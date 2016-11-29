@@ -1,8 +1,8 @@
- # -*- coding: utf-8 -*-
+﻿ # -*- coding: utf-8 -*-
 """
 Created on Wed Apr 13 10:15:15 2016
 
-@authors: Nils, Jule, Leo
+@authors: Andi, Malte, Paul, Felix
 """
 
 import modbus_tk.defines as cst
