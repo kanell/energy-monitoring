@@ -518,7 +518,7 @@ def get_JanitzaUMG_data(IP='129.69.176.123'):
         counter = counter + 1
 
 
-    h5file.close()    
+    #h5file.close()    
    
     
     return measure_data_dict, adress_data_dict, adress_measure_dict, data, charts_dict, counter
