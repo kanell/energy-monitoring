@@ -235,7 +235,7 @@ def get_JanitzaUMG_data(IP='129.69.176.123'):
 # get data:
     counter=0 
     #while counter<200: # "while counter" just for testing purposes, replace with "while True"
-    while True:
+    while counter < 10:
         t1=time.time()
         measure_data_dict = {}
         adress_data_dict = {}
@@ -533,7 +533,9 @@ def convert_to_float(data):
     mantisse = (high0 + low0) % 2**23
     return round(sign * (1.0 + mantisse / 2**23) * 2**exponent, 4)
 
-if __name__ == '__main__':
 
-    measure_data_dict, adress_data_dict, adress_measure_dict, data, charts_dict, counter = get_JanitzaUMG_data()
+def Call():
+    if __name__ == '__main__':
+    
+        measure_data_dict, adress_data_dict, adress_measure_dict, data, charts_dict, counter = get_JanitzaUMG_data()
 
