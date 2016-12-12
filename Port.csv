@@ -1,0 +1,295 @@
+Adresse,Format,RD/WR,Einheit,Bemerkung,EinstellbeIrnedicehx,Voreinstellung,Abk
+800,FLOAT,RD,Hz,Measured frequency,,,f
+802,FLOAT,RD,-,"Voltage, zero sequence",,,U_zero
+804,FLOAT,RD,-,"Voltage, negative sequence",,,U_neg
+806,FLOAT,RD,-,"Voltage, positive sequence",,,U_pos
+808,FLOAT,RD,V,Voltage U1 L1-N,[0],,U1
+810,FLOAT,RD,V,Voltage U2 L2-N,[1],,U2
+812,FLOAT,RD,V,Voltage U3 L3-N,[2],,U3
+814,FLOAT,RD,V,Voltage U1 L1-L2,[0],,U12
+816,FLOAT,RD,V,Voltage U2 L2-L3,[1],,U23
+818,FLOAT,RD,V,Voltage U3 L3-L1,[2],,U31
+820,FLOAT,RD,-,"Fund. power factor, CosPhi; ULN, IL1",[0],,CosPhi1
+822,FLOAT,RD,-,"Fund. power factor, CosPhi; ULN, IL2",[1],,CosPhi2
+824,FLOAT,RD,-,"Fund. power factor, CosPhi; ULN, IL3",[2],,CosPhi3
+826,FLOAT,RD,-,Sum; CosPhisum3=P0sum3/Ssum3,[3],,CosPhi123
+828,FLOAT,RD,-,"Power factor; UL1N, IL1",[0],,ULN_powerfactor1
+830,FLOAT,RD,-,"Power factor; UL2N, IL2",[1],,ULN_powerfactor2
+832,FLOAT,RD,-,"Power factor; UL3N, IL3",[2],,ULN_powerfactor3
+834,FLOAT,RD,-,Sum; Power factor sum3=Psum3/Ssum3,[3],,ULN_powerfactor123
+836,FLOAT,RD,%,"THD, U L1N, bezogen auf U0 L1",[0],,THD_U1
+838,FLOAT,RD,%,"THD, U L2N, bezogen auf U0 L2",[1],,THD_U2
+840,FLOAT,RD,%,"THD, U L3N, bezogen auf U0 L3",[2],,THD_U3
+842,FLOAT,RD,%,"THD, U L1L2, bezogen auf U0 L1L2",[0],,THD_U12
+844,FLOAT,RD,%,"THD, U L2L3, bezogen auf U0 L2L3",[1],,THD_U23
+846,FLOAT,RD,%,"THD, U L3L1, bezogen auf U0 L3L1",[2],,THD_U31
+848,FLOAT,RD,V,"Voltage, real part U1 L1N",[0],,U1_real
+850,FLOAT,RD,V,"Voltage, real part U2 L2N",[1],,U2_real
+852,FLOAT,RD,V,"Voltage, real part U3 L3N",[2],,U3_real
+854,FLOAT,RD,V,"Voltage, imaginary part U L1N",[0],,U1_imag
+856,FLOAT,RD,V,"Voltage, imaginary part U L2N",[1],,U2_imag
+858,FLOAT,RD,V,"Voltage, imaginary part U L3N",[2],,U3_imag
+860,FLOAT,RD,A,Current I1 L1,[0],,I1
+862,FLOAT,RD,A,Current I2 L2,[1],,I2
+864,FLOAT,RD,A,Current I3 L3,[2],,I3
+866,FLOAT,RD,A,Vector sum; IN=I1+I2+I3,[3],,I123
+868,FLOAT,RD,W,Real power P1 L1N,[0],,P1
+870,FLOAT,RD,W,Real power P2 L2N,[1],,P2
+872,FLOAT,RD,W,Real power P3 L3N,[2],,P3
+874,FLOAT,RD,W,Sum; Psum3=P1+P2+P3,[3],,P123
+876,FLOAT,RD,var,Fund. reactive power Q1 L1N,[0],,Q1
+878,FLOAT,RD,var,Fund. reactive power Q2 L2N,[1],,Q2
+880,FLOAT,RD,var,Fund. reactive power Q3 L3N,[2],,Q3
+882,FLOAT,RD,var,Sum; Qsum3=Q1+Q2+Q3,[3],,Q123
+884,FLOAT,RD,VA,Apparent power S1 L1N,[0],,S1
+886,FLOAT,RD,VA,Apparent power S2 L2N,[1],,S2
+888,FLOAT,RD,VA,Apparent power S3 L3N,[2],,S3
+890,FLOAT,RD,VA,Sum; Ssum3=S1+S2+S3,[3],,S123
+892,FLOAT,RD,W,Fund. real power P01 L1N,[0],,P01
+894,FLOAT,RD,W,Fund. real power P02 L2N,[1],,P02
+896,FLOAT,RD,W,Fund. real power P03 L3N,[2],,P03
+898,FLOAT,RD,W,Sum; P0sum3=P01+P02+P03,[3],,P0123
+900,FLOAT,RD,var,Harmonic distortion power D1 L1N,[0],,D1
+902,FLOAT,RD,var,Harmonic distortion power D2 L2N,[1],,D2
+904,FLOAT,RD,var,Harmonic distortion power D3 L3N,[2],,D3
+906,FLOAT,RD,var,Sum; Dsum3=D1+D2+D3,[3],,D123
+908,FLOAT,RD,%,"THDI1 I1, bezogen auf I01",[0],,THD_I1
+910,FLOAT,RD,%,"THDI2 I2, bezogen auf I02",[1],,THD_I2
+912,FLOAT,RD,%,"THDI3 I3, bezogen auf I03",[2],,THD_I3
+914,FLOAT,RD,%,"TDDI1 I1, bezogen auf den Nenn-Laststrom",[0],,TDD_I1
+916,FLOAT,RD,%,"TDDI2 I2, bezogen auf den Nenn-Laststrom",[1],,TDD_I2
+918,FLOAT,RD,%,"TDDI3 I3, bezogen auf den Nenn-Laststrom",[2],,TDD_I3
+920,FLOAT,RD,-,"Current, zero sequence",,,I_zero
+922,FLOAT,RD,-,"Current, negative sequence",,,I_neg
+924,FLOAT,RD,-,"Current, positive sequence",,,I_pos
+926,FLOAT,RD,A,"Current, real part I L1",[0],,I1_real
+928,FLOAT,RD,A,"Current, real part I L2",[1],,I2_real
+930,FLOAT,RD,A,"Current, real part I L3",[2],,I3_real
+932,FLOAT,RD,A,"Current, imaginary part I L",[0],,I1_imag
+934,FLOAT,RD,A,"Current, imaginary part I L",[1],,I2_imag
+936,FLOAT,RD,A,"Current, imaginary part I L",[2],,I3_imag
+938,FLOAT,RD,-,"Rotation field; 1=right, 0=none, -1=left",,,rot_field
+1720,FLOAT,RD,Hz,"Average, measured frequency",,,f_av
+1722,FLOAT,RD,-,"Average, Voltage, zero sequence",,,U_zero_av
+1724,FLOAT,RD,-,"Average, Voltage, negative sequence",,,U_neg_av
+1726,FLOAT,RD,-,"Average, Voltage, positive sequence",,,U_pos_av
+1728,FLOAT,RD,V,"Average, Voltage LN",[0],,U1_av
+1730,FLOAT,RD,V,"Average, Voltage LN",[1],,U2_av
+1732,FLOAT,RD,V,"Average, Voltage LN",[2],,U3_av
+1734,FLOAT,RD,V,"Average, Voltage LL",[0],,U12_av
+1736,FLOAT,RD,V,"Average, Voltage LL",[1],,U23_av
+1738,FLOAT,RD,V,"Average, Voltage LL",[2],,U31_av
+2220,FLOAT,RD,-,"Average, Fund. power factor, CosPhi; ULN IL",[0],,CosPhi1_av
+2222,FLOAT,RD,-,"Average, Fund. power factor, CosPhi; ULN IL",[1],,CosPhi2_av
+2224,FLOAT,RD,-,"Average, Fund. power factor, CosPhi; ULN IL",[2],,CosPhi3_av
+2226,FLOAT,RD,-,"Average, Sum; CosPhisum3=P0sum3/Ssum3",[3],,CosPhi123_av
+2228,FLOAT,RD,-,"Average, Power factor; ULN IL",[0],,ULN_powerfactor1_av
+2230,FLOAT,RD,-,"Average, Power factor; ULN IL",[1],,ULN_powerfactor2_av
+2232,FLOAT,RD,-,"Average, Power factor; ULN IL",[2],,ULN_powerfactor3_av
+2234,FLOAT,RD,-,"Average, Sum; Power factor sum3=Psum3/Ssum3",[3],,ULN_powerfactor123_av
+2236,FLOAT,RD,V,"Average, THD, U LN",[0],,THD_U1_av
+2238,FLOAT,RD,V,"Average, THD, U LN",[1],,THD_U2_av
+2240,FLOAT,RD,V,"Average, THD, U LN",[2],,THD_U3_av
+2242,FLOAT,RD,V,"Average, THD, U LL",[0],,THD_U12_av
+2244,FLOAT,RD,V,"Average, THD, U LL",[1],,THD_U23_av
+2246,FLOAT,RD,V,"Average, THD, U LL",[2],,THD_U31_av
+2248,FLOAT,RD,V,"Average, Voltage, real part U LN",[0],,U1_real_av
+2250,FLOAT,RD,V,"Average, Voltage, real part U LN",[1],,U2_real_av
+2252,FLOAT,RD,V,"Average, Voltage, real part U LN",[2],,U3_real_av
+2254,FLOAT,RD,V,"Average, Voltage, imaginary part U LN",[0],,U1_imag_av
+2256,FLOAT,RD,V,"Average, Voltage, imaginary part U LN",[1],,U2_imag_av
+2258,FLOAT,RD,V,"Average, Voltage, imaginary part U LN",[2],,U3_imag_av
+2500,FLOAT,RD,A,"Average, Current IL",[0],,I1_av
+2502,FLOAT,RD,A,"Average, Current IL",[1],,I2_av
+2504,FLOAT,RD,A,"Average, Current IL",[2],,I3_av
+2506,FLOAT,RD,A,"Average, Vector sum; IN=I1+I2+I3",[3],,I123_av
+2508,FLOAT,RD,W,"Average, Real power P LN",[0],,P1_av
+2510,FLOAT,RD,W,"Average, Real power PLN",[1],,P2_av
+2512,FLOAT,RD,W,"Average, Real power P LN",[2],,P3_av
+2514,FLOAT,RD,W,"Average, Sum; Psum3=P1+P2+P3",[3],,P123_av
+2516,FLOAT,RD,var,"Average, Fund. reactive power Q LN",[0],,Q1_av
+2518,FLOAT,RD,var,"Average, Fund. reactive power Q LN",[1],,Q2_av
+2520,FLOAT,RD,var,"Average, Fund. reactive power Q LN",[2],,Q3_av
+2522,FLOAT,RD,var,"Average, Sum; Qsum3=Q1+Q2+Q3",[3],,Q123_av
+2524,FLOAT,RD,VA,"Average, Apparent power S LN",[0],,S1_av
+2526,FLOAT,RD,VA,"Average, Apparent power S LN",[1],,S2_av
+2528,FLOAT,RD,VA,"Average, Apparent power S LN",[2],,S3_av
+2530,FLOAT,RD,VA,"Average, Sum; Ssum3=S1+S2+S3",[3],,S123_av
+2532,FLOAT,RD,W,"Average, Fund. real power P0 LN",[0],,P01_av
+2534,FLOAT,RD,W,"Average, Fund. real power P0 LN",[1],,P02_av
+2536,FLOAT,RD,W,"Average, Fund. real power P0 LN",[2],,P03_av
+2538,FLOAT,RD,W,"Average, Sum; CosPhisum3=P0sum3/Ssum3",[3],,P0123_av
+2540,FLOAT,RD,var,"Average, Harmonic distortion power D LN",[0],,D1_av
+2542,FLOAT,RD,var,"Average, Harmonic distortion power D LN",[1],,D2_av
+2544,FLOAT,RD,var,"Average, Harmonic distortion power D LN",[2],,D3_av
+2546,FLOAT,RD,var,"Average, Sum; Dsum3=D1+D2+D3",[3],,D123_av
+2548,FLOAT,RD,%,"Average, THD I",[0],,THD_I1_av
+2550,FLOAT,RD,%,"Average, THD I",[1],,THD_I2_av
+2552,FLOAT,RD,%,"Average, THD I",[2],,THD_I3_av
+2554,FLOAT,RD,%,"Average, TDD I",[0],,TDD_I1_av
+2556,FLOAT,RD,%,"Average, TDD I",[1],,TDD_I2_av
+2558,FLOAT,RD,%,"Average, TDD I",[2],,TDD_I3_av
+2560,FLOAT,RD,-,"Average, Current, zero sequence",,,I_zero_av
+2562,FLOAT,RD,-,"Average, Current, negative sequence",,,I_neg_av
+2564,FLOAT,RD,-,"Average, Current, positive sequence",,,I_pos_av
+2566,FLOAT,RD,A,"Average, Current, real part I L",[0],,I1_real_av
+2568,FLOAT,RD,A,"Average, Current, real part I L",[1],,I2_real_av
+2570,FLOAT,RD,A,"Average, Current, real part I L",[2],,I3_real_av
+2572,FLOAT,RD,A,"Average, Current, imaginary part IL",[0],,I1_imag_av
+2574,FLOAT,RD,A,"Average, Current, imaginary part IL",[1],,I2_imag_av
+2576,FLOAT,RD,A,"Average, Current, imaginary part IL",[2],,I3_imag_av
+3436,FLOAT,RD/WR,Hz,"Minimum, measured frequency",,,f_min
+3438,FLOAT,RD/WR,-,"Minimum, Voltage, zero sequence",,,U_zero_min
+3440,FLOAT,RD/WR,-,"Minimum, Voltage, negative sequence",,,U_neg_min
+3442,FLOAT,RD/WR,-,"Minimum, Voltage, positive sequence",,,U_pos_min
+3444,FLOAT,RD/WR,V,"Minimum, Voltage L-N",[0],,U1_min
+3446,FLOAT,RD/WR,V,"Minimum, Voltage L-N",[1],,U2_min
+3448,FLOAT,RD/WR,V,"Minimum, Voltage L-N",[2],,U3_min
+3450,FLOAT,RD/WR,V,"Minimum, Voltage L-L",[0],,U12_min
+3452,FLOAT,RD/WR,V,"Minimum, Voltage L-L",[1],,U23_min
+3454,FLOAT,RD/WR,V,"Minimum, Voltage L-L",[2],,U31_min
+3456,FLOAT,RD/WR,-,"Minimum, Fund. power factor, CosPhi; ULN IL",[0],,CosPhi1_min
+3458,FLOAT,RD/WR,-,"Minimum, Fund. power factor, CosPhi; ULN IL",[1],,CosPhi2_min
+3460,FLOAT,RD/WR,-,"Minimum, Fund. power factor, CosPhi; ULN IL",[2],,CosPhi3_min
+3462,FLOAT,RD/WR,-,"Minimum, Sum; CosPhisum3=P0sum3/Ssum3",[3],,CosPhi123_min
+3464,FLOAT,RD/WR,-,"Minimum, Power factor; ULN I L",[0],,ULN_powerfactor1_min
+3466,FLOAT,RD/WR,-,"Minimum, Power factor; ULN I L",[1],,ULN_powerfactor2_min
+3468,FLOAT,RD/WR,-,"Minimum, Power factor; ULN I L",[2],,ULN_powerfactor3_min
+3470,FLOAT,RD/WR,-,"Minimum, Sum; Power factor sum3=Psum3/Ssum3",[3],,ULN_powerfactor123_min
+3472,FLOAT,RD/WR,%,"Minimum, THD U LN",[0],,THD_U1_min
+3474,FLOAT,RD/WR,%,"Minimum, THD U LN",[1],,THD_U2_min
+3476,FLOAT,RD/WR,%,"Minimum, THD U LN",[2],,THD_U3_min
+3478,FLOAT,RD/WR,%,"Minimum, THD U LL",[0],,THD_U12_min
+3480,FLOAT,RD/WR,%,"Minimum, THD U LL",[1],,THD_U23_min
+3482,FLOAT,RD/WR,%,"Minimum, THD U LL",[2],,THD_U31_min
+3484,FLOAT,RD/WR,V,"Minimum, Voltage, real part U LN",[0],,U1_real_min
+3486,FLOAT,RD/WR,V,"Minimum, Voltage, real part U LN",[1],,U2_real_min
+3488,FLOAT,RD/WR,V,"Minimum, Voltage, real part U LN",[2],,U3_real_min
+3490,FLOAT,RD/WR ,V ,"Minimum, Voltage, imaginary part U LN ","[0]
+[1]",,U1_imag_min
+3492,FLOAT,RD/WR,V,"Minimum, Voltage, imaginary part U LN",,,U2_imag_min
+3494,FLOAT,RD/WR,V,"Minimum, Voltage, imaginary part U LN",[2],,U3_imag_min
+2578,FLOAT,RD/WR,Hz,"Maximum, measured frequency",,,f_max
+2580,FLOAT,RD/WR,-,"Maximum, Voltage, zero sequence",,,U_zero_max
+2582,FLOAT,RD/WR,-,"Maximum, Voltage, negative sequence",,,U_neg_max
+2584,FLOAT,RD/WR,-,"Maximum, Voltage, positive sequence",,,U_pos_max
+2586,FLOAT,RD/WR,V,"Maximum, Voltage L-N",[0],,U1_max
+2588,FLOAT,RD/WR,V,"Maximum, Voltage L-N",[1],,U2_max
+2590,FLOAT,RD/WR,V,"Maximum, Voltage L-N",[2],,U3_max
+2592,FLOAT,RD/WR,V,"Maximum, Voltage L-L",[0],,U12_max
+2594,FLOAT,RD/WR,V,"Maximum, Voltage L-L",[1],,U23_max
+2596,FLOAT,RD/WR,V,"Maximum, Voltage L-L",[2],,U31_max
+3078,FLOAT,RD/WR,-,"Maximum, Fund. power factor, CosPhi; ULN IL",[0],,CosPhi1_max
+3080,FLOAT,RD/WR,-,"Maximum, Fund. power factor, CosPhi; ULN IL",[1],,CosPhi2_max
+3082,FLOAT,RD/WR,-,"Maximum, Fund. power factor, CosPhi; ULN IL",[2],,CosPhi3_max
+3084,FLOAT,RD/WR,-,"Maximum, Sum; CosPhisum3=P0sum3/Ssum3",[3],,CosPhi123_max
+3086,FLOAT,RD/WR,-,"Maximum, Power factor; ULN IL",[0],,ULN_powerfactor1_max
+3088,FLOAT,RD/WR,-,"Maximum, Power factor; ULN IL",[1],,ULN_powerfactor2_max
+3090,FLOAT,RD/WR,-,"Maximum, Power factor; ULN IL",[2],,ULN_powerfactor3_max
+3092,FLOAT,RD/WR,-,"Maximum, Sum; Power factor sum3=Psum3/Ssum",[3],,ULN_powerfactor123_max
+3094,FLOAT,RD/WR,%,"Maximum, THD, U LN",[0],,THD_U1_max
+3096,FLOAT,RD/WR,%,"Maximum, THD, U LN",[1],,THD_U2_max
+3098,FLOAT,RD/WR,%,"Maximum, THD, U LN",[2],,THD_U3_max
+3100,FLOAT,RD/WR,%,"Maximum, THD, U LL",[0],,THD_U12_max
+3102,FLOAT,RD/WR,%,"Maximum, THD, U LL",[1],,THD_U23_max
+3104,FLOAT,RD/WR,%,"Maximum, THD, U LL",[2],,THD_U31_max
+3106,FLOAT,RD/WR,V,"Maximum, Voltage, real part U LN",[0],,U1_real_max
+3108,FLOAT,RD/WR,V,"Maximum, Voltage, real part U LN",[1],,U2_real_max
+3110,FLOAT,RD/WR,V,"Maximum, Voltage, real part U LN",[2],,U3_real_max
+3112,FLOAT,RD/WR,V,"Maximum, Voltage, imaginary part U LN",[0],,U1_imag_max
+3114,FLOAT,RD/WR,V,"Maximum, Voltage, imaginary part U LN",[1],,U2_imag_max
+3116,FLOAT,RD/WR,V,"Maximum, Voltage, imaginary part U LN",[2],,U3_imag_max
+3358,FLOAT,RD/WR,A,"Maximum, Current I L",[0],,I1_max
+3360,FLOAT,RD/WR,A,"Maximum, Current I L",[1],,I2_max
+3362,FLOAT,RD/WR,A,"Maximum, Current I L",[2],,I3_max
+3364,FLOAT,RD/WR,A,"Maximum, Vector sum; IN=I1+I2+I3",[3],,I123_max
+3366,FLOAT,RD/WR,W,"Maximum, Real power P LN",[0],,P1_max
+3368,FLOAT,RD/WR,W,"Maximum, Real power P LN",[1],,P2_max
+3370,FLOAT,RD/WR,W,"Maximum, Real power P LN",[2],,P3_max
+3372,FLOAT,RD/WR,W,"Maximum, Sum; Psum3=P1+P2+P3",[3],,P123_max
+3374,FLOAT,RD/WR,var,"Maximum, Fund. reactive power Q LN",[0],,Q1_max
+3376,FLOAT,RD/WR,var,"Maximum, Fund. reactive power Q LN",[1],,Q2_max
+3378,FLOAT,RD/WR,var,"Maximum, Fund. reactive power Q LN",[2],,Q3_max
+3380,FLOAT,RD/WR,var,"Maximum, Sum; Qsum3=Q1+Q2+Q3",[3],,Q123_max
+3382,FLOAT,RD/WR,VA,"Maximum, Average, Apparent power S LN",[0],,S1_max
+3384,FLOAT,RD/WR,VA,"Maximum, Average, Apparent power S LN",[1],,S2_max
+3386,FLOAT,RD/WR,VA,"Maximum, Average, Apparent power S LN",[2],,S3_max
+3388,FLOAT,RD/WR,VA,"Maximum, Average, Sum; Ssum3=S1+S2+S3",[3],,S123_max
+3390,FLOAT,RD/WR,W,"Maximum, Fund. real power P0 LN",[0],,P01_max
+3392,FLOAT,RD/WR,W,"Maximum, Fund. real power P0 LN",[1],,P02_max
+3394,FLOAT,RD/WR,W,"Maximum, Fund. real power P0 LN",[2],,P03_max
+3396,FLOAT,RD/WR,W,"Maximum, Sum; P0sum3=P01+P02+P03",[3],,P0123_max
+3398,FLOAT,RD/WR,var,"Maximum, Harmonic distortion power D LN",[0],,D1_max
+3400,FLOAT,RD/WR,var,"Maximum, Harmonic distortion power D LN",[1],,D2_max
+3402,FLOAT,RD/WR,var,"Maximum, Harmonic distortion power D LN",[2],,D3_max
+3404,FLOAT,RD/WR,var,"Maximum, Sum; Dsum3=D1+D2+D3",[3],,D123_max
+3406,FLOAT,RD/WR,A,"Maximum, THD I",[0],,THD_I1_max
+3408,FLOAT,RD/WR,A,"Maximum, THD I",[1],,THD_I2_max
+3410,FLOAT,RD/WR,A,"Maximum, THD I",[2],,THD_I3_max
+3412,FLOAT,RD/WR,A,"Maximum, TDD I",[0],,TDD_I1_max
+3414,FLOAT,RD/WR,A,"Maximum, TDD I",[1],,TDD_I2_max
+3416,FLOAT,RD/WR,A,"Maximum, TDD I",[2],,TDD_I3_max
+3418,FLOAT,RD/WR,-,"Maximum, Current, zero sequence",,,I_zero_max
+3420,FLOAT,RD/WR,-,"Maximum, Current, negative sequence",,,I_neg_max
+3422,FLOAT,RD/WR,-,"Maximum, positive sequence",,,I_pos_max
+3424,FLOAT,RD/WR,A,"Maximum, real part I L",[0],,I1_real_max
+3426,FLOAT,RD/WR,A,"Maximum, real part I L",[1],,I2_real_max
+3428,FLOAT,RD/WR,A,"Maximum, real part I L",[2],,I3_real_max
+3430,FLOAT,RD/WR,A,"Maximum, imaginary part I L",[0],,I1_imag_max
+3432,FLOAT,RD/WR,A,"Maximum, imaginary part I L",[1],,I2_imag_max
+3434,FLOAT,RD/WR,A,"Maximum, imaginary part I L",[2],,I3_imag_max
+19054,FLOAT,RD,Wh,Real energy L1,[0],,E1_real
+19056,FLOAT,RD,Wh,Real energy L2,[0],,E2_real
+19058,FLOAT,RD,Wh,Real energy L3,[0],,E3_real
+19060,FLOAT,RD,Wh,Real energy L1..L3,[0],,E123_real
+19062,FLOAT,RD,Wh,"Real energy L1, consumed",[0],,E1_real_cons
+19064,FLOAT,RD,Wh,"Real energy L2, consumed",[0],,E2_real_cons
+19066,FLOAT,RD,Wh,"Real energy L3, consumed",[0],,E3_real_cons
+19068,FLOAT,RD,Wh,"Real energy L1..L3, consumed, rate 1",[1],,E123_real_cons
+19070,FLOAT,RD,Wh,"Real energy L1, delivered",[0],,E1_real_del
+19072,FLOAT,RD,Wh,"Real energy L2, delivered",[0],,E2_real_del
+19074,FLOAT,RD,Wh,"Real energy L3, delivered",[0],,E3_real_del
+19076,FLOAT,RD,Wh,"Real energy L1..L3, delivered",[0],,E123_real_del
+19078,FLOAT,RD,VAh,Apparent energy L1,[0],,E1_app
+19080,FLOAT,RD,VAh,Apparent energy L2,[0],,E2_app
+19082,FLOAT,RD,VAh,Apparent energy L3,[0],,E3_app
+19084,FLOAT,RD,VAh,Apparent energy L1..L3,[0],,E123_app
+19086,FLOAT,RD,varh,Reactive energy L1,[0],,E1_react
+19088,FLOAT,RD,varh,Reactive energy L2,[0],,E2_react
+19090,FLOAT,RD,varh,Reactive energy L3,[0],,E3_react
+19092,FLOAT,RD,varh,Reactive energy L1..L3,[0],,E123_react
+19094,FLOAT,RD,varh,Reactive energy ind. L1,[0],,E1_react_ind
+19096,FLOAT,RD,varh,Reactive energy ind. L2,[0],,E2_react_ind
+19098,FLOAT,RD,varh,Reactive energy ind. L3,[0],,E3_react_ind
+19100,FLOAT,RD,varh,Reactive energy ind. L1..L3,[0],,E123_react_ind
+19102,FLOAT,RD,varh,Reactive energy cap. L1,[0],,E1_react_cap
+19104,FLOAT,RD,varh,Reactive energy cap. L2,[0],,E2_react_cap
+19106,FLOAT,RD,varh,Reactive energy cap. L3,[0],,E3_react_cap
+19108,FLOAT,RD,varh,Reactive energy cap. L1..L3,[0],,E123_react_cap
+1000,FLOAT,RD,V,Harmonic U L1,[0],,H_U1
+1080,FLOAT,RD,V,Harmonic U L2,[0],,H_U2
+1160,FLOAT,RD,V,Harmonic U L3,[0],,H_U3
+1240,FLOAT,RD,V,Harmonic U L1-L2,[0],,H_U12
+1320,FLOAT,RD,V,Harmonic U L2-L3,[0],,H_U23
+1400,FLOAT,RD,V,Harmonic U L3-L1,[0],,H_U31
+1480,FLOAT,RD,A,Harmonic I L1,[0],,H_I1
+1560,FLOAT,RD,A,Harmonic I L2,[0],,H_I2
+1640,FLOAT,RD,A,Harmonic I L3,[0],,H_I3
+1740,FLOAT,RD,V,"Average, Harmonic U L1",[0],,H_U1_av
+1820,FLOAT,RD,V,"Average, Harmonic U L2",[0],,H_U2_av
+1900,FLOAT,RD,V,"Average, Harmonic U L3",[0],,H_U3_av
+1980,FLOAT,RD,V,"Average, Harmonic U L1-L2",[0],,H_U12_av
+2060,FLOAT,RD,V,"Average, Harmonic U L2-L3",[0],,H_U23_av
+2140,FLOAT,RD,V,"Average, Harmonic U L3-L1",[0],,H_U31_av
+2260,FLOAT,RD,A,"Average, Harmonic I L1",[0],,H_I1_av
+2340,FLOAT,RD,A,"Average, Harmonic I L2",[0],,H_I2_av
+2420,FLOAT,RD,A,"Average, Harmonic I L3",[0],,H_I3_av
+2598,FLOAT,RD/WR,V,"Maximum, Harmonic U L1",[0],,H_U1_max
+2678,FLOAT,RD/WR,V,"Maximum, Harmonic U L2",[0],,H_U2_max
+2758,FLOAT,RD/WR,V,"Maximum, Harmonic U L3",[0],,H_U3_max
+2838,FLOAT,RD/WR,V,"Maximum, Harmonic U L1-L2",[0],,H_U12_max
+2918,FLOAT,RD/WR,V,"Maximum, Harmonic U L2-L3",[0],,H_U23_max
+2998,FLOAT,RD/WR,V,"Maximum, Harmonic U L3-L1",[0],,H_U31_max
+3118,FLOAT,RD/WR,A,"Maximum, Harmonic I L1",[0],,H_I1_max
+3198,FLOAT,RD/WR,A,"Maximum, Harmonic I L2",[0],,H_I2_max
+3278,FLOAT,RD/WR,A,"Maximum, Harmonic I L3",[0],,H_I3_max
