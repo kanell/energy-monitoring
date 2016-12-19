@@ -16,7 +16,7 @@ db_config = {'dbname': 'postgres',
              'passwd': 'pqdata'}
 
 db_table_config = {'voltage':'float',
-                   'current':'float'}
+                   '1111':'float'}
 
 def get_data(db, tablename, selector, rule):
     if rule == None:
@@ -29,8 +29,8 @@ def get_data(db, tablename, selector, rule):
 
 def create_db_table(db, tablename, description):
     config_string = 'create table '+tablename+' ('
-    for key in db_table_config.keys():
-        config_string = config_string+key+' '+db_table_config[key]+','
+    for key in description.keys():
+        config_string = config_string+key+' '+description[key]+','
     config_string = config_string[:-1]+')'
     db.query(config_string)
     return 1
@@ -65,5 +65,5 @@ if __name__ == '__main__':
     print(data)
     
     # Get data with rule
-    data = get_data(db, tablename, 'voltage', 'current > 15')
+    data = get_data(db, tablename, 'voltage', '1111 > 15')
     print(data)
