@@ -148,35 +148,38 @@ div.Inhalt {
     display: none;
     }
 
-/* style of the table in "Aktuelle Werte" */
+/* styles of the table in "Aktuelle Werte" */
+
+/* general styling of the table */
 
 table.Ubertabelle {
     width: 800px;
-    border-collapse: collapse; 
+    border-collapse: collapse;
+    border: 5px solid hsla(0, 0%, 0%, 1); 
 }
 
-table.Bezeichnung td {
-    text-align: left;
-    height:30px;
-    width:200px;     
+
+td,th {
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    padding: 0px;
+     
 }
 
-table.Phase1 td {
+table.Bezeichnung th {
+    padding-left: 5px;
     text-align: left;
-    height:30px;
-    width:200px;     
 }
 
-table.Phase2 td {
-    text-align: left;
-    height:30px;
-    width:200px;     
+table {
+    border-collapse: collapse;
 }
 
-table.Phase3 td {
-    text-align: left;
-    height:30px;
-    width:200px;     
+/* background colors for the different rows and collumns */
+
+table.Bezeichnung {
+    background-color: hsla(0, 0%, 67%, 1);
 }
 
 table.Phase1 {
@@ -201,4 +204,8 @@ table.Phase2 tr:nth-child(even)  {
 
 table.Phase3 tr:nth-child(even)  {
     background-color: hsla(141, 100%, 40%, 1) 
+}
+
+table.Bezeichnung tr:nth-child(even)  {
+    background-color: hsla(0, 0%, 80%, 1);
 }
