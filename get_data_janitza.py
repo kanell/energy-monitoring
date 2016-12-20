@@ -103,9 +103,14 @@ def fetch_data_dataframe(Adress_DF,Ports_DF,master):
 def fetch_data_dict(Adress_DF,Ports_DF,master):
     '''Fetches data by port-series from Modbus and stores it converted in
     seperat dict.'''
+    dict_list = []
     Start_time = dt.datetime.now()
-    Data_dict = Adress_DF['Data'].to_dict()
+    dict_list.append({})
+    current_data_dict = 0
     for i in Ports_DF.index:
+        if len(dict_list[current_data_dict]) >= 500:
+            dict_list.append({})
+            current_data_dict = 1
         data = ()
         n = 0
         Delta = Ports_DF.at[i,'End'] - Ports_DF.at[i,'Start']
@@ -113,7 +118,7 @@ def fetch_data_dict(Adress_DF,Ports_DF,master):
             Start = Ports_DF.at[i,'Start']
             data = data + fetch_raw(master,Start)
             for m in range(Ports_DF.at[i,'Start'],Ports_DF.at[i,'End']+1,2):
-                Data_dict[m] = convert_to_float(data[n:n+2])
+                dict_list[current_data_dict]['port_'+str(m)] = convert_to_float(data[n:n+2])
                 n += Ports_DF.at[i,'Range']
         else:
             X = math.ceil(Delta/123)
@@ -122,13 +127,13 @@ def fetch_data_dict(Adress_DF,Ports_DF,master):
                 data = data + fetch_raw(master,Start)
             if Ports_DF.at[i,'Range'] == 2:
                 for m in range(Ports_DF.at[i,'Start'],Ports_DF.at[i,'End']+1,2):
-                    Data_dict[m] = convert_to_float(data[n:n+2])
+                    dict_list[current_data_dict]['port_'+str(m)] = convert_to_float(data[n:n+2])
                     n += Ports_DF.at[i,'Range']
 
     End_time = dt.datetime.now()
     TimeDelta = End_time - Start_time
     print (TimeDelta)
-    return Data_dict
+    return dict_list
 
 
 def convert_to_float(data):

@@ -16,7 +16,7 @@ db_config = {'dbname': 'postgres',
              'passwd': 'pqdata'}
 
 db_table_config = {'voltage':'float',
-                   '1111':'float'}
+                   'current':'float'}
 
 def get_data(db, tablename, selector, rule):
     if rule == None:
@@ -28,7 +28,7 @@ def get_data(db, tablename, selector, rule):
     return data
 
 def create_db_table(db, tablename, description):
-    config_string = 'create table '+tablename+' ('
+    config_string = 'create table '+tablename+' (timestamp float, '
     for key in description.keys():
         config_string = config_string+key+' '+description[key]+','
     config_string = config_string[:-1]+')'

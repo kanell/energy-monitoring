@@ -29,7 +29,7 @@ addresses, ports = gd.read_port_csv()
 # create database table
 db_table_config = {}
 for index in addresses.index:
-    db_table_config[str(index)] = 'float'
+    db_table_config['port_'+str(index)] = 'float'
 
 # connect to janitza
 pqid = gd.connection(ipaddr)
@@ -45,7 +45,9 @@ while True:
     # get data from janitza
     pq_data = gd.fetch_data_dict(addresses, ports, pqid)
     # insert data in database
-    db.insert(tablename,pq_data)
+    for data_dict in pq_data:
+        db.insert(tablename,data_dict)
+
     time2 = time.time()
     
     # try to get data every 1 second
