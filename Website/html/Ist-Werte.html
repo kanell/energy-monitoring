@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="../css/main.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="../js/functions.js"></script>
+
+
+</head>
+<body>
+
+<!-- upper menu -->
+
+
+<ul class="oben">                 
+  
+  <li class="aktiv"><a href="Ist-Werte.html">Aktuelle Werte</a>    
+    
+     <ul class="links">
+     
+           <!-- left menu -->
+     
+           <li class="links"><a id="Uber" href="#Übersicht">Übersicht</a></li>
+           <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
+           <li class="links"><a id="I" href="#Strom">Strom</a></li>  
+             
+     </ul>     
+   </li>
+     
+  <li class="oben"><a href="Historische-Werte.html">Historische Werte</a></li>
+  <li class="oben"><a href="Analyse.html">Analyse</a></li>  
+  <li class="oben"><a href="Test.html">Test</a></li>            
+  
+  <!-- upper right comment -->
+  
+  <li class="oben-rechts">Spannungsüberwachungsdienst des IEH</li>  
+  
+</ul>
+
+<!-- content (heading, table, etc.) -->
+
+
+<!-- content of button "Übersicht" -->
+
+
+<div id="Ubersicht" class="Inhalt">      <!--div with table-->
+
+<h2>Übersicht</h2>    
+
+<div style="overflow-x:auto;">         <!-- makes the table scrollable, if screen to small-->
+
+<table class="Ubertabelle"           <!-- Mastertable with the different content-tables inside-->
+
+  <tr>
+     <td>
+     
+     <table class="Bezeichnung">          <!-- table for the lables-->
+     
+     <tr>
+      <th style="color:white">Spannung</th>
+     </tr>
+     
+     <tr>       
+      <td>Spannung</td>
+     </tr>
+     
+     <tr>
+      <td>Strom</td>
+     </tr>
+    
+     <tr>
+      <td>Scheinleistung</td>  
+     </tr>
+     
+     <tr>
+      <td>Wirkleistung</td>
+     </tr>
+     
+     <tr>
+      <td>Blindleistung</td>
+     </tr>     
+     
+     <tr>
+      <td>THD<sub>U</sub></td> 
+     </tr>
+     
+     <tr>
+      <td>THD<sub>I</sub></td>   
+     </tr>
+     
+        
+    </table>
+    </td>
+          
+  
+  <td>
+     
+     <table class="Phase1">          <!-- table for the values of Phase 1-->
+     
+     <tr>       
+      <th>Phase 1</th>
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>
+    
+     <tr>
+      <td>5</td>  
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>     
+     
+     <tr>
+      <td>5</td> 
+     </tr>
+     
+     <tr>
+      <td>5</td>   
+     </tr> 
+         
+     <tr>       
+      <td>5</td>
+     </tr>
+     
+        
+    </table>  
+    
+  </td>
+   
+ 
+  <td>
+     
+     <table class="Phase2">          <!-- table for the values of Phase 2-->
+     
+     <tr>       
+      <th>Phase 2</th>
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>
+    
+     <tr>
+      <td>5</td>  
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>     
+     
+     <tr>
+      <td>5</td> 
+     </tr>
+     
+     <tr>
+      <td>5</td>   
+     </tr>  
+          
+     <tr>       
+      <td>5</td>
+     </tr>
+     
+        
+    </table>  
+    
+  </td>
+  
+  <td>
+     
+     <table class="Phase3">          <!-- table for values of Phase 3-->
+     
+     <tr>       
+      <th>Phase 3</th>
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>
+    
+     <tr>
+      <td>5</td>  
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>
+     
+     <tr>
+      <td>5</td>
+     </tr>     
+     
+     <tr>
+      <td>5</td> 
+     </tr>
+     
+     <tr>
+      <td>5</td>   
+     </tr> 
+     
+     <tr>       
+      <td>5</td>
+     </tr>
+     
+        
+    </table>  
+    
+  </td>
+           
+   </tr>  
+ </table>
+ <!--   
+  <tr class="Uberschrift">
+    <th></th>      
+    <th>Phase 1</th>
+    <th></th>
+    <th>Phase 2</th>      
+    <th></th>
+    <th>Phase 3</th>  
+    <th></th> 
+  </tr>
+  
+  <tr>
+    <th>Spannung</th> 
+    <td class="Wert">5</td>
+    <td class="Einheit">V</td>
+    <td class="Wert">5</td>
+    <td class="Einheit">V</td>
+    <td class="Wert">5</td>
+    <td class="Einheit">V</td>        
+  </tr>
+  
+  <tr>
+    <th>Strom</th>   
+    <td class="Wert">5</td>
+    <td class="Einheit">A</td>        
+    <td class="Wert">7</td>               
+    <td class="Einheit">A</td>        
+    <td class="Wert">9</td>   
+    <td class="Einheit">A</td>        
+
+  </tr>
+  
+  <tr>
+    <th>Scheinleistung</th>   
+    <td class="Wert">5</td>
+    <td class="Einheit">VA</td>        
+    <td class="Wert">7</td>
+    <td class="Einheit">VA</td> 
+    <td class="Wert">9</td>
+    <td class="Einheit">VA</td> 
+    
+  </tr>
+  
+  <tr>
+    <th>Wirkleistung</th>     
+    <td class="Wert">5</td>
+    <td class="Einheit">W</td>         
+    <td class="Wert">7</td>
+    <td class="Einheit">W</td>
+    <td class="Wert">9</td>
+    <td class="Einheit">W</td>
+    
+  </tr>
+  
+  <tr>
+    <th>Blindleistung</th>        
+    <td class="Wert">5</td>
+    <td class="Einheit">Var</td>        
+    <td class="Wert">7</td>
+    <td class="Einheit">Var</td>
+    <td class="Wert">9</td>
+    <td class="Einheit">Var</td>
+    
+  </tr>
+  
+  <tr>
+    <th>THD<sub>U</sub></th>      
+    <td class="Wert">5</td>
+    <td class="Einheit">%</td>        
+    <td class="Wert">7</td>
+    <td class="Einheit">%</td>
+    <td class="Wert">9</td>
+    <td class="Einheit">%</td>
+    
+  </tr>
+  
+  <tr>
+    <th>THD<sub>I</sub></th>      
+    <td class="Wert">5</td>
+    <td class="Einheit">%</td>         
+    <td class="Wert">7</td>
+    <td class="Einheit">%</td>
+    <td class="Wert">9</td>
+    <td class="Einheit">%</td>
+    
+  </tr>
+  
+</table>
+
+</table>
+-->
+</div>
+
+</div>    
+    
+
+<!-- content of button "Spannung" -->
+
+
+<div id="Spannung" class="Inhalt">
+
+    <h2>Spannung</h2>
+
+</div>
+
+<!-- content of button "Strom" -->
+
+
+<div id="Strom" class="Inhalt">
+
+    <h2>Strom</h2>
+ 
+</div>
+
+
+
+
+</body>
+</html>

@@ -12,6 +12,7 @@ import time
 import tables
 import datetime
 import os
+import test
 
 jsonpath = 'jsonfiles'
 h5path = 'h5files'
@@ -449,12 +450,20 @@ def get_JanitzaUMG_data(IP='129.69.176.123'):
         # localtime:
         measure_data_dict.update({'localtime': time.asctime( time.localtime(time.time()) )})
         
-        # Harmonics-help-list for harmonic bar chart in JavaScript:
-        if counter==0:
+        # Harmonics-help-list for harmonic bar chart in JavaScript: 
+        
+        '''
+        Wird für Balkendiagramm für die X-werte verwendet
+        '''
+        
+        
+        if counter==0:  #
             H_help=[]
             for i in range(1,41):
                 H_help.append(i)
         measure_data_dict.update({'H_help':H_help})
+        
+        
         
         # create json:
         
@@ -534,8 +543,11 @@ def convert_to_float(data):
     return round(sign * (1.0 + mantisse / 2**23) * 2**exponent, 4)
 
 
+    '''
+    Mit unterer If-Abfrage wird Python mitgeteilt, dass get_data_janitza = Hauptskript 
+    '''
+    
 def Call():
     if __name__ == '__main__':
     
         measure_data_dict, adress_data_dict, adress_measure_dict, data, charts_dict, counter = get_JanitzaUMG_data()
-
