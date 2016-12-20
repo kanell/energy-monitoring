@@ -1,3 +1,4 @@
 # No Python Bytecode Files
 *.pyc
 __pycache__
+jsonfiles

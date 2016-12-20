@@ -108,7 +108,7 @@ def fetch_data_dict(Adress_DF,Ports_DF,master):
     dict_list.append({})
     current_data_dict = 0
     for i in Ports_DF.index:
-        if len(dict_list[current_data_dict]) >= 500:
+        if len(dict_list[current_data_dict]) >= 700:
             dict_list.append({})
             current_data_dict = 1
         data = ()
