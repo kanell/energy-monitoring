@@ -29,24 +29,15 @@ $(document).ready(function(){
         $("#Ubersicht").show();
     });
 });
+              
 
 
-<<<<<<< HEAD
-
-          
-$(document).ready(function(){
-    $("#N").click(function(){
-        $("#div_g").hide();
-    });
-    $("#G").click(function(){
-        $("#div_g").show();
-=======
 $(document).ready(function(){
     $("#L").click(function(){
         $("#Spannung, #Ubersicht, #Strom").hide();
     });
     $("#L").click(function(){
         $("#Leistung").show();
->>>>>>> origin/master
+
     });
 });

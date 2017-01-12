@@ -5,9 +5,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="http://dygraphs.com/dist/dygraph.css">
 <script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
+<script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
 <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<!-- AM-Charts -->
+
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/radar.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+<!-- js-Dateien -->
+
 <script src="../js/charts.js"></script>
 <script src="../js/functions.js"></script>
+<script src="../js/polar.js"></script>
 
 
 </head>
@@ -26,7 +40,8 @@
      
            <li class="links"><a id="Uber" href="#Übersicht">Übersicht</a></li>
            <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
-           <li class="links"><a id="I" href="#Strom">Strom</a></li>  
+           <li class="links"><a id="I" href="#Strom">Strom</a></li>
+           <li class="links"><a id="L" href="#Leistung">Leistung</a></li>  
              
      </ul>     
    </li>
@@ -339,6 +354,13 @@
   
 </div>
 
+<!-- content of button "Leistung" -->
+
+<div id="Leistung" class="Inhalt">
+
+    <h2>Leistung</h2>
+    <div id="chartdiv" style="width:800px; height:400px;"></div>
+</div>
 
 
 
