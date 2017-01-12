@@ -31,3 +31,13 @@ $(document).ready(function(){
 });
 
 
+
+          
+$(document).ready(function(){
+    $("#N").click(function(){
+        $("#div_g").hide();
+    });
+    $("#G").click(function(){
+        $("#div_g").show();
+    });
+});
