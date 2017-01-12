@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-window.onload = function Spannung () {
+	window.onload = function Spannung () {
 
 		var dps = []; // dataPoints
 
-		var chart = new CanvasJS.Chart("chartContainer",{
+		var chart = new CanvasJS.Chart("chartSpannung",{
 			title :{
 				text: "Spannung"
-			},			
+			},
+      axisY:{
+				suffix: ' V',
+				includeZero: false
+        },			
 			data: [{
 				type: "line",
 				dataPoints: dps 
@@ -51,11 +49,3 @@ window.onload = function Spannung () {
 		setInterval(function(){updateChart()}, updateInterval); 
 
 	}
-</script>
-</head>
-<body>
-
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
-
-</body>
-</html>
