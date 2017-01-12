@@ -3,7 +3,7 @@
           
 $(document).ready(function(){
     $("#U").click(function(){
-        $("#Strom, #Ubersicht").hide();
+        $("#Strom, #Ubersicht, #Leistung").hide();
     });
     $("#U").click(function(){
         $("#Spannung").show();
@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#I").click(function(){
-        $("#Spannung, #Ubersicht").hide();
+        $("#Spannung, #Ubersicht, #Leistung").hide();
     });
     $("#I").click(function(){
         $("#Strom").show();
@@ -23,7 +23,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $("#Uber").click(function(){
-        $("#Spannung, #Strom").hide();
+        $("#Spannung, #Strom, #Leistung").hide();
     });
     $("#Uber").click(function(){
         $("#Ubersicht").show();
@@ -31,6 +31,7 @@ $(document).ready(function(){
 });
 
 
+<<<<<<< HEAD
 
           
 $(document).ready(function(){
@@ -39,5 +40,13 @@ $(document).ready(function(){
     });
     $("#G").click(function(){
         $("#div_g").show();
+=======
+$(document).ready(function(){
+    $("#L").click(function(){
+        $("#Spannung, #Ubersicht, #Strom").hide();
+    });
+    $("#L").click(function(){
+        $("#Leistung").show();
+>>>>>>> origin/master
     });
 });
