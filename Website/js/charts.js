@@ -1,4 +1,5 @@
-  $(document).ready(function () {
+
+ $(document).ready(function () {
       var dataLength = 15;
       var data = [];
       var t = new Date();
@@ -26,3 +27,4 @@
       }, 1000);
     }
 );
+

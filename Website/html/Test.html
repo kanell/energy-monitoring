@@ -3,59 +3,16 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<script>
-window.onload = function Spannung () {
+<link rel="stylesheet" href="http://dygraphs.com/dist/dygraph.css">
+<script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
+<script src="../js/charts.js"></script>
 
-		var dps = []; // dataPoints
 
-		var chart = new CanvasJS.Chart("chartContainer",{
-			title :{
-				text: "Spannung"
-			},			
-			data: [{
-				type: "line",
-				dataPoints: dps 
-			}]
-		});
-
-		var xVal = 0;
-		var yVal = 230;	
-		var updateInterval = 100;
-		var dataLength = 500; // number of dataPoints visible at any point
-
-		var updateChart = function (count) {
-			count = count || 1;
-			// count is number of times loop runs to generate random dataPoints.
-			
-			for (var j = 0; j < count; j++) {	
-				yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-				dps.push({
-					x: xVal,
-					y: yVal
-				});
-				xVal++;
-			};
-			if (dps.length > dataLength)
-			{
-				dps.shift();				
-			}
-			
-			chart.render();		
-
-		};
-
-		// generates first set of dataPoints
-		updateChart(dataLength); 
-
-		// update chart after specified time. 
-		setInterval(function(){updateChart()}, updateInterval); 
-
-	}
-</script>
 </head>
 <body>
+<div id="div_gf" style="width:800px; height:400px;"></div>
 
-<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+
 
 </body>
 </html>
