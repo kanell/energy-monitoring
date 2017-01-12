@@ -3,8 +3,20 @@
 <head>
 <link rel="stylesheet" href="../css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- AM-Charts -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+<!-- js-Datein -->
 <script src="../js/functions.js"></script>
-<script src="../js/charts.js"></script>
+<script src="../js/historie.js"></script>
+
+
+
 </head>
 <body>
 
@@ -28,8 +40,13 @@
 <div>
 <br>
 <h2 id=Ist>Historische Messwerte</h2>
+<h3 id=Ist>Spannung</h3>
+<div id="historie_chartdiv" style="width:1200px; height:400px;"></div>
+
+<h3 id=Ist>Leistung</h3>
+<div id="historie_chartdiv" style="width:1200px; height:400px;"></div>
+
 
 </div>
-
 </body>
 </html>

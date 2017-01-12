@@ -1,10 +1,5 @@
-/**
- * Create the chart
- * Uses amCharts Polar Scatter plugin:
- * https://github.com/amcharts/tools/tree/master/polarScatter
- */
 window.onload = function Leistung () {
-var chart = AmCharts.makeChart("chartdiv", {
+var chart = AmCharts.makeChart("polar_chartdiv", {
   "type": "radar",
   "theme": "light",
   "dataProvider": [],

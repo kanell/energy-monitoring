@@ -3,14 +3,36 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <link rel="stylesheet" href="http://dygraphs.com/dist/dygraph.css">
 <script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
-<script src="../js/charts.js"></script>
 
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+<script src="../js/charts.js"></script>
+<script src="../js/historie.js"></script>
 
 </head>
 <body>
-<div id="div_gf" style="width:800px; height:400px;"></div>
+<!-- upper menu -->
+
+<ul class="oben">
+
+  <li class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a></li>
+  <li class="aktiv"><a href="Historische-Werte.html">Historische Werte</a></li>
+  <li class="oben"><a href="Analyse.html">Analyse</a></li>           
+  <li class="oben"><a href="Test.html">Test</a></li>  
+    
+  <!-- upper right comment -->
+
+  <li class="oben-rechts">Spannungsüberwachungsdienst des IEH</li>
+    
+</ul>
+<div id="div_g" style="width:800px; height:400px;"></div>
 
 
 
