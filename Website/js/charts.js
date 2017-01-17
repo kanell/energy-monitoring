@@ -1,5 +1,4 @@
-
- $(document).ready(function () {
+window.onload = function Spannung () {
       var dataLength = 15;
       var data = [];
       var t = new Date();
@@ -8,7 +7,7 @@
         data.push([x, Math.random()]);
       }
 
-      var g = new Dygraph(document.getElementById("div_g"), data,
+      var g = new Dygraph("div_g", data,
                           {
                             drawPoints: true,
                             showRoller: true,
@@ -27,4 +26,3 @@
       }, 1000);
     }
 );
-

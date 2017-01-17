@@ -146,7 +146,22 @@ div.Inhalt {
     top: 100px;
     left: 150px;
     display: none;
-    }
+        }          
+        
+/* Propertoies of the current Voltage content */
+   
+#Spannung {
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    visibility: hidden;  
+        }                           
+        
+#Ubersicht {
+    position: absolute;
+    top: 100px;
+    left: 150px;
+          }                    
 
 /* styles of the table in "Aktuelle Werte" */
 
