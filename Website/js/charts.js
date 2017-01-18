@@ -1,14 +1,14 @@
 /* Chart current Voltage */
 
-  /*
+ 
      $(document).ready(function () {
-      var data = ["Datum, Funktion, Linie/n"]; 
+      var data = []; 
       var dataLength = 15;
       var t = new Date();
       for (var i = 10; i >= 0; i--) {
         var x = new Date(t.getTime() - i * 1000);
         var z = 1.1;
-        data.push(x, Math.random(),z"/n");
+        data.push([x, Math.random(),z]);
        
       }
 
@@ -18,20 +18,21 @@
                             drawPoints: true,
                             showRoller: false,
                             valueRange: [0.0, 1.2],
-                            labels: ['Time', 'Random']
+                            labels: ['Time', 'Random','Linie']
                           });
       // It sucks that these things aren't objects, and we need to store state in window.
      window.intervalId = setInterval(function() {
         var x = new Date();  // current time
         var y = Math.random();
-        data.push([x, y]);
+        var z = 1.1;
+        data.push([x, y, z]);
         g.updateOptions( { 'file': data } );
          if (data.length > dataLength) {
         data.shift();
         };
       }, 1000);      
     }            
-);       */
+);       /*
 
 
  $(document).ready(function () {
@@ -92,4 +93,4 @@
               
          }, 1000);
     }
-); 
+); */
