@@ -1,6 +1,9 @@
-window.onload = function Spannung () {
+/* Chart current Voltage */
+
+
+     $(document).ready(function () {
+      var data = []; 
       var dataLength = 15;
-      var data = [];
       var t = new Date();
       for (var i = 10; i >= 0; i--) {
         var x = new Date(t.getTime() - i * 1000);
@@ -20,9 +23,9 @@ window.onload = function Spannung () {
         var y = Math.random();
         data.push([x, y]);
         g.updateOptions( { 'file': data } );
-        if (data.length > dataLength) {
+         if (data.length > dataLength) {
         data.shift();
-        }
+        };
       }, 1000);
     }
 );
