@@ -5,6 +5,8 @@ Created on Wed Jan 11 16:08:28 2017
 @author: Paul-G
 """
 
+import pandas as pd
+
 def analyse(pq_data):
     '''Analyses live Data: frequency, voltage, THD, harmonics'''
     data_dict = pq_data[0]
