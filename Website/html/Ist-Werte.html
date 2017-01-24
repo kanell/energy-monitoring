@@ -63,7 +63,7 @@
 <!-- content of button "Übersicht" -->
 
 
-<div id="Ubersicht" class="Inhalt">      <!--div with table-->
+<div id="Ubersicht">      <!--div with table-->
 
 <h2>Übersicht</h2>    
 
@@ -239,97 +239,7 @@
            
    </tr>  
  </table>
- <!--   
-  <tr class="Uberschrift">
-    <th></th>      
-    <th>Phase 1</th>
-    <th></th>
-    <th>Phase 2</th>      
-    <th></th>
-    <th>Phase 3</th>  
-    <th></th> 
-  </tr>
-  
-  <tr>
-    <th>Spannung</th> 
-    <td class="Wert">5</td>
-    <td class="Einheit">V</td>
-    <td class="Wert">5</td>
-    <td class="Einheit">V</td>
-    <td class="Wert">5</td>
-    <td class="Einheit">V</td>        
-  </tr>
-  
-  <tr>
-    <th>Strom</th>   
-    <td class="Wert">5</td>
-    <td class="Einheit">A</td>        
-    <td class="Wert">7</td>               
-    <td class="Einheit">A</td>        
-    <td class="Wert">9</td>   
-    <td class="Einheit">A</td>        
 
-  </tr>
-  
-  <tr>
-    <th>Scheinleistung</th>   
-    <td class="Wert">5</td>
-    <td class="Einheit">VA</td>        
-    <td class="Wert">7</td>
-    <td class="Einheit">VA</td> 
-    <td class="Wert">9</td>
-    <td class="Einheit">VA</td> 
-    
-  </tr>
-  
-  <tr>
-    <th>Wirkleistung</th>     
-    <td class="Wert">5</td>
-    <td class="Einheit">W</td>         
-    <td class="Wert">7</td>
-    <td class="Einheit">W</td>
-    <td class="Wert">9</td>
-    <td class="Einheit">W</td>
-    
-  </tr>
-  
-  <tr>
-    <th>Blindleistung</th>        
-    <td class="Wert">5</td>
-    <td class="Einheit">Var</td>        
-    <td class="Wert">7</td>
-    <td class="Einheit">Var</td>
-    <td class="Wert">9</td>
-    <td class="Einheit">Var</td>
-    
-  </tr>
-  
-  <tr>
-    <th>THD<sub>U</sub></th>      
-    <td class="Wert">5</td>
-    <td class="Einheit">%</td>        
-    <td class="Wert">7</td>
-    <td class="Einheit">%</td>
-    <td class="Wert">9</td>
-    <td class="Einheit">%</td>
-    
-  </tr>
-  
-  <tr>
-    <th>THD<sub>I</sub></th>      
-    <td class="Wert">5</td>
-    <td class="Einheit">%</td>         
-    <td class="Wert">7</td>
-    <td class="Einheit">%</td>
-    <td class="Wert">9</td>
-    <td class="Einheit">%</td>
-    
-  </tr>
-  
-</table>
-
-</table>
--->
 </div>
 
 </div>    
@@ -338,10 +248,22 @@
 <!-- content of button "Spannung" -->
 
 
-<div id="Spannung" class="Inhalt">
+<!-- hides the chart for the voltage , necessery because it doesn't show up, if
+it's initially hidden by css's "display: none" command -->
+<script> 
+
+$(document).ready(function(){
+     $("#Spannung").hide();
+    });
+</script>         
+
+<!-- actual content of "Spannung" -->
+
+<div id="Spannung">
 <h2>Spannung</h2>
 
-<div id="div_g" style="position: right; width:800px; height:400px;"></div>
+<div id="div_g" style="width:800px; height:400px; position:absolute;"></div>
+
 
  
 </div>
