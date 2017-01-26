@@ -25,10 +25,25 @@ def analyse_database(starttime, endtime):
     
     db = pqdb.connect_to_db(db_config)
     
-    rule = 'port_800 < {}'.format(50)
-
-    
+    rule = 'port_800 < {}'.format(49.5) 
+    '''weitere Regel wird noch eingefügt'''
     data = pqdb.get_data(db, tablename, 'port_800', rule )
-    return data
+
+    frequency_critical_s = len(data)*10
+    year_s = 31536000
+
+    if frequency_critical_s/year_s < 0.005 :
+        frequency1_average_year = "okay"
+    else:
+        frequency1_average_year = "bad"
+
+    rule = 'port_800 < {}'.format(47.5) 
+    '''weitere Regel wird noch eingefügt'''
+    data = pqdb.get_data(db, tablename, 'port_800', rule )       
     
-data = analyse_database(starttime, endtime)
+    if data == None :
+        frequency2_average_year = "okay"
+    else:        
+        frequency2_average_year = "bad" 
+    
+    return data, frequency_critical_s, frequency1_average_year, frequency2_average_year

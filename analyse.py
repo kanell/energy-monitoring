@@ -7,26 +7,24 @@ Created on Wed Jan 11 16:08:28 2017
 
 import pandas as pd
 
-def analyse(pq_data):
-    '''Analyses live Data: frequency, voltage, THD, harmonics'''
+def analyse(pq_data, frequency_average_10s, i):
+    '''Analyses live Data from pq_data: frequency, voltage, THD, harmonics. i = [0...9] for frequency_average_10s'''
     data_dict = pq_data[0]
                
-    '''Analyses frequency and checks if measured data is confom with EN 50160'''
-#            frequency_average_10s = []
-#            while True:
-#                for i in frequency_average:
-#                frequency = data_dict.get("port_19050")
-                
-#                frequency_average.append(frequency)
-#                frequency_average.delete[10]
-
-
-
-    freqeuency_average_10s = data_dict.get("port_800")
-                    
-    if freqeuency_average_10s < 47.5 or freqeuency_average_10s > 52:
+    '''Analyses frequency and checks if measured data is confom with EN 50160
+    Both frequency_average_10s AND frequency are returned'''
+#   frequency_average_10s = [] '''in pqmain.py'''
+            
+    if len(frequency_average_10s) < 10:
+        frequency_average_10s.append(data_dict.get("port_800"))
+    else:
+        frequency_average_10s[i] = data_dict.get("port_800")
+     
+    frequency = sum(frequency_average_10s)/len(frequency_average_10s)
+               
+    if frequency_average_10s < 47.5 or frequency_average_10s > 52:
         frequency = "bad"
-    elif freqeuency_average_10s < 49.5 or freqeuency_average_10s > 50.5:
+    elif frequency_average_10s < 49.5 or frequency_average_10s > 50.5:
         frequency = "critical"
     else:    
         frequency = "okay"
@@ -120,4 +118,4 @@ def analyse(pq_data):
         harmonic_7th_U3 = "okay"
                 
                 
-    return frequency, voltage_L1, voltage_L2, voltage_L3, THD_L1, THD_L2, THD_L3, harmonic_5th_U1, harmonic_7th_U1, harmonic_5th_U2, harmonic_7th_U2, harmonic_5th_U3, harmonic_7th_U3
+    return frequency_average_10s, frequency, voltage_L1, voltage_L2, voltage_L3, THD_L1, THD_L2, THD_L3, harmonic_5th_U1, harmonic_7th_U1, harmonic_5th_U2, harmonic_7th_U2, harmonic_5th_U3, harmonic_7th_U3
