@@ -28,7 +28,7 @@ def get_data(db, tablename, selector, rule):
     return data
 
 def create_db_table(db, tablename, description):
-    config_string = 'create table '+tablename+' (timestamp float, '
+    config_string = 'create table '+tablename+' (timestamp float primary key, '
     for key in description.keys():
         config_string = config_string+key+' '+description[key]+','
     config_string = config_string[:-1]+')'

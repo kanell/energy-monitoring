@@ -25,4 +25,3 @@ window.onload = function Spannung () {
         }
       }, 1000);
     }
-);
