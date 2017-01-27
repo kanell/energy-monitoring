@@ -12,6 +12,7 @@ import time
 import cProfile
 import pstats
 import datetime as dt
+import json
 
 # init
 ipaddr = '129.69.176.123'
@@ -57,6 +58,8 @@ try:
     # create table in  database if not already created
     if not 'public.'+tablename in db.get_tables():
         pqdb.create_db_table(db,tablename,db_table_config)
+        
+    timestamp = int(dt.datetime.now().timestamp())
     
     while True:
         time1 = time.time()
@@ -71,7 +74,7 @@ try:
             datadictlist[index]['port_'+str(addr)] = pq_data[addr]
         
         # add primary key to every dict
-        timestamp = int(dt.datetime.now().timestamp())
+        timestamp += 1
         for datadict in datadictlist:
             datadict['timestamp'] = timestamp
 
@@ -79,6 +82,9 @@ try:
         db.insert(tablename,{'timestamp':timestamp})
         for index, datadict in enumerate(datadictlist):
                 db.update(tablename,datadict)
+                # create data json
+                with open('temp/jsons/alldata.json','w') as f:
+                    f.write(json.dumps(datadict))
         
     
         time2 = time.time()
