@@ -84,7 +84,7 @@ $(document).ready(function(){
       document.getElementById("ft").innerHTML =  data["port_" + f] ;                        
       };       
     }}); 
-    }, 1000);                                                                     
+    }, 10000);                                                                     
   
 });
     
