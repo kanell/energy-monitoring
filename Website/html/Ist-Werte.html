@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8"> 
 <link rel="stylesheet" href="../css/main.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -17,6 +18,7 @@
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
 
 <!-- js-Dateien -->
 
@@ -39,7 +41,7 @@
 
            <!-- left menu -->
 
-           <li class="links"><a id="Uber" href="#�bersicht">�bersicht</a></li>
+           <li class="links"><a id="Uber" href="#Übersicht">Übersicht</a></li>
            <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
            <li class="links"><a id="I" href="#Strom">Strom</a></li>
            <li class="links"><a id="L" href="#Leistung">Leistung</a></li>
@@ -53,7 +55,7 @@
 
   <!-- upper right comment -->
 
-  <li class="oben-rechts">Spannungs�berwachungsdienst des IEH</li>
+  <li class="oben-rechts">Energiemonitoringsystem des IEH</li>
 
 </ul>
 
@@ -65,7 +67,7 @@
 
 <div id="Ubersicht">      <!--div with table-->
 
-<h2>�bersicht</h2>
+
 
 <div style="overflow-x:auto;">         <!-- makes the table scrollable, if screen to small-->
 
@@ -81,31 +83,31 @@
      </tr>
 
      <tr>
-      <th>Spannung</th>
+      <th>Spannung (V)</th>
      </tr>
 
      <tr>
-      <th>Strom</th>
+      <th>Strom (A)</th>
      </tr>
 
      <tr>
-      <th>Scheinleistung</th>
+      <th>Scheinleistung (VA)</th>
      </tr>
 
      <tr>
-      <th>Wirkleistung</th>
+      <th>Wirkleistung (W)</th>
      </tr>
 
      <tr>
-      <th>Blindleistung</th>
+      <th>Blindleistung (var)</th>
      </tr>
 
      <tr>
-      <th>THD<sub>U</sub></th>
+      <th>THD<sub>U</sub> (%)</th>
      </tr>
 
      <tr>
-      <th>THD<sub>I</sub></th>
+      <th>THD<sub>I</sub> (%)</th>
      </tr>
 
 
@@ -122,31 +124,31 @@
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="U1t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="I1t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="S1t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="P1t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="Q1t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="THD_U1t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="THD_I1t"></td>
      </tr>
 
 
@@ -164,31 +166,31 @@
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="U2t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="I2t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="S2t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="P2t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="Q2t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="THD_U2t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="THD_I2t"></td>
      </tr>
 
 
@@ -204,32 +206,32 @@
       <th>Phase 3</th>
      </tr>
 
-     <tr>
-      <td>5</td>
+      <tr>
+      <td id="U3t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="I3t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="S3t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="P3t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="Q3t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="THD_U3t"></td>
      </tr>
 
      <tr>
-      <td>5</td>
+      <td id="THD_I3t"></td>
      </tr>
 
 
@@ -238,7 +240,19 @@
   </td>
 
    </tr>
- </table>
+ </table>  
+ 
+<!-- table for the frequency -->
+ 
+<table class="Ubertabelle" style="background-color:green; color:white;"> 
+<tr>
+<td> Frequenz (Hz) </td>
+</tr>
+<tr>
+<td id="ft"></td>
+</tr>
+</table>
+
 
 </div>
 
