@@ -12,38 +12,79 @@ tablename = 'pqdata'
 
 starttime = datetime.datetime(2017,1,24,14,00,00,000000).timestamp()
 endtime = datetime.datetime(2017,1,24,15,00,00,000000).timestamp()
+'''wöchentlicher Abstand?'''
 
-def analyse_database(starttime, endtime):
-    '''Analyses live Data: frequency, voltage'''
+#   1 weak in seconds 
+week_s = 604800
     
-    db_config = {'dbname': 'postgres',
+db_config = {'dbname': 'postgres',
              'host': 'localhost',
              'port': 5432,
              'opt': None,
              'user': 'postgres',
              'passwd': 'pqdata'}
+#   connection to database
+db = pqdb.connect_to_db(db_config)
     
-    db = pqdb.connect_to_db(db_config)
-    
+def analyse_database_frequency(starttime, endtime):
+#   Analyses historical Data: frequency
     rule = 'port_800 < {}'.format(49.5) 
-    '''weitere Regel wird noch eingefügt'''
-    data = pqdb.get_data(db, tablename, 'port_800', rule )
+    '''weitere Regel wird noch eingefügt, >50.5 & timestamp < endtime, > starttime'''
+    data_frequency_1 = pqdb.get_data(db, tablename, 'port_800', rule )
+    '''hier muss noch der jeweilige Zeitstempel selected werden.''' 
+    
+#   Duration of exceeding limits in seconds
+    frequency_critical_s = len(data_frequency_1)
 
-    frequency_critical_s = len(data)*10
-    year_s = 31536000
-
-    if frequency_critical_s/year_s < 0.005 :
-        frequency1_average_year = "okay"
+    if frequency_critical_s/week_s < 0.005 :
+        frequency1_weekly = "okay"
     else:
-        frequency1_average_year = "bad"
+        frequency1_weekly = "bad"
 
-    rule = 'port_800 < {}'.format(47.5) 
+    rule2 = 'port_800 < {}'.format(47.5) 
     '''weitere Regel wird noch eingefügt'''
-    data = pqdb.get_data(db, tablename, 'port_800', rule )       
+    data_frequency_2 = pqdb.get_data(db, tablename, 'port_800', rule2 ) 
+    '''hier muss noch der jeweilige Zeitstempel selected werden.'''      
     
-    if data == None :
-        frequency2_average_year = "okay"
+    if data_frequency_2 == None :
+        frequency2_weekly = "okay"
     else:        
-        frequency2_average_year = "bad" 
+        frequency2_weekly = "bad" 
     
-    return data, frequency_critical_s, frequency1_average_year, frequency2_average_year
+    return data_frequency_1, data_frequency_2, frequency1_weekly, frequency2_weekly
+    
+def analyse_database_voltage(starttime, endtime):
+#   Analyses historical Data: voltage        
+    rule3 = 'port_1728 < {}'.format(207) 
+    rule4 = 'port_1730 < {}'.format(207) 
+    rule5 = 'port_1732 < {}'.format(207) 
+    '''weitere Regeln werden noch eingefügt: > 253'''
+
+    data_voltage_L1 = pqdb.get_data(db, tablename, 'port_1728', rule3 )    
+    data_voltage_L2 = pqdb.get_data(db, tablename, 'port_1730', rule4 )  
+    data_voltage_L3 = pqdb.get_data(db, tablename, 'port_1732', rule5 )    
+    '''hier müssen noch die jeweiligen Zeitstempel selected werden.''' 
+        
+#   Duration of exceeding limits in seconds
+    voltageL1_critical_s = len(data_voltage_L1)
+    if voltageL1_critical_s/week_s < 0.05 :
+        voltage_weekly_L1 = "okay"
+    else:
+        voltage_weekly_L1 = "bad"   
+        
+    voltageL2_critical_s = len(data_voltage_L2)
+    if voltageL2_critical_s/week_s < 0.05 :
+        voltage_weekly_L2 = "okay"
+    else:
+        voltage_weekly_L2 = "bad"   
+
+    voltageL3_critical_s = len(data_voltage_L3)
+    if voltageL3_critical_s/week_s < 0.05 :
+        voltage_weekly_L3 = "okay"
+    else:
+        voltage_weekly_L3 = "bad"   
+        
+    return voltage_weekly_L1, voltage_weekly_L2, voltage_weekly_L3
+    
+    return data_voltage_L1, data_voltage_L2, data_voltage_L3, 
+    voltage_weekly_L1, voltage_weekly_L2, voltage_weekly_L3
