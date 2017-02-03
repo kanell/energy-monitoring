@@ -10,14 +10,8 @@ import pandas as pd
 import modbus_tk.defines as cst
 import modbus_tk.modbus_tcp as modbus_tcp
 import datetime as dt
-import os
 import numpy as np
 import math
-
-
-jsonpath    = 'jsonfiles'
-IP          = '129.69.176.123'
-os.makedirs(jsonpath, exist_ok=True)
 
 
 def read_port_csv():
@@ -92,7 +86,7 @@ def fetch_data_dataframe(dataframe,ports,master):
 
     end_time = dt.datetime.now()
     timedelta = end_time - start_time
-    print (timedelta)
+    #print (timedelta)
     return dataframe
 
 

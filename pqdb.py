@@ -19,12 +19,16 @@ db_table_config = {'voltage':'float',
                    'current':'float'}
 
 def get_data(db, tablename, selector, rule):
-    if rule == None:
-        # get all data
-        data = np.array(db.query('select {} from {}'.format(selector, tablename)).getresult())[:,-1]
-    else:
-        # get data depending on rule
-        data = np.array(db.query('select {} from {} where {}'.format(selector, tablename, rule)).getresult())[:,-1]
+    try:
+        if rule == None:
+            # get all data
+            data = np.array(db.query('select {} from {}'.format(selector, tablename)).getresult())[:,-1]
+        else:
+            # get data depending on rule
+            data = np.array(db.query('select {} from {} where {}'.format(selector, tablename, rule)).getresult())[:,-1]
+    except IndexError:
+        print('No data in that time period')
+        return np.array([])
     return data
 
 def create_db_table(db, tablename, description):

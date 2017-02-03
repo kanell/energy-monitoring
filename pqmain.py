@@ -13,6 +13,7 @@ import cProfile
 import pstats
 import datetime as dt
 import json
+import os
 
 # init
 ipaddr = '129.69.176.123'
@@ -20,7 +21,12 @@ timedelta = 1 # seconds
 tablename = 'pqdata'
 max_dictsize = 1000
 
-profile = True
+# create folders
+paths = ['temp', 'temp/jsons', 'temp/csv']
+for path in paths:
+    os.makedirs(os.path.join(path), exist_ok=True)
+
+profile = False
 if profile is True:
     profiling = cProfile.Profile()
     profiling.enable()
@@ -74,7 +80,6 @@ try:
             datadictlist[index]['port_'+str(addr)] = pq_data[addr]
         
         # add primary key to every dict
-        timestamp += 1
         for datadict in datadictlist:
             datadict['timestamp'] = timestamp
 
@@ -86,13 +91,14 @@ try:
                 with open('temp/jsons/alldata.json','w') as f:
                     f.write(json.dumps(datadict))
         
-    
         time2 = time.time()
-        
         # try to get data every 1 second
         if time2-time1 < timedelta:
+            timestamp += timedelta
             time.sleep(timedelta-time2+time1) 
         else:
+            timestamp += 2*timedelta
+            time.sleep(2*timedelta-time2+time1)
             print('getting data from janitza takes to long')
 
 except KeyboardInterrupt:
