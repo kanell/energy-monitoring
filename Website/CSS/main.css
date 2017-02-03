@@ -154,8 +154,8 @@ div.Inhalt {
     position: absolute;
     top: 100px;
     left: 180px;
-    visibility: hidden;  
-        }                           
+    display: none;
+           }                           
         
 #Ubersicht {
     position: absolute;
