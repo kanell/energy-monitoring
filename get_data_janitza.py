@@ -9,7 +9,6 @@ Created on Wed Dec  7 12:16:42 2016
 import pandas as pd
 import modbus_tk.defines as cst
 import modbus_tk.modbus_tcp as modbus_tcp
-import json
 import datetime as dt
 import os
 import numpy as np
@@ -26,33 +25,31 @@ def read_port_csv():
     The DataFrame Ports_DF is later used to fetch the data-tuple via Modbus TCP/IP.
     The Start, End and Range parameter is used to set the start, lenght and steprange
     in each tulpe.'''
-    Adress_DF = pd.read_csv( 'Port.csv')
-    Ports_DF = pd.DataFrame(columns = ['Start','End','Range']).apply(int)
-    Start = Adress_DF.at[0,'Adresse']
-    for i in Adress_DF.index:
+    addresses = pd.read_csv('port.csv')['Adresse']
+    ports = pd.DataFrame(columns = ['start','end','range']).astype(int)
+    start = addresses[0]
+    for i in addresses.index:
         try:
-            if i+1 == len(Adress_DF):
-                Range_Num = Adress_DF.at[i,'Adresse']-Adress_DF.at[i-1,'Adresse']
-                Row = pd.DataFrame(data = [[Start,Adress_DF.at[i,'Adresse'],Range_Num]],columns = ['Start','End','Range'])
-                Ports_DF = pd.concat([Ports_DF,Row])
-                Start = Adress_DF.at[i,'Adresse']
-            elif (Adress_DF.at[i,'Adresse']-Adress_DF.at[i-1,'Adresse']) == (Adress_DF.at[i+1,'Adresse']-Adress_DF.at[i,'Adresse']):
+            if i == addresses.size - 1:
+                range_num = addresses[i] - addresses[i-1]
+                row = pd.DataFrame(data = [[start,addresses[i],range_num]], columns = ['start','end','range'])
+                ports = ports.append(row)
+                start = addresses[i]
+            elif (addresses[i] - addresses[i-1]) == (addresses[i+1]-addresses[i]):
                 pass
             else:
-                if Start == Adress_DF.at[i,'Adresse']:
+                if start == addresses[i]:
                     pass
                 else:
-                    Range_Num = Adress_DF.at[i,'Adresse']-Adress_DF.at[i-1,'Adresse']
-                    Row = pd.DataFrame(data = [[Start,Adress_DF.at[i,'Adresse'],Range_Num]],columns = ['Start','End','Range'])
-                    Ports_DF = pd.concat([Ports_DF,Row])
-                    Start = Adress_DF.at[i+1,'Adresse']
+                    range_num = addresses[i] - addresses[i-1]
+                    row = pd.DataFrame(data = [[start,addresses[i],range_num]], columns = ['start','end','range'])
+                    ports = ports.append(row)
+                    start = addresses[i+1]
         except KeyError:
             pass
-    Ports_DF = Ports_DF.set_index(np.arange(0,(len(Ports_DF))))
-    Ports_DF = Ports_DF.astype(int)
-    Adress_DF = Adress_DF.set_index('Adresse')
-    Adress_DF['Data'] = pd.Series(np.NaN, index=Adress_DF.index).astype(object)
-    return Adress_DF, Ports_DF
+    ports = ports.set_index(np.arange(ports.index.size))
+    dataframe = pd.Series(np.NaN, index=addresses, name='data').astype(float)
+    return dataframe, ports, addresses
 
 
 def connection(IP):
@@ -62,78 +59,41 @@ def connection(IP):
     return master
 
 
-def fetch_raw(master,Start):
+def fetch_raw(master,start):
     '''Fetches data via Modbus. Can only take 123 floating point numbers at once.'''
-    Raw_Data = master.execute(1, cst.READ_HOLDING_REGISTERS,Start, 123)
-    return Raw_Data
+    raw_data = master.execute(1, cst.READ_HOLDING_REGISTERS,start, 123)
+    return raw_data
 
+def fetch_raw_new(master,port):
+    '''Fetches data via Modbus. Can only take 123 floating point numbers at once.'''
+    raw_data = master.execute(1, cst.READ_HOLDING_REGISTERS,port, 1)
+    return raw_data
 
-def fetch_data_dataframe(Adress_DF,Ports_DF,master):
+def fetch_data_dataframe(dataframe,ports,master):
     '''Fetches data by port-series from Modbus and stores it converted in
     seperat DataFrame.'''
-    Start_time = dt.datetime.now()
-    Data_DF = pd.DataFrame(Adress_DF['Data'])
-    for i in Ports_DF.index:
+    start_time = dt.datetime.now()
+    for i in ports.index:
         data = ()
         n = 0
-        Delta = Ports_DF.at[i,'End'] - Ports_DF.at[i,'Start']
-        if Delta < 123:
-            Start = Ports_DF.at[i,'Start']
-            data = data + fetch_raw(master,Start)
-            for m in range(Ports_DF.at[i,'Start'],Ports_DF.at[i,'End']+1,2):
-                Data_DF.at[m,'Data'] = convert_to_float(data[n:n+2])
-                n += Ports_DF.at[i,'Range']
+        delta = ports.at[i,'end'] - ports.at[i,'start']
+        if delta < 123:
+            start = ports.at[i,'start']
+            data = data + fetch_raw(master,start)
         else:
-            X = math.ceil(Delta/123)
-            for k in range(0,X):
-                Start =  Ports_DF.at[i,'Start']+k*124
-                data = data + fetch_raw(master,Start)
-            if Ports_DF.at[i,'Range'] == 2:
-                for m in range(Ports_DF.at[i,'Start'],Ports_DF.at[i,'End']+1,2):
-                    Data_DF.at[m,'Data'] = convert_to_float(data[n:n+2])
-                    n += Ports_DF.at[i,'Range']
+            x = math.ceil(delta/123)
+            for k in range(x):
+                start =  ports.at[i,'start']+k*124
+                data = data + fetch_raw(master,start)
+        if ports.at[i,'range'] == 2:
+            for m in range(ports.at[i,'start'],ports.at[i,'end']+1,ports.at[i,'range']):
+                dataframe[m] = convert_to_float(data[n:n+2])
+                n += ports.at[i,'range']
 
-
-    End_time = dt.datetime.now()
-    TimeDelta = End_time - Start_time
-    print (TimeDelta)
-    return Data_DF
-
-
-def fetch_data_dict(Adress_DF,Ports_DF,master):
-    '''Fetches data by port-series from Modbus and stores it converted in
-    seperat dict.'''
-    dict_list = []
-    Start_time = dt.datetime.now()
-    dict_list.append({})
-    current_data_dict = 0
-    for i in Ports_DF.index:
-        if len(dict_list[current_data_dict]) >= 700:
-            dict_list.append({})
-            current_data_dict = 1
-        data = ()
-        n = 0
-        Delta = Ports_DF.at[i,'End'] - Ports_DF.at[i,'Start']
-        if Delta < 123:
-            Start = Ports_DF.at[i,'Start']
-            data = data + fetch_raw(master,Start)
-            for m in range(Ports_DF.at[i,'Start'],Ports_DF.at[i,'End']+1,2):
-                dict_list[current_data_dict]['port_'+str(m)] = convert_to_float(data[n:n+2])
-                n += Ports_DF.at[i,'Range']
-        else:
-            X = math.ceil(Delta/123)
-            for k in range(0,X):
-                Start =  Ports_DF.at[i,'Start']+k*124
-                data = data + fetch_raw(master,Start)
-            if Ports_DF.at[i,'Range'] == 2:
-                for m in range(Ports_DF.at[i,'Start'],Ports_DF.at[i,'End']+1,2):
-                    dict_list[current_data_dict]['port_'+str(m)] = convert_to_float(data[n:n+2])
-                    n += Ports_DF.at[i,'Range']
-
-    End_time = dt.datetime.now()
-    TimeDelta = End_time - Start_time
-    print (TimeDelta)
-    return dict_list
+    end_time = dt.datetime.now()
+    timedelta = end_time - start_time
+    print (timedelta)
+    return dataframe
 
 
 def convert_to_float(data):

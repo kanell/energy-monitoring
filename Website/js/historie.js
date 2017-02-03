@@ -647,5 +647,6 @@ window.onload = function Historie () {
 
 	function zoomChart() {
 	    chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
-	}																			
+			console.log(chart);
+	}
 }

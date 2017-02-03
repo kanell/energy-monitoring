@@ -144,7 +144,7 @@ li.links a:hover {
 div.Inhalt {
     position: absolute;
     top: 100px;
-    left: 150px;
+    left: 180px;
     display: none;
         }          
         
@@ -153,14 +153,14 @@ div.Inhalt {
 #Spannung {
     position: absolute;
     top: 100px;
-    left: 150px;
+    left: 180px;
     visibility: hidden;  
         }                           
         
 #Ubersicht {
     position: absolute;
     top: 100px;
-    left: 150px;
+    left: 180px;
           }                    
 
 /* styles of the table in "Aktuelle Werte" */

@@ -71,32 +71,28 @@ def analyse(pq_data, frequency_average_10s, i, long_interruption_df):
         return long_interruption_df
         
     elif voltage_L1_average > 1 and voltage_L2_average > 1 and voltage_L3_average > 1 and m < (3*60) and m > 0:
-        while len(long_interruption_df) > 0:
-            long_interruption_df = long_interruption_df.drop(long_interruption_df.index[[0]])
-            
+        long_interruption_df = pd.DataFrame(columns = ['Time','Voltage_L1','Voltage_L2','Voltage_L3'])
+        
     else:
-        data = long_interruption_df.to_csv()
-        out_file = open("longterm_interruption.json","w")
-        json.dump(data, out_file)
-        out_file.close()
-        while len(long_interruption_df) > 0:
-            long_interruption_df = long_interruption_df.drop(long_interruption_df.index[[0]])
+        with open("longterm_interruption.json","w") as out_file:
+            out_file.write(long_interruption_df.to_json())
+        long_interruption_df = pd.DataFrame(columns = ['Time','Voltage_L1','Voltage_L2','Voltage_L3'])
                
 #    Analyses Total Harmonics Distortion (THD) and checks if measured data is confom with EN 50160
     THD_L1 = data_dict.get("port_836")
     THD_L2 = data_dict.get("port_868")
     THD_L3 = data_dict.get("port_840")
-            
+
     if THD_L1  >= 8:
         THD_L1 = "bad"
     else:
         THD_L1 = "okay"
-        
+
     if THD_L2 >= 8:
         THD_L2 = "critical"
     else:
         THD_L2 = "okay"
-               
+
     if THD_L3 >= 8:
         THD_L3 = "critical"
     else:
@@ -107,43 +103,43 @@ def analyse(pq_data, frequency_average_10s, i, long_interruption_df):
     '''Harmonics U L1,L2,L3: Maximum of mean value'''
     harmonic_5th_U1 = data_dict.get("port_1008")
     harmonic_7th_U1 = data_dict.get("port_1012")
-    voltage_U1 = data_dict.get("port_808") 
-            
+    voltage_U1 = data_dict.get("port_808")
+
     harmonic_5th_U2 = data_dict.get("port_1088")
     harmonic_7th_U2 = data_dict.get("port_1092")
-    voltage_U2 = data_dict.get("port_810") 
-    
+    voltage_U2 = data_dict.get("port_810")
+
     '''inacceptable values from janitza for L3'''
     harmonic_5th_U3 = data_dict.get("port_1168")
     harmonic_7th_U3 = data_dict.get("port_1172")
-    voltage_U3 = data_dict.get("port_812") 
-    
-    
+    voltage_U3 = data_dict.get("port_812")
+
+
     if harmonic_5th_U1/voltage_U1 > 0.06:
         harmonic_5th_U1 = "bad"
     else:
         harmonic_5th_U1 = "okay"
-    
+
     if harmonic_7th_U1/voltage_U1 > 0.05:
         harmonic_7th_U1 = "bad"
     else:
         harmonic_7th_U1 = "okay"
-        
+
     if harmonic_5th_U2/voltage_U2 > 0.06:
         harmonic_5th_U2 = "bad"
     else:
         harmonic_5th_U2 = "okay"
-   
+
     if harmonic_7th_U2/voltage_U2 > 0.05:
         harmonic_7th_U2 = "bad"
     else:
         harmonic_7th_U2 = "okay"
-        
+
     if harmonic_5th_U3/voltage_U3 > 0.06:
         harmonic_5th_U3 = "bad"
     else:
         harmonic_5th_U3 = "okay"
-    
+
     if harmonic_7th_U3/voltage_U3 > 0.05:
         harmonic_7th_U3 = "bad"
     else:
