@@ -14,6 +14,7 @@ import pstats
 import datetime as dt
 import json
 import os
+import analyse as ana
 
 # init
 ipaddr = '129.69.176.123'
@@ -55,6 +56,7 @@ try:
     db_table_config = {}
     for index in dataframe.index:
         db_table_config['port_'+str(index)] = 'float'
+    db_table_config['frequency_10s'] = 'float'
     
     # connect to janitza
     pqid = gd.connection(ipaddr)
@@ -72,6 +74,9 @@ try:
         # get data from janitza
         pq_data = gd.fetch_data_dataframe(dataframe, ports, pqid)
         
+        # send data to analysis func
+        frequency_10s, status_dict = ana.analyse(pq_data)
+        
         # create dict for database insert
         index = 0
         for i,addr in enumerate(pq_data.index):
@@ -82,6 +87,7 @@ try:
         # add primary key to every dict
         for datadict in datadictlist:
             datadict['timestamp'] = timestamp
+            datadict['frequency_10s'] = frequency_10s
 
         # insert data in database
         db.insert(tablename,{'timestamp':timestamp})

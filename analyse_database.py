@@ -28,10 +28,13 @@ db = pqdb.connect_to_db(db_config)
     
 def analyse_database_frequency(starttime, endtime):
 #   Analyses historical Data: frequency
-    rule = 'port_800 < {}'.format(49.5) 
-    '''weitere Regel wird noch eingefügt, >50.5 & timestamp < endtime, > starttime'''
-    data_frequency_1 = pqdb.get_data(db, tablename, 'port_800', rule )
-    '''hier muss noch der jeweilige Zeitstempel selected werden.''' 
+    rule = 'frequency_10s between {} and {} and timestamp between {} and {}'.format(49.5,50,5,starttime,endtime) 
+    data_frequency_1 = pqdb.get_data(db, tablename, 'frequency_10s', rule)
+    '''her muss noch der jeweilige Zeitstempel selected werden.''' 
+    data_frequency_time = pqdb.get_data(db, tablename, 'timestamp', rule)
+    
+    analysisdict = {}
+    analysisdict = 
     
 #   Duration of exceeding limits in seconds
     frequency_critical_s = len(data_frequency_1)
@@ -41,9 +44,9 @@ def analyse_database_frequency(starttime, endtime):
     else:
         frequency1_weekly = "bad"
 
-    rule2 = 'port_800 < {}'.format(47.5) 
+    rule2 = 'frequency_10s < {}'.format(47.5) 
     '''weitere Regel wird noch eingefügt'''
-    data_frequency_2 = pqdb.get_data(db, tablename, 'port_800', rule2 ) 
+    data_frequency_2 = pqdb.get_data(db, tablename, 'frequency_10s', rule2 ) 
     '''hier muss noch der jeweilige Zeitstempel selected werden.'''      
     
     if data_frequency_2 == None :
