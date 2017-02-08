@@ -1,0 +1,355 @@
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 22:26:13 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 65536
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1de80f8
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x1de80f8 pid: 1354 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1354)
+spawned uWSGI worker 1 (pid: 1357, cores: 1)
+spawned uWSGI worker 2 (pid: 1358, cores: 1)
+spawned uWSGI worker 3 (pid: 1359, cores: 1)
+spawned uWSGI worker 4 (pid: 1360, cores: 1)
+spawned uWSGI worker 5 (pid: 1361, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 22:40:48 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 65536
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xeff1d8
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0xeff1d8 pid: 1659 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1659)
+spawned uWSGI worker 1 (pid: 1662, cores: 1)
+spawned uWSGI worker 2 (pid: 1663, cores: 1)
+spawned uWSGI worker 3 (pid: 1664, cores: 1)
+spawned uWSGI worker 4 (pid: 1665, cores: 1)
+spawned uWSGI worker 5 (pid: 1666, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 22:41:52 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 65536
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1e641d8
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x1e641d8 pid: 1681 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1681)
+spawned uWSGI worker 1 (pid: 1684, cores: 1)
+spawned uWSGI worker 2 (pid: 1685, cores: 1)
+spawned uWSGI worker 3 (pid: 1686, cores: 1)
+spawned uWSGI worker 4 (pid: 1687, cores: 1)
+spawned uWSGI worker 5 (pid: 1688, cores: 1)
+[pid: 1684|app: 0|req: 1/1] 127.0.0.1 () {40 vars in 680 bytes} [Wed Feb  8 22:42:06 2017] GET / => generated 11 bytes in 13 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 1687|app: 0|req: 1/2] 127.0.0.1 () {42 vars in 656 bytes} [Wed Feb  8 22:42:07 2017] GET /favicon.ico => generated 233 bytes in 144 msecs (HTTP/1.1 404) 2 headers in 72 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 22:42:52 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+Failed to import the site module
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site.py", line 586, in <module>
+    main()
+  File "/usr/lib/python3.4/site.py", line 572, in main
+    known_paths = addusersitepackages(known_paths)
+  File "/usr/lib/python3.4/site.py", line 287, in addusersitepackages
+    user_site = getusersitepackages()
+  File "/usr/lib/python3.4/site.py", line 263, in getusersitepackages
+    user_base = getuserbase() # this will also set USER_BASE
+  File "/usr/lib/python3.4/site.py", line 253, in getuserbase
+    USER_BASE = get_config_var('userbase')
+  File "/usr/lib/python3.4/sysconfig.py", line 597, in get_config_var
+    return get_config_vars().get(name)
+  File "/usr/lib/python3.4/sysconfig.py", line 540, in get_config_vars
+    _init_posix(_CONFIG_VARS)
+  File "/usr/lib/python3.4/sysconfig.py", line 412, in _init_posix
+    from _sysconfigdata import build_time_vars
+  File "/usr/lib/python3.4/_sysconfigdata.py", line 6, in <module>
+    from _sysconfigdata_m import *
+ImportError: No module named '_sysconfigdata_m'
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 22:54:25 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+Failed to import the site module
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site.py", line 586, in <module>
+    main()
+  File "/usr/lib/python3.4/site.py", line 572, in main
+    known_paths = addusersitepackages(known_paths)
+  File "/usr/lib/python3.4/site.py", line 287, in addusersitepackages
+    user_site = getusersitepackages()
+  File "/usr/lib/python3.4/site.py", line 263, in getusersitepackages
+    user_base = getuserbase() # this will also set USER_BASE
+  File "/usr/lib/python3.4/site.py", line 253, in getuserbase
+    USER_BASE = get_config_var('userbase')
+  File "/usr/lib/python3.4/sysconfig.py", line 597, in get_config_var
+    return get_config_vars().get(name)
+  File "/usr/lib/python3.4/sysconfig.py", line 540, in get_config_vars
+    _init_posix(_CONFIG_VARS)
+  File "/usr/lib/python3.4/sysconfig.py", line 412, in _init_posix
+    from _sysconfigdata import build_time_vars
+  File "/usr/lib/python3.4/_sysconfigdata.py", line 6, in <module>
+    from _sysconfigdata_m import *
+ImportError: No module named '_sysconfigdata_m'
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 23:19:42 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+Failed to import the site module
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site.py", line 586, in <module>
+    main()
+  File "/usr/lib/python3.4/site.py", line 572, in main
+    known_paths = addusersitepackages(known_paths)
+  File "/usr/lib/python3.4/site.py", line 287, in addusersitepackages
+    user_site = getusersitepackages()
+  File "/usr/lib/python3.4/site.py", line 263, in getusersitepackages
+    user_base = getuserbase() # this will also set USER_BASE
+  File "/usr/lib/python3.4/site.py", line 253, in getuserbase
+    USER_BASE = get_config_var('userbase')
+  File "/usr/lib/python3.4/sysconfig.py", line 597, in get_config_var
+    return get_config_vars().get(name)
+  File "/usr/lib/python3.4/sysconfig.py", line 540, in get_config_vars
+    _init_posix(_CONFIG_VARS)
+  File "/usr/lib/python3.4/sysconfig.py", line 412, in _init_posix
+    from _sysconfigdata import build_time_vars
+  File "/usr/lib/python3.4/_sysconfigdata.py", line 6, in <module>
+    from _sysconfigdata_m import *
+ImportError: No module named '_sysconfigdata_m'
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 23:19:43 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+Failed to import the site module
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site.py", line 586, in <module>
+    main()
+  File "/usr/lib/python3.4/site.py", line 572, in main
+    known_paths = addusersitepackages(known_paths)
+  File "/usr/lib/python3.4/site.py", line 287, in addusersitepackages
+    user_site = getusersitepackages()
+  File "/usr/lib/python3.4/site.py", line 263, in getusersitepackages
+    user_base = getuserbase() # this will also set USER_BASE
+  File "/usr/lib/python3.4/site.py", line 253, in getuserbase
+    USER_BASE = get_config_var('userbase')
+  File "/usr/lib/python3.4/sysconfig.py", line 597, in get_config_var
+    return get_config_vars().get(name)
+  File "/usr/lib/python3.4/sysconfig.py", line 540, in get_config_vars
+    _init_posix(_CONFIG_VARS)
+  File "/usr/lib/python3.4/sysconfig.py", line 412, in _init_posix
+    from _sysconfigdata import build_time_vars
+  File "/usr/lib/python3.4/_sysconfigdata.py", line 6, in <module>
+    from _sysconfigdata_m import *
+ImportError: No module named '_sysconfigdata_m'
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Wed Feb  8 23:46:42 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+Failed to import the site module
+Traceback (most recent call last):
+  File "/usr/lib/python3.4/site.py", line 586, in <module>
+    main()
+  File "/usr/lib/python3.4/site.py", line 572, in main
+    known_paths = addusersitepackages(known_paths)
+  File "/usr/lib/python3.4/site.py", line 287, in addusersitepackages
+    user_site = getusersitepackages()
+  File "/usr/lib/python3.4/site.py", line 263, in getusersitepackages
+    user_base = getuserbase() # this will also set USER_BASE
+  File "/usr/lib/python3.4/site.py", line 253, in getuserbase
+    USER_BASE = get_config_var('userbase')
+  File "/usr/lib/python3.4/sysconfig.py", line 597, in get_config_var
+    return get_config_vars().get(name)
+  File "/usr/lib/python3.4/sysconfig.py", line 540, in get_config_vars
+    _init_posix(_CONFIG_VARS)
+  File "/usr/lib/python3.4/sysconfig.py", line 412, in _init_posix
+    from _sysconfigdata import build_time_vars
+  File "/usr/lib/python3.4/_sysconfigdata.py", line 6, in <module>
+    from _sysconfigdata_m import *
+ImportError: No module named '_sysconfigdata_m'
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Thu Feb  9 00:29:50 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pi/energy-monitoring/pqflask
+detected binary path: /home/pi/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 65536
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0xd84250
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0xd84250 pid: 1870 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1870)
+spawned uWSGI worker 1 (pid: 1873, cores: 1)
+spawned uWSGI worker 2 (pid: 1874, cores: 1)
+spawned uWSGI worker 3 (pid: 1875, cores: 1)
+spawned uWSGI worker 4 (pid: 1876, cores: 1)
+spawned uWSGI worker 5 (pid: 1877, cores: 1)
+[pid: 1873|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 653 bytes} [Thu Feb  9 00:30:13 2017] GET / => generated 11 bytes in 6 msecs (HTTP/1.1 200) 2 headers in 79 bytes (1 switches on core 0)
+[pid: 1875|app: 0|req: 1/2] 127.0.0.1 () {38 vars in 632 bytes} [Thu Feb  9 00:30:13 2017] GET /favicon.ico => generated 233 bytes in 74 msecs (HTTP/1.1 404) 2 headers in 72 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.

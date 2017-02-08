@@ -18,7 +18,7 @@ import analyse as ana
 
 # init
 ipaddr = '129.69.176.123'
-timedelta = 5 # seconds
+timedelta = 2 # seconds
 tablename = 'pqdata'
 max_time = 0
 min_time = 1000
