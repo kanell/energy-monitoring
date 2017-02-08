@@ -133,34 +133,34 @@ def analyse(pq_data):
     voltage_U3 = pq_data[812]
 
 
-#    if harmonic_5th_U1/voltage_U1 > 0.06:
-#        harmonic_5th_U1 = "bad"
-#    else:
-#        harmonic_5th_U1 = "okay"
-#
-#    if harmonic_7th_U1/voltage_U1 > 0.05:
-#        harmonic_7th_U1 = "bad"
-#    else:
-#        harmonic_7th_U1 = "okay"
-#
-#    if harmonic_5th_U2/voltage_U2 > 0.06:
-#        harmonic_5th_U2 = "bad"
-#    else:
-#        harmonic_5th_U2 = "okay"
-#
-#    if harmonic_7th_U2/voltage_U2 > 0.05:
-#        harmonic_7th_U2 = "bad"
-#    else:
-#        harmonic_7th_U2 = "okay"
-#
-#    if harmonic_5th_U3/voltage_U3 > 0.06:
-#        harmonic_5th_U3 = "bad"
-#    else:
-#        harmonic_5th_U3 = "okay"
-#
-#    if harmonic_7th_U3/voltage_U3 > 0.05:
-#        harmonic_7th_U3 = "bad"
-#    else:
-#        harmonic_7th_U3 = "okay"
+    if harmonic_5th_U1/voltage_U1 > 0.06:
+        harmonic_5th_U1 = "bad"
+    else:
+        harmonic_5th_U1 = "okay"
+
+    if harmonic_7th_U1/voltage_U1 > 0.05:
+        harmonic_7th_U1 = "bad"
+    else:
+        harmonic_7th_U1 = "okay"
+
+    if harmonic_5th_U2/voltage_U2 > 0.06:
+        harmonic_5th_U2 = "bad"
+    else:
+        harmonic_5th_U2 = "okay"
+
+    if harmonic_7th_U2/voltage_U2 > 0.05:
+        harmonic_7th_U2 = "bad"
+    else:
+        harmonic_7th_U2 = "okay"
+
+    if harmonic_5th_U3/voltage_U3 > 0.06:
+        harmonic_5th_U3 = "bad"
+    else:
+        harmonic_5th_U3 = "okay"
+
+    if harmonic_7th_U3/voltage_U3 > 0.05:
+        harmonic_7th_U3 = "bad"
+    else:
+        harmonic_7th_U3 = "okay"
                                 
     return frequency, status_dict
