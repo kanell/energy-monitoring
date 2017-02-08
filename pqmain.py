@@ -18,16 +18,17 @@ import analyse as ana
 
 # init
 ipaddr = '129.69.176.123'
-timedelta = 1 # seconds
+timedelta = 5 # seconds
 tablename = 'pqdata'
-max_dictsize = 1000
+max_time = 0
+min_time = 1000
 
 # create folders
 paths = ['temp', 'temp/jsons', 'temp/csv']
 for path in paths:
     os.makedirs(os.path.join(path), exist_ok=True)
 
-profile = False
+profile = True
 if profile is True:
     profiling = cProfile.Profile()
     profiling.enable()
@@ -42,15 +43,11 @@ db_config = {'dbname': 'postgres',
 
 try:
     # read ports from csv
+    print('Get addresses from csv file')
     dataframe, ports, addresses = gd.read_port_csv()
     
     # create datadict
-    datadictlist = []
-    dataframesize = dataframe.size
-    while dataframesize > max_dictsize:
-        datadictlist.append({})
-        dataframesize -= max_dictsize
-    datadictlist.append({})
+    datadict = {}
     
     # create database table
     db_table_config = {}
@@ -59,10 +56,15 @@ try:
     db_table_config['frequency_10s'] = 'float'
     
     # connect to janitza
+    print('Connect to Janitza', end='\r')
     pqid = gd.connection(ipaddr)
+    print('Connected to Janitza')
     
     # connect to database
+    print('Connect to postgres database', end='\r')
     db = pqdb.connect_to_db(db_config)
+    print('Connected to postgres database')
+    
     # create table in  database if not already created
     if not 'public.'+tablename in db.get_tables():
         pqdb.create_db_table(db,tablename,db_table_config)
@@ -78,37 +80,34 @@ try:
         frequency_10s, status_dict = ana.analyse(pq_data)
         
         # create dict for database insert
-        index = 0
-        for i,addr in enumerate(pq_data.index):
-            if (i - max_dictsize*index) >= max_dictsize:
-                index += 1
-            datadictlist[index]['port_'+str(addr)] = pq_data[addr]
+        for addr in pq_data.index:
+            datadict['port_'+str(addr)] = pq_data[addr]
         
-        # add primary key to every dict
-        for datadict in datadictlist:
-            datadict['timestamp'] = timestamp
-            datadict['frequency_10s'] = frequency_10s
+        # add primary key to every dict and frequency 10s
+        datadict['timestamp'] = timestamp
+        datadict['frequency_10s'] = frequency_10s
 
         # insert data in database
-        db.insert(tablename,{'timestamp':timestamp})
-        for index, datadict in enumerate(datadictlist):
-                db.update(tablename,datadict)
-                # create data json
-                with open('temp/jsons/alldata.json','w') as f:
-                    f.write(json.dumps(datadict))
+        db.insert(tablename,datadict)
+
+        # create data json
+        with open('temp/jsons/alldata.json','w') as f:
+            f.write(json.dumps(datadict))
         
         time2 = time.time()
+        min_time = min(min_time,time2-time1)
+        max_time = max(max_time,time2-time1)
+        print('loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
         # try to get data every 1 second
-        if time2-time1 < timedelta:
+        if time2-time1 <= timedelta:
             timestamp += timedelta
-            time.sleep(timedelta-time2+time1) 
+            time.sleep(timedelta-time1+time2) 
         else:
             timestamp += 2*timedelta
-            time.sleep(2*timedelta-time2+time1)
-            print('getting data from janitza takes to long')
+            time.sleep(2*timedelta-time1+time2)
 
 except KeyboardInterrupt:
-    print('CTRL-C KeyboardInterrupt is active')
+    print('\nCTRL-C KeyboardInterrupt is active')
 except:
     import traceback
     print(traceback.format_exc())
