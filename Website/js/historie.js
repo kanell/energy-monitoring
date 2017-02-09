@@ -1,3 +1,5 @@
+var chartvalue;
+
 window.onload = function Historie () {
 	var chart = AmCharts.makeChart("historie_chartdiv", {
 	    "type": "serial",
@@ -646,7 +648,14 @@ window.onload = function Historie () {
 	zoomChart();
 
 	function zoomChart() {
-	    chart.zoomToIndexes(chart.dataProvider.length - 40, chart.dataProvider.length - 1);
-			console.log(chart);
-	}
-}
+	    chart.zoomToIndexes(chart.dataProvider.length - 30, chart.dataProvider.length - 1);
+			
+      
+      
+	}                 
+  console.log(chart);  
+  console.log(chart.start); 
+  chartvalue=chart;     
+
+};
+
