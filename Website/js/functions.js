@@ -61,9 +61,10 @@ $(document).ready(function(){
     cache: false,
     url: "http://localhost:8080/temp/json/alldata.json",
     dataType: "json",      
+    
     success: function(data) {
      
-     
+     console.log(data)
       for (i=1; i <= 3; i++) {  
        var U = 806 + i*2;
        var I = 858 + i*2;
@@ -90,52 +91,18 @@ $(document).ready(function(){
     
    
     
-/*     
-$(document).ready(function(){
 
- 
 
-  $(function () {
-  
-   function update()  {  
-   
-       $.ajax({
-    cache: false,
-    url: "http://localhost:8080/temp/json/alldata.json",
-    dataType: "json",      
-    success: function(data) {
-        
-     
-       
-      for (i=1; i <= 3; i++) {  
-       var U = 806 + i*2;
-       var I = 858 + i*2;
-       var S = 882 + i*2;
-       var P = 866 + i*2; 
-       var Q = 874 + i*2;
-       var THD_U = 834 + i*2;
-       var THD_I = 906 + i*2;
-      /*var f = 800             /
-      
-      document.getElementById("U" + i + "t").innerHTML =  data["port_" + U] ;
-      document.getElementById("I" + i + "t").innerHTML =  data["port_" + I] ;
-      document.getElementById("S" + i + "t").innerHTML =  data["port_" + S] ;
-      document.getElementById("P" + i + "t").innerHTML =  data["port_" + P] ;
-      document.getElementById("Q" + i + "t").innerHTML =  data["port_" + Q] ;
-      document.getElementById("THD_U" + i + "t").innerHTML =  data["port_" + THD_U];
-      document.getElementById("THD_I" + i + "t").innerHTML =  data["port_" + THD_I];  
-      /*document.getElementById("ft").innerHTML =  data["port_" + f] ;               
-      };       
-    }}); 
-    
-    }
-    
-   setInterval(update, 1000);
-   update();
-                                                                      
-  
-});
-});
-       
-       
- */   
+
+
+/*
+$(function() {
+    $.each(analyseResponseU1, function(i, item) {
+        var $tr = $('<tr>').append(
+            $('<td>').text(item.Zeitpunkt),
+            $('<td>').text(item.Wert),
+            $('<td>').text(item.Abweichung)
+        ); $tr.appendTo('#AnalyseTabelleU1');
+        console.log($tr.wrap('<p>').html());
+    });
+}); */

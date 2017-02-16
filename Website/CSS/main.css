@@ -32,15 +32,45 @@ li.oben a {
     text-align: center;
     padding: 16px;
     text-decoration: none;
+    width:150px;
     
 }
 
 
 /* hovers the entries */
 
-li.oben a:hover {
-    background-color: #00CD00;
+#aktuell:hover li.links{
+        
+        display:block;
+    
 }
+
+#analysiert:hover .dropdown-content{
+    display:block;
+   
+}
+
+/*li.oben a:hover{
+        
+    background-color:#00CD00;
+    
+}        */
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: hsla(122, 100%, 41%, 0.55);
+}
+
+.dropdown-content a{
+    color: black;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+    
+       
+}
+
 
 /* changes the style of the active choice */
 
@@ -55,8 +85,10 @@ li.aktiv a {
     color: black;
     text-align: center;
     padding: 16px;
+    width:150px;
     text-decoration: none;
-    background-color: #00CD00;
+    background-color: #00CD00; 
+    
     
 }
 
@@ -82,6 +114,7 @@ li.oben-rechts {
 
 
 ul.links {
+    
     position:absolute;
     width:100%;
     margin: 0;
@@ -95,19 +128,21 @@ ul.links {
 /* defines the style of the links */ 
 
 li.links {
-    display: block;
-    float:none;
+    display: none;
+   float:none;
+   
     
 }
- 
+
 
 
 li.links a {
+    display: block;
     color: black;
     text-align: center;
     padding: 16px;
     text-decoration: none;
-    background-color: lightgreen;
+    background-color: hsla(122, 100%, 41%, 0.55);
     
 }
 
@@ -134,7 +169,7 @@ li.links.aktiv a {
 /* hover */
 
 li.links a:hover {
-    background-color: #00CD00;
+    background-color:#00CD00  ; 
 }
 
 

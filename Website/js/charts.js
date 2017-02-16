@@ -1,13 +1,16 @@
 /* Chart current Voltage */
 
- 
+ var g;
      function VoltageChart () {
       
       var dataLength = 15;
       var csvData;
       
+       
+
       $.ajax({
                     type: "GET",
+                    cache: false,
                     url: "http://localhost:8080/temp/csv/alldata.csv",
                     dataType: "text",
                     success: function (data) {
@@ -24,7 +27,7 @@
        
       function VoltageGraph () { 
       console.log(csvData);
-      var g = new Dygraph(document.getElementById("div_g"), csvData,
+      g = new Dygraph(document.getElementById("div_g"), csvData,
               {
                 axis : {
                   x : {
@@ -33,21 +36,32 @@
                     ticker: Dygraph.dateTicker                
                   }
                 }
-              });
+          }); 
                                   
       }
-      // It sucks that these things aren't objects, and we need to store state in window.
-    /* window.intervalId = setInterval(function() {
-        var x = new Date();  // current time
-        var y = Math.random();
-        var z = 1.1;
-        data.push([x, y, z]);
-        g.updateOptions( { 'file': data } );
-         if (data.length > dataLength) {
-        data.shift();
-        };
-      }, 1000);  */    
-    }            
+      
+      
+
+      window.intervalId = setInterval(function() {
+        
+         $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "http://localhost:8080/temp/csv/alldata.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;      
+                      
+                       VoltageGraph(csvData);
+                       //alert("done!"+ csvData.getAllResponseHeaders()) - my fix makes this won't work...
+                     }   
+                     
+                });
+
+       // g.updateOptions( { 'file': csvData } );
+         
+      }, 1000);     
+    }          
       /*
 
 

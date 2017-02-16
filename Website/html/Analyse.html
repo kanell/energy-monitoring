@@ -6,6 +6,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="../js/functions.js"></script>
 <script src="../js/charts.js"></script>
+<script src="../js/analyse.js"></script>
 </head>
 <body>
 
@@ -13,9 +14,34 @@
 
 <ul class="oben">
 
-  <li class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a></li>
-  <li class="oben"><a href="Historische-Werte.html">Historische Werte</a></li>
-  <li class="aktiv"><a href="Analyse.html">Analyse</a></li>        
+  <li id="aktuell" class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a></li>             
+    
+    <ul class="links">
+
+           <!-- left menu -->
+
+           <li class="links"><a id="Uber" href="#Übersicht">Übersicht</a></li>
+           <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
+           <li class="links"><a id="I" href="#Strom">Strom</a></li>
+           <li class="links"><a id="L" href="#Leistung">Leistung</a></li>
+
+     </ul>
+           
+  
+  <li id="historisch" class="oben"><a href="Historische-Werte.html">Historische Werte</a></li>  
+  
+ 
+  
+  <li id="analysiert" class="aktiv"><a href="Analyse.html">Analyse</a>
+  
+    <div class="dropdown-content">
+      <a href="#">Spannung U1</a>
+      <a href="#">Spannung U2</a>
+      <a href="#">Spannung U3</a>
+    </div>
+
+    
+     
   <li class="oben"><a href="Test.html">Test</a></li> 
   
   <!-- upper right comment -->
@@ -25,11 +51,20 @@
 </ul>
 
 <!-- content -->
+<!-- content of Spannungsüberschreitung U1-->
 
-<div>
+<div class="UberschreitungsDiv" id="UberschreitungU1">
 <br>
-<h2 id=Ist>Diagramme</h2>
+<h2>Grenzwertüberschreitung Spannung Leiter 1</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
 </div>
+
 
 
 </body>
