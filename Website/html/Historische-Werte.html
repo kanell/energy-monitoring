@@ -23,35 +23,58 @@
 
 <!-- upper menu -->
 
+<!-- upper menu -->
+
+
 <ul class="oben">
 
-  <li id="aktuell" class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a></li>    
-  
-    <ul class="links">
+  <li id="aktuell" class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a>
+
+     <ul id="akt" class="links">
 
            <!-- left menu -->
 
-           <li class="links"><a id="Uber" href="#Übersicht">Übersicht</a></li>
+           <li class="links"><a id="Uber" href="#Übersicht">&Uuml;bersicht</a></li>
            <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
            <li class="links"><a id="I" href="#Strom">Strom</a></li>
            <li class="links"><a id="L" href="#Leistung">Leistung</a></li>
 
      </ul>
-  
-  <li id="historisch" class="aktiv"><a href="Historische-Werte.html">Historische Werte</a></li>
-  <li id="analysiert" class="oben"><a href="Analyse.html">Analyse</a></li>
+   </li>
 
- 
-  
-  <li class="oben"><a href="Test.html">Test</a></li>  
-    
+  <li id="historisch" class="aktiv"><a href="Historische-Werte.html">Historische Werte</a>  
+     
+  <ul id="hist" class="links">
+
+           <!-- left menu -->
+
+           
+           <li class="links"><a id="Uh" href="#">Spannung</a></li>
+           <li class="links"><a id="Ih" href="#">Strom</a></li>
+           <li class="links"><a id="Lh" href="#">Leistung</a></li>
+
+     </ul>
+    </li>
+  <li id="analysiert" class="oben"><a href="Analyse.html">Analyse</a>
+
+      <ul id="analy"class="links"> 
+      
+      
+           <li class="links"><a id="U1a" href="#">Abweichung U Phase 1</a></li>
+           <li class="links"><a id="U2a" href="#">Abweichung U Phase 2</a></li>
+           <li class="links"><a id="U3a" href="#">Abweichung U Phase 3</a></li>
+           <li class="links"><a id="fa" href="#">Abweichung f</a></li>    
+           <li class="links"><a id="THD_Ua" href="#">Abweichung THD_U</a></li>
+           <li class="links"><a id="THD_Ia" href="#">Abweichung THD_I</a></li>
+           
+      </ul>
+    </li>
+     
   <!-- upper right comment -->
 
   <li class="oben-rechts">Energiemonitoringsystem des IEH</li>
-    
-</ul>
 
-<!-- content -->
+</ul>
 
 <div>
 <br>
@@ -61,7 +84,7 @@
 
 <h3 id=Ist>Leistung</h3>
 <div id="historie_chartdiv" style="width:1200px; height:400px;"></div>
-<button id="buttonFresh"> Refresh  </button>
+<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
 
 
 </div>

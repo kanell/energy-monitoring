@@ -8,8 +8,8 @@ $(document).ready(function(){
     $("#U").click(function(){
         $("#Spannung").show();
     });  
-    $("#U").click(function(){                                               /* makes the content of "Spannung" visible for the first time click, necessery because it doesn't show up, if
-                                                                            it's initially hidden by css's "display: none" command */
+    $("#U").click(function(){                                               
+                                                                            
         VoltageChart();   
     });  
      
@@ -33,6 +33,10 @@ $(document).ready(function(){
     $("#Uber").click(function(){
         $("#Ubersicht").show();
     });
+     $("#Uber").click(function(){                                               
+                                                                            
+        currentValues();   
+    });  
 });
               
 
@@ -50,13 +54,27 @@ $(document).ready(function(){
 
 
 /*  functions for the current values in the table      */
+var runValues;
+function currentValues() {
 
-$(document).ready(function(){
-
- 
+ if (runValues == 1){
+  return;
+ }
+getData();
 
   window.intervalId = setInterval(function() {  
    
+
+getData();
+
+
+
+    }, 10000); }
+    
+   
+   function getData() {
+   runValues = 1;
+
     $.ajax({
     cache: false,
     url: "http://localhost:8080/temp/json/alldata.json",
@@ -64,9 +82,11 @@ $(document).ready(function(){
     
     success: function(data) {
      
-     console.log(data)
+     var input = data
+     console.log(input)
       for (i=1; i <= 3; i++) {  
        var U = 806 + i*2;
+       console.log(U);
        var I = 858 + i*2;
        var S = 882 + i*2;
        var P = 866 + i*2; 
@@ -75,22 +95,17 @@ $(document).ready(function(){
        var THD_I = 906 + i*2;
        var f = 800                               
       
-      document.getElementById("U" + i + "t").innerHTML =  data["port_" + U] ;
-      document.getElementById("I" + i + "t").innerHTML =  data["port_" + I] ;
-      document.getElementById("S" + i + "t").innerHTML =  data["port_" + S] ;
-      document.getElementById("P" + i + "t").innerHTML =  data["port_" + P] ;
-      document.getElementById("Q" + i + "t").innerHTML =  data["port_" + Q] ;
-      document.getElementById("THD_U" + i + "t").innerHTML =  data["port_" + THD_U];
-      document.getElementById("THD_I" + i + "t").innerHTML =  data["port_" + THD_I];  
-      document.getElementById("ft").innerHTML =  data["port_" + f] ;                        
+      document.getElementById("U" + i + "t").innerHTML =  input["port_" + U] ;
+      document.getElementById("I" + i + "t").innerHTML =  input["port_" + I] ;
+      document.getElementById("S" + i + "t").innerHTML =  input["port_" + S] ;
+      document.getElementById("P" + i + "t").innerHTML =  input["port_" + P] ;
+      document.getElementById("Q" + i + "t").innerHTML =  input["port_" + Q] ;
+      document.getElementById("THD_U" + i + "t").innerHTML =  input["port_" + THD_U];
+      document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];  
+      document.getElementById("ft").innerHTML =  input["port_" + f] ;                        
       };       
     }}); 
-    }, 10000);                                                                     
-  
-});
-    
-   
-    
+    }    
 
 
 

@@ -9,45 +9,57 @@
 <script src="../js/analyse.js"></script>
 </head>
 <body>
-
 <!-- upper menu -->
+
 
 <ul class="oben">
 
-  <li id="aktuell" class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a></li>             
-    
-    <ul class="links">
+  <li id="aktuell" class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a>
+
+     <ul id="akt" class="links">
 
            <!-- left menu -->
 
-           <li class="links"><a id="Uber" href="#Übersicht">Übersicht</a></li>
+           <li class="links"><a id="Uber" href="#Übersicht">&Uuml;bersicht</a></li>
            <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
            <li class="links"><a id="I" href="#Strom">Strom</a></li>
            <li class="links"><a id="L" href="#Leistung">Leistung</a></li>
 
      </ul>
-           
-  
-  <li id="historisch" class="oben"><a href="Historische-Werte.html">Historische Werte</a></li>  
-  
- 
-  
-  <li id="analysiert" class="aktiv"><a href="Analyse.html">Analyse</a>
-  
-    <div class="dropdown-content">
-      <a href="#">Spannung U1</a>
-      <a href="#">Spannung U2</a>
-      <a href="#">Spannung U3</a>
-    </div>
+   </li>
 
-    
+  <li id="historisch" class="oben"><a href="Historische-Werte.html">Historische Werte</a>  
      
-  <li class="oben"><a href="Test.html">Test</a></li> 
-  
+  <ul id="hist" class="links">
+
+           <!-- left menu -->
+
+           
+           <li class="links"><a id="Uh" href="#">Spannung</a></li>
+           <li class="links"><a id="Ih" href="#">Strom</a></li>
+           <li class="links"><a id="Lh" href="#">Leistung</a></li>
+
+     </ul>
+    </li>
+  <li id="analysiert" class="aktiv"><a href="Analyse.html">Analyse</a>
+
+      <ul id="analy"class="links"> 
+      
+      
+           <li class="links"><a id="U1a" href="#">Abweichung U Phase 1</a></li>
+           <li class="links"><a id="U2a" href="#">Abweichung U Phase 2</a></li>
+           <li class="links"><a id="U3a" href="#">Abweichung U Phase 3</a></li>
+           <li class="links"><a id="fa" href="#">Abweichung f</a></li>    
+           <li class="links"><a id="THD_Ua" href="#">Abweichung THD_U</a></li>
+           <li class="links"><a id="THD_Ia" href="#">Abweichung THD_I</a></li>
+           
+      </ul>
+    </li>
+     
   <!-- upper right comment -->
-  
-  <li class="oben-rechts">Energiemonitoringsystem des IEH</li> 
-  
+
+  <li class="oben-rechts">Energiemonitoringsystem des IEH</li>
+
 </ul>
 
 <!-- content -->
@@ -55,7 +67,7 @@
 
 <div class="UberschreitungsDiv" id="UberschreitungU1">
 <br>
-<h2>Grenzwertüberschreitung Spannung Leiter 1</h2>
+<h2>Grenzwert&uuml;berschreitung Spannung Leiter 1</h2>
 <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
 <tr class="UberschreitungsTabelle">
 <th class="UberschreitungsTabelle">Zeitstempel</th>

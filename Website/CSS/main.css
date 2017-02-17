@@ -7,7 +7,7 @@ ul.oben {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: green;  
+    background-color: hsla(131, 100%, 14%, 0.81);  
     float:left; 
     width:100%;
     
@@ -30,7 +30,8 @@ li.oben a {
     display: block;
     color: white;
     text-align: center;
-    padding: 16px;
+    padding: 16px;   
+    width:150px;
     text-decoration: none;
     width:150px;
     
@@ -39,55 +40,46 @@ li.oben a {
 
 /* hovers the entries */
 
-#aktuell:hover li.links{
+#aktuell:hover #akt{
         
-        display:block;
+    display:block;
     
 }
 
-#analysiert:hover .dropdown-content{
-    display:block;
+#analysiert:hover #analy{
+    display: block;
    
 }
 
-/*li.oben a:hover{
-        
-    background-color:#00CD00;
-    
-}        */
-
-.dropdown-content{
-    display: none;
-    position: absolute;
-    background-color: hsla(122, 100%, 41%, 0.55);
+#historisch:hover #hist{
+    display: block;
+   
 }
 
-.dropdown-content a{
-    color: black;
-    text-align: center;
-    padding: 16px;
-    text-decoration: none;
-    
-       
+li.oben:hover{
+    background-color: green;
+   
 }
 
+   
 
 /* changes the style of the active choice */
 
 li.aktiv {
   float:left;
-  position: relative; 
+  position: relative;
+  
   
 }
 
 li.aktiv a {
     display: block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 16px;
     width:150px;
     text-decoration: none;
-    background-color: #00CD00; 
+    background-color: #134201; 
     
     
 }
@@ -114,7 +106,7 @@ li.oben-rechts {
 
 
 ul.links {
-    
+    display: none;
     position:absolute;
     width:100%;
     margin: 0;
@@ -128,8 +120,10 @@ ul.links {
 /* defines the style of the links */ 
 
 li.links {
-    display: none;
-   float:none;
+   display: block;
+   float:none; 
+   position:relative;
+   z-index:1;
    
     
 }
@@ -138,11 +132,11 @@ li.links {
 
 li.links a {
     display: block;
-    color: black;
+    color: white;
     text-align: center;
     padding: 16px;
     text-decoration: none;
-    background-color: hsla(122, 100%, 41%, 0.55);
+    background-color:hsla(131, 100%, 16%, 0.52);
     
 }
 
@@ -161,7 +155,7 @@ li.links.aktiv a {
     text-align: center;
     padding: 16px;
     text-decoration: none;
-    background-color: #00CD00;
+    background-color: green;
     
 }
 
@@ -169,7 +163,7 @@ li.links.aktiv a {
 /* hover */
 
 li.links a:hover {
-    background-color:#00CD00  ; 
+    background-color:green  ; 
 }
 
 
@@ -179,8 +173,9 @@ li.links a:hover {
 div.Inhalt {
     position: absolute;
     top: 100px;
-    left: 180px;
+    left: 300px;
     display: none;
+    z-index: -12;
         }          
         
 /* Propertoies of the current Voltage content */
@@ -188,14 +183,14 @@ div.Inhalt {
 #Spannung {
     position: absolute;
     top: 100px;
-    left: 180px;
+    left: 300px;
     display: none;
            }                           
         
 #Ubersicht {
     position: absolute;
     top: 100px;
-    left: 180px;
+    left: 300px;
           }                    
 
 /* styles of the table in "Aktuelle Werte" */

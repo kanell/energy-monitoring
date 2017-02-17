@@ -14,7 +14,7 @@ var analyseResponseU1 = [ {
 "Wert" : "273",
 "Abweichung" : "14"
 }];
-console.log(analyseResponseU1)
+
 AppendToTable(analyseResponseU1);
 
    /* // convert string to JSON
@@ -25,7 +25,7 @@ function AppendToTable(){
             trHTML += '<tr><td>' + item.Zeitpunkt + '</td><td>' + item.Wert + '</td><td>' + item.Abweichung + '</td></tr>';
         });
         $('#AnalyseTabelleU1').append(trHTML);
-        console.log("5");
+        
     }
 
 }

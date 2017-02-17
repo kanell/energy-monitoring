@@ -1,8 +1,14 @@
 /* Chart current Voltage */
 
- var g;
+ var runVoltage;
      function VoltageChart () {
       
+      
+      if (runVoltage == 1) {
+        return;
+      }
+      else {
+
       var dataLength = 15;
       var csvData;
       
@@ -27,7 +33,8 @@
        
       function VoltageGraph () { 
       console.log(csvData);
-      g = new Dygraph(document.getElementById("div_g"), csvData,
+      
+    var g = new Dygraph(document.getElementById("div_g"), csvData,
               {
                 axis : {
                   x : {
@@ -43,7 +50,7 @@
       
 
       window.intervalId = setInterval(function() {
-        
+        runVoltage = 1;
          $.ajax({
                     type: "GET",
                     cache: false,
@@ -61,7 +68,7 @@
        // g.updateOptions( { 'file': csvData } );
          
       }, 1000);     
-    }          
+    }    }      
       /*
 
 
