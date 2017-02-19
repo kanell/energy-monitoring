@@ -7,7 +7,7 @@ ul.oben {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: hsla(131, 100%, 14%, 0.81);  
+    background-color: hsla(131, 100%, 15%, 0.80);  
     float:left; 
     width:100%;
     
@@ -136,7 +136,7 @@ li.links a {
     text-align: center;
     padding: 16px;
     text-decoration: none;
-    background-color:hsla(131, 100%, 16%, 0.52);
+    background-color:hsla(131, 100%, 15%, 0.8);
     
 }
 
