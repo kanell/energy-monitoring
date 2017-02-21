@@ -17,7 +17,7 @@
       $.ajax({
                     type: "GET",
                     cache: false,
-                    url: "http://localhost:8080/temp/csv/alldata.csv",
+                    url: "../temp/csv/alldata.csv",
                     dataType: "text",
                     success: function (data) {
                        csvData = data;      
@@ -54,7 +54,7 @@
          $.ajax({
                     type: "GET",
                     cache: false,
-                    url: "http://localhost:8080/temp/csv/alldata.csv",
+                    url: "../temp/csv/alldata.csv",
                     dataType: "text",
                     success: function (data) {
                        csvData = data;      

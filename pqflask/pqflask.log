@@ -569,3 +569,159 @@ spawned uWSGI worker 2 (pid: 5321, cores: 1)
 spawned uWSGI worker 3 (pid: 5322, cores: 1)
 spawned uWSGI worker 4 (pid: 5323, cores: 1)
 spawned uWSGI worker 5 (pid: 5324, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Thu Feb  9 06:52:18 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pqm/energy-monitoring/pqflask
+detected binary path: /home/pqm/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x4e4278
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x4e4278 pid: 541 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 541)
+spawned uWSGI worker 1 (pid: 786, cores: 1)
+spawned uWSGI worker 2 (pid: 787, cores: 1)
+spawned uWSGI worker 3 (pid: 788, cores: 1)
+spawned uWSGI worker 4 (pid: 789, cores: 1)
+spawned uWSGI worker 5 (pid: 790, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Thu Feb 16 20:35:15 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pqm/energy-monitoring/pqflask
+detected binary path: /home/pqm/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1633278
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x1633278 pid: 1356 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1356)
+spawned uWSGI worker 1 (pid: 1362, cores: 1)
+spawned uWSGI worker 2 (pid: 1363, cores: 1)
+spawned uWSGI worker 3 (pid: 1364, cores: 1)
+spawned uWSGI worker 4 (pid: 1365, cores: 1)
+spawned uWSGI worker 5 (pid: 1366, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Thu Feb 16 20:37:15 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pqm/energy-monitoring/pqflask
+detected binary path: /home/pqm/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1172278
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x1172278 pid: 1455 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 1455)
+spawned uWSGI worker 1 (pid: 1461, cores: 1)
+spawned uWSGI worker 2 (pid: 1462, cores: 1)
+spawned uWSGI worker 3 (pid: 1463, cores: 1)
+spawned uWSGI worker 4 (pid: 1464, cores: 1)
+spawned uWSGI worker 5 (pid: 1465, cores: 1)
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+worker 5 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: unix socket pqflask.sock removed.
+*** Starting uWSGI 2.0.14 (32bit) on [Tue Feb 21 18:42:23 2017] ***
+compiled with version: 4.9.2 on 08 February 2017 18:43:05
+os: Linux-4.4.38-v7+ #938 SMP Thu Dec 15 15:22:21 GMT 2016
+nodename: raspberrypi
+machine: armv7l
+clock source: unix
+detected number of CPU cores: 4
+current working directory: /home/pqm/energy-monitoring/pqflask
+detected binary path: /home/pqm/miniconda3/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+your processes number limit is 7336
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to UNIX address pqflask.sock fd 3
+Python version: 3.4.3 |Continuum Analytics, Inc.| (default, Aug 21 2015, 00:53:08)  [GCC 4.6.3]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x1f5e278
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 385536 bytes (376 KB) for 5 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 5 seconds on interpreter 0x1f5e278 pid: 534 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 534)
+spawned uWSGI worker 1 (pid: 789, cores: 1)
+spawned uWSGI worker 2 (pid: 790, cores: 1)
+spawned uWSGI worker 3 (pid: 791, cores: 1)
+spawned uWSGI worker 4 (pid: 792, cores: 1)
+spawned uWSGI worker 5 (pid: 793, cores: 1)

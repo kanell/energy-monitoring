@@ -228,7 +228,7 @@ getData();
 
     $.ajax({
     cache: false,
-    url: "http://localhost:8080/temp/json/alldata.json",
+    url: "../temp/json/alldata.json",
     dataType: "json",      
     
     success: function(data) {

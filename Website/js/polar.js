@@ -17,23 +17,24 @@ var chart = AmCharts.makeChart("polar_chartdiv", {
     "position": "right"
   },
   "graphs": [{
-    "title": "Trial #1",
+    "title": "Scheinleistung",
     "balloonText": "[[category]]: [[value]] m/s",
     "bullet": "round",
     "lineAlpha": 1,
     "series": [[0,0],[100,90]]
   }, {
-    "title": "Trial #2",
-    "balloonText": "[[category]]: [[value]] m/s",
-    "bullet": "round",
-    "lineAlpha": 1,
-    "series": [[100,90],[90,89]]
-  }, {
-    "title": "Trial #3",
+    "title": "Wirkleistung",
     "balloonText": "[[category]]: [[value]] m/s",
     "bullet": "round",
     "lineAlpha": 1,
     "series": [[0,0],[90,89]]
+  }, {
+    "title": "Blindleistung",
+    "balloonText": "[[category]]: [[value]] m/s",
+    "bullet": "round",
+    "lineAlpha": 1,
+    
+    "series": [[100,90],[90,89]]
   }],
   "export": {
     "enabled": true
