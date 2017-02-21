@@ -154,7 +154,7 @@ try:
             time1 = time.time()
             
             # get data from mbqueue
-            pq_data = mbqueue.get()
+            pq_data, timestamp = mbqueue.get()
             
             # send data to analysis func
             frequency_10s, status_dict = ana.analyse(pq_data)
@@ -200,4 +200,6 @@ finally:
         
     mbprocess.join()
     dbprocess.join()
+    
+    print('finished measurement')
     
