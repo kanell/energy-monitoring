@@ -1,56 +1,205 @@
 
-/* hide and show functions for the buttons of the left menu */
+/* hide and show functions for the buttons of the dropdown menu */
           
-$(document).ready(function(){
-    $("#U").click(function(){
-        $("#Strom, #Ubersicht, #Leistung").hide();
-    });
-    $("#U").click(function(){
-        $("#Spannung").show();
-    });  
-    $("#U").click(function(){                                               
-                                                                            
-        VoltageChart();   
-    });  
-     
-});
 
+/* "Aktuelle Werte" */
 
 $(document).ready(function(){
-    $("#I").click(function(){
-        $("#Spannung, #Ubersicht, #Leistung").hide();
+
+    $("#U_i").click(function(){
+
+        
+    $("#Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+
+    $("#Spannung_i").show();
+
+    changeColor(a="aktiv",b="oben", c="oben");
+
+    VoltageChart();  
+
     });
-    $("#I").click(function(){
-        $("#Strom").show();
-    });
-});
+   
 
 
-$(document).ready(function(){
-    $("#Uber").click(function(){
-        $("#Spannung, #Strom, #Leistung").hide();
-    });
-    $("#Uber").click(function(){
-        $("#Ubersicht").show();
-    });
-     $("#Uber").click(function(){                                               
+
+
+    $("#I_i").click(function(){
+        $("#Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    
+        $("#Strom_i").show();
+
+        changeColor(a="aktiv",b="oben", c="oben");
+    
+      });
+
+
+
+
+    $("#Uber_i").click(function(){
+        $("#Spannung_i, #Strom_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    
+        $("#Ubersicht_i").show();
+
+        changeColor(a="aktiv",b="oben", c="oben");
+                                              
                                                                             
         currentValues();   
-    });  
-});
-              
+      
+    });
 
+                
+
+
+
+    $("#L_i").click(function(){
+        $("#Spannung_i, #Ubersicht_i, #Strom_i, .Inhalt_hist, .Inhalt_analy").hide();
+    
+        $("#Leistung_i").show();
+
+        changeColor(a="aktiv",b="oben", c="oben");
+
+        });
+});
+
+/*Historische Werte*/
 
 $(document).ready(function(){
-    $("#L").click(function(){
-        $("#Spannung, #Ubersicht, #Strom").hide();
-    });
-    $("#L").click(function(){
-        $("#Leistung").show();
 
-    });
+    $("#U_h").click(function(){
+      
+              $("#Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
+    
+      
+        $("#Spannung_h").show();
+
+        changeColor(a="oben",b="aktiv", c="oben");
+
+          
+        Historie();
+
+    });  
+
+     $("#f_h").click(function(){
+      
+              $("#Spannung_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
+         
+        $("#Frequenz_h").show();
+
+        changeColor(a="oben",b="aktiv", c="oben");
+
+    });  
+
+     $("#I_h").click(function(){
+      
+              $("#Spannung_h, #Frequenz_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
+         
+        $("#Strom_h").show();
+
+        changeColor(a="oben",b="aktiv", c="oben");
+
+    });  
+
+     $("#L_h").click(function(){
+      
+              $("#Spannung_h, #Frequenz_h, #Strom_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
+         
+        $("#Leistung_h").show();
+
+        changeColor(a="oben",b="aktiv", c="oben");
+
+    });  
+
+     $("#H_U_h").click(function(){
+      
+              $("#Spannung_h, #Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
+          
+        $("#Harmonische_U_h").show();
+
+        changeColor(a="oben",b="aktiv", c="oben");
+
+    });  
+
+     $("#H_I_h").click(function(){
+      
+              $("#Spannung_h, #Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_U_h, .Inhalt_ist, .Inhalt_analy").hide();
+          
+        $("#Harmonische_I_h").show();
+
+        changeColor(a="oben",b="aktiv", c="oben");
+
+    });  
 });
 
+/* Analyse */
+
+$(document).ready(function(){
+
+        $("#U1_a").click(function(){
+
+           $("#Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
+
+           $("#Spannung_1_a").show();
+
+          changeColor(a="oben",b="oben", c="aktiv");
+
+          Analyse();
+
+        });
+
+        $("#U2_a").click(function(){
+
+           $("#Spannung_1_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
+
+           $("#Spannung_2_a").show();
+
+          changeColor(a="oben",b="oben", c="aktiv");
+
+        });
+
+        $("#U3_a").click(function(){
+
+           $("#Spannung_1_a, #Spannung_2_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
+
+           $("#Spannung_3_a").show();
+
+          changeColor(a="oben",b="oben", c="aktiv");
+
+        });
+
+        $("#f_a").click(function(){
+
+           $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
+
+           $("#Frequenz_a").show();
+
+          changeColor(a="oben",b="oben", c="aktiv");
+
+        });
+
+
+        $("#THD_U_a").click(function(){
+
+           $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
+
+           $("#Harmonische_U_a").show();
+
+          changeColor(a="oben",b="oben", c="aktiv");
+
+        });
+
+
+
+        $("#THD_I_a").click(function(){
+
+           $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, .Inhalt_ist, .Inhalt_hist").hide();
+
+           $("#Harmonische_I_a").show();
+
+          changeColor(a="oben",b="oben", c="aktiv");
+
+        });
+
+});
 
 
 /*  functions for the current values in the table      */
@@ -60,6 +209,8 @@ function currentValues() {
  if (runValues == 1){
   return;
  }
+
+ else {
 getData();
 
   window.intervalId = setInterval(function() {  
@@ -69,7 +220,7 @@ getData();
 
 
 
-    }, 10000); }
+    }, 10000); } }
     
    
    function getData() {
@@ -121,3 +272,14 @@ $(function() {
         console.log($tr.wrap('<p>').html());
     });
 }); */
+
+
+/* Changes the Color of the selected Tab */
+function changeColor() {
+
+
+    document.getElementById("aktuell").className = a; 
+    document.getElementById("historisch").className = b; 
+    document.getElementById("analysiert").className = c; 
+
+  }

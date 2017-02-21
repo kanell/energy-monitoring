@@ -1,7 +1,17 @@
 var chartvalue;
+var runVoltage_h;
+   
 
-window.onload = function Historie () {
-	var chart = AmCharts.makeChart("historie_chartdiv", {
+ function Historie () {
+	
+ if (runVoltage_h == 1) {
+        return;
+      }
+      else {
+
+        runVoltag_h = 1;
+
+     var chart = AmCharts.makeChart("historie_chartdiv_U", {
 	    "type": "serial",
 	    "theme": "light",
 	    "marginRight": 40,
@@ -657,5 +667,6 @@ window.onload = function Historie () {
   console.log(chart.start); 
   chartvalue=chart;     
 
-};
-
+ }
+ }
+ 

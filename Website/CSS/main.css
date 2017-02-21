@@ -170,7 +170,25 @@ li.links a:hover {
 /* Sets the position of the content */
 
 
-div.Inhalt {
+div.Inhalt_ist {
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    display: none;
+    z-index: -12;
+        }          
+
+
+div.Inhalt_hist {
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    display: none;
+    z-index: -12;
+        }          
+
+
+div.Inhalt_analy {
     position: absolute;
     top: 100px;
     left: 300px;
@@ -180,14 +198,14 @@ div.Inhalt {
         
 /* Propertoies of the current Voltage content */
    
-#Spannung {
+#Spannung_i {
     position: absolute;
     top: 100px;
     left: 300px;
     display: none;
            }                           
         
-#Ubersicht {
+#Ubersicht_i {
     position: absolute;
     top: 100px;
     left: 300px;

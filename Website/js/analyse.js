@@ -2,7 +2,7 @@
 /* function to append the Table in tab "Analyse" */
 
 
-window.onload = function Analyse(){
+function Analyse(){
 
 var analyseResponseU1 = [ { 
   "Zeitpunkt" : "2017-02-16 13:32:31",

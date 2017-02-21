@@ -28,7 +28,7 @@
 
 <ul class="oben">
 
-  <li id="aktuell" class="oben"><a href="Ist-Werte.html">Aktuelle Werte</a>
+  <li id="aktuell" class="oben"><a href="#aktuell">Aktuelle Werte</a>
 
      <ul id="akt" class="links">
 
@@ -76,15 +76,41 @@
 
 </ul>
 
-<div>
-<br>
-<h2 id=Ist>Historische Messwerte</h2>
-<h3 id=Ist>Spannung</h3>
-<div id="historie_chartdiv" style="width:1200px; height:400px;"></div>
+<div id="Spannung_h" class="Inhalt">
 
-<h3 id=Ist>Leistung</h3>
-<div id="historie_chartdiv" style="width:1200px; height:400px;"></div>
+<h3>Spannung</h3>
+<div id="historie_chartdiv_U" style="width:1200px; height:400px;"></div>
+</div>
+
+<div id="Frequenz_h" class="Inhalt">
+<h3>Frequenz</h3>
+<div id="historie_chartdiv_f" style="width:1200px; height:400px;"></div>
+</div>
+
+<div id="Strom_h" class="Inhalt">
+<h3>Strom</h3>
+<div id="historie_chartdiv_I" style="width:1200px; height:400px;"></div>
+</div>
+
+<div id="Leistung_h" class="Inhalt">
+<h3>Leistung</h3>
+<div id="historie_chartdiv_L" style="width:1200px; height:400px;"></div>
 <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+</div>
+
+<div id="Harmonische_U_h" class="Inhalt">
+<h3>Leistung</h3>
+<div id="historie_chartdiv_HU" style="width:1200px; height:400px;"></div>
+<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+</div>
+
+<div id="Harmonische_I_h" class="Inhalt">
+<h3>Leistung</h3>
+<div id="historie_chartdiv_HI" style="width:1200px; height:400px;"></div>
+<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+</div>
+
+
 
 
 </div>

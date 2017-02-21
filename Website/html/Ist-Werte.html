@@ -14,6 +14,7 @@
 
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/radar.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
@@ -25,6 +26,8 @@
 <script src="../js/charts.js"></script>
 <script src="../js/functions.js"></script>
 <script src="../js/polar.js"></script>
+<script src="../js/historie.js"></script>
+<script src="../js/analyse.js"></script>
 
 
 </head>
@@ -35,44 +38,47 @@
 
 <ul class="oben">
 
-  <li id="aktuell" class="aktiv"><a href="Ist-Werte.html">Aktuelle Werte</a>
+  <li id="aktuell" class="oben"><a href="#aktuell">Aktuelle Werte</a>
 
      <ul id="akt" class="links">
 
            <!-- left menu -->
 
-           <li class="links"><a id="Uber" href="#Übersicht">&Uuml;bersicht</a></li>
-           <li class="links"><a id="U" href="#Spannung">Spannung</a></li>
-           <li class="links"><a id="I" href="#Strom">Strom</a></li>
-           <li class="links"><a id="L" href="#Leistung">Leistung</a></li>
+           <li class="links"><a id="Uber_i" href="#Übersicht">&Uuml;bersicht</a></li>
+           <li class="links"><a id="U_i" href="#Spannung">Spannung</a></li>
+           <li class="links"><a id="I_i" href="#Strom">Strom</a></li>
+           <li class="links"><a id="L_i" href="#Leistung">Leistung</a></li>
 
      </ul>
    </li>
 
-  <li id="historisch" class="oben"><a href="Historische-Werte.html">Historische Werte</a>  
+  <li id="historisch" class="oben"><a href="#historisch">Historische Werte</a>  
      
   <ul id="hist" class="links">
 
            <!-- left menu -->
 
            
-           <li class="links"><a id="Uh" href="#">Spannung</a></li>
-           <li class="links"><a id="Ih" href="#">Strom</a></li>
-           <li class="links"><a id="Lh" href="#">Leistung</a></li>
+           <li class="links"><a id="U_h" href="#">Spannung</a></li>
+           <li class="links"><a id="f_h" href="#">Frequenz</a></li>
+           <li class="links"><a id="I_h" href="#">Strom</a></li>
+           <li class="links"><a id="L_h" href="#">Leistung</a></li>
+           <li class="links"><a id="H_U_h" href="#">Harmonische U</a></li>
+           <li class="links"><a id="H_I_h" href="#">Harmonische I</a></li>
 
      </ul>
     </li>
-  <li id="analysiert" class="oben"><a href="Analyse.html">Analyse</a>
+  <li id="analysiert" class="oben"><a href="#analysiert">Analyse</a>
 
       <ul id="analy"class="links"> 
       
       
-           <li class="links"><a id="U1a" href="#">Abweichung U Phase 1</a></li>
-           <li class="links"><a id="U2a" href="#">Abweichung U Phase 2</a></li>
-           <li class="links"><a id="U3a" href="#">Abweichung U Phase 3</a></li>
-           <li class="links"><a id="fa" href="#">Abweichung f</a></li>    
-           <li class="links"><a id="THD_Ua" href="#">Abweichung THD_U</a></li>
-           <li class="links"><a id="THD_Ia" href="#">Abweichung THD_I</a></li>
+           <li class="links"><a id="U1_a" href="#">Abweichung U Phase 1</a></li>
+           <li class="links"><a id="U2_a" href="#">Abweichung U Phase 2</a></li>
+           <li class="links"><a id="U3_a" href="#">Abweichung U Phase 3</a></li>
+           <li class="links"><a id="f_a" href="#">Abweichung f</a></li>    
+           <li class="links"><a id="THD_U_a" href="#">Abweichung THD_U</a></li>
+           <li class="links"><a id="THD_I_a" href="#">Abweichung THD_I</a></li>
            
       </ul>
     </li>
@@ -89,7 +95,7 @@
 <!-- content of button "�bersicht" -->
 
 
-<div id="Ubersicht">      <!--div with table-->
+<div id="Ubersicht_i" class="Inhalt_ist">      <!--div with table-->
 
 
 
@@ -290,7 +296,7 @@
 
 <!-- actual content of "Spannung" -->
 
-<div id="Spannung">
+<div id="Spannung_i" class="Inhalt_ist">
 <h2>Spannung</h2>
 
 <div id="div_g" style="width:800px; height:400px; position:absolute;"></div>
@@ -302,7 +308,7 @@
 <!-- content of button "Strom" -->
 
 
-<div id="Strom" class="Inhalt">
+<div id="Strom_i" class="Inhalt_ist">
 
     <h2>Strom</h2>
 
@@ -310,12 +316,124 @@
 
 <!-- content of button "Leistung" -->
 
-<div id="Leistung" class="Inhalt">
+<div id="Leistung_i" class="Inhalt_ist">
 
     <h2>Leistung</h2>
     <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
 </div>
 
+
+
+<!-- content of "Historische Werte" -->
+
+
+<div id="Spannung_h" class="Inhalt_hist">
+
+<h3>Spannung</h3>
+<div id="historie_chartdiv_U" style="width:1200px; height:400px; position:absolute;"></div>
+</div>
+
+<div id="Frequenz_h" class="Inhalt_hist">
+<h3>Frequenz</h3>
+<div id="historie_chartdiv_f" style="width:1200px; height:400px;"></div>
+</div>
+
+<div id="Strom_h" class="Inhalt_hist">
+<h3>Strom</h3>
+<div id="historie_chartdiv_I" style="width:1200px; height:400px;"></div>
+</div>
+
+<div id="Leistung_h" class="Inhalt_hist">
+<h3>Leistung</h3>
+<div id="historie_chartdiv_L" style="width:1200px; height:400px;"></div>
+<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+</div>
+
+<div id="Harmonische_U_h" class="Inhalt_hist">
+<h3>Harmonische U</h3>
+<div id="historie_chartdiv_HU" style="width:1200px; height:400px;"></div>
+<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+</div>
+
+<div id="Harmonische_I_h" class="Inhalt_hist">
+<h3>Harmonische I</h3>
+<div id="historie_chartdiv_HI" style="width:1200px; height:400px;"></div>
+<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+</div>
+
+<!-- content of "Analyse" -->
+
+<div class="Inhalt_analy" id="Spannung_1_a">
+<br>
+<h2>Grenzwert&uuml;berschreitung Spannung Leiter 1</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
+</div>
+
+<div class="Inhalt_analy" id="Spannung_2_a">
+<br>
+<h2>Grenzwert&uuml;berschreitung Spannung Leiter 2</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
+</div>
+
+<div class="Inhalt_analy" id="Spannung_3_a">
+<br>
+<h2>Grenzwert&uuml;berschreitung Spannung Leiter 3</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
+</div>
+
+<div class="Inhalt_analy" id="Frequenz_a">
+<br>
+<h2>Grenzwert&uuml;berschreitung Frequenz</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
+</div>
+
+<div class="Inhalt_analy" id="Harmonische_U_a">
+<br>
+<h2>Grenzwert&uuml;berschreitung Harmonische U</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
+</div>
+
+<div class="Inhalt_analy" id="Harmonische_I_a">
+<br>
+<h2>Grenzwert&uuml;berschreitung Harmonische I</h2>
+<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+<tr class="UberschreitungsTabelle">
+<th class="UberschreitungsTabelle">Zeitstempel</th>
+<th>Wert</th>
+<th>Abweichung in %</th>
+</tr>
+</table>
+</div>
 
 
 </body>
