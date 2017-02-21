@@ -208,7 +208,8 @@ div.Inhalt_analy {
 #Ubersicht_i {
     position: absolute;
     top: 100px;
-    left: 300px;
+    left: 300px; 
+    display:block;
           }                    
 
 /* styles of the table in "Aktuelle Werte" */
