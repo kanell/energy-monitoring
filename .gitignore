@@ -1,18 +1,6 @@
 # No Python Bytecode Files
 *.pyc
 __pycache__
-
-# No json folders
 jsonfiles
-
-# No profiling file
 *.pstat
-
-# No .json file
 *.json
-
-# No .log file
-*.log
-
-# No .bat for server on windows
-*.bat
