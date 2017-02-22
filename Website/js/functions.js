@@ -220,7 +220,7 @@ getData();
 
 
 
-    }, 10000); } }
+    }, 1000); } }
 
 
    function getData() {
@@ -234,10 +234,9 @@ getData();
     success: function(data) {
 
      var input = data
-     console.log(input)
+     //console.log(input)
       for (i=1; i <= 3; i++) {
        var U = 806 + i*2;
-       console.log(U);
        var I = 858 + i*2;
        var S = 882 + i*2;
        var P = 866 + i*2;
