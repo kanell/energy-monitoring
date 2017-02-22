@@ -79,7 +79,7 @@ def put_data(queue, db, tablename, control_flag):
                 datadict = queue.get()
 
                 # insert data in database
-                db.insert(tablename,datadict)
+                #db.insert(tablename,datadict)
 
                 time2 = time.time()
                 min_time = min(min_time,time2-time1)
@@ -98,7 +98,7 @@ def put_data(queue, db, tablename, control_flag):
 
 # init
 ipaddr = '129.69.176.123'
-timedelta = 2 # seconds
+timedelta = 1 # seconds
 tablename = 'pqdata'
 max_time = 0
 min_time = 1000
