@@ -103,6 +103,10 @@ tablename = 'pqdata'
 max_time = 0
 min_time = 1000
 control_flag = Value('i',0)
+
+# ports for live data
+live_ports = [800,808,810,812,860,862,864,884,886,888,868,870,872,876,878,880,836,838,840,908,910,912]
+
 # queues
 mbqueue = Queue()
 dbqueue = Queue()
@@ -133,6 +137,7 @@ try:
 
     # create datadict
     datadict = {}
+    livedatadict = {}
 
     # create database table
     db_table_config = {}
@@ -178,8 +183,10 @@ try:
             # send data to analysis func
             frequency_10s, status_dict = ana.analyse(pq_data)
 
-            # create dict for database insert
+            # create dict for database insert and showing on website
             for addr in pq_data.index:
+                if addr in live_ports:
+                    livedatadict['port_'+str(addr)] = pq_data[addr]
                 datadict['port_'+str(addr)] = pq_data[addr]
 
             # add primary key to every dict and frequency 10s
@@ -192,6 +199,9 @@ try:
             # create data json
             with open(os.path.join(basefolder,'temp/json/alldata.json'),'w') as f:
                 f.write(json.dumps(datadict))
+            with open(os.path.join(basefolder,'temp/json/livedata.json'), 'w') as f:
+                f.write(json.dumps(livedatadict))
+
 
             time2 = time.time()
             min_time = min(min_time,time2-time1)
