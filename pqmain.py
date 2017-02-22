@@ -16,9 +16,13 @@ import json
 import os
 import analyse as ana
 from multiprocessing import Process, Queue, Value
+import signal
 
 # processes
 def get_data(queue, dataframe, ports, pqid, control_flag):
+    # ignore signals from main process
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+    
     # init
     max_time = 0
     min_time = 1000
@@ -57,16 +61,30 @@ def get_data(queue, dataframe, ports, pqid, control_flag):
             queue.get()
             
 def put_data(queue, db, tablename, control_flag):
+    # ignore signals from main process
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+    # init
+    max_time = 0
+    min_time = 1000
+
     try:
         while control_flag.value == 0:
             if queue.qsize() == 0:
                 time.sleep(0.2)
             else:
+                time1 = time.time()
+                
                 # get dict from queue
                 datadict = queue.get()
                 
                 # insert data in database
                 db.insert(tablename,datadict)
+
+                time2 = time.time()
+                min_time = min(min_time,time2-time1)
+                max_time = max(max_time,time2-time1)
+                #print('database loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
     except:
         control_flag.value = 1
         
