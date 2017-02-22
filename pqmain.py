@@ -109,7 +109,7 @@ dbqueue = Queue()
 
 # create folders
 basefolder = 'Website'
-paths = ['temp', 'temp/jsons', 'temp/csv']
+paths = ['temp', 'temp/json', 'temp/csv']
 for path in paths:
     os.makedirs(os.path.join(basefolder,path), exist_ok=True)
 
@@ -190,7 +190,7 @@ try:
             dbqueue.put(datadict)
 
             # create data json
-            with open('temp/jsons/alldata.json','w') as f:
+            with open(os.path.join(basefolder,'temp/json/alldata.json'),'w') as f:
                 f.write(json.dumps(datadict))
 
             time2 = time.time()

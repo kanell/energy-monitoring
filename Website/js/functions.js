@@ -1,6 +1,6 @@
 
 /* hide and show functions for the buttons of the dropdown menu */
-          
+
 
 /* "Aktuelle Werte" */
 
@@ -8,28 +8,28 @@ $(document).ready(function(){
 
     $("#U_i").click(function(){
 
-        
+
     $("#Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
 
     $("#Spannung_i").show();
 
     changeColor(a="aktiv",b="oben", c="oben");
 
-    VoltageChart();  
+    VoltageChart();
 
     });
-   
+
 
 
 
 
     $("#I_i").click(function(){
         $("#Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
-    
+
         $("#Strom_i").show();
 
         changeColor(a="aktiv",b="oben", c="oben");
-    
+
       });
 
 
@@ -37,23 +37,23 @@ $(document).ready(function(){
 
     $("#Uber_i").click(function(){
         $("#Spannung_i, #Strom_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
-    
+
         $("#Ubersicht_i").show();
 
         changeColor(a="aktiv",b="oben", c="oben");
-                                              
-                                                                            
-        currentValues();   
-      
+
+
+        currentValues();
+
     });
 
-                
+
 
 
 
     $("#L_i").click(function(){
         $("#Spannung_i, #Ubersicht_i, #Strom_i, .Inhalt_hist, .Inhalt_analy").hide();
-    
+
         $("#Leistung_i").show();
 
         changeColor(a="aktiv",b="oben", c="oben");
@@ -66,68 +66,68 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $("#U_h").click(function(){
-      
+
               $("#Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
-    
-      
+
+
         $("#Spannung_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
 
-          
+
         Historie();
 
-    });  
+    });
 
      $("#f_h").click(function(){
-      
+
               $("#Spannung_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
-         
+
         $("#Frequenz_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
 
-    });  
+    });
 
      $("#I_h").click(function(){
-      
+
               $("#Spannung_h, #Frequenz_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
-         
+
         $("#Strom_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
 
-    });  
+    });
 
      $("#L_h").click(function(){
-      
+
               $("#Spannung_h, #Frequenz_h, #Strom_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
-         
+
         $("#Leistung_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
 
-    });  
+    });
 
      $("#H_U_h").click(function(){
-      
+
               $("#Spannung_h, #Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
-          
+
         $("#Harmonische_U_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
 
-    });  
+    });
 
      $("#H_I_h").click(function(){
-      
+
               $("#Spannung_h, #Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_U_h, .Inhalt_ist, .Inhalt_analy").hide();
-          
+
         $("#Harmonische_I_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
 
-    });  
+    });
 });
 
 /* Analyse */
@@ -213,50 +213,50 @@ function currentValues() {
  else {
 getData();
 
-  window.intervalId = setInterval(function() {  
-   
+  window.intervalId = setInterval(function() {
+
 
 getData();
 
 
 
     }, 10000); } }
-    
-   
+
+
    function getData() {
    runValues = 1;
 
     $.ajax({
     cache: false,
-    url: "../temp/json/alldata.json",
-    dataType: "json",      
-    
+    url: "temp/json}/alldata.json",
+    dataType: "json",
+
     success: function(data) {
-     
+
      var input = data
      console.log(input)
-      for (i=1; i <= 3; i++) {  
+      for (i=1; i <= 3; i++) {
        var U = 806 + i*2;
        console.log(U);
        var I = 858 + i*2;
        var S = 882 + i*2;
-       var P = 866 + i*2; 
+       var P = 866 + i*2;
        var Q = 874 + i*2;
        var THD_U = 834 + i*2;
        var THD_I = 906 + i*2;
-       var f = 800                               
-      
+       var f = 800
+
       document.getElementById("U" + i + "t").innerHTML =  input["port_" + U] ;
       document.getElementById("I" + i + "t").innerHTML =  input["port_" + I] ;
       document.getElementById("S" + i + "t").innerHTML =  input["port_" + S] ;
       document.getElementById("P" + i + "t").innerHTML =  input["port_" + P] ;
       document.getElementById("Q" + i + "t").innerHTML =  input["port_" + Q] ;
       document.getElementById("THD_U" + i + "t").innerHTML =  input["port_" + THD_U];
-      document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];  
-      document.getElementById("ft").innerHTML =  input["port_" + f] ;                        
-      };       
-    }}); 
-    }    
+      document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];
+      document.getElementById("ft").innerHTML =  input["port_" + f] ;
+      };
+    }});
+    }
 
 
 
@@ -278,8 +278,8 @@ $(function() {
 function changeColor() {
 
 
-    document.getElementById("aktuell").className = a; 
-    document.getElementById("historisch").className = b; 
-    document.getElementById("analysiert").className = c; 
+    document.getElementById("aktuell").className = a;
+    document.getElementById("historisch").className = b;
+    document.getElementById("analysiert").className = c;
 
   }
