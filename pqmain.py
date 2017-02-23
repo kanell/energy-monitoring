@@ -96,9 +96,12 @@ def put_data(queue, db, tablename, control_flag):
         while queue.qsize() != 0:
             queue.get()
 
-def write_csv(csvdict, basefolder):
-    csvdict['csvdata'] = np.roll(csvdict['csvdata'],-1,axis=0)
-    csvdict['csvdata'][-1] = csvdict['newdata']
+def write_csv(csvdict, basefolder, csvsize):
+    if csvdict['csvdata'].shape[0] < csvsize:
+        csvdict['csvdata'] = np.array([csvdict['newdata']])
+    else:
+        csvdict['csvdata'] = np.roll(csvdict['csvdata'],-1,axis=0)
+        csvdict['csvdata'][-1] = csvdict['newdata']
     np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
     return csvdict
 
@@ -225,8 +228,9 @@ try:
 
             # create csv files
             for index, csvdata in enumerate(csvdictlist):
-                csvdata['newdata'] = pq_data[csvports[index]]
-                csvdictlist[index] = write_csv(csvdata,basefolder)
+                newdata = [timestamp]
+                csvdata['newdata'] = newdata.append(pq_data[csvports[index]])
+                csvdictlist[index] = write_csv(csvdata,basefolder, csvsize)
 
             time2 = time.time()
             min_time = min(min_time,time2-time1)
