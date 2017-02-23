@@ -96,6 +96,12 @@ def put_data(queue, db, tablename, control_flag):
         while queue.qsize() != 0:
             queue.get()
 
+def write_csv(csvdict, basefolder):
+    csvdict['csvdata'] = np.roll(csvdict['csvdata'],-1,axis=0)
+    csvdict['csvdata'][-1] = csvdict['newdata']
+    np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
+    return csvdict
+
 # init
 ipaddr = '129.69.176.123'
 timedelta = 1 # seconds
@@ -104,11 +110,22 @@ max_time = 0
 min_time = 1000
 control_flag = Value('i',0)
 
-# arrays for csv files
-voltage = np.full((100,4),np.nan)
-
 # ports for live data
 live_ports = [800,808,810,812,860,862,864,884,886,888,868,870,872,876,878,880,836,838,840,908,910,912]
+
+# configdicts for csv file
+csvsize = 100
+filenames = ['voltage','current','power','frequency']
+valuenumber = [4,4,4,2]
+headers = ['timestamp,u1,u2,u3','timestamp,i1,i2,i3','timestamp,p1,p2,p3','timestamp,frequency']
+csvports = [[808,810,812],[860,862,864],[868,870,872],[800]]
+csvdictlist = []
+for index, filename in enumerate(filenames):
+    csvdictlist.append({'filename':filename,
+                        'header':headers[index],
+                        'newdata': [],
+                        'csvdata': np.full((csvsize,valuenumber[index]),0)
+                        })
 
 # queues
 mbqueue = Queue()
@@ -206,10 +223,9 @@ try:
                 f.write(json.dumps(livedatadict))
 
             # create csv files
-            voltage = np.roll(voltage,-1,axis=0)
-            voltage[-1] = [timestamp,datadict['port_806'],datadict['port_808'],datadict['port_810']] 
-            np.savetxt(os.path.join(basefolder,'temp/csv/voltage.csv'),voltage,delimiter=',',newline='\n',header='timestamp,u1,u2,u3', comments='')
-
+            for index, csvdata in enumerate(csvdictlist):
+                csvdata['newdata'] = pq_data[csvports[index]]
+                csvdictlist[index] = write_csv(csvdata,basefolder)
 
             time2 = time.time()
             min_time = min(min_time,time2-time1)

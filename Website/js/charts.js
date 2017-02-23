@@ -39,7 +39,7 @@
                 axis : {
                   x : {
                     valueFormatter: Dygraph.dateString_,
-                    valueParser: function(x) { return 1000*parseInt(x); },
+                    valueParser: function(x) { return new Date(1000*parseInt(x)); },
                     ticker: Dygraph.dateTicker
                   }
                 }
