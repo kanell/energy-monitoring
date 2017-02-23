@@ -41,7 +41,7 @@ def get_data(queue, dataframe, ports, pqid, control_flag):
             time2 = time.time()
             min_time = min(min_time,time2-time1)
             max_time = max(max_time,time2-time1)
-            print('modbus loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
+            #print('modbus loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
             # try to get data every 1 second
             if time2-time1 <= timedelta:
                 timestamp += 2*timedelta
@@ -103,6 +103,9 @@ tablename = 'pqdata'
 max_time = 0
 min_time = 1000
 control_flag = Value('i',0)
+
+# arrays for csv files
+voltage = np.full((100,4),np.nan)
 
 # ports for live data
 live_ports = [800,808,810,812,860,862,864,884,886,888,868,870,872,876,878,880,836,838,840,908,910,912]
@@ -201,6 +204,11 @@ try:
                 f.write(json.dumps(datadict))
             with open(os.path.join(basefolder,'temp/json/livedata.json'), 'w') as f:
                 f.write(json.dumps(livedatadict))
+
+            # create csv files
+            voltage = np.roll(voltage,-1,axis=0)
+            voltage[-1] = [timestamp,datadict['port_806'],datadict['port_808'],datadict['port_810']] 
+            np.savetxt(os.path.join(basefolder,'temp/csv/voltage.csv'),voltage,delimiter=',',newline='\n',header='timestamp,u1,u2,u3', comments='')
 
 
             time2 = time.time()
