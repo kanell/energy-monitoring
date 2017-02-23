@@ -98,10 +98,11 @@ def put_data(queue, db, tablename, control_flag):
 
 def write_csv(csvdict, basefolder, csvsize):
     if csvdict['csvdata'].shape[0] < csvsize:
-        csvdict['csvdata'] = np.array([csvdict['newdata']])
+        csvdict['csvdata'] = np.append(csvdict['csvdata'],np.array([csvdict['newdata']]),axis=0)
     else:
         csvdict['csvdata'] = np.roll(csvdict['csvdata'],-1,axis=0)
         csvdict['csvdata'][-1] = csvdict['newdata']
+    #print(csvdict['csvdata'])
     np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
     return csvdict
 
@@ -126,8 +127,8 @@ csvdictlist = []
 for index, filename in enumerate(filenames):
     csvdictlist.append({'filename':filename,
                         'header':headers[index],
-                        'newdata': [],
-                        'csvdata': np.array([[]]))
+                        'newdata': np.empty(4),
+                        'csvdata': np.empty((0,4))
                         })
 
 # queues
@@ -228,8 +229,8 @@ try:
 
             # create csv files
             for index, csvdata in enumerate(csvdictlist):
-                newdata = [timestamp]
-                csvdata['newdata'] = newdata.append(pq_data[csvports[index]])
+                csvdata['newdata'][0] = timestamp
+                csvdata['newdata'][1:] = pq_data[csvports[index]]
                 csvdictlist[index] = write_csv(csvdata,basefolder, csvsize)
 
             time2 = time.time()
