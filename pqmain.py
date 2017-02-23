@@ -136,6 +136,7 @@ basefolder = 'Website'
 paths = ['temp', 'temp/json', 'temp/csv']
 for path in paths:
     os.makedirs(os.path.join(basefolder,path), exist_ok=True)
+os.makedirs('logs', exist_ok=True)
 
 profile = True
 if profile is True:
