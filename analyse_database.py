@@ -43,10 +43,11 @@ def analyse_database_frequency():
 #    timestamps_frequency = []
 #    for i in timestamp_frequency:
 #        timestamps_frequency.append = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_frequency[i]))
-#    
-    frequency_critical_dict = {'frequency_data': data_frequency_critical,
-                               'frequency_timestamp': timestamp_frequency}
-    
+   
+    frequency_critical_JS = []
+    for i in timestamp_frequency:
+        frequency_critical_JS[i] = {"timestamp": timestamp_frequency[i], "value": data_frequency_critical[i],"deviation": (data_frequency_critical[i]-230)/230*100}
+
 #   Duration of exceeding limits in seconds
 #    frequency_critical_s = len(data_frequency_critcal)
 #
@@ -71,9 +72,9 @@ def analyse_database_frequency():
     
 def analyse_database_voltage():
 #   Analyses historical Data: voltage        
-    rule_L1 = 'port_1728 not between {} and {}'.format(207, 200) 
-    rule_L2 = 'port_1730 not between {} and {}'.format(207, 200) 
-    rule_L3 = 'port_1732 not between {} and {}'.format(207, 200) 
+    rule_L1 = 'port_1728 not between {} and {}'.format(207, 253) 
+    rule_L2 = 'port_1730 not between {} and {}'.format(207, 253) 
+    rule_L3 = 'port_1732 not between {} and {}'.format(207, 253) 
 
     data_voltage_L1 = pqdb.get_data(db, tablename, 'port_1728', rule_L1 ) 
     timestamp_voltage_L1 = pqdb.get_data(db, tablename, 'timestamp', rule_L1)
@@ -91,8 +92,8 @@ def analyse_database_voltage():
                             'voltage_L2_timestamp': timestamp_voltage_L2}
     
     data_voltage_L3_dict = {'voltage_L3_data:': data_voltage_L3,
-                            'voltage_L3_timestamp': timestamp_voltage_L3}
-        
+                            'voltage_L3_timestamp': timestamp_voltage_L3}                          
+                            
 #   Duration of exceeding limits in seconds
 #    voltageL1_critical_s = len(data_voltage_L1)
 #    if voltageL1_critical_s/week_s < 0.05 :
@@ -113,3 +114,26 @@ def analyse_database_voltage():
 #        voltage_weekly_L3 = "bad"   
         
     return data_voltage_L1_dict, data_voltage_L2_dict, data_voltage_L3_dict
+    
+def analyse_database_THD():
+    #   Analyses historical Data: THD 
+    data_THD_L1 = pqdb.get_data(db, tablename, 'port_2236', 'port_2236 > 8') 
+    timestamp_THD_L1 = pqdb.get_data(db, tablename, 'timestamp', 'port_2236 > 8')
+    
+    data_THD_L2 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
+    timestamp_THD_L2 = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')
+
+    data_THD_L3 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
+    timestamp_THD_L3 = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')    
+    
+    data_THD_L1_dict = {'THD_L1_data:': data_THD_L1,
+                            'THD_L1_timestamp': timestamp_THD_L1}
+                            
+    data_THD_L2_dict =  {'THD_L2_data:': data_THD_L2,
+                            'THD_L2_timestamp': timestamp_THD_L2}
+    
+    data_THD_L3_dict = {'THD_L3_data:': data_THD_L3,
+                            'THD_L3_timestamp': timestamp_THD_L3}    
+    
+    return data_THD_L1_dict, data_THD_L2_dict, data_THD_L3_dict
+    
