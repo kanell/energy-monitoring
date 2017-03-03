@@ -41,7 +41,7 @@ def get_data(queue, dataframe, ports, pqid, control_flag):
             time2 = time.time()
             min_time = min(min_time,time2-time1)
             max_time = max(max_time,time2-time1)
-            print('modbus loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
+            #print('modbus loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
             # try to get data every 1 second
             if time2-time1 <= timedelta:
                 timestamp += 2*timedelta
@@ -96,6 +96,16 @@ def put_data(queue, db, tablename, control_flag):
         while queue.qsize() != 0:
             queue.get()
 
+def write_csv(csvdict, basefolder, csvsize):
+    if csvdict['csvdata'].shape[0] < csvsize:
+        csvdict['csvdata'] = np.append(csvdict['csvdata'],np.array([csvdict['newdata']]),axis=0)
+    else:
+        csvdict['csvdata'] = np.roll(csvdict['csvdata'],-1,axis=0)
+        csvdict['csvdata'][-1] = csvdict['newdata']
+    #print(csvdict['csvdata'])
+    np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
+    return csvdict
+
 # init
 ipaddr = '129.69.176.123'
 timedelta = 1 # seconds
@@ -107,6 +117,20 @@ control_flag = Value('i',0)
 # ports for live data
 live_ports = [800,808,810,812,860,862,864,884,886,888,868,870,872,876,878,880,836,838,840,908,910,912]
 
+# configdicts for csv file
+csvsize = 100
+filenames = ['voltage','current','power','frequency']
+valuenumber = [4,4,4,2]
+headers = ['timestamp,u1,u2,u3','timestamp,i1,i2,i3','timestamp,p1,p2,p3','timestamp,frequency']
+csvports = [[808,810,812],[860,862,864],[868,870,872],[800]]
+csvdictlist = []
+for index, filename in enumerate(filenames):
+    csvdictlist.append({'filename':filename,
+                        'header':headers[index],
+                        'newdata': np.empty(4),
+                        'csvdata': np.empty((0,4))
+                        })
+
 # queues
 mbqueue = Queue()
 dbqueue = Queue()
@@ -116,6 +140,7 @@ basefolder = 'Website'
 paths = ['temp', 'temp/json', 'temp/csv']
 for path in paths:
     os.makedirs(os.path.join(basefolder,path), exist_ok=True)
+os.makedirs('logs', exist_ok=True)
 
 profile = True
 if profile is True:
@@ -202,6 +227,11 @@ try:
             with open(os.path.join(basefolder,'temp/json/livedata.json'), 'w') as f:
                 f.write(json.dumps(livedatadict))
 
+            # create csv files
+            for index, csvdata in enumerate(csvdictlist):
+                csvdata['newdata'][0] = timestamp
+                csvdata['newdata'][1:] = pq_data[csvports[index]]
+                csvdictlist[index] = write_csv(csvdata,basefolder, csvsize)
 
             time2 = time.time()
             min_time = min(min_time,time2-time1)

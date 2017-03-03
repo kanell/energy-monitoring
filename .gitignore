@@ -16,3 +16,6 @@ jsonfiles
 
 # No .bat for server on windows
 *.bat
+
+logs
+Website/temp
