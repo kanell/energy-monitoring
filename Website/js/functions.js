@@ -1,5 +1,5 @@
 
-/* hide and show functions for the buttons of the dropdown menu */
+/* hide and show functions and clearinterval for the choices of the dropdown menu */
 
 
 /* "Aktuelle Werte" */
@@ -14,7 +14,7 @@ $(document).ready(function(){
     $("#Spannung_i").show();
 
     changeColor(a="aktiv",b="oben", c="oben");
-
+    window.clearInterval(Interval_Table);
     VoltageChart();
 
     });
@@ -27,6 +27,9 @@ $(document).ready(function(){
         $("#Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
 
         $("#Strom_i").show();
+        
+
+        
 
         changeColor(a="aktiv",b="oben", c="oben");
 
@@ -42,7 +45,7 @@ $(document).ready(function(){
 
         changeColor(a="aktiv",b="oben", c="oben");
 
-
+        window.clearInterval(Interval_U);
         currentValues();
 
     });
@@ -203,28 +206,22 @@ $(document).ready(function(){
 
 
 /*  functions for the current values in the table      */
-var runValues;
+
 function currentValues() {
 
- if (runValues == 1){
-  return;
- }
-
- else {
 getData();
 
-  window.intervalId = setInterval(function() {
-
-
-getData();
+  Interval_Table = window.setInterval(function (){
 
 
 
-    }, 1000); } }
+    getData();
+
+    }, 1000); } 
 
 
    function getData() {
-   runValues = 1;
+   
 
     $.ajax({
     cache: false,

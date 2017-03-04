@@ -118,7 +118,7 @@ control_flag = Value('i',0)
 live_ports = [800,808,810,812,860,862,864,884,886,888,868,870,872,876,878,880,836,838,840,908,910,912]
 
 # configdicts for csv file
-csvsize = 100
+csvsize = 1000
 filenames = ['voltage','current','power','frequency']
 valuenumber = [4,4,4,2]
 headers = ['timestamp,u1,u2,u3','timestamp,i1,i2,i3','timestamp,p1,p2,p3','timestamp,frequency']
