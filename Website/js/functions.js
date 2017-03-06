@@ -104,8 +104,8 @@ $(document).ready(function(){
         if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
         if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
         if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
-
         PowerChart();
+       // PowerPolarChart();
 
         });
 });
