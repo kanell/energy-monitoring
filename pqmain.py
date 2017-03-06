@@ -127,8 +127,8 @@ csvdictlist = []
 for index, filename in enumerate(filenames):
     csvdictlist.append({'filename':filename,
                         'header':headers[index],
-                        'newdata': np.empty(4),
-                        'csvdata': np.empty((0,4))
+                        'newdata': np.empty(len(csvports[index])+1),
+                        'csvdata': np.empty((0,len(csvports[index])+1))
                         })
 
 # queues
