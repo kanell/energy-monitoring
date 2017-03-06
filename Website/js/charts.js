@@ -1,15 +1,15 @@
 /* Chart current Voltage */
 var g;
- 
+var csvData;
+var Interval_U_t;
+var Interval_I_t;
+var Interval_f_t;
+var Interval_Table_t;
+var Interval_L_t;
+
+
      function VoltageChart () {
-
-      
-
-      var dataLength = 15;
-      var csvData;
-
-
-
+        
       $.ajax({
                     type: "GET",
                     cache: false,
@@ -19,18 +19,18 @@ var g;
                        csvData = data;
 
                        VoltageGraph(csvData);
-                       //alert("done!"+ csvData.getAllResponseHeaders()) - my fix makes this won't work...
+                       
                      }
 
                 });
 
 
 
-
       function VoltageGraph () {
       //console.log(csvData);
-
-     g = new Dygraph(document.getElementById("div_g"), csvData,
+      if ( Interval_U_t == 1) {return;}
+      else {
+        g = new Dygraph(document.getElementById("div_U"), csvData,
               {
                 axis : {
                   x : {
@@ -41,12 +41,12 @@ var g;
                 }
           });
 
-      }
-
+      
 
 
       Interval_U = window.setInterval(function() {
-        runVoltage = 1;
+        Interval_U_t = 1;
+        
          $.ajax({
                     type: "GET",
                     cache: false,
@@ -55,8 +55,67 @@ var g;
                     success: function (data) {
                        csvData = data;
 
-                       //VoltageGraph(csvData);
-                       //alert("done!"+ csvData.getAllResponseHeaders()) - my fix makes this won't work...
+                      }
+
+                });
+
+        g.updateOptions( { 'file': csvData } );
+
+      }, 1000);
+    } }   }
+
+
+
+     function CurrentChart () {
+
+      
+      $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "temp/csv/current.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;
+
+                       CurrentGraph(csvData);
+                       
+                     }
+
+                });
+
+
+
+
+      function CurrentGraph () {
+      //console.log(csvData);
+      if ( Interval_I_t == 1) {return;}
+      else {
+     g = new Dygraph(document.getElementById("div_I"), csvData,
+              {
+                axis : {
+                  x : {
+                    valueFormatter: Dygraph.dateString_,
+                    //valueParser: function(x) {return 1000*parteInt(x); },
+                    ticker: Dygraph.dateTicker
+                  }
+                }
+          });
+
+      
+
+
+
+      Interval_I = window.setInterval(function() {
+       Interval_I_t = 1
+         $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "temp/csv/current.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;
+
+                      
                      }
 
                 });
@@ -64,4 +123,126 @@ var g;
         g.updateOptions( { 'file': csvData } );
 
       }, 1000);
-    }    
+    }  }}  
+
+
+
+
+
+         function PowerChart () {
+
+      
+      $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "temp/csv/power.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;
+
+                       PowerGraph(csvData);
+                       
+                     }
+
+                });
+
+
+
+
+      function PowerGraph () {
+      //console.log(csvData);
+      if ( Interval_L_t == 1) {return;}
+      else {
+     g = new Dygraph(document.getElementById("div_L"), csvData,
+              {
+                axis : {
+                  x : {
+                    valueFormatter: Dygraph.dateString_,
+                    //valueParser: function(x) {return 1000*parteInt(x); },
+                    ticker: Dygraph.dateTicker
+                  }
+                }
+          });
+
+      
+
+
+
+      Interval_L = window.setInterval(function() {
+        Interval_L_t = 1
+         $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "temp/csv/power.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;
+
+                      
+                     }
+
+                });
+
+        g.updateOptions( { 'file': csvData } );
+
+      }, 1000);
+    } }}   
+
+
+
+function FrequencyChart () {
+
+      $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "temp/csv/frequency.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;
+
+                       FrequencyGraph(csvData);
+                       
+                     }
+
+                });
+
+
+
+      function FrequencyGraph () {
+      //console.log(csvData);
+      if ( Interval_U_t == 1) {return;}
+      else {
+     g = new Dygraph(document.getElementById("div_f"), csvData,
+              {
+                axis : {
+                  x : {
+                    valueFormatter: Dygraph.dateString_,
+                    //valueParser: function(x) {return 1000*parteInt(x); },
+                    ticker: Dygraph.dateTicker
+                  }
+                }
+          });
+
+      
+
+
+
+      Interval_f = window.setInterval(function() {
+        Interval_f_t = 1
+         $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "temp/csv/frequency.csv",
+                    dataType: "text",
+                    success: function (data) {
+                       csvData = data;
+
+                      }
+
+                });
+
+        g.updateOptions( { 'file': csvData } );
+
+      }, 1000);
+    }  }}  
+    

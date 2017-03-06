@@ -6,60 +6,106 @@
 
 $(document).ready(function(){
 
-    $("#U_i").click(function(){
-
-
-    $("#Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
-
-    $("#Spannung_i").show();
-
-    changeColor(a="aktiv",b="oben", c="oben");
-    window.clearInterval(Interval_Table);
-    VoltageChart();
-
-    });
 
 
 
-
-
-    $("#I_i").click(function(){
-        $("#Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
-
-        $("#Strom_i").show();
-        
-
-        
-
-        changeColor(a="aktiv",b="oben", c="oben");
-
-      });
-
-
-
-
-    $("#Uber_i").click(function(){
-        $("#Spannung_i, #Strom_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+   $("#Uber_i").click(function(){
+        $("#Frequenz_i, #Spannung_i, #Strom_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
 
         $("#Ubersicht_i").show();
 
         changeColor(a="aktiv",b="oben", c="oben");
 
-        window.clearInterval(Interval_U);
+        if (Interval_I_t == 1) {window.clearInterval(Interval_I); Interval_I_t = 0;}
+        if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
+        if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
+        if (Interval_L_t == 1) {window.clearInterval(Interval_L); Interval_L_t = 0;}
+
         currentValues();
 
     });
 
 
 
+    $("#U_i").click(function(){
+
+
+        $("#Frequenz_i, #Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+
+       $("#Spannung_i").show();
+
+        changeColor(a="aktiv",b="oben", c="oben");
+
+        if (Interval_I_t == 1) {window.clearInterval(Interval_I); Interval_I_t = 0;}
+        if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
+        if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
+        if (Interval_L_t == 1) {window.clearInterval(Interval_L); Interval_L_t = 0;}
+
+        VoltageChart();
+
+    });
+
+
+
+    $("#f_i").click(function(){
+
+
+        $("#Spannung_i, #Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+
+       $("#Frequenz_i").show();
+
+        changeColor(a="aktiv",b="oben", c="oben");
+
+        if (Interval_I_t == 1) {window.clearInterval(Interval_I); Interval_I_t = 0;}
+        if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
+        if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
+        if (Interval_L_t == 1) {window.clearInterval(Interval_L); Interval_L_t = 0;}
+
+        FrequencyChart();
+
+    });
+
+
+
+
+
+
+    $("#I_i").click(function(){
+        $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+
+        $("#Strom_i").show();
+        
+        changeColor(a="aktiv",b="oben", c="oben");
+
+        if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
+        if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
+        if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
+        if (Interval_L_t == 1) {window.clearInterval(Interval_L); Interval_L_t = 0;}
+        CurrentChart();
+      });
+
+
+
+
+   
+
+
+
 
 
     $("#L_i").click(function(){
-        $("#Spannung_i, #Ubersicht_i, #Strom_i, .Inhalt_hist, .Inhalt_analy").hide();
+        $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Strom_i, .Inhalt_hist, .Inhalt_analy").hide();
 
         $("#Leistung_i").show();
 
         changeColor(a="aktiv",b="oben", c="oben");
+
+        if (Interval_I_t == 1) {window.clearInterval(Interval_I); Interval_I_t = 0;}
+        if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
+        if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
+        if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
+
+        PowerChart();
 
         });
 });
@@ -208,16 +254,17 @@ $(document).ready(function(){
 /*  functions for the current values in the table      */
 
 function currentValues() {
-
+if ( Interval_Table_t == 1) {return;}
+      else {
 getData();
 
   Interval_Table = window.setInterval(function (){
-
+    Interval_Table_t = 1
 
 
     getData();
 
-    }, 1000); } 
+    }, 1000); 
 
 
    function getData() {
@@ -252,7 +299,7 @@ getData();
       document.getElementById("ft").innerHTML =  input["port_" + f] ;
       };
     }});
-    }
+    }}}
 
 
 
