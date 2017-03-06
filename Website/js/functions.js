@@ -122,7 +122,7 @@ $(document).ready(function(){
         $("#Spannung_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
-
+        clearIntervalfunction();
 
         Historie();
 
@@ -135,7 +135,7 @@ $(document).ready(function(){
         $("#Frequenz_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
-
+        clearIntervalfunction();
     });
 
      $("#I_h").click(function(){
@@ -145,7 +145,7 @@ $(document).ready(function(){
         $("#Strom_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
-
+        clearIntervalfunction();
     });
 
      $("#L_h").click(function(){
@@ -155,7 +155,7 @@ $(document).ready(function(){
         $("#Leistung_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
-
+        clearIntervalfunction();
     });
 
      $("#H_U_h").click(function(){
@@ -165,7 +165,7 @@ $(document).ready(function(){
         $("#Harmonische_U_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
-
+        clearIntervalfunction();
     });
 
      $("#H_I_h").click(function(){
@@ -175,7 +175,7 @@ $(document).ready(function(){
         $("#Harmonische_I_h").show();
 
         changeColor(a="oben",b="aktiv", c="oben");
-
+        clearIntervalfunction();
     });
 });
 
@@ -190,7 +190,7 @@ $(document).ready(function(){
            $("#Spannung_1_a").show();
 
           changeColor(a="oben",b="oben", c="aktiv");
-
+          clearIntervalfunction();
           Analyse();
 
         });
@@ -202,7 +202,7 @@ $(document).ready(function(){
            $("#Spannung_2_a").show();
 
           changeColor(a="oben",b="oben", c="aktiv");
-
+          clearIntervalfunction();
         });
 
         $("#U3_a").click(function(){
@@ -212,7 +212,7 @@ $(document).ready(function(){
            $("#Spannung_3_a").show();
 
           changeColor(a="oben",b="oben", c="aktiv");
-
+          clearIntervalfunction();
         });
 
         $("#f_a").click(function(){
@@ -222,7 +222,7 @@ $(document).ready(function(){
            $("#Frequenz_a").show();
 
           changeColor(a="oben",b="oben", c="aktiv");
-
+          clearIntervalfunction();
         });
 
 
@@ -233,7 +233,7 @@ $(document).ready(function(){
            $("#Harmonische_U_a").show();
 
           changeColor(a="oben",b="oben", c="aktiv");
-
+          clearIntervalfunction();
         });
 
 
@@ -245,7 +245,7 @@ $(document).ready(function(){
            $("#Harmonische_I_a").show();
 
           changeColor(a="oben",b="oben", c="aktiv");
-
+          clearIntervalfunction();
         });
 
 });
@@ -326,3 +326,12 @@ function changeColor() {
     document.getElementById("analysiert").className = c;
 
   }
+
+function clearIntervalfunction() {
+
+		if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
+	    if (Interval_I_t == 1) {window.clearInterval(Interval_I); Interval_I_t = 0;}
+        if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
+        if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
+        if (Interval_L_t == 1) {window.clearInterval(Interval_L); Interval_L_t = 0;}
+}
