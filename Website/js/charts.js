@@ -213,14 +213,16 @@ function FrequencyChart () {
       if ( Interval_U_t == 1) {return;}
       else {
      g = new Dygraph(document.getElementById("div_f"), csvData,
-              {
-                axis : {
-                  x : {
-                    valueFormatter: Dygraph.dateString_,
+              {           	
+             	digitsAfterDecimal : 4,
+                axes : {
+                 x: {
+                     valueFormatter: Dygraph.dateString_,
                     //valueParser: function(x) {return 1000*parteInt(x); },
                     ticker: Dygraph.dateTicker
-                  }
+                   }
                 }
+                
           });
 
       
