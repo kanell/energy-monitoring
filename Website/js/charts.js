@@ -32,12 +32,13 @@ var Interval_L_t;
       else {
         g = new Dygraph(document.getElementById("div_U"), csvData,
               {
-                axis : {
-                  x : {
-                    valueFormatter: Dygraph.dateString_,
-                    //valueParser: function(x) {return 1000*parteInt(x); },
-                    ticker: Dygraph.dateTicker
-                  }
+		xValueParser : function(x) {return 1000 * parseFloat(x);},
+                axes : {
+                  	x : {
+                    		valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+                    		axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+                    		ticker: Dygraph.dateTicker
+                  	}
                 }
           });
 
@@ -92,12 +93,13 @@ var Interval_L_t;
       else {
      g = new Dygraph(document.getElementById("div_I"), csvData,
               {
-                axis : {
-                  x : {
-                    valueFormatter: Dygraph.dateString_,
-                    //valueParser: function(x) {return 1000*parteInt(x); },
-                    ticker: Dygraph.dateTicker
-                  }
+		xValueParser : function(x) {return 1000 * parseFloat(x);},
+                axes : {
+                  	x : {
+                    		valueFormatter: function(x) {return Dygraph.dateString_(x,0);},
+                    		axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+                    		ticker: Dygraph.dateTicker
+                  	}
                 }
           });
 
@@ -155,12 +157,13 @@ var Interval_L_t;
       else {
      g = new Dygraph(document.getElementById("div_L"), csvData,
               {
-                axis : {
-                  x : {
-                    valueFormatter: Dygraph.dateString_,
-                    //valueParser: function(x) {return 1000*parteInt(x); },
-                    ticker: Dygraph.dateTicker
-                  }
+                xValueParser : function(x) {return 1000 * parseFloat(x);},
+		axes : {
+                  	x : {
+                    		valueFormatter: function(x) {return Dygraph.dateString_(x,0);},
+                    		axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+                    		ticker: Dygraph.dateTicker
+                  	}
                 }
           });
 
@@ -215,10 +218,11 @@ function FrequencyChart () {
      g = new Dygraph(document.getElementById("div_f"), csvData,
               {           	
              	digitsAfterDecimal : 4,
+		xValueParser: function(x) {return 1000 * parseFloat(x);},
                 axes : {
                  x: {
-                     valueFormatter: Dygraph.dateString_,
-                    //valueParser: function(x) {return 1000*parteInt(x); },
+                    valueFormatter: function(x) {return Dygraph.dateString_(x,0);},
+                    axisLabelFormatter: Dygraph.dateAxisLabelFormatter,
                     ticker: Dygraph.dateTicker
                    }
                 }
