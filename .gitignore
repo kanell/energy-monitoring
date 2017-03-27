@@ -13,6 +13,7 @@ jsonfiles
 
 # No .log file
 *.log
+*.out
 
 # No .bat for server on windows
 *.bat
