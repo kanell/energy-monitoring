@@ -29,26 +29,27 @@ def get_data(queue, dataframe, ports, pqid, control_flag):
     timestamp = int(dt.datetime.now().timestamp())
 
     try:
+        starttime = dt.datetime.now().timestamp()
         while control_flag.value == 0:
-            time1 = time.time()
-
             # get data from janitza
             pq_data = gd.fetch_data_dataframe(dataframe, ports, pqid)
 
             # put in queue
             queue.put((pq_data, timestamp))
 
-            time2 = time.time()
-            min_time = min(min_time,time2-time1)
-            max_time = max(max_time,time2-time1)
+            endtime = time.time()
+            min_time = min(min_time,endtime-starttime)
+            max_time = max(max_time,endtime-starttime)
             #print('modbus loop duration time| current: {:6.4f} sec.\t| max: {:6.4f} sec.\t| min: {:6.4f} sec.'.format(time2-time1,max_time,min_time), end='\r')
             # try to get data every 1 second
             if time2-time1 <= timedelta:
                 timestamp += timedelta
-                time.sleep(timedelta-(time2-time1))
+                time.sleep(timedelta-(endtime-starttime))
+                starttime += timedelta
             else:
                 timestamp += 2*timedelta
-                time.sleep(2*timedelta-(time2-time1))
+                time.sleep(2*timedelta-(endtime-starttime))
+                starttime += 2*timedelta
     except:
         control_flag.value = 1
 

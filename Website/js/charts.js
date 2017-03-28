@@ -8,47 +8,36 @@ var Interval_Table_t;
 var Interval_L_t;
 
 
-     function VoltageChart () {
-        
-      $.ajax({
-                    type: "GET",
-                    cache: false,
-                    url: "temp/csv/voltage.csv",
-                    dataType: "text",
-                    success: function (data) {
-                       csvData = data;
-
-                       VoltageGraph(csvData);
-                       
-                     }
-
-                });
-
-
-
-      function VoltageGraph () {
-      //console.log(csvData);
-      if ( Interval_U_t == 1) {return;}
-      else {
-        g = new Dygraph(document.getElementById("div_U"), csvData,
-              {
-		xValueParser : function(x) {return 1000 * parseFloat(x);},
-                axes : {
-                  	x : {
-                    		valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
-                    		axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
-                    		ticker: Dygraph.dateTicker
-                  	}
-                }
-          });
-
-      
-
-
+function VoltageChart () {
+  $.ajax({
+    type: "GET",
+    cache: false,
+    url: "temp/csv/voltage.csv",
+    dataType: "text",
+    success: function (data) {
+      csvData = data;
+      VoltageGraph(csvData);
+    }
+  });
+  // Set graph
+  function VoltageGraph () {
+    //console.log(csvData);
+    if ( Interval_U_t == 1) {return;}
+    else {
+      g = new Dygraph(document.getElementById("div_U"), csvData,{
+        xValueParser : function(x) {return 1000 * parseFloat(x);},
+        axes : {
+          x : {
+              valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+              axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+              ticker: Dygraph.dateTicker
+          }
+        }
+      });
+      // set Interval
       Interval_U = window.setInterval(function() {
         Interval_U_t = 1;
-        
-         $.ajax({
+        $.ajax({
                     type: "GET",
                     cache: false,
                     url: "temp/csv/voltage.csv",
@@ -69,7 +58,7 @@ var Interval_L_t;
 
      function CurrentChart () {
 
-      
+
       $.ajax({
                     type: "GET",
                     cache: false,
@@ -79,7 +68,7 @@ var Interval_L_t;
                        csvData = data;
 
                        CurrentGraph(csvData);
-                       
+
                      }
 
                 });
@@ -103,7 +92,7 @@ var Interval_L_t;
                 }
           });
 
-      
+
 
 
 
@@ -117,7 +106,7 @@ var Interval_L_t;
                     success: function (data) {
                        csvData = data;
 
-                      
+
                      }
 
                 });
@@ -125,7 +114,7 @@ var Interval_L_t;
         g.updateOptions( { 'file': csvData } );
 
       }, 1000);
-    }  }}  
+    }  }}
 
 
 
@@ -133,7 +122,7 @@ var Interval_L_t;
 
          function PowerChart () {
 
-      
+
       $.ajax({
                     type: "GET",
                     cache: false,
@@ -143,7 +132,7 @@ var Interval_L_t;
                        csvData = data;
 
                        PowerGraph(csvData);
-                       
+
                      }
 
                 });
@@ -167,7 +156,7 @@ var Interval_L_t;
                 }
           });
 
-      
+
 
 
 
@@ -181,7 +170,7 @@ var Interval_L_t;
                     success: function (data) {
                        csvData = data;
 
-                      
+
                      }
 
                 });
@@ -189,7 +178,7 @@ var Interval_L_t;
         g.updateOptions( { 'file': csvData } );
 
       }, 1000);
-    } }}   
+    } }}
 
 
 
@@ -204,7 +193,7 @@ function FrequencyChart () {
                        csvData = data;
 
                        FrequencyGraph(csvData);
-                       
+
                      }
 
                 });
@@ -216,7 +205,7 @@ function FrequencyChart () {
       if ( Interval_U_t == 1) {return;}
       else {
      g = new Dygraph(document.getElementById("div_f"), csvData,
-              {           	
+              {
              	digitsAfterDecimal : 4,
 		xValueParser: function(x) {return 1000 * parseFloat(x);},
                 axes : {
@@ -226,10 +215,10 @@ function FrequencyChart () {
                     ticker: Dygraph.dateTicker
                    }
                 }
-                
+
           });
 
-      
+
 
 
 
@@ -250,5 +239,4 @@ function FrequencyChart () {
         g.updateOptions( { 'file': csvData } );
 
       }, 1000);
-    }  }}  
-    
+    }  }}
