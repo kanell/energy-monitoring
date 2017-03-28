@@ -9,50 +9,33 @@ var Interval_L_t;
 
 
 function VoltageChart () {
-  $.ajax({
-    type: "GET",
-    cache: false,
-    url: "temp/csv/voltage.csv",
-    dataType: "text",
-    success: function (data) {
-      csvData = data;
-      VoltageGraph(csvData);
-    }
-  });
   // Set graph
-  function VoltageGraph () {
-    //console.log(csvData);
-    if ( Interval_U_t == 1) {return;}
-    else {
-      g = new Dygraph(document.getElementById("div_U"), csvData,{
-        xValueParser : function(x) {return 1000 * parseFloat(x);},
-        axes : {
-          x : {
-              valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
-              axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
-              ticker: Dygraph.dateTicker
-          }
+  if ( Interval_U_t == 1) {return;}
+  else {
+    g = new Dygraph(document.getElementById("div_U"), [],{
+      xValueParser : function(x) {return 1000 * parseFloat(x);},
+      axes : {
+        x : {
+            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+            ticker: Dygraph.dateTicker
         }
+      }
+    });
+    // set Interval
+    Interval_U = window.setInterval(function() {
+      Interval_U_t = 1;
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/voltage.csv",
+        dataType: "text",
+        success: function (data) {csvData = data;}
       });
-      // set Interval
-      Interval_U = window.setInterval(function() {
-        Interval_U_t = 1;
-        $.ajax({
-                    type: "GET",
-                    cache: false,
-                    url: "temp/csv/voltage.csv",
-                    dataType: "text",
-                    success: function (data) {
-                       csvData = data;
-
-                      }
-
-                });
-
-        g.updateOptions( { 'file': csvData } );
-
-      }, 1000);
-    } }   }
+      g.updateOptions( { 'file': csvData } );
+    }, 1000);
+  }
+}
 
 
 
