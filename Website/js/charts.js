@@ -12,7 +12,7 @@ function VoltageChart () {
   // Set graph
   if ( Interval_U_t == 1) {return;}
   else {
-    g = new Dygraph(document.getElementById("div_U"), [],{
+    g = new Dygraph(document.getElementById("div_U"), [[0],[0],[0],[0]],{
       xValueParser : function(x) {return 1000 * parseFloat(x);},
       axes : {
         x : {
