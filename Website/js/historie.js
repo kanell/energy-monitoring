@@ -26,7 +26,7 @@ function makeFlaskRequest(requestJSON){
     //voltagePlot.updateOptions( { 'file': req.responseText } );
     }
   req.addEventListener('load',transferComplete);
-  req.open('POST', '/get_data');
+  req.open('POST', '/get_data/');
   req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   req.responseType = 'text';
   req.send(JSON.stringify(requestJSON));
