@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="http://dygraphs.com/dist/dygraph.css">
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <!-- Skripte -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
     <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -217,7 +219,8 @@
     <!-- content of "Historische Werte" -->
     <div id="Spannung_h" class="Inhalt_hist">
       <h3>Spannung</h3>
-      <div id="historie_chartdiv_U" style="width:1200px; height:400px; position:absolute;"></div>
+      <div id="historic_chart_u" style="width:1200px; height:400px; position:absolute;"></div>
+      <div>Startzeitpunkt: <input type="text" id="datepicker" style=margin-right:4em> Endzeitpunkt: <input type="text" id="datepicker" style=margin-right:4em><button></button></div>
     </div>
     <div id="Frequenz_h" class="Inhalt_hist">
       <h3>Frequenz</h3>

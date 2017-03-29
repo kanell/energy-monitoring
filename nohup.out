@@ -1,55 +1,0 @@
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Started database process
-Traceback (most recent call last):
-  File "pqmain.py", line 233, in <module>
-    csvdictlist[index] = write_csv(csvdata,basefolder, csvsize)
-  File "pqmain.py", line 104, in write_csv
-    csvdict['csvdata'][-1] = np.array([csvdict['newdata']])
-ValueError: setting an array element with a sequence.
-
-finished measurement
-Traceback (most recent call last):
-  File "pqmain.py", line 233, in <module>
-    csvdictlist[index] = write_csv(csvdata,basefolder, csvsize)
-  File "pqmain.py", line 104, in write_csv
-    csvdict['csvdata'][-1] = np.array([csvdict['newdata']])
-ValueError: setting an array element with a sequence.
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
-Get addresses from csv file
-Connect to JanitzaConnected to Janitza
-Connect to postgres databaseConnected to postgres database
-Started modbus process
