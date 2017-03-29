@@ -35,10 +35,9 @@ $(document).ready(function(){
   function loadHistoricVoltageData() {
     // create requestJSON
     var requestJSON = {
-      seconds_to_record : parseInt(document.getElementById('seconds_to_record').value),
-      channel_to_record : document.getElementById('channel_to_record').value,
-      file_type : document.getElementById('file_type').value,
-      file_name : document.getElementById('file_name').value
+      startTime : 1,
+      endTime : 2,
+      dataName : 'Voltage'
     }
     // make request
     makeFlaskRequest(requestJSON)

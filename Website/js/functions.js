@@ -75,7 +75,7 @@ $(document).ready(function(){
     $("#Spannung_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
     clearIntervalFunction();
-    Historie();
+    loadHistoricVoltageData();
   });
 
   // Frequenz wird geklickt
