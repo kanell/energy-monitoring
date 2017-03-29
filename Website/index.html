@@ -1,450 +1,313 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8"> 
-<link rel="stylesheet" href="../css/main.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="http://dygraphs.com/dist/dygraph.css">
-<script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
-
-<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-<!-- AM-Charts -->
-
-<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
-<script src="https://www.amcharts.com/lib/3/radar.js"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-
-
-<!-- js-Dateien -->
-
-<script src="../js/charts.js"></script>
-<script src="../js/functions.js"></script>
-<script src="../js/polar.js"></script>
-<script src="../js/historie.js"></script>
-<script src="../js/analyse.js"></script>
-
-
-</head>
-<body>
-
-<!-- upper menu -->
-
-
-<ul class="oben">
-
-  <li id="aktuell" class="oben"><a href="#aktuell">Aktuelle Werte</a>
-
-     <ul id="akt" class="links">
-
-           <!-- left menu -->
-
-           <li class="links"><a id="Uber_i" href="#Übersicht">&Uuml;bersicht</a></li>
-           <li class="links"><a id="U_i" href="#Spannung">Spannung</a></li>
-           <li class="links"><a id="f_i" href="#Frequenz">Frequenz</a></li>
-           <li class="links"><a id="I_i" href="#Strom">Strom</a></li>
-           <li class="links"><a id="L_i" href="#Leistung">Leistung</a></li>
-
-     </ul>
-   </li>
-
-  <li id="historisch" class="oben"><a href="#historisch">Historische Werte</a>  
-     
-  <ul id="hist" class="links">
-
-           <!-- left menu -->
-
-           
-           <li class="links"><a id="U_h" href="#">Spannung</a></li>
-           <li class="links"><a id="f_h" href="#">Frequenz</a></li>
-           <li class="links"><a id="I_h" href="#">Strom</a></li>
-           <li class="links"><a id="L_h" href="#">Leistung</a></li>
-           <li class="links"><a id="H_U_h" href="#">Harmonische U</a></li>
-           <li class="links"><a id="H_I_h" href="#">Harmonische I</a></li>
-
-     </ul>
-    </li>
-  <li id="analysiert" class="oben"><a href="#analysiert">Analyse</a>
-
-      <ul id="analy"class="links"> 
-      
-      
-           <li class="links"><a id="U1_a" href="#">Abweichung U Phase 1</a></li>
-           <li class="links"><a id="U2_a" href="#">Abweichung U Phase 2</a></li>
-           <li class="links"><a id="U3_a" href="#">Abweichung U Phase 3</a></li>
-           <li class="links"><a id="f_a" href="#">Abweichung f</a></li>    
-           <li class="links"><a id="THD_U_a" href="#">Abweichung THD_U</a></li>
-           <li class="links"><a id="THD_I_a" href="#">Abweichung THD_I</a></li>
-           
-      </ul>
-    </li>
-     
-  <!-- upper right comment -->
-
-  <li class="oben-rechts">Energiemonitoringsystem des IEH</li>
-
-</ul>
-
-<!-- content (heading, table, etc.) -->
-
-
-<!-- content of button "?bersicht" -->
-
-
-<div id="Ubersicht_i" class="Inhalt_ist">      <!--div with table-->
-
-
-
-<div style="overflow-x:auto;">         <!-- makes the table scrollable, if screen to small-->
-
-<table class="Ubertabelle">           <!-- Mastertable with the different content-tables inside-->
-
-  <tr>
-     <td class="Ubertabelle">
-
-     <table class="Bezeichnung">          <!-- table for the lables-->
-
-     <tr>
-      <th style="background-color: hsla(0, 0%, 0%, 1)"><br></th>
-     </tr>
-
-     <tr>
-      <th>Spannung (V)</th>
-     </tr>
-
-     <tr>
-      <th>Strom (A)</th>
-     </tr>
-
-     <tr>
-      <th>Scheinleistung (VA)</th>
-     </tr>
-
-     <tr>
-      <th>Wirkleistung (W)</th>
-     </tr>
-
-     <tr>
-      <th>Blindleistung (var)</th>
-     </tr>
-
-     <tr>
-      <th>THD<sub>U</sub> (%)</th>
-     </tr>
-
-     <tr>
-      <th>THD<sub>I</sub> (%)</th>
-     </tr>
-
-
-    </table>
-    </td>
-
-
-  <td class="Ubertabelle">
-
-     <table class="Phase1">          <!-- table for the values of Phase 1-->
-
-     <tr>
-      <th>Phase 1</th>
-     </tr>
-
-     <tr>
-      <td id="U1t"></td>
-     </tr>
-
-     <tr>
-      <td id="I1t"></td>
-     </tr>
-
-     <tr>
-      <td id="S1t"></td>
-     </tr>
-
-     <tr>
-      <td id="P1t"></td>
-     </tr>
-
-     <tr>
-      <td id="Q1t"></td>
-     </tr>
-
-     <tr>
-      <td id="THD_U1t"></td>
-     </tr>
-
-     <tr>
-      <td id="THD_I1t"></td>
-     </tr>
-
-
-    </table>
-
-  </td>
-
-
-  <td class="Ubertabelle">
-
-     <table class="Phase2">          <!-- table for the values of Phase 2-->
-
-     <tr>
-      <th>Phase 2</th>
-     </tr>
-
-     <tr>
-      <td id="U2t"></td>
-     </tr>
-
-     <tr>
-      <td id="I2t"></td>
-     </tr>
-
-     <tr>
-      <td id="S2t"></td>
-     </tr>
-
-     <tr>
-      <td id="P2t"></td>
-     </tr>
-
-     <tr>
-      <td id="Q2t"></td>
-     </tr>
-
-     <tr>
-      <td id="THD_U2t"></td>
-     </tr>
-
-     <tr>
-      <td id="THD_I2t"></td>
-     </tr>
-
-
-    </table>
-
-  </td>
-
-  <td class="Ubertabelle">
-
-     <table class="Phase3">          <!-- table for values of Phase 3-->
-
-     <tr>
-      <th>Phase 3</th>
-     </tr>
-
-      <tr>
-      <td id="U3t"></td>
-     </tr>
-
-     <tr>
-      <td id="I3t"></td>
-     </tr>
-
-     <tr>
-      <td id="S3t"></td>
-     </tr>
-
-     <tr>
-      <td id="P3t"></td>
-     </tr>
-
-     <tr>
-      <td id="Q3t"></td>
-     </tr>
-
-     <tr>
-      <td id="THD_U3t"></td>
-     </tr>
-
-     <tr>
-      <td id="THD_I3t"></td>
-     </tr>
-
-
-    </table>
-
-  </td>
-
-   </tr>
- </table>  
- 
-<!-- table for the frequency -->
- 
-<table class="Ubertabelle" style="background-color:green; color:white;"> 
-<tr>
-<td> Frequenz (Hz) </td>
-</tr>
-<tr>
-<td id="ft"></td>
-</tr>
-</table>
-
-
-</div>
-<script type="text/javascript">currentValues();</script>
-</div>
-
-
-<!-- content of button "Spannung" -->
-
-
-
-
-<!-- actual content of "Spannung" -->
-
-<div id="Spannung_i" class="Inhalt_ist">
-<h2>Spannung</h2>
-
-<div id="div_U" style="width:800px; height:400px; position:absolute;"></div>
-
-</div>
-
-<!-- content of button "Frequenz" -->
-
-
-<div id="Frequenz_i" class="Inhalt_ist">
-<h3>Frequenz</h3>
-<div id="div_f" style="width:800px; height:400px; position:absolute;"></div>
-</div>
-
-
-<!-- content of button "Strom" -->
-
-
-<div id="Strom_i" class="Inhalt_ist">
-
-    <h2>Strom</h2>
-<div id="div_I" style="width:800px; height:400px; position:absolute;"></div>
-</div>
-
-<!-- content of button "Leistung" -->
-
-<div id="Leistung_i" class="Inhalt_ist">
-
-    <h2>Leistung</h2>
-    <div id="div_L" style="width:800px; height:400px;"></div>
-    <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
-    
-</div>
-
-
-
-<!-- content of "Historische Werte" -->
-
-
-<div id="Spannung_h" class="Inhalt_hist">
-
-<h3>Spannung</h3>
-<div id="historie_chartdiv_U" style="width:1200px; height:400px; position:absolute;"></div>
-</div>
-
-<div id="Frequenz_h" class="Inhalt_hist">
-<h3>Frequenz</h3>
-<div id="historie_chartdiv_f" style="width:1200px; height:400px;"></div>
-</div>
-
-<div id="Strom_h" class="Inhalt_hist">
-<h3>Strom</h3>
-<div id="historie_chartdiv_I" style="width:1200px; height:400px;"></div>
-</div>
-
-<div id="Leistung_h" class="Inhalt_hist">
-<h3>Leistung</h3>
-<div id="historie_chartdiv_L" style="width:1200px; height:400px;"></div>
-<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
-</div>
-
-<div id="Harmonische_U_h" class="Inhalt_hist">
-<h3>Harmonische U</h3>
-<div id="historie_chartdiv_HU" style="width:1200px; height:400px;"></div>
-<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
-</div>
-
-<div id="Harmonische_I_h" class="Inhalt_hist">
-<h3>Harmonische I</h3>
-<div id="historie_chartdiv_HI" style="width:1200px; height:400px;"></div>
-<button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
-</div>
-
-<!-- content of "Analyse" -->
-
-<div class="Inhalt_analy" id="Spannung_1_a">
-<br>
-<h2>Grenzwert&uuml;berschreitung Spannung Leiter 1</h2>
-<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-<tr class="UberschreitungsTabelle">
-<th class="UberschreitungsTabelle">Zeitstempel</th>
-<th>Wert</th>
-<th>Abweichung in %</th>
-</tr>
-</table>
-</div>
-
-<div class="Inhalt_analy" id="Spannung_2_a">
-<br>
-<h2>Grenzwert&uuml;berschreitung Spannung Leiter 2</h2>
-<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-<tr class="UberschreitungsTabelle">
-<th class="UberschreitungsTabelle">Zeitstempel</th>
-<th>Wert</th>
-<th>Abweichung in %</th>
-</tr>
-</table>
-</div>
-
-<div class="Inhalt_analy" id="Spannung_3_a">
-<br>
-<h2>Grenzwert&uuml;berschreitung Spannung Leiter 3</h2>
-<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-<tr class="UberschreitungsTabelle">
-<th class="UberschreitungsTabelle">Zeitstempel</th>
-<th>Wert</th>
-<th>Abweichung in %</th>
-</tr>
-</table>
-</div>
-
-<div class="Inhalt_analy" id="Frequenz_a">
-<br>
-<h2>Grenzwert&uuml;berschreitung Frequenz</h2>
-<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-<tr class="UberschreitungsTabelle">
-<th class="UberschreitungsTabelle">Zeitstempel</th>
-<th>Wert</th>
-<th>Abweichung in %</th>
-</tr>
-</table>
-</div>
-
-<div class="Inhalt_analy" id="Harmonische_U_a">
-<br>
-<h2>Grenzwert&uuml;berschreitung Harmonische U</h2>
-<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-<tr class="UberschreitungsTabelle">
-<th class="UberschreitungsTabelle">Zeitstempel</th>
-<th>Wert</th>
-<th>Abweichung in %</th>
-</tr>
-</table>
-</div>
-
-<div class="Inhalt_analy" id="Harmonische_I_a">
-<br>
-<h2>Grenzwert&uuml;berschreitung Harmonische I</h2>
-<table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-<tr class="UberschreitungsTabelle">
-<th class="UberschreitungsTabelle">Zeitstempel</th>
-<th>Wert</th>
-<th>Abweichung in %</th>
-</tr>
-</table>
-</div>
-
-
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <!-- Links/CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="http://dygraphs.com/dist/dygraph.css">
+    <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+
+    <!-- Skripte -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://dygraphs.com/dist/dygraph.js"></script>
+    <script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="https://www.amcharts.com/lib/3/radar.js"></script>
+    <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/functions.js"></script>
+    <script src="../js/polar.js"></script>
+    <script src="../js/historie.js"></script>
+    <script src="../js/analyse.js"></script>
+  </head>
+  <body>
+    <!-- upper menu -->
+    <ul class="oben">
+      <li id="aktuell" class="oben"><a href="#aktuell">Aktuelle Werte</a>
+        <ul id="akt" class="links">
+          <!-- left menu -->
+          <li class="links"><a id="Uber_i" href="#ï¿½bersicht">&Uuml;bersicht</a></li>
+          <li class="links"><a id="U_i" href="#Spannung">Spannung</a></li>
+          <li class="links"><a id="f_i" href="#Frequenz">Frequenz</a></li>
+          <li class="links"><a id="I_i" href="#Strom">Strom</a></li>
+          <li class="links"><a id="L_i" href="#Leistung">Leistung</a></li>
+        </ul>
+      </li>
+      <li id="historisch" class="oben"><a href="#historisch">Historische Werte</a>
+        <ul id="hist" class="links">
+          <!-- left menu -->
+          <li class="links"><a id="U_h" href="#">Spannung</a></li>
+          <li class="links"><a id="f_h" href="#">Frequenz</a></li>
+          <li class="links"><a id="I_h" href="#">Strom</a></li>
+          <li class="links"><a id="L_h" href="#">Leistung</a></li>
+          <li class="links"><a id="H_U_h" href="#">Harmonische U</a></li>
+          <li class="links"><a id="H_I_h" href="#">Harmonische I</a></li>
+        </ul>
+      </li>
+      <li id="analysiert" class="oben"><a href="#analysiert">Analyse</a>
+        <ul id="analy"class="links">
+          <li class="links"><a id="U1_a" href="#">Abweichung U Phase 1</a></li>
+          <li class="links"><a id="U2_a" href="#">Abweichung U Phase 2</a></li>
+          <li class="links"><a id="U3_a" href="#">Abweichung U Phase 3</a></li>
+          <li class="links"><a id="f_a" href="#">Abweichung f</a></li>
+          <li class="links"><a id="THD_U_a" href="#">Abweichung THD_U</a></li>
+          <li class="links"><a id="THD_I_a" href="#">Abweichung THD_I</a></li>
+        </ul>
+      </li>
+      <!-- upper right comment -->
+      <li class="oben-rechts">Energiemonitoringsystem des IEH</li>
+    </ul>
+    <!-- content (heading, table, etc.) -->
+    <!-- content of button "?bersicht" -->
+    <div id="Ubersicht_i" class="Inhalt_ist">      <!--div with table-->
+      <div style="overflow-x:auto;">         <!-- makes the table scrollable, if screen to small-->
+        <table class="Ubertabelle">           <!-- Mastertable with the different content-tables inside-->
+          <tr>
+            <td class="Ubertabelle">
+              <table class="Bezeichnung">          <!-- table for the lables-->
+                <tr>
+                  <th style="background-color: hsla(0, 0%, 0%, 1)"><br></th>
+                </tr>
+                <tr>
+                  <th>Spannung (V)</th>
+                </tr>
+                <tr>
+                  <th>Strom (A)</th>
+                </tr>
+                <tr>
+                  <th>Scheinleistung (VA)</th>
+                </tr>
+                <tr>
+                  <th>Wirkleistung (W)</th>
+                </tr>
+                <tr>
+                  <th>Blindleistung (var)</th>
+                </tr>
+                <tr>
+                  <th>THD<sub>U</sub> (%)</th>
+                </tr>
+                <tr>
+                  <th>THD<sub>I</sub> (%)</th>
+                </tr>
+              </table>
+            </td>
+            <td class="Ubertabelle">
+              <table class="Phase1">          <!-- table for the values of Phase 1-->
+                <tr>
+                  <th>Phase 1</th>
+                </tr>
+                <tr>
+                  <td id="U1t"></td>
+                </tr>
+                <tr>
+                  <td id="I1t"></td>
+                </tr>
+                <tr>
+                  <td id="S1t"></td>
+                </tr>
+                <tr>
+                  <td id="P1t"></td>
+                </tr>
+                <tr>
+                  <td id="Q1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_U1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_I1t"></td>
+                </tr>
+              </table>
+            </td>
+            <td class="Ubertabelle">
+              <table class="Phase2">          <!-- table for the values of Phase 2-->
+                <tr>
+                  <th>Phase 2</th>
+                </tr>
+                <tr>
+                  <td id="U2t"></td>
+                </tr>
+                <tr>
+                  <td id="I2t"></td>
+                </tr>
+                <tr>
+                  <td id="S2t"></td>
+                </tr>
+                <tr>
+                  <td id="P2t"></td>
+                </tr>
+                <tr>
+                  <td id="Q2t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_U2t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_I2t"></td>
+                </tr>
+              </table>
+            </td>
+            <td class="Ubertabelle">
+              <table class="Phase3">          <!-- table for values of Phase 3-->
+                <tr>
+                  <th>Phase 3</th>
+                </tr>
+                <tr>
+                  <td id="U3t"></td>
+                </tr>
+                <tr>
+                  <td id="I3t"></td>
+                </tr>
+                <tr>
+                  <td id="S3t"></td>
+                </tr>
+                <tr>
+                  <td id="P3t"></td>
+                </tr>
+                <tr>
+                  <td id="Q3t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_U3t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_I3t"></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <!-- table for the frequency -->
+        <table class="Ubertabelle" style="background-color:green; color:white;">
+          <tr>
+            <td> Frequenz (Hz) </td>
+          </tr>
+          <tr>
+            <td id="ft"></td>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript">currentValues();</script>
+    </div>
+    <!-- content of button "Spannung" -->
+    <!-- actual content of "Spannung" -->
+    <div id="Spannung_i" class="Inhalt_ist">
+      <h2>Spannung</h2>
+      <div id="div_U" style="width:800px; height:400px; position:absolute;"></div>
+    </div>
+    <!-- content of button "Frequenz" -->
+    <div id="Frequenz_i" class="Inhalt_ist">
+      <h3>Frequenz</h3>
+      <div id="div_f" style="width:800px; height:400px; position:absolute;"></div>
+    </div>
+    <!-- content of button "Strom" -->
+    <div id="Strom_i" class="Inhalt_ist">
+      <h2>Strom</h2>
+      <div id="div_I" style="width:800px; height:400px; position:absolute;"></div>
+    </div>
+    <!-- content of button "Leistung" -->
+    <div id="Leistung_i" class="Inhalt_ist">
+      <h2>Leistung</h2>
+      <div id="div_L" style="width:800px; height:400px;"></div>
+      <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
+    </div>
+    <!-- content of "Historische Werte" -->
+    <div id="Spannung_h" class="Inhalt_hist">
+      <h3>Spannung</h3>
+      <div id="historie_chartdiv_U" style="width:1200px; height:400px; position:absolute;"></div>
+    </div>
+    <div id="Frequenz_h" class="Inhalt_hist">
+      <h3>Frequenz</h3>
+      <div id="historie_chartdiv_f" style="width:1200px; height:400px;"></div>
+    </div>
+    <div id="Strom_h" class="Inhalt_hist">
+      <h3>Strom</h3>
+      <div id="historie_chartdiv_I" style="width:1200px; height:400px;"></div>
+    </div>
+    <div id="Leistung_h" class="Inhalt_hist">
+      <h3>Leistung</h3>
+      <div id="historie_chartdiv_L" style="width:1200px; height:400px;"></div>
+      <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+    </div>
+    <div id="Harmonische_U_h" class="Inhalt_hist">
+      <h3>Harmonische U</h3>
+      <div id="historie_chartdiv_HU" style="width:1200px; height:400px;"></div>
+      <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+    </div>
+    <div id="Harmonische_I_h" class="Inhalt_hist">
+      <h3>Harmonische I</h3>
+      <div id="historie_chartdiv_HI" style="width:1200px; height:400px;"></div>
+      <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+    </div>
+    <!-- content of "Analyse" -->
+    <div class="Inhalt_analy" id="Spannung_1_a">
+      <br>
+      <h2>Grenzwert&uuml;berschreitung Spannung Leiter 1</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Zeitstempel</th>
+          <th>Wert</th>
+          <th>Abweichung in %</th>
+        </tr>
+      </table>
+    </div>
+    <div class="Inhalt_analy" id="Spannung_2_a">
+      <br>
+      <h2>Grenzwert&uuml;berschreitung Spannung Leiter 2</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Zeitstempel</th>
+          <th>Wert</th>
+          <th>Abweichung in %</th>
+        </tr>
+      </table>
+    </div>
+    <div class="Inhalt_analy" id="Spannung_3_a">
+      <br>
+      <h2>Grenzwert&uuml;berschreitung Spannung Leiter 3</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Zeitstempel</th>
+          <th>Wert</th>
+          <th>Abweichung in %</th>
+        </tr>
+      </table>
+    </div>
+    <div class="Inhalt_analy" id="Frequenz_a">
+      <br>
+      <h2>Grenzwert&uuml;berschreitung Frequenz</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Zeitstempel</th>
+          <th>Wert</th>
+          <th>Abweichung in %</th>
+        </tr>
+      </table>
+    </div>
+    <div class="Inhalt_analy" id="Harmonische_U_a">
+      <br>
+      <h2>Grenzwert&uuml;berschreitung Harmonische U</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Zeitstempel</th>
+          <th>Wert</th>
+          <th>Abweichung in %</th>
+        </tr>
+      </table>
+    </div>
+    <div class="Inhalt_analy" id="Harmonische_I_a">
+      <br>
+      <h2>Grenzwert&uuml;berschreitung Harmonische I</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Zeitstempel</th>
+          <th>Wert</th>
+          <th>Abweichung in %</th>
+        </tr>
+      </table>
+    </div>
+  </body>
 </html>
