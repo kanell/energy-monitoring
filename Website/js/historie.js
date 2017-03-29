@@ -15,31 +15,31 @@ $(document).ready(function(){
       }
     }
   }
-  var voltagePlot = new Dygraph(document.getElementById("historic_chart_u"), [[0],[0],[0],[0]],plotOptions);
+  var voltagePlot = new Dygraph(document.getElementById("historic_chart_u"), [[0],[0],[0],[0]],voltagePlotOptions);
+});
 
-  // Request for Flask
-  function makeFlaskRequest(requestJSON){
-    var req = new XMLHttpRequest();
-    function transferComplete() {
-      console.log(req.responseText);
-      //voltagePlot.updateOptions( { 'file': req.responseText } );
-      }
-    req.addEventListener('load',transferComplete);
-    req.open('POST', '/get_data');
-    req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-    req.responseType = 'text';
-    req.send(JSON.stringify(requestJSON));
-  }
-
-  // Init Plot
-  function loadHistoricVoltageData() {
-    // create requestJSON
-    var requestJSON = {
-      startTime : 1,
-      endTime : 2,
-      dataName : 'Voltage'
+// Request for Flask
+function makeFlaskRequest(requestJSON){
+  var req = new XMLHttpRequest();
+  function transferComplete() {
+    console.log(req.responseText);
+    //voltagePlot.updateOptions( { 'file': req.responseText } );
     }
-    // make request
-    makeFlaskRequest(requestJSON)
+  req.addEventListener('load',transferComplete);
+  req.open('POST', '/get_data');
+  req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  req.responseType = 'text';
+  req.send(JSON.stringify(requestJSON));
+}
+
+// Init Plot
+function loadHistoricVoltageData() {
+  // create requestJSON
+  var requestJSON = {
+    startTime : 1,
+    endTime : 2,
+    dataName : 'Voltage'
   }
+  // make request
+  makeFlaskRequest(requestJSON)
 }
