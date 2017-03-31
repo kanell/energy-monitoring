@@ -4,23 +4,9 @@ import numpy as np
 from pg import DB
 import json
 import datetime as dt
-app = Flask(__name__)
 
 with open('../db_config.json', 'r') as f:
     db_config = json.loads(f.read())
-
-def get_data(db, tablename, selector, rule):
-    try:
-        if rule == None:
-            # get all data
-            data = np.array(db.query('select {} from {}'.format(selector, tablename)).getresult())[:,-1]
-        else:
-            # get data depending on rule
-            data = np.array(db.query('select {} from {} where {}'.format(selector, tablename, rule)).getresult())[:,-1]
-    except IndexError:
-        print('No data in that time period')
-        return np.array([])
-    return data
 
 def connect_to_db(description):
     dbname = description['dbname']
@@ -41,8 +27,16 @@ def get_data_from_db(startTime, endTime, dataName):
     if dataName == 'voltage':
         selectors = ['port_808','port_810','port_812']
         for selector in selectors:
-            print('get selector: '+selector)
-            df = get_data(db, db_config['tablename'], selector, rule)
+            try:
+                if rule == None:
+                    # get all data
+                    df = np.array(db.query('select {} from {}'.format(selector, tablename)).getresult())[:,-1]
+                else:
+                    # get data depending on rule
+                    df = np.array(db.query('select {} from {} where {}'.format(selector, tablename, rule)).getresult())[:,-1]
+            except IndexError:
+                print('No data in that time period')
+                df = np.array([])
 
     elif dataName == 'current':
         pass
@@ -67,7 +61,7 @@ def get_data():
 
     csvdata = get_data_from_db(startTime, endTime, dataName)
     if type(csvdata) == 'str':
-        return csvdata 
+        return csvdata
     output = io.BytesIO()
     #writer = csv.writer(output, delimiter=',', newline='\n', header='Voltage', comments='')
     writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header='Voltage', comments='')
