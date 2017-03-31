@@ -65,27 +65,9 @@ def get_data():
     endTime = startTime + 24*60*60
     dataName = requestJSON['dataName']
 
-    # get data from DB
-    db = connect_to_db(db_config)
-    rule = 'timestamp between ' + str(startTime) + ' and ' + str(endTime)
-
-    if dataName == 'Voltage':
-        selectors = ['port_808','port_810','port_812']
-        for selector in selectors:
-            print('get selector: '+selector)
-            #df = np.random.random_integers(210,240,90000)
-            df = get_data(db, db_config['tablename'], selector, rule)
-
-    elif dataName == 'Current':
-        pass
-    elif dataName == 'Frequency':
-        pass
-    elif dataName == 'Power':
-        pass
-    else:
-        return 'wrong data type input'
-
-    csvdata = df
+    csvdata = get_data_from_db(startTime, endTime, dataName)
+    if type(csvdata) == 'str':
+        return csvdata 
     output = io.BytesIO()
     #writer = csv.writer(output, delimiter=',', newline='\n', header='Voltage', comments='')
     writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header='Voltage', comments='')
