@@ -6,10 +6,9 @@ Created on Wed Jan 18 15:55:29 2017
 """
 
 import pqdb
-import numpy as np
-import datetime
 import json
 import time
+import os
 tablename = 'pqdata'
     
 db_config = {'dbname': 'postgres',
@@ -21,6 +20,7 @@ db_config = {'dbname': 'postgres',
              
 #   connection to database
 db = pqdb.connect_to_db(db_config)
+basefolder = 'Website/temp/json'
     
 def analyse_database_frequency():
 #   Analyses historical Data: frequency (+/- 1%)
@@ -50,7 +50,7 @@ def analyse_database_frequency():
             while i < len(timestamp_frequency_critical):
                 frequency_critical_JS.append({"timestamp": timestamp_frequency_critical[i], "value": data_frequency_critical[i],"deviation": (data_frequency_critical[i]-50)/50*100})
                 i += 1
-            with open("frequency_critical.json","w") as out_file:
+            with open(os.path.join(basefolder, "frequency_critical.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_critical_JS))
     except KeyError:
         pass
@@ -75,7 +75,7 @@ def analyse_database_frequency():
             while i < len(timestamp_frequency_bad):
                 frequency_bad_JS.append({"timestamp": timestamp_frequency_bad[i], "value": data_frequency_bad[i],"deviation": (data_frequency_bad[i]-50)/50*100})
                 i += 1
-            with open("frequency_bad.json","w") as out_file:
+            with open(os.path.join(basefolder, "frequency_bad.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_bad_JS))
     except KeyError:
         pass
@@ -105,7 +105,7 @@ def analyse_database_voltage():
             while i < len(timestamp_voltage_L1):
                 voltage_L1_JS.append({"timestamp": timestamp_voltage_L1[i], "value": data_voltage_L1[i],"deviation": (data_voltage_L1[i]-230)/230*100})
                 i += 1
-            with open("voltage_L1.json","w") as out_file:
+            with open(os.path.join(basefolder, "voltage_L1.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L1_JS))
     except KeyError:
         pass
@@ -129,7 +129,7 @@ def analyse_database_voltage():
             while i < len(timestamp_voltage_L2):
                 voltage_L2_JS.append({"timestamp": timestamp_voltage_L2[i], "value": data_voltage_L2[i],"deviation": (data_voltage_L2[i]-230)/230*100})
                 i += 1
-            with open("voltage_L2.json","w") as out_file:
+            with open(os.path.join(basefolder, "voltage_L2.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L2_JS))
     except KeyError:
         pass
@@ -153,7 +153,7 @@ def analyse_database_voltage():
             while i < len(timestamp_voltage_L3):
                 voltage_L3_JS.append({"timestamp": timestamp_voltage_L3[i], "value": data_voltage_L3[i],"deviation": (data_voltage_L3[i]-230)/230*100})
                 i += 1
-            with open("voltage_L3.json","w") as out_file:
+            with open(os.path.join(basefolder, "voltage_L3.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L3_JS))
     except KeyError:
         pass
