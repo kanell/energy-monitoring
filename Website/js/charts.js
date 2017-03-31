@@ -55,7 +55,7 @@ function VoltageChart () {
 		    	  g.updateOptions( { 'file': csvData } );
 		    }, 1000);
   }
-}
+}}
 
 
 

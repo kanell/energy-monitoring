@@ -1,9 +1,20 @@
+
+var date_1 = "";
+var date_2 = "";
+
 $(document).ready(function(){
   // Datepicker
-  $(function() {
-    $("#datepicker").datepicker();
-  });
 
+  $("#datepicker_1").datepicker( {
+  onSelect: function(date) {
+      date_1 = date;
+  },});
+ 
+  $("#datepicker_2").datepicker( {
+  onSelect: function(date) {
+      date_2 = date;
+  },});
+ 
   /* Load plots */
   // Voltage plot
   var voltagePlotOptions = {xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -34,12 +45,13 @@ function makeFlaskRequest(requestJSON){
 
 // Init Plot
 function loadHistoricVoltageData() {
-  // create requestJSON
+  // create requestJ,SON
   var requestJSON = {
-    startTime : 1,
-    endTime : 2,
-    dataName : 'Voltage'
+    startTime : date_1,
+    endTime : date_2,
+    dataName : "Voltage"
   }
   // make request
+  console.log(requestJSON);
   makeFlaskRequest(requestJSON)
 }

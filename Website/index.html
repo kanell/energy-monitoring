@@ -198,17 +198,17 @@
     <!-- actual content of "Spannung" -->
     <div id="Spannung_i" class="Inhalt_ist">
       <h2>Spannung</h2>
-      <div id="div_U" style="width:800px; height:400px; position:absolute;"></div>
+      <div id="div_U" style="width:800px; height:400px; position:relative;"></div>
     </div>
     <!-- content of button "Frequenz" -->
     <div id="Frequenz_i" class="Inhalt_ist">
       <h3>Frequenz</h3>
-      <div id="div_f" style="width:800px; height:400px; position:absolute;"></div>
+      <div id="div_f" style="width:800px; height:400px; position:relative;"></div>
     </div>
     <!-- content of button "Strom" -->
     <div id="Strom_i" class="Inhalt_ist">
       <h2>Strom</h2>
-      <div id="div_I" style="width:800px; height:400px; position:absolute;"></div>
+      <div id="div_I" style="width:800px; height:400px; position:relative;"></div>
     </div>
     <!-- content of button "Leistung" -->
     <div id="Leistung_i" class="Inhalt_ist">
@@ -216,11 +216,17 @@
       <div id="div_L" style="width:800px; height:400px;"></div>
       <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
     </div>
+   
+
+
+
+
+
     <!-- content of "Historische Werte" -->
     <div id="Spannung_h" class="Inhalt_hist">
       <h3>Spannung</h3>
-      <div id="historic_chart_u" style="width:1200px; height:400px; position:absolute;"></div>
-      <div>Startzeitpunkt: <input type="text" id="datepicker" style=margin-right:4em> Endzeitpunkt: <input type="text" id="datepicker" style=margin-right:4em><button>Lade neue Daten</button></div>
+      <div id="historic_chart_u" style="width:800px; height:400px; position:relative;"></div>
+      <div>Startzeitpunkt: <input type="text" id="datepicker_1" style=margin-right:4em> Endzeitpunkt: <input type="text" id="datepicker_2" style=margin-right:4em>    <button onclick="loadHistoricVoltageData()">Lade neue Daten</button></div>
     </div>
     <div id="Frequenz_h" class="Inhalt_hist">
       <h3>Frequenz</h3>
@@ -243,7 +249,7 @@
     <div id="Harmonische_I_h" class="Inhalt_hist">
       <h3>Harmonische I</h3>
       <div id="historie_chartdiv_HI" style="width:1200px; height:400px;"></div>
-      <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
+      
     </div>
     <!-- content of "Analyse" -->
     <div class="Inhalt_analy" id="Spannung_1_a">
