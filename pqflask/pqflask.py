@@ -3,7 +3,9 @@ import io
 import numpy as np
 from pg import DB
 import json
+import time
 import datetime as dt
+app = Flask(__name__)
 
 with open('../db_config.json', 'r') as f:
     db_config = json.loads(f.read())
@@ -22,21 +24,20 @@ def get_data_from_db(startTime, endTime, dataName):
     # get data from DB
     db = connect_to_db(db_config)
     rule = 'timestamp between ' + str(startTime) + ' and ' + str(endTime)
-    df = np.array([])
+    try:
+        df = np.array(db.query('select {} from {} where {}'.format('timestamp', db_config['tablename'], rule)).getresult())[:,-1]
+    except IndexError:
+        return 'No data in that time period', ''
+    indices = np.linspace(0,df.size-1,num=1000,dtype=int)
+    print('complete number of timestamp values per day: ' + str(df.size))
 
     if dataName == 'voltage':
         selectors = ['port_808','port_810','port_812']
-        for selector in selectors:
-            try:
-                if rule == None:
-                    # get all data
-                    df = np.array(db.query('select {} from {}'.format(selector, tablename)).getresult())[:,-1]
-                else:
-                    # get data depending on rule
-                    df = np.array(db.query('select {} from {} where {}'.format(selector, tablename, rule)).getresult())[:,-1]
-            except IndexError:
-                print('No data in that time period')
-                df = np.array([])
+        header = 'timestamp,u1,u2,u3'
+        df_short = np.empty((1000,len(selectors)+1))
+        df_short[:,0] = df[indices]
+        for index, selector in enumerate(selectors):
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
 
     elif dataName == 'current':
         pass
@@ -45,11 +46,12 @@ def get_data_from_db(startTime, endTime, dataName):
     elif dataName == 'power':
         pass
     else:
-        return 'wrong data type input'
-    return df
+        return 'wrong data type input', ''
+    return df_short, header
 
 @app.route('/get_data/', methods=['POST'])
 def get_data():
+    starttime = time.time()
     # get JSONrequest
     requestJSON = request.get_json()
     print(requestJSON)
@@ -59,15 +61,18 @@ def get_data():
     endTime = startTime + 24*60*60
     dataName = requestJSON['dataName']
 
-    csvdata = get_data_from_db(startTime, endTime, dataName)
+    csvdata, header = get_data_from_db(startTime, endTime, dataName)
     if type(csvdata) == 'str':
         return csvdata
     output = io.BytesIO()
     #writer = csv.writer(output, delimiter=',', newline='\n', header='Voltage', comments='')
-    writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header='Voltage', comments='')
+    writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header=header, comments='')
+    print('csvdata size: '+str(csvdata.size))
 
     response = make_response(output.getvalue())
     response.headers["Content-type"] = "text"
+    endtime = time.time()
+    print('time needed for response: ' + str(endtime-starttime) + ' s')
     return response
 
 if __name__ == '__main__':
