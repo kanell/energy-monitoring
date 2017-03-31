@@ -6,14 +6,13 @@ Created on Wed Dec 14 09:59:51 2016
 """
 
 from pg import DB
+import json
 import numpy as np
 
-db_config = {'dbname': 'postgres',
-             'host': 'localhost',
-             'port': 5432,
-             'opt': None,
-             'user': 'postgres',
-             'passwd': 'pqdata'}
+# database config
+with open('db_config.json', 'r') as f:
+    db_config = json.loads(f.read())
+tablename = db_config['tablename']
 
 db_table_config = {'voltage':'float',
                    'current':'float'}
@@ -54,20 +53,15 @@ if __name__ == '__main__':
     
     # Connecting to Database an create Table if neccessary
     db = connect_to_db(db_config)
-    tablename = 'testdata'
+    tablename = db_config['tablename']
     
     if not 'public.'+tablename in db.get_tables():
         create_db_table(db,tablename,db_table_config)
-    
-    # Put data in Database
-    for i in range(200):
-        data = {'voltage':2.3314*i, 'current':0.1564*i}
-        db.insert(tablename,data)
         
     # Get all data
-    data = get_data(db, tablename, 'voltage', None)
+    data = get_data(db, tablename, 'port_808', None)
     print(data)
     
     # Get data with rule
-    data = get_data(db, tablename, 'voltage', '1111 > 15')
+    data = get_data(db, tablename, 'port_808', 'timestamp between 1490981000 and 1490982000')
     print(data)

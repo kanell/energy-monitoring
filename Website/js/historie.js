@@ -1,6 +1,10 @@
 
-var date_1 = "";
-var date_2 = "";
+
+//var dateNow = Date.now()
+//var m = getDate(date1);
+//var d = getDay(date1);
+//var y = getFullYear(date1);
+//var date1 = ' + m + '/' + d + '/' + y + '
 
 $(document).ready(function(){
   // Datepicker
@@ -15,9 +19,14 @@ $(document).ready(function(){
       date_2 = date;
   },});
  
-  /* Load plots */
-  // Voltage plot
-  var voltagePlotOptions = {xValueParser : function(x) {return 1000 * parseFloat(x);},
+  
+  
+  
+});
+
+function VoltageChart_h() {
+// Voltage plot
+var voltagePlotOptions = {xValueParser : function(x) {return 1000 * parseFloat(x);},
     axes : {
     x : {
         valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -26,8 +35,10 @@ $(document).ready(function(){
       }
     }
   }
+
   var voltagePlot = new Dygraph(document.getElementById("historic_chart_u"), [[0],[0],[0],[0]],voltagePlotOptions);
-});
+};
+
 
 // Request for Flask
 function makeFlaskRequest(requestJSON){
@@ -47,8 +58,8 @@ function makeFlaskRequest(requestJSON){
 function loadHistoricVoltageData() {
   // create requestJ,SON
   var requestJSON = {
-    startTime : date_1,
-    endTime : date_2,
+    startTime : document.getElementById("datepicker_1").value,
+    endTime : document.getElementById("datepicker_2").value,
     dataName : "Voltage"
   }
   // make request

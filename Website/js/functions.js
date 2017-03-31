@@ -76,6 +76,7 @@ $(document).ready(function(){
     changeColor(a="oben",b="aktiv", c="oben");
     clearIntervalFunction();
     loadHistoricVoltageData();
+    VoltageChart_h();
   });
 
   // Frequenz wird geklickt
