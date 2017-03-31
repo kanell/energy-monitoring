@@ -1,27 +1,6 @@
-
-
-//var dateNow = Date.now()
-//var m = getDate(date1);
-//var d = getDay(date1);
-//var y = getFullYear(date1);
-//var date1 = ' + m + '/' + d + '/' + y + '
-
 $(document).ready(function(){
   // Datepicker
-
-  $("#datepicker_1").datepicker( {
-  onSelect: function(date) {
-      date_1 = date;
-  },});
- 
-  $("#datepicker_2").datepicker( {
-  onSelect: function(date) {
-      date_2 = date;
-  },});
- 
-  
-  
-  
+  $("#datepicker_1").datepicker();
 });
 
 function VoltageChart_h() {
@@ -58,9 +37,8 @@ function makeFlaskRequest(requestJSON){
 function loadHistoricVoltageData() {
   // create requestJ,SON
   var requestJSON = {
-    startTime : document.getElementById("datepicker_1").value,
-    endTime : document.getElementById("datepicker_2").value,
-    dataName : "Voltage"
+    date : document.getElementById("datepicker_1").value,
+    dataName : "voltage"
   }
   // make request
   console.log(requestJSON);

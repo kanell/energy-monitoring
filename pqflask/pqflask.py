@@ -21,7 +21,7 @@ def get_data(db, tablename, selector, rule):
         print('No data in that time period')
         return np.array([])
     return data
-    
+
 def connect_to_db(description):
     dbname = description['dbname']
     host = description['host']
@@ -38,47 +38,44 @@ def get_data_from_db(startTime, endTime, dataName):
     rule = 'timestamp between ' + str(startTime) + ' and ' + str(endTime)
     df = np.array([])
 
-    if dataName == 'Voltage':
+    if dataName == 'voltage':
         selectors = ['port_808','port_810','port_812']
         for selector in selectors:
             print('get selector: '+selector)
             df = get_data(db, db_config['tablename'], selector, rule)
-            
-    elif dataName == 'Current':
+
+    elif dataName == 'current':
         pass
-    elif dataName == 'Frequency':
+    elif dataName == 'frequency':
         pass
-    elif dataName == 'Power':
+    elif dataName == 'power':
         pass
     else:
         return 'wrong data type input'
     return df
-
-@app.route('/flask')
-def test():
-    return 'hello world'
 
 @app.route('/get_data/', methods=['POST'])
 def get_data():
     # get JSONrequest
     requestJSON = request.get_json()
     print(requestJSON)
-    startTime = dt.datetime.strptime(requestJSON['startTime'],'%m/%d/%Y').timestamp()
-    endTime = dt.datetime.strptime(requestJSON['endTime'],'%m/%d/%Y').timestamp()
+    if requestJSON['date'] == '':
+        return 'no date is selected'
+    startTime = dt.datetime.strptime(requestJSON['date'],'%m/%d/%Y').timestamp()
+    endTime = startTime + 24*60*60
     dataName = requestJSON['dataName']
 
     # get data from DB
     db = connect_to_db(db_config)
     rule = 'timestamp between ' + str(startTime) + ' and ' + str(endTime)
-    df = np.array([])
 
     if dataName == 'Voltage':
         selectors = ['port_808','port_810','port_812']
         for selector in selectors:
             print('get selector: '+selector)
-            df = np.random.random_integers(210,240,90000)
-            #df = get_data(db, db_config['tablename'], selector, rule)
-            
+            #df = np.random.random_integers(210,240,90000)
+            df = get_data(db, db_config['tablename'], selector, rule)
+
     elif dataName == 'Current':
         pass
     elif dataName == 'Frequency':
@@ -87,12 +84,12 @@ def get_data():
         pass
     else:
         return 'wrong data type input'
-    
+
     csvdata = df
     output = io.BytesIO()
     #writer = csv.writer(output, delimiter=',', newline='\n', header='Voltage', comments='')
     writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header='Voltage', comments='')
-    
+
     response = make_response(output.getvalue())
     response.headers["Content-type"] = "text"
     return response
