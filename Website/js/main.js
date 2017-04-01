@@ -238,10 +238,17 @@ $(document).ready(function(){
     changeColor(a="oben",b="aktiv", c="oben");
     // Datepicker
     $("#datepicker_1").datepicker();
+    // set default startTime and endTime
+    let startTime = Date.parse(new Date(date.getFullYear(),date.getMonth(),date.getDay())) / 1000
+    let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
-      zoomCallback : function() {console.log(historicVoltageGraph.xAxisRange());}
+      zoomCallback : function() {
+        startTime = historicVoltageGraph.xAxisRange()[0] / 1000;
+        endTime = historicVoltageGraph.xAxisRange()[1] / 1000;
+        updateHistoricVoltageGraph(historicVoltageGraph);
+      },
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -254,8 +261,9 @@ $(document).ready(function(){
     let historicVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), historicVoltageData, historicVoltageOptions);
     function updateHistoricVoltageGraph(historicVoltageGraph) {
       // create requestJSON
-      var requestJSON = {
-        date : document.getElementById("datepicker_1").value,
+      let requestJSON = {
+        startTime : startTime,
+        endTime : endTime,
         dataName : "voltage"
       }
       // make request
@@ -264,6 +272,8 @@ $(document).ready(function(){
     }
     updateHistoricVoltageGraph(historicVoltageGraph)
     $("#load_voltage").click(function(){
+      startTime = Date.parse(document.getElementById("datepicker_1").value) / 1000
+      endTime = startTime + 24 * 60 * 60
       updateHistoricVoltageGraph(historicVoltageGraph)
     });
   });

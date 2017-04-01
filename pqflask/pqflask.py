@@ -72,11 +72,12 @@ def get_data():
     # get JSONrequest
     requestJSON = request.get_json()
     print(requestJSON)
-    if requestJSON['date'] == '':
+    if requestJSON['startTime'] == '':
         startTime = dt.datetime(dt.date.today().year,dt.date.today().month,dt.date.today().day).timestamp()
+        endTime = startTime + 24*60*60
     else:
-        startTime = dt.datetime.strptime(requestJSON['date'],'%m/%d/%Y').timestamp()
-    endTime = startTime + 24*60*60
+        startTime = requestJSON['startTime']
+        endTime = requestJSON['endTime']
     dataName = requestJSON['dataName']
 
     csvdata, header = get_data_from_db(startTime, endTime, dataName)
