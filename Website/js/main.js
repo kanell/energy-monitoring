@@ -32,7 +32,7 @@ $(document).ready(function(){
     $("#Ubersicht_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
     // Beende alle Anfragen/Timer
-    clearTimers()
+    clearTimers();
     // Hole gesuchte Werte ab// Get data function
     function updateLiveDashboad() {
       $.ajax({
@@ -76,7 +76,7 @@ $(document).ready(function(){
     $("#Frequenz_i, #Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Spannung_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
-    clearTimers()
+    clearTimers();
 
     // set graph
     const currentVoltageOptions = {
@@ -115,7 +115,7 @@ $(document).ready(function(){
     $("#Spannung_i, #Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Frequenz_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
-    clearTimers()
+    clearTimers();
 
     // set graph
     const currentFrequencyOptions = {
@@ -155,7 +155,7 @@ $(document).ready(function(){
     $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Strom_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
-    clearTimers()
+    clearTimers();
 
     // set graph
     const currentCurrentOptions = {
@@ -195,7 +195,7 @@ $(document).ready(function(){
     $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Strom_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Leistung_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
-    clearTimers()
+    clearTimers();
 
     // set graph
     const currentPowerOptions = {
@@ -236,10 +236,11 @@ $(document).ready(function(){
     $("#Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Spannung_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
+    clearTimers();
     // Datepicker
     $("#datepicker_1").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
     let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicVoltageOptions = {
@@ -283,10 +284,11 @@ $(document).ready(function(){
     $("#Spannung_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Frequenz_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
+    clearTimers();
     // Datepicker
     $("#datepicker_2").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
     let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicFrequencyOptions = {
@@ -330,10 +332,11 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Strom_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
+    clearTimers();
     // Datepicker
     $("#datepicker_3").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
     let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicCurrentOptions = {
@@ -377,10 +380,11 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Strom_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Leistung_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
+    clearTimers();
     // Datepicker
     $("#datepicker_4").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
     let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicPowerOptions = {
