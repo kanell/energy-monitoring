@@ -239,7 +239,7 @@ $(document).ready(function(){
     // Datepicker
     $("#datepicker_1").datepicker();
     // set graph
-    const histoticVoltageOptions = {
+    const historicVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
       axes : {
         x : {
@@ -249,9 +249,9 @@ $(document).ready(function(){
         }
       }
     }
-    let histoticVoltageData = "timestamp,u1,u2,u3\n"
-    let histoticVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), histoticVoltageData, histoticVoltageOptions);
-    function updateHistoricVoltageGraph(histoticVoltageGraph) {
+    let historicVoltageData = "timestamp,u1,u2,u3\n"
+    let historicVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), historicVoltageData, historicVoltageOptions);
+    function updateHistoricVoltageGraph(historicVoltageGraph) {
       // create requestJSON
       var requestJSON = {
         date : document.getElementById("datepicker_1").value,
@@ -259,11 +259,11 @@ $(document).ready(function(){
       }
       // make request
       console.log(requestJSON);
-      makeFlaskRequest(requestJSON, histoticVoltageGraph)
+      makeFlaskRequest(requestJSON, historicVoltageGraph)
     }
-    updateHistoricVoltageGraph(histoticVoltageGraph)
+    updateHistoricVoltageGraph(historicVoltageGraph)
     $("#load_voltage").click(function(){
-      updateHistoricVoltageGraph(histoticVoltageGraph)
+      updateHistoricVoltageGraph(historicVoltageGraph)
     });
   });
 
@@ -272,7 +272,7 @@ $(document).ready(function(){
     $("#Spannung_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Frequenz_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // Strom wird geklickt
@@ -280,7 +280,7 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Strom_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // Leistung wird geklickt
@@ -288,7 +288,7 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Strom_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Leistung_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // Harmonische Spannung werden geklickt
@@ -296,7 +296,7 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Harmonische_U_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // Harmonische Strom werden geklickt
@@ -304,7 +304,7 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Strom_h, #Leistung_h, #Harmonische_U_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Harmonische_I_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearIntervalFunction();
+    clearTimers();
   });
   /* Analyse */
 
@@ -313,7 +313,7 @@ $(document).ready(function(){
     $("#Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
     $("#Spannung_1_a").show();
     changeColor(a="oben",b="oben", c="aktiv");
-    clearIntervalFunction();
+    clearTimers();
     Analyse();
   });
 
@@ -322,7 +322,7 @@ $(document).ready(function(){
     $("#Spannung_1_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
     $("#Spannung_2_a").show();
     changeColor(a="oben",b="oben", c="aktiv");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // Spannung U3 wurde geklickt
@@ -330,7 +330,7 @@ $(document).ready(function(){
     $("#Spannung_1_a, #Spannung_2_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
     $("#Spannung_3_a").show();
     changeColor(a="oben",b="oben", c="aktiv");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // Frequenz wurde geklickt
@@ -338,7 +338,7 @@ $(document).ready(function(){
     $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
     $("#Frequenz_a").show();
     changeColor(a="oben",b="oben", c="aktiv");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // THD U wurde geklickt
@@ -346,7 +346,7 @@ $(document).ready(function(){
     $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
     $("#Harmonische_U_a").show();
     changeColor(a="oben",b="oben", c="aktiv");
-    clearIntervalFunction();
+    clearTimers();
   });
 
   // THD I wurde geklickt
@@ -354,7 +354,7 @@ $(document).ready(function(){
     $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, .Inhalt_ist, .Inhalt_hist").hide();
     $("#Harmonische_I_a").show();
     changeColor(a="oben",b="oben", c="aktiv");
-    clearIntervalFunction();
+    clearTimers();
   });
   // click to show dashboard at start
   document.getElementById("Uber_i").click();
@@ -365,13 +365,4 @@ function changeColor() {
   document.getElementById("aktuell").className = a;
   document.getElementById("historisch").className = b;
   document.getElementById("analysiert").className = c;
-}
-
-// clear all Intervals
-function clearIntervalFunction() {
-  if (Interval_U_t == 1) {window.clearInterval(Interval_U); Interval_U_t = 0;}
-  if (Interval_I_t == 1) {window.clearInterval(Interval_I); Interval_I_t = 0;}
-  if (Interval_f_t == 1) {window.clearInterval(Interval_f); Interval_f_t = 0;}
-  if (Interval_Table_t == 1) {window.clearInterval(Interval_Table); Interval_Table_t = 0;}
-  if (Interval_L_t == 1) {window.clearInterval(Interval_L); Interval_L_t = 0;}
 }
