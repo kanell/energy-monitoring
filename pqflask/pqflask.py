@@ -56,8 +56,9 @@ def get_data():
     requestJSON = request.get_json()
     print(requestJSON)
     if requestJSON['date'] == '':
-        return 'no date is selected'
-    startTime = dt.datetime.strptime(requestJSON['date'],'%m/%d/%Y').timestamp()
+        startTime = int(dt.datetime.now().timestamp())
+    else:
+        startTime = dt.datetime.strptime(requestJSON['date'],'%m/%d/%Y').timestamp()
     endTime = startTime + 24*60*60
     dataName = requestJSON['dataName']
 

@@ -16,15 +16,16 @@ var voltagePlotOptions = {xValueParser : function(x) {return 1000 * parseFloat(x
   }
 
   var voltagePlot = new Dygraph(document.getElementById("historic_chart_u"), [[0],[0],[0],[0]],voltagePlotOptions);
+    return voltagePlot;
 };
 
 
 // Request for Flask
-function makeFlaskRequest(requestJSON){
+function makeFlaskRequest(requestJSON, plotId){
   var req = new XMLHttpRequest();
   function transferComplete() {
     console.log(req.responseText);
-    //voltagePlot.updateOptions( { 'file': req.responseText } );
+    plotId.updateOptions( { 'file': req.responseText } );
     }
   req.addEventListener('load',transferComplete);
   req.open('POST', '/get_data/');
@@ -34,13 +35,13 @@ function makeFlaskRequest(requestJSON){
 }
 
 // Init Plot
-function loadHistoricVoltageData() {
-  // create requestJ,SON
+function loadHistoricVoltageData(plotId) {
+  // create requestJSON
   var requestJSON = {
     date : document.getElementById("datepicker_1").value,
     dataName : "voltage"
   }
   // make request
   console.log(requestJSON);
-  makeFlaskRequest(requestJSON)
+  makeFlaskRequest(requestJSON, plotId)
 }
