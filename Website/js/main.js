@@ -239,7 +239,7 @@ $(document).ready(function(){
     // Datepicker
     $("#datepicker_1").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date(date.getFullYear(),date.getMonth(),date.getDay())) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
     let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicVoltageOptions = {
@@ -285,9 +285,17 @@ $(document).ready(function(){
     changeColor(a="oben",b="aktiv", c="oben");
     // Datepicker
     $("#datepicker_2").datepicker();
+    // set default startTime and endTime
+    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicFrequencyOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      zoomCallback : function() {
+        startTime = historicFrequencyGraph.xAxisRange()[0] / 1000;
+        endTime = historicFrequencyGraph.xAxisRange()[1] / 1000;
+        updateHistoricFrequencyGraph(historicFrequencyGraph);
+      },
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -301,7 +309,8 @@ $(document).ready(function(){
     function updateHistoricFrequencyGraph(historicFrequencyGraph) {
       // create requestJSON
       var requestJSON = {
-        date : document.getElementById("datepicker_2").value,
+        startTime : startTime,
+        endTime : endTime,
         dataName : "frequency"
       }
       // make request
@@ -310,6 +319,8 @@ $(document).ready(function(){
     }
     updateHistoricFrequencyGraph(historicFrequencyGraph)
     $("#load_frequency").click(function(){
+      startTime = Date.parse(document.getElementById("datepicker_2").value) / 1000
+      endTime = startTime + 24 * 60 * 60
       updateHistoricFrequencyGraph(historicFrequencyGraph)
     });
   });
@@ -321,9 +332,17 @@ $(document).ready(function(){
     changeColor(a="oben",b="aktiv", c="oben");
     // Datepicker
     $("#datepicker_3").datepicker();
+    // set default startTime and endTime
+    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicCurrentOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      zoomCallback : function() {
+        startTime = historicCurrentGraph.xAxisRange()[0] / 1000;
+        endTime = historicCurrentGraph.xAxisRange()[1] / 1000;
+        updateHistoricCurrentGraph(historicCurrentGraph);
+      },
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -337,7 +356,8 @@ $(document).ready(function(){
     function updateHistoricCurrentGraph(historicCurrentGraph) {
       // create requestJSON
       var requestJSON = {
-        date : document.getElementById("datepicker_3").value,
+        startTime : startTime,
+        endTime : endTime,
         dataName : "current"
       }
       // make request
@@ -346,6 +366,8 @@ $(document).ready(function(){
     }
     updateHistoricCurrentGraph(historicCurrentGraph)
     $("#load_current").click(function(){
+      startTime = Date.parse(document.getElementById("datepicker_3").value) / 1000
+      endTime = startTime + 24 * 60 * 60
       updateHistoricCurrentGraph(historicCurrentGraph)
     });
   });
@@ -357,9 +379,17 @@ $(document).ready(function(){
     changeColor(a="oben",b="aktiv", c="oben");
     // Datepicker
     $("#datepicker_4").datepicker();
+    // set default startTime and endTime
+    let startTime = Date.parse(new Date().toLocaleDateString('en_US')) / 1000
+    let endTime = startTime + 24 * 60 * 60
     // set graph
     const historicPowerOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      zoomCallback : function() {
+        startTime = historicPowerGraph.xAxisRange()[0] / 1000;
+        endTime = historicPowerGraph.xAxisRange()[1] / 1000;
+        updateHistoricPowerGraph(historicPowerGraph);
+      },
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -373,7 +403,8 @@ $(document).ready(function(){
     function updateHistoricPowerGraph(historicPowerGraph) {
       // create requestJSON
       var requestJSON = {
-        date : document.getElementById("datepicker_4").value,
+        startTime : startTime,
+        endTime : endTime,
         dataName : "power"
       }
       // make request
@@ -382,6 +413,8 @@ $(document).ready(function(){
     }
     updateHistoricPowerGraph(historicPowerGraph)
     $("#load_power").click(function(){
+      startTime = Date.parse(document.getElementById("datepicker_4").value) / 1000
+      endTime = startTime + 24 * 60 * 60
       updateHistoricPowerGraph(historicPowerGraph)
     });
   });
