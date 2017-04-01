@@ -56,15 +56,16 @@ def get_data():
     requestJSON = request.get_json()
     print(requestJSON)
     if requestJSON['date'] == '':
-        startTime = int(dt.datetime.now().timestamp())
+        startTime = dt.datetime(dt.date.today().year,dt.date.today().month,dt.date.today().day).timestamp()
     else:
         startTime = dt.datetime.strptime(requestJSON['date'],'%m/%d/%Y').timestamp()
     endTime = startTime + 24*60*60
     dataName = requestJSON['dataName']
 
     csvdata, header = get_data_from_db(startTime, endTime, dataName)
-    if type(csvdata) == 'str':
+    if header == '':
         return csvdata
+    print(type(csvdata))
     output = io.BytesIO()
     #writer = csv.writer(output, delimiter=',', newline='\n', header='Voltage', comments='')
     writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header=header, comments='')

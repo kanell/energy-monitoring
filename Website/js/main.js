@@ -11,7 +11,7 @@ function clearTimers() {
 function makeFlaskRequest (requestJSON, plotId) {
   let req = new XMLHttpRequest();
   function transferComplete() {
-    console.log(req.responseText);
+    //console.log(req.responseText);
     plotId.updateOptions( { 'file': req.responseText } );
     }
   req.addEventListener('load',transferComplete);
