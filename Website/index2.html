@@ -19,7 +19,10 @@
     <script src="https://www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/functions.js"></script>
+    <script src="../js/polar.js"></script>
+    <script src="../js/historie.js"></script>
     <script src="../js/analyse.js"></script>
   </head>
   <body>
@@ -189,6 +192,7 @@
           </tr>
         </table>
       </div>
+      <script type="text/javascript">currentValues();</script>
     </div>
     <!-- content of button "Spannung" -->
     <!-- actual content of "Spannung" -->
@@ -212,11 +216,17 @@
       <div id="div_L" style="width:800px; height:400px;"></div>
       <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
     </div>
+
+
+
+
+
+
     <!-- content of "Historische Werte" -->
     <div id="Spannung_h" class="Inhalt_hist">
       <h3>Spannung</h3>
       <div id="historic_chart_u" style="width:800px; height:400px; position:relative;"></div>
-      <div style="position:relative;">Messungstag: <input type="text" id="datepicker_1" style=margin-right:4em><button id="load_voltage">Lade neue Daten</button></div>
+      <div style="position:relative;">Messungstag: <input type="text" id="datepicker_1" style=margin-right:4em><button onclick="loadHistoricVoltageData()">Lade neue Daten</button></div>
     </div>
     <div id="Frequenz_h" class="Inhalt_hist">
       <h3>Frequenz</h3>
