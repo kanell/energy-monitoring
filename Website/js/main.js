@@ -241,6 +241,7 @@ $(document).ready(function(){
     // set graph
     const historicVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      zoomCallback : function() {console.log(historicVoltageGraph.xAxisRange());}
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -272,7 +273,35 @@ $(document).ready(function(){
     $("#Spannung_h, #Strom_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Frequenz_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearTimers();
+    // Datepicker
+    $("#datepicker_2").datepicker();
+    // set graph
+    const historicFrequencyOptions = {
+      xValueParser : function(x) {return 1000 * parseFloat(x);},
+      axes : {
+        x : {
+            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+            ticker: Dygraph.dateTicker
+        }
+      }
+    }
+    let historicFrequencyData = "timestamp,frequency\n"
+    let historicFrequencyGraph = new Dygraph(document.getElementById("historic_chart_f"), historicFrequencyData, historicFrequencyOptions);
+    function updateHistoricFrequencyGraph(historicFrequencyGraph) {
+      // create requestJSON
+      var requestJSON = {
+        date : document.getElementById("datepicker_2").value,
+        dataName : "frequency"
+      }
+      // make request
+      console.log(requestJSON);
+      makeFlaskRequest(requestJSON, historicFrequencyGraph)
+    }
+    updateHistoricFrequencyGraph(historicFrequencyGraph)
+    $("#load_frequency").click(function(){
+      updateHistoricFrequencyGraph(historicFrequencyGraph)
+    });
   });
 
   // Strom wird geklickt
@@ -280,7 +309,35 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Leistung_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Strom_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearTimers();
+    // Datepicker
+    $("#datepicker_3").datepicker();
+    // set graph
+    const historicCurrentOptions = {
+      xValueParser : function(x) {return 1000 * parseFloat(x);},
+      axes : {
+        x : {
+            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+            ticker: Dygraph.dateTicker
+        }
+      }
+    }
+    let historicCurrentData = "timestamp,i1,i2,i3\n"
+    let historicCurrentGraph = new Dygraph(document.getElementById("historic_chart_i"), historicCurrentData, historicCurrentOptions);
+    function updateHistoricCurrentGraph(historicCurrentGraph) {
+      // create requestJSON
+      var requestJSON = {
+        date : document.getElementById("datepicker_3").value,
+        dataName : "current"
+      }
+      // make request
+      console.log(requestJSON);
+      makeFlaskRequest(requestJSON, historicCurrentGraph)
+    }
+    updateHistoricCurrentGraph(historicCurrentGraph)
+    $("#load_current").click(function(){
+      updateHistoricCurrentGraph(historicCurrentGraph)
+    });
   });
 
   // Leistung wird geklickt
@@ -288,7 +345,35 @@ $(document).ready(function(){
     $("#Spannung_h, #Frequenz_h, #Strom_h, #Harmonische_U_h, #Harmonische_I_h, .Inhalt_ist, .Inhalt_analy").hide();
     $("#Leistung_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
-    clearTimers();
+    // Datepicker
+    $("#datepicker_4").datepicker();
+    // set graph
+    const historicPowerOptions = {
+      xValueParser : function(x) {return 1000 * parseFloat(x);},
+      axes : {
+        x : {
+            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+            ticker: Dygraph.dateTicker
+        }
+      }
+    }
+    let historicPowerData = "timestamp,p1,p2,p3\n"
+    let historicPowerGraph = new Dygraph(document.getElementById("historic_chart_p"), historicPowerData, historicPowerOptions);
+    function updateHistoricPowerGraph(historicPowerGraph) {
+      // create requestJSON
+      var requestJSON = {
+        date : document.getElementById("datepicker_4").value,
+        dataName : "power"
+      }
+      // make request
+      console.log(requestJSON);
+      makeFlaskRequest(requestJSON, historicPowerGraph)
+    }
+    updateHistoricPowerGraph(historicPowerGraph)
+    $("#load_power").click(function(){
+      updateHistoricPowerGraph(historicPowerGraph)
+    });
   });
 
   // Harmonische Spannung werden geklickt

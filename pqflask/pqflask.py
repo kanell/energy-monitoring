@@ -31,6 +31,7 @@ def get_data_from_db(startTime, endTime, dataName):
     indices = np.linspace(0,df.size-1,num=1000,dtype=int)
     print('complete number of timestamp values per day: ' + str(df.size))
 
+    # get voltag
     if dataName == 'voltage':
         selectors = ['port_808','port_810','port_812']
         header = 'timestamp,u1,u2,u3'
@@ -38,13 +39,29 @@ def get_data_from_db(startTime, endTime, dataName):
         df_short[:,0] = df[indices]
         for index, selector in enumerate(selectors):
             df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
-
+    # get current
     elif dataName == 'current':
-        pass
+        selectors = ['port_860','port_862','port_864']
+        df_short = np.empty((1000,len(selectors)+1))
+        df_short[:,0] = df[indices]
+        for index, selector in enumerate(selectors):
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
+    # get frequency
     elif dataName == 'frequency':
-        pass
+        selectors = ['port_800']
+        header = 'timestamp,frequency'
+        df_short = np.empty((1000,len(selectors)+1))
+        df_short[:,0] = df[indices]
+        for index, selector in enumerate(selectors):
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
+    # get power
     elif dataName == 'power':
-        pass
+        selectors = ['port_868','port_870','port_872']
+        header = 'timestamp,p1,p2,p3'
+        df_short = np.empty((1000,len(selectors)+1))
+        df_short[:,0] = df[indices]
+        for index, selector in enumerate(selectors):
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
     else:
         return 'wrong data type input', ''
     return df_short, header
