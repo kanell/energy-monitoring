@@ -2,7 +2,7 @@
 var timers = [];
 function clearTimers() {
     for (var i=0; i<timers.length; i++) {
-        window.clearinterval(timers[i]);
+        window.clearInterval(timers[i]);
     }
     timers = [];
 }
@@ -23,7 +23,6 @@ function makeFlaskRequest (requestJSON, plotId) {
 
 $(document).ready(function(){
   /* "Aktuelle Werte" */
-  $("#Uber_i").trigger('click');
 
   // Uebersicht wird geklickt
   $("#Uber_i").click(function(){
@@ -67,7 +66,7 @@ $(document).ready(function(){
     }
     function updateLiveDashboadRepeater() {
       updateLiveDashboad();
-      timers.push(window.setInterval(function (){updateLiveDashboad();}, 1000););
+      timers.push(window.setInterval(function (){updateLiveDashboad();}, 1000));
     }
     updateLiveDashboadRepeater()
   });
@@ -106,8 +105,9 @@ $(document).ready(function(){
         });
       }
       updateCurrentVoltageGraph()
-      timers.push(window.setInterval(function (){updateCurrentVoltageGraph();}, 1000););
+      timers.push(window.setInterval(function (){updateCurrentVoltageGraph();}, 1000));
     }
+    updateCurrentVoltageGraphRepeater()
   });
 
   // Frequenz wird geklickt
@@ -129,7 +129,7 @@ $(document).ready(function(){
       }
     }
     let currentFrequencyData = "timestamp,frequency\n"
-    let currentFrequencyGraph = new Dygraph(document.getElementById("div_U"), currentFrequencyData, currentFrequencyOptions);
+    let currentFrequencyGraph = new Dygraph(document.getElementById("div_f"), currentFrequencyData, currentFrequencyOptions);
     function updateCurrentFrequencyGraphRepeater () {
       function updateCurrentFrequencyGraph () {
         $.ajax({
@@ -144,8 +144,9 @@ $(document).ready(function(){
         });
       }
       updateCurrentFrequencyGraph()
-      timers.push(window.setInterval(function (){updateCurrentFrequencyGraph();}, 1000););
+      timers.push(window.setInterval(function (){updateCurrentFrequencyGraph();}, 1000));
     }
+    updateCurrentFrequencyGraphRepeater()
   });
 
 
@@ -168,7 +169,7 @@ $(document).ready(function(){
       }
     }
     let currentCurrentData = "timestamp,i1,i2,i3\n"
-    let currentCurrentGraph = new Dygraph(document.getElementById("div_U"), currentCurrentData, currentCurrentOptions);
+    let currentCurrentGraph = new Dygraph(document.getElementById("div_I"), currentCurrentData, currentCurrentOptions);
     function updateCurrentCurrentGraphRepeater () {
       function updateCurrentCurrentGraph () {
         $.ajax({
@@ -183,8 +184,9 @@ $(document).ready(function(){
         });
       }
       updateCurrentCurrentGraph()
-      timers.push(window.setInterval(function (){updateCurrentCurrentGraph();}, 1000););
+      timers.push(window.setInterval(function (){updateCurrentCurrentGraph();}, 1000));
     }
+    updateCurrentCurrentGraphRepeater()
   });
 
 
@@ -207,7 +209,7 @@ $(document).ready(function(){
       }
     }
     let currentPowerData = "timestamp,p1,p2,p3\n"
-    let currentPowerGraph = new Dygraph(document.getElementById("div_U"), currentPowerData, currentPowerOptions);
+    let currentPowerGraph = new Dygraph(document.getElementById("div_L"), currentPowerData, currentPowerOptions);
     function updateCurrentPowerGraphRepeater () {
       function updateCurrentPowerGraph () {
         $.ajax({
@@ -222,8 +224,9 @@ $(document).ready(function(){
         });
       }
       updateCurrentPowerGraph()
-      timers.push(window.setInterval(function (){updateCurrentPowerGraph();}, 1000););
+      timers.push(window.setInterval(function (){updateCurrentPowerGraph();}, 1000));
     }
+    updateCurrentPowerGraphRepeater()
   });
 
   /* Historische Werte */
@@ -247,7 +250,7 @@ $(document).ready(function(){
       }
     }
     let histoticVoltageData = "timestamp,u1,u2,u3\n"
-    let histoticVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), currentPowerData, currentPowerOptions);
+    let histoticVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), histoticVoltageData, histoticVoltageOptions);
     function updateHistoricVoltageGraph(histoticVoltageGraph) {
       // create requestJSON
       var requestJSON = {
@@ -262,36 +265,6 @@ $(document).ready(function(){
     $("#load_voltage").click(function(){
       updateHistoricVoltageGraph(histoticVoltageGraph)
     });
-  });
-
-  function VoltageChart_h() {
-  // Voltage plot
-  var voltagePlotOptions = {xValueParser : function(x) {return 1000 * parseFloat(x);},
-      axes : {
-      x : {
-          valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
-          axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
-          ticker: Dygraph.dateTicker
-        }
-      }
-    }
-
-    var voltagePlot = new Dygraph(document.getElementById("historic_chart_u"), [[0],[0],[0],[0]],voltagePlotOptions);
-      return voltagePlot;
-  };
-
-  // Init Plot
-  function updateHistoricVoltageGraph(plotId) {
-    // create requestJSON
-    var requestJSON = {
-      date : document.getElementById("datepicker_1").value,
-      dataName : "voltage"
-    }
-    // make request
-    console.log(requestJSON);
-    makeFlaskRequest(requestJSON, plotId)
-  }
-
   });
 
   // Frequenz wird geklickt
@@ -383,6 +356,8 @@ $(document).ready(function(){
     changeColor(a="oben",b="oben", c="aktiv");
     clearIntervalFunction();
   });
+  // click to show dashboard at start
+  document.getElementById("Uber_i").click();
 });
 
 /* Changes the Color of the selected Tab */
