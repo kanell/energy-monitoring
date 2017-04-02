@@ -12,8 +12,12 @@ function makeFlaskRequest (requestJSON, plotId) {
   let req = new XMLHttpRequest();
   function transferComplete() {
     //console.log(req.responseText);
-    plotId.updateOptions( { 'file': req.responseText } );
-    }
+    plotId.updateOptions({
+      'file': req.responseText,
+      dateWindow: null,
+      valueRange: null
+    });
+  }
   req.addEventListener('load',transferComplete);
   req.open('POST', '/get_data/');
   req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
@@ -250,6 +254,7 @@ $(document).ready(function(){
         endTime = historicVoltageGraph.xAxisRange()[1] / 1000;
         updateHistoricVoltageGraph(historicVoltageGraph);
       },
+      'dblclick' : function() {resetHistoricVoltageGraph(historicVoltageGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -272,10 +277,17 @@ $(document).ready(function(){
       makeFlaskRequest(requestJSON, historicVoltageGraph)
     }
     updateHistoricVoltageGraph(historicVoltageGraph)
-    $("#load_voltage").click(function(){
-      startTime = Date.parse(document.getElementById("datepicker_1").value) / 1000
+    function resetHistoricVoltageGraph(historicVoltageGraph) {
+      if (document.getElementById("datepicker_1").value == ''){
+        startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
+      } else {
+        startTime = Date.parse(document.getElementById("datepicker_1").value) / 1000
+      }
       endTime = startTime + 24 * 60 * 60
       updateHistoricVoltageGraph(historicVoltageGraph)
+    }
+    $("#load_voltage").click(function(){
+      resetHistoricVoltageGraph(historicVoltageGraph)
     });
   });
 
@@ -298,6 +310,7 @@ $(document).ready(function(){
         endTime = historicFrequencyGraph.xAxisRange()[1] / 1000;
         updateHistoricFrequencyGraph(historicFrequencyGraph);
       },
+      'dblclick' : function() {resetHistoricFrequencyGraph(historicFrequencyGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -320,10 +333,17 @@ $(document).ready(function(){
       makeFlaskRequest(requestJSON, historicFrequencyGraph)
     }
     updateHistoricFrequencyGraph(historicFrequencyGraph)
-    $("#load_frequency").click(function(){
-      startTime = Date.parse(document.getElementById("datepicker_2").value) / 1000
+    function resetHistoricFrequencyGraph(historicFrequencyGraph) {
+      if (document.getElementById("datepicker_2").value == ''){
+        startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
+      } else {
+        startTime = Date.parse(document.getElementById("datepicker_2").value) / 1000
+      }
       endTime = startTime + 24 * 60 * 60
       updateHistoricFrequencyGraph(historicFrequencyGraph)
+    }
+    $("#load_frequency").click(function(){
+      resetHistoricFrequencyGraph(historicFrequencyGraph)
     });
   });
 
@@ -346,6 +366,7 @@ $(document).ready(function(){
         endTime = historicCurrentGraph.xAxisRange()[1] / 1000;
         updateHistoricCurrentGraph(historicCurrentGraph);
       },
+      'dblclick' : function() {resetHistoricCurrentGraph(historicCurrentGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -368,10 +389,17 @@ $(document).ready(function(){
       makeFlaskRequest(requestJSON, historicCurrentGraph)
     }
     updateHistoricCurrentGraph(historicCurrentGraph)
-    $("#load_current").click(function(){
-      startTime = Date.parse(document.getElementById("datepicker_3").value) / 1000
+    function resetHistoricCurrentGraph(historicCurrentGraph){
+      if (document.getElementById("datepicker_3").value == ''){
+        startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
+      } else {
+        startTime = Date.parse(document.getElementById("datepicker_3").value) / 1000
+      }
       endTime = startTime + 24 * 60 * 60
       updateHistoricCurrentGraph(historicCurrentGraph)
+    }
+    $("#load_current").click(function(){
+      resetHistoricCurrentGraph(historicCurrentGraph)
     });
   });
 
@@ -394,6 +422,7 @@ $(document).ready(function(){
         endTime = historicPowerGraph.xAxisRange()[1] / 1000;
         updateHistoricPowerGraph(historicPowerGraph);
       },
+      'dblclick' : function() {resetHistoricPowerGraph(historicPowerGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -416,10 +445,17 @@ $(document).ready(function(){
       makeFlaskRequest(requestJSON, historicPowerGraph)
     }
     updateHistoricPowerGraph(historicPowerGraph)
-    $("#load_power").click(function(){
-      startTime = Date.parse(document.getElementById("datepicker_4").value) / 1000
+    function resetHistoricPowerGraph(historicPowerGraph){
+      if (document.getElementById("datepicker_4").value == ''){
+        startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
+      } else {
+        startTime = Date.parse(document.getElementById("datepicker_4").value) / 1000
+      }
       endTime = startTime + 24 * 60 * 60
       updateHistoricPowerGraph(historicPowerGraph)
+    }
+    $("#load_power").click(function(){
+      resetHistoricPowerGraph(historicPowerGraph)
     });
   });
 
