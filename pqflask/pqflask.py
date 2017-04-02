@@ -22,13 +22,18 @@ def connect_to_db(description):
 
 def get_data_from_db(startTime, endTime, dataName):
     # get data from DB
+    tc = time.time()
     db = connect_to_db(db_config)
-    rule = 'timestamp between ' + str(startTime) + ' and ' + str(endTime)
+    ttc = time.time() - tc
+    indices = np.linspace(startTime,endTime,num=1000,dtype=int)
+    rule = 'timestamp between {} and {} and where timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
+
+    ts = time.time()
     try:
         df = np.array(db.query('select {} from {} where {}'.format('timestamp', db_config['tablename'], rule)).getresult())[:,-1]
     except IndexError:
         return 'No data in that time period', ''
-    indices = np.linspace(0,df.size-1,num=1000,dtype=int)
+    tts = time.time() - ts
     print('complete number of timestamp values per day: ' + str(df.size))
 
     # get voltag
@@ -64,6 +69,8 @@ def get_data_from_db(startTime, endTime, dataName):
             df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
     else:
         return 'wrong data type input', ''
+    ttsa = time.time() - ts
+    print('Conncetion Time: ' + str(ttc) + ' s , Single Selection Time' + str(tts) + ' s , Total Selection Time' + str(ttsa) + ' s')
     return df_short, header
 
 @app.route('/get_data/', methods=['POST'])
