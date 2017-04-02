@@ -26,7 +26,7 @@ def get_data_from_db(startTime, endTime, dataName):
     db = connect_to_db(db_config)
     ttc = time.time() - tc
     indices = np.linspace(startTime,endTime,num=1000,dtype=int)
-    rule = 'timestamp between {} and {} and where timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
+    rule = 'timestamp between {} and {} and timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
 
     ts = time.time()
     try:
@@ -40,33 +40,33 @@ def get_data_from_db(startTime, endTime, dataName):
     if dataName == 'voltage':
         selectors = ['port_808','port_810','port_812']
         header = 'timestamp,u1,u2,u3'
-        df_short = np.empty((1000,len(selectors)+1))
-        df_short[:,0] = df[indices]
+        df_short = np.empty((df.size,len(selectors)+1))
+        df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
     # get current
     elif dataName == 'current':
         selectors = ['port_860','port_862','port_864']
-        df_short = np.empty((1000,len(selectors)+1))
-        df_short[:,0] = df[indices]
+        df_short = np.empty((df.size,len(selectors)+1))
+        df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
     # get frequency
     elif dataName == 'frequency':
         selectors = ['port_800']
         header = 'timestamp,frequency'
-        df_short = np.empty((1000,len(selectors)+1))
-        df_short[:,0] = df[indices]
+        df_short = np.empty((df.size,len(selectors)+1))
+        df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
     # get power
     elif dataName == 'power':
         selectors = ['port_868','port_870','port_872']
         header = 'timestamp,p1,p2,p3'
-        df_short = np.empty((1000,len(selectors)+1))
-        df_short[:,0] = df[indices]
+        df_short = np.empty((df.size,len(selectors)+1))
+        df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[indices,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
     else:
         return 'wrong data type input', ''
     ttsa = time.time() - ts
