@@ -191,11 +191,12 @@ div.Inhalt_ist {
     z-index: -12;
         }
 
-
 div.Inhalt_hist {
     position: absolute;
     top: 50px;
-    padding-left: 50px;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
     display: none;
         }
 
