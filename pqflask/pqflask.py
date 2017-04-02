@@ -34,7 +34,6 @@ def get_data_from_db(startTime, endTime, dataName):
     except IndexError:
         return 'No data in that time period', ''
     tts = time.time() - ts
-    print('complete number of timestamp values per day: ' + str(df.size))
 
     # get voltag
     if dataName == 'voltage':
@@ -44,6 +43,7 @@ def get_data_from_db(startTime, endTime, dataName):
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
             df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+        print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     # get current
     elif dataName == 'current':
         selectors = ['port_860','port_862','port_864']
@@ -51,6 +51,7 @@ def get_data_from_db(startTime, endTime, dataName):
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
             df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+        print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     # get frequency
     elif dataName == 'frequency':
         selectors = ['port_800']
@@ -59,6 +60,7 @@ def get_data_from_db(startTime, endTime, dataName):
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
             df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+        print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     # get power
     elif dataName == 'power':
         selectors = ['port_868','port_870','port_872']
@@ -67,10 +69,11 @@ def get_data_from_db(startTime, endTime, dataName):
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
             df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+        print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     else:
         return 'wrong data type input', ''
     ttsa = time.time() - ts
-    print('Conncetion Time: ' + str(ttc) + ' s , Single Selection Time' + str(tts) + ' s , Total Selection Time' + str(ttsa) + ' s')
+    print('Conncetion Time: ' + str(ttc) + ' s , Single Selection Time: ' + str(tts) + ' s , Total Selection Time: ' + str(ttsa) + ' s')
     return df_short, header
 
 @app.route('/get_data/', methods=['POST'])
@@ -90,11 +93,9 @@ def get_data():
     csvdata, header = get_data_from_db(startTime, endTime, dataName)
     if header == '':
         return csvdata
-    print(type(csvdata))
     output = io.BytesIO()
     #writer = csv.writer(output, delimiter=',', newline='\n', header='Voltage', comments='')
     writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header=header, comments='')
-    print('csvdata size: '+str(csvdata.size))
 
     response = make_response(output.getvalue())
     response.headers["Content-type"] = "text"
