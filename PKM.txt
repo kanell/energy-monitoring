@@ -1,5 +1,9 @@
-User:	pqm
-		pkm123
+User:	postgres
+		postgr3s
+
+User:	pqpostgres
+		pkm123_postgres
 
 User: 	pi
 		pqm,123
+
