@@ -87,6 +87,7 @@ $(document).ready(function(){
       xValueParser : function(x) {return 1000 * parseFloat(x);},
       xlabel : 'Uhrzeit',
       ylabel : 'Spannung [V]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -128,6 +129,7 @@ $(document).ready(function(){
       xValueParser : function(x) {return 1000 * parseFloat(x);},
       xlabel : 'Uhrzeit',
       ylabel : 'Frequenz [Hz]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -170,6 +172,7 @@ $(document).ready(function(){
       xValueParser : function(x) {return 1000 * parseFloat(x);},
       xlabel : 'Uhrzeit',
       ylabel : 'Strom [A]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -212,6 +215,7 @@ $(document).ready(function(){
       xValueParser : function(x) {return 1000 * parseFloat(x);},
       xlabel : 'Uhrzeit',
       ylabel : 'Leistung [W]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -264,6 +268,7 @@ $(document).ready(function(){
       },
       xlabel : 'Uhrzeit',
       ylabel : 'Spannung [V]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -324,6 +329,7 @@ $(document).ready(function(){
       },
       xlabel : 'Uhrzeit',
       ylabel : 'Frequenz [Hz]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -384,6 +390,7 @@ $(document).ready(function(){
       },
       xlabel : 'Uhrzeit',
       ylabel : 'Strom [A]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -444,6 +451,7 @@ $(document).ready(function(){
       },
       xlabel : 'Uhrzeit',
       ylabel : 'Leistung [W]',
+      digitsAfterDecimal : 4,
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
