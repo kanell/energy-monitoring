@@ -184,11 +184,12 @@ li.links a:hover {
 
 
 div.Inhalt_ist {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display: none;
-    z-index: -12;
+  position: absolute;
+  top: 50px;
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: none;
         }
 
 div.Inhalt_hist {
@@ -202,11 +203,12 @@ div.Inhalt_hist {
 
 
 div.Inhalt_analy {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display: none;
-    z-index: -12;
+  position: absolute;
+  top: 50px;
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: none;
         }
 
 /* Propertoies of the current Voltage content */
