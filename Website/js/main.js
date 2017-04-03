@@ -2,7 +2,7 @@
 var timers = [];
 function clearTimers() {
     for (var i=0; i<timers.length; i++) {
-        window.clearInterval(timers[i]);
+        window.clearTimeout(timers[i]);
     }
     timers = [];
 }
@@ -65,14 +65,11 @@ $(document).ready(function(){
             document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];
             document.getElementById("ft").innerHTML =  input["port_" + f] ;
           };
+          timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
         }
       });
     }
-    function updateLiveDashboadRepeater() {
-      updateLiveDashboad();
-      timers.push(window.setInterval(function (){updateLiveDashboad();}, 1000));
-    }
-    updateLiveDashboadRepeater()
+    updateLiveDashboad()
   });
 
   // Spannung wird geklickt
@@ -98,23 +95,20 @@ $(document).ready(function(){
     }
     let currentVoltageData = "timestamp,u1,u2,u3\n"
     let currentVoltageGraph = new Dygraph(document.getElementById("div_U"), currentVoltageData, currentVoltageOptions);
-    function updateCurrentVoltageGraphRepeater () {
-      function updateCurrentVoltageGraph () {
-        $.ajax({
-          type: "GET",
-          cache: false,
-          url: "temp/csv/voltage.csv",
-          dataType: "text",
-          success: function (data) {
-            currentVoltageData = data;
-            currentVoltageGraph.updateOptions({'file':currentVoltageData});
-          }
-        });
-      }
-      updateCurrentVoltageGraph()
-      timers.push(window.setInterval(function (){updateCurrentVoltageGraph();}, 1000));
+    function updateCurrentVoltageGraph () {
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/voltage.csv",
+        dataType: "text",
+        success: function (data) {
+          currentVoltageData = data;
+          currentVoltageGraph.updateOptions({'file':currentVoltageData});
+          timers.push(window.setTimeout(function (){updateCurrentVoltageGraph();}, 1000));
+        }
+      });
     }
-    updateCurrentVoltageGraphRepeater()
+    updateCurrentVoltageGraph()
   });
 
   // Frequenz wird geklickt
@@ -140,23 +134,20 @@ $(document).ready(function(){
     }
     let currentFrequencyData = "timestamp,frequency\n"
     let currentFrequencyGraph = new Dygraph(document.getElementById("div_f"), currentFrequencyData, currentFrequencyOptions);
-    function updateCurrentFrequencyGraphRepeater () {
-      function updateCurrentFrequencyGraph () {
-        $.ajax({
-          type: "GET",
-          cache: false,
-          url: "temp/csv/frequency.csv",
-          dataType: "text",
-          success: function (data) {
-            currentFrequencyData = data;
-            currentFrequencyGraph.updateOptions({'file':currentFrequencyData});
-          }
-        });
-      }
-      updateCurrentFrequencyGraph()
-      timers.push(window.setInterval(function (){updateCurrentFrequencyGraph();}, 1000));
+    function updateCurrentFrequencyGraph () {
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/frequency.csv",
+        dataType: "text",
+        success: function (data) {
+          currentFrequencyData = data;
+          currentFrequencyGraph.updateOptions({'file':currentFrequencyData});
+          timers.push(window.setTimeout(function (){updateCurrentFrequencyGraph();}, 1000));
+        }
+      });
     }
-    updateCurrentFrequencyGraphRepeater()
+    updateCurrentFrequencyGraph()
   });
 
 
@@ -183,23 +174,20 @@ $(document).ready(function(){
     }
     let currentCurrentData = "timestamp,i1,i2,i3\n"
     let currentCurrentGraph = new Dygraph(document.getElementById("div_I"), currentCurrentData, currentCurrentOptions);
-    function updateCurrentCurrentGraphRepeater () {
-      function updateCurrentCurrentGraph () {
-        $.ajax({
-          type: "GET",
-          cache: false,
-          url: "temp/csv/current.csv",
-          dataType: "text",
-          success: function (data) {
-            currentCurrentData = data;
-            currentCurrentGraph.updateOptions({'file':currentCurrentData});
-          }
-        });
-      }
-      updateCurrentCurrentGraph()
-      timers.push(window.setInterval(function (){updateCurrentCurrentGraph();}, 1000));
+    function updateCurrentCurrentGraph () {
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/current.csv",
+        dataType: "text",
+        success: function (data) {
+          currentCurrentData = data;
+          currentCurrentGraph.updateOptions({'file':currentCurrentData});
+          timers.push(window.setTimeout(function (){updateCurrentCurrentGraph();}, 1000));
+        }
+      });
     }
-    updateCurrentCurrentGraphRepeater()
+    updateCurrentCurrentGraph()
   });
 
 
@@ -226,23 +214,20 @@ $(document).ready(function(){
     }
     let currentPowerData = "timestamp,p1,p2,p3\n"
     let currentPowerGraph = new Dygraph(document.getElementById("div_L"), currentPowerData, currentPowerOptions);
-    function updateCurrentPowerGraphRepeater () {
-      function updateCurrentPowerGraph () {
-        $.ajax({
-          type: "GET",
-          cache: false,
-          url: "temp/csv/power.csv",
-          dataType: "text",
-          success: function (data) {
-            currentPowerData = data;
-            currentPowerGraph.updateOptions({'file':currentPowerData});
-          }
-        });
-      }
-      updateCurrentPowerGraph()
-      timers.push(window.setInterval(function (){updateCurrentPowerGraph();}, 1000));
+    function updateCurrentPowerGraph () {
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/power.csv",
+        dataType: "text",
+        success: function (data) {
+          currentPowerData = data;
+          currentPowerGraph.updateOptions({'file':currentPowerData});
+          timers.push(window.setTimeout(function (){updateCurrentPowerGraph();}, 1000));
+        }
+      });
     }
-    updateCurrentPowerGraphRepeater()
+    updateCurrentPowerGraph()
   });
 
   /* Historische Werte */
