@@ -213,20 +213,13 @@ div.Inhalt_analy {
 
 /* Propertoies of the current Voltage content */
 
-#Spannung_i {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display: none;
-           }
-
-#Ubersicht_i {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display:block;
-          }
-
+#Ubersicht_i { 
+    display: block;
+    padding: 50px;
+    position: relative;
+    width: 800px;
+    margin :auto;
+}
 /* styles of the table in "Aktuelle Werte" */
 
 /* general styling of the table */
