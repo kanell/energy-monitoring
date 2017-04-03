@@ -245,7 +245,7 @@ $(document).ready(function(){
     $("#datepicker_1").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = startTime + 24 * 60 * 60
+    let endTime = Date.parse(new Date()) / 1000 
     // set graph
     const historicVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -254,7 +254,6 @@ $(document).ready(function(){
         endTime = historicVoltageGraph.xAxisRange()[1] / 1000;
         updateHistoricVoltageGraph(historicVoltageGraph);
       },
-      'dblclick' : function() {resetHistoricVoltageGraph(historicVoltageGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -301,7 +300,7 @@ $(document).ready(function(){
     $("#datepicker_2").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = startTime + 24 * 60 * 60
+    let endTime = Date.parse(new Date()) / 1000 
     // set graph
     const historicFrequencyOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -310,7 +309,6 @@ $(document).ready(function(){
         endTime = historicFrequencyGraph.xAxisRange()[1] / 1000;
         updateHistoricFrequencyGraph(historicFrequencyGraph);
       },
-      'dblclick' : function() {resetHistoricFrequencyGraph(historicFrequencyGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -357,7 +355,7 @@ $(document).ready(function(){
     $("#datepicker_3").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = startTime + 24 * 60 * 60
+    let endTime = Date.parse(new Date()) / 1000 
     // set graph
     const historicCurrentOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -366,7 +364,6 @@ $(document).ready(function(){
         endTime = historicCurrentGraph.xAxisRange()[1] / 1000;
         updateHistoricCurrentGraph(historicCurrentGraph);
       },
-      'dblclick' : function() {resetHistoricCurrentGraph(historicCurrentGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -413,7 +410,7 @@ $(document).ready(function(){
     $("#datepicker_4").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = startTime + 24 * 60 * 60
+    let endTime = Date.parse(new Date()) / 1000 
     // set graph
     const historicPowerOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -422,7 +419,6 @@ $(document).ready(function(){
         endTime = historicPowerGraph.xAxisRange()[1] / 1000;
         updateHistoricPowerGraph(historicPowerGraph);
       },
-      'dblclick' : function() {resetHistoricPowerGraph(historicPowerGraph)},
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
