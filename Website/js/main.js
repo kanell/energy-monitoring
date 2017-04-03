@@ -85,6 +85,8 @@ $(document).ready(function(){
     // set graph
     const currentVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      xlabel : 'Uhrzeit',
+      ylabel : 'Spannung [V]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -124,6 +126,8 @@ $(document).ready(function(){
     // set graph
     const currentFrequencyOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      xlabel : 'Uhrzeit',
+      ylabel : 'Frequenz [Hz]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -164,6 +168,8 @@ $(document).ready(function(){
     // set graph
     const currentCurrentOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      xlabel : 'Uhrzeit',
+      ylabel : 'Strom [A]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -204,6 +210,8 @@ $(document).ready(function(){
     // set graph
     const currentPowerOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
+      xlabel : 'Uhrzeit',
+      ylabel : 'Leistung [W]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -245,7 +253,7 @@ $(document).ready(function(){
     $("#datepicker_1").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000 
+    let endTime = Date.parse(new Date()) / 1000
     // set graph
     const historicVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -254,6 +262,8 @@ $(document).ready(function(){
         endTime = historicVoltageGraph.xAxisRange()[1] / 1000;
         updateHistoricVoltageGraph(historicVoltageGraph);
       },
+      xlabel : 'Uhrzeit',
+      ylabel : 'Spannung [V]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -288,6 +298,9 @@ $(document).ready(function(){
     $("#load_voltage").click(function(){
       resetHistoricVoltageGraph(historicVoltageGraph)
     });
+    $("#historic_chart_u").dblclick(function(){
+      resetHistoricVoltageGraph(historicVoltageGraph)
+    });
   });
 
   // Frequenz wird geklickt
@@ -300,7 +313,7 @@ $(document).ready(function(){
     $("#datepicker_2").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000 
+    let endTime = Date.parse(new Date()) / 1000
     // set graph
     const historicFrequencyOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -309,6 +322,8 @@ $(document).ready(function(){
         endTime = historicFrequencyGraph.xAxisRange()[1] / 1000;
         updateHistoricFrequencyGraph(historicFrequencyGraph);
       },
+      xlabel : 'Uhrzeit',
+      ylabel : 'Frequenz [Hz]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -343,6 +358,9 @@ $(document).ready(function(){
     $("#load_frequency").click(function(){
       resetHistoricFrequencyGraph(historicFrequencyGraph)
     });
+    $("#historic_chart_f").dblclick(function(){
+      resetHistoricFrequencyGraph(historicFrequencyGraph)
+    });
   });
 
   // Strom wird geklickt
@@ -355,7 +373,7 @@ $(document).ready(function(){
     $("#datepicker_3").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000 
+    let endTime = Date.parse(new Date()) / 1000
     // set graph
     const historicCurrentOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -364,6 +382,8 @@ $(document).ready(function(){
         endTime = historicCurrentGraph.xAxisRange()[1] / 1000;
         updateHistoricCurrentGraph(historicCurrentGraph);
       },
+      xlabel : 'Uhrzeit',
+      ylabel : 'Strom [A]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -398,6 +418,9 @@ $(document).ready(function(){
     $("#load_current").click(function(){
       resetHistoricCurrentGraph(historicCurrentGraph)
     });
+    $("#historic_chart_i").dblclick(function(){
+      resetHistoricCurrentGraph(historicCurrentGraph)
+    });
   });
 
   // Leistung wird geklickt
@@ -410,7 +433,7 @@ $(document).ready(function(){
     $("#datepicker_4").datepicker();
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000 
+    let endTime = Date.parse(new Date()) / 1000
     // set graph
     const historicPowerOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -419,6 +442,8 @@ $(document).ready(function(){
         endTime = historicPowerGraph.xAxisRange()[1] / 1000;
         updateHistoricPowerGraph(historicPowerGraph);
       },
+      xlabel : 'Uhrzeit',
+      ylabel : 'Leistung [W]',
       axes : {
         x : {
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
@@ -451,6 +476,9 @@ $(document).ready(function(){
       updateHistoricPowerGraph(historicPowerGraph)
     }
     $("#load_power").click(function(){
+      resetHistoricPowerGraph(historicPowerGraph)
+    });
+    $("#historic_chart_p").dblclick(function(){
       resetHistoricPowerGraph(historicPowerGraph)
     });
   });
