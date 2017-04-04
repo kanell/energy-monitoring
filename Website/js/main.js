@@ -327,7 +327,7 @@ $(document).ready(function(){
     let historicFrequencyGraph = new Dygraph(document.getElementById("historic_chart_f"), historicFrequencyData, historicFrequencyOptions);
     function updateHistoricFrequencyGraph(historicFrequencyGraph) {
       // create requestJSON
-      var requestJSON = {
+      let requestJSON = {
         startTime : startTime,
         endTime : endTime,
         dataName : "frequency"
@@ -388,7 +388,7 @@ $(document).ready(function(){
     let historicCurrentGraph = new Dygraph(document.getElementById("historic_chart_i"), historicCurrentData, historicCurrentOptions);
     function updateHistoricCurrentGraph(historicCurrentGraph) {
       // create requestJSON
-      var requestJSON = {
+      let requestJSON = {
         startTime : startTime,
         endTime : endTime,
         dataName : "current"
@@ -449,7 +449,7 @@ $(document).ready(function(){
     let historicPowerGraph = new Dygraph(document.getElementById("historic_chart_p"), historicPowerData, historicPowerOptions);
     function updateHistoricPowerGraph(historicPowerGraph) {
       // create requestJSON
-      var requestJSON = {
+      let requestJSON = {
         startTime : startTime,
         endTime : endTime,
         dataName : "power"
@@ -482,6 +482,18 @@ $(document).ready(function(){
     $("#Harmonische_U_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
     clearTimers();
+      radius: 10,
+      maxOpacity: .5,
+      minOpacity: 0,
+      blur: .75
+    };
+    let historicHarmonicUData = [[1,2],[3,4]];
+    let historicHarmonicUGraph = simpleheat(document.getElementById('historic_heatmap_u'));
+    historicHarmonicUGraph.max(max(historicHarmonicUData))
+    historicHarmonicUData.data(historicHarmonicUData)
+    historicHarmonicUGraph.radius(1, 1);
+    historicHarmonicUGraph.gradient({1.5: 'blue', 3: 'lime', 4: 'red'});
+    historicHarmonicUGraph.draw()
   });
 
   // Harmonische Strom werden geklickt
