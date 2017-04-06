@@ -297,7 +297,7 @@ $(document).ready(function(){
     }
     let historicVoltageData = "timestamp,u1,u2,u3\n"
     let historicVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), historicVoltageData, historicVoltageOptions);
-    function updateHistoricVoltageGraph(historicVoltageGraph) {
+    function updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
       dataSize = 1000;
       // create requestJSON
       let requestJSON = {
@@ -305,13 +305,13 @@ $(document).ready(function(){
         endTime : endTime,
         dataName : "voltage",
         dataSize : dataSize,
-        dataType : 'text'    
+        dataType : 'text'
       }
       // make request
       console.log(requestJSON);
       makeFlaskRequest(requestJSON, historicVoltageGraph, historicVoltageData)
     }
-    updateHistoricVoltageGraph(historicVoltageGraph)
+    updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData)
     function resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
       if (document.getElementById("datepicker_1").value == ''){
         startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000;
@@ -335,12 +335,12 @@ $(document).ready(function(){
         endTime : endTime,
         dataName : "voltage",
         dataSize : dataSize,
-        dataType : 'blob'    
+        dataType : 'blob'
       }
       downloadAll(requestJSON);
     });
     $("#download_selected_voltage").click(function(){
-      downloadSelected(historicVoltageData); 
+      downloadSelected(historicVoltageData);
     });
   });
 
@@ -353,8 +353,9 @@ $(document).ready(function(){
     // Datepicker
     $("#datepicker_2").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000;
+    let endTime = Date.parse(new Date()) / 1000;
+    let dataSize = 1000;
     // set graph
     const historicFrequencyOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -376,32 +377,50 @@ $(document).ready(function(){
     }
     let historicFrequencyData = "timestamp,frequency\n"
     let historicFrequencyGraph = new Dygraph(document.getElementById("historic_chart_f"), historicFrequencyData, historicFrequencyOptions);
-    function updateHistoricFrequencyGraph(historicFrequencyGraph) {
+    function updateHistoricFrequencyGraph(historicFrequencyGraph, historicFrequencyData) {
+      dataSize = 1000;
       // create requestJSON
       let requestJSON = {
         startTime : startTime,
         endTime : endTime,
-        dataName : "frequency"
+        dataName : "frequency",
+        dataSize : dataSize,
+        dataType : 'text'
       }
       // make request
       console.log(requestJSON);
-      makeFlaskRequest(requestJSON, historicFrequencyGraph)
+      makeFlaskRequest(requestJSON, historicFrequencyGraph, historicFrequencyData)
     }
-    updateHistoricFrequencyGraph(historicFrequencyGraph)
-    function resetHistoricFrequencyGraph(historicFrequencyGraph) {
+    updateHistoricFrequencyGraph(historicFrequencyGraph, historicFrequencyData)
+    function resetHistoricFrequencyGraph(historicFrequencyGraph, historicFrequencyData) {
       if (document.getElementById("datepicker_2").value == ''){
         startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
       } else {
         startTime = Date.parse(document.getElementById("datepicker_2").value) / 1000
       }
       endTime = startTime + 24 * 60 * 60
-      updateHistoricFrequencyGraph(historicFrequencyGraph)
+      updateHistoricFrequencyGraph(historicFrequencyGraph, historicFrequencyData)
     }
     $("#load_frequency").click(function(){
-      resetHistoricFrequencyGraph(historicFrequencyGraph)
+      resetHistoricFrequencyGraph(historicFrequencyGraph, historicFrequencyData)
     });
     $("#historic_chart_f").dblclick(function(){
-      resetHistoricFrequencyGraph(historicFrequencyGraph)
+      resetHistoricFrequencyGraph(historicFrequencyGraph, historicFrequencyData)
+    });
+    $("#download_all_frequency").click(function(){
+      dataSize = 0;
+      // create requestJSON
+      let requestJSON = {
+        startTime : startTime,
+        endTime : endTime,
+        dataName : "frequency",
+        dataSize : dataSize,
+        dataType : 'blob'
+      }
+      downloadAll(requestJSON);
+    });
+    $("#download_selected_frequency").click(function(){
+      downloadSelected(historicFrequencyData);
     });
   });
 
@@ -414,8 +433,9 @@ $(document).ready(function(){
     // Datepicker
     $("#datepicker_3").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000;
+    let endTime = Date.parse(new Date()) / 1000;
+    let dataSize = 1000;
     // set graph
     const historicCurrentOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -437,32 +457,50 @@ $(document).ready(function(){
     }
     let historicCurrentData = "timestamp,i1,i2,i3\n"
     let historicCurrentGraph = new Dygraph(document.getElementById("historic_chart_i"), historicCurrentData, historicCurrentOptions);
-    function updateHistoricCurrentGraph(historicCurrentGraph) {
+    function updateHistoricCurrentGraph(historicCurrentGraph, historicCurrentData) {
+      dataSize = 1000;
       // create requestJSON
       let requestJSON = {
         startTime : startTime,
         endTime : endTime,
-        dataName : "current"
+        dataName : "current",
+        dataSize : dataSize,
+        dataType : 'text'
       }
       // make request
       console.log(requestJSON);
-      makeFlaskRequest(requestJSON, historicCurrentGraph)
+      makeFlaskRequest(requestJSON, historicCurrentGraph, historicCurrentData)
     }
-    updateHistoricCurrentGraph(historicCurrentGraph)
-    function resetHistoricCurrentGraph(historicCurrentGraph){
+    updateHistoricCurrentGraph(historicCurrentGraph, historicCurrentData)
+    function resetHistoricCurrentGraph(historicCurrentGraph, historicCurrentData){
       if (document.getElementById("datepicker_3").value == ''){
         startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
       } else {
         startTime = Date.parse(document.getElementById("datepicker_3").value) / 1000
       }
       endTime = startTime + 24 * 60 * 60
-      updateHistoricCurrentGraph(historicCurrentGraph)
+      updateHistoricCurrentGraph(historicCurrentGraph, historicCurrentData)
     }
     $("#load_current").click(function(){
-      resetHistoricCurrentGraph(historicCurrentGraph)
+      resetHistoricCurrentGraph(historicCurrentGraph, historicCurrentData)
     });
     $("#historic_chart_i").dblclick(function(){
-      resetHistoricCurrentGraph(historicCurrentGraph)
+      resetHistoricCurrentGraph(historicCurrentGraph, historicCurrentData)
+    });
+    $("#download_all_current").click(function(){
+      dataSize = 0;
+      // create requestJSON
+      let requestJSON = {
+        startTime : startTime,
+        endTime : endTime,
+        dataName : "current",
+        dataSize : dataSize,
+        dataType : 'blob'
+      }
+      downloadAll(requestJSON);
+    });
+    $("#download_selected_current").click(function(){
+      downloadSelected(historicCurrentData);
     });
   });
 
@@ -475,8 +513,9 @@ $(document).ready(function(){
     // Datepicker
     $("#datepicker_4").datepicker();
     // set default startTime and endTime
-    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
-    let endTime = Date.parse(new Date()) / 1000
+    let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000;
+    let endTime = Date.parse(new Date()) / 1000;
+    let dataSize = 1000;
     // set graph
     const historicPowerOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -498,32 +537,50 @@ $(document).ready(function(){
     }
     let historicPowerData = "timestamp,p1,p2,p3\n"
     let historicPowerGraph = new Dygraph(document.getElementById("historic_chart_p"), historicPowerData, historicPowerOptions);
-    function updateHistoricPowerGraph(historicPowerGraph) {
+    function updateHistoricPowerGraph(historicPowerGraph, historicPowerData) {
+      dataSize = 1000;
       // create requestJSON
       let requestJSON = {
         startTime : startTime,
         endTime : endTime,
-        dataName : "power"
+        dataName : "power",
+        dataSize : dataSize,
+        dataType : 'text'
       }
       // make request
       console.log(requestJSON);
-      makeFlaskRequest(requestJSON, historicPowerGraph)
+      makeFlaskRequest(requestJSON, historicPowerGraph, historicPowerData)
     }
-    updateHistoricPowerGraph(historicPowerGraph)
-    function resetHistoricPowerGraph(historicPowerGraph){
+    updateHistoricPowerGraph(historicPowerGraph, historicPowerData)
+    function resetHistoricPowerGraph(historicPowerGraph, historicPowerData){
       if (document.getElementById("datepicker_4").value == ''){
         startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
       } else {
         startTime = Date.parse(document.getElementById("datepicker_4").value) / 1000
       }
       endTime = startTime + 24 * 60 * 60
-      updateHistoricPowerGraph(historicPowerGraph)
+      updateHistoricPowerGraph(historicPowerGraph, historicPowerData)
     }
     $("#load_power").click(function(){
-      resetHistoricPowerGraph(historicPowerGraph)
+      resetHistoricPowerGraph(historicPowerGraph, historicPowerData)
     });
     $("#historic_chart_p").dblclick(function(){
-      resetHistoricPowerGraph(historicPowerGraph)
+      resetHistoricPowerGraph(historicPowerGraph, historicPowerData)
+    });
+    $("#download_all_power").click(function(){
+      dataSize = 0;
+      // create requestJSON
+      let requestJSON = {
+        startTime : startTime,
+        endTime : endTime,
+        dataName : "power",
+        dataSize : dataSize,
+        dataType : 'blob'
+      }
+      downloadAll(requestJSON);
+    });
+    $("#download_selected_power").click(function(){
+      downloadSelected(historicPowerData);
     });
   });
 
