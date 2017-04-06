@@ -80,7 +80,10 @@ def put_data(queue, db, tablename, control_flag):
                 datadict = queue.get()
 
                 # insert data in database
-                db.insert(tablename,datadict)
+                try:
+                    db.insert(tablename,datadict)
+                except:
+                    pass
 
                 time2 = time.time()
                 min_time = min(min_time,time2-time1)
