@@ -9,19 +9,48 @@ import pqdb
 import json
 import time
 import os
+import numpy as np
+import datetime as dt
+
 tablename = 'pqdata'
     
 db_config = {'dbname': 'postgres',
-             'host': 'localhost',
+             'host': '129.69.176.71',
              'port': 5432,
              'opt': None,
-             'user': 'postgres',
-             'passwd': 'pqdata'}
+             'user': 'pqpostgres',
+             'passwd': 'pkm123_postgres'}
              
 #   connection to database
 db = pqdb.connect_to_db(db_config)
 basefolder = 'Website/temp/json'
-    
+
+
+def heatplot_data(starttime, endtime):
+    tc = time.time()
+    db = pqdb.connect_to_db(db_config)
+    ttc = time.time() - tc
+    startTime = dt.datetime.strptime(starttime, '%m/%d/%Y').timestamp()
+    endTime = dt.datetime.strptime(endtime, '%m/%d/%Y').timestamp()
+    indices = np.linspace(startTime,endTime,num=1000,dtype=int)
+    rule = 'timestamp between {} and {} and timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
+
+    ts = time.time()
+    try:
+        df = np.array(db.query('select {} from {} where {}'.format('timestamp', db_config['tablename'], rule)).getresult())[:,-1]
+    except IndexError:
+        return 'No data in that time period', ''
+    tts = time.time() - ts
+    #ports = [i in ran1000,1002,1004,1006,1008,1010,1012,1014,1016,1018,1020,1022,1024,1026,1028,1030,1032,1034,1036,1038,1040,1042,1044,1046,1048,1050,1052,1054,1056,1058,1060,1062,1064,1066,1068,1070,1072,1074,1076,1078]
+    selectors = ['port_'+str(i) for i in np.arange(1000,1079,2)]
+    df_short = np.empty((df.size,len(selectors)+1))
+    df_short[:,0] = df
+    for index, selector in enumerate(selectors):
+        df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+    print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
+    np.save('harmonics.npy',df_short)
+
+
 def analyse_database_frequency():
 #   Analyses historical Data: frequency (+/- 1%)
     rule = 'frequency_10s between {} and {}'.format(47,49.5) 
