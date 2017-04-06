@@ -11,18 +11,13 @@ import time
 import os
 import numpy as np
 import datetime as dt
+import json
 
-tablename = 'pqdata'
+with open('db_config.json','r') as f:
+    db_config = json.loads(f.read())
     
-db_config = {'dbname': 'postgres',
-             'host': '129.69.176.71',
-             'port': 5432,
-             'opt': None,
-             'user': 'pqpostgres',
-             'passwd': 'pkm123_postgres'}
-             
 #   connection to database
-db = pqdb.connect_to_db(db_config)
+#db = pqdb.connect_to_db(db_config)
 basefolder = 'Website/temp/json'
 
 
@@ -32,7 +27,7 @@ def heatplot_data(starttime, endtime):
     ttc = time.time() - tc
     startTime = dt.datetime.strptime(starttime, '%m/%d/%Y').timestamp()
     endTime = dt.datetime.strptime(endtime, '%m/%d/%Y').timestamp()
-    indices = np.linspace(startTime,endTime,num=1000,dtype=int)
+    indices = np.linspace(startTime,endTime,num=10000,dtype=int)
     rule = 'timestamp between {} and {} and timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
 
     ts = time.time()
