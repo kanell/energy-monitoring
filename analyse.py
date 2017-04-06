@@ -6,9 +6,9 @@ Created on Wed Jan 11 16:08:28 2017
 """
 
 import pandas as pd
-import time 
+import time
 
-keylist = ['frequency_status', 'voltage_L1, voltage_L2', 'voltage_L3', 'THD_L1', 'THD_L2', 'THD_L3', 
+keylist = ['frequency_status', 'voltage_L1, voltage_L2', 'voltage_L3', 'THD_L1', 'THD_L2', 'THD_L3',
     'harmonic_5th_U1', 'harmonic_7th_U1', 'harmonic_5th_U2', 'harmonic_7th_U2', 'harmonic_5th_U3', 'harmonic_7th_U3']
 
 status_dict = {}
@@ -21,68 +21,68 @@ def analyse(pq_data):
     global long_interruption_df
     global frequency_average_10s
 
-    #   Analyses live Data from pq_data and checks if measured data is confom with EN 50160: frequency, voltage, THD, harmonics. i = [0...9] for frequency_average_10s       
+    #   Analyses live Data from pq_data and checks if measured data is confom with EN 50160: frequency, voltage, THD, harmonics. i = [0...9] for frequency_average_10s
     '''Analyses frequency and checks if measured data is confom with EN 50160
     Both frequency_average_10s AND frequency are returned'''
-    
+
     if len(frequency_average_10s) < 10:
         frequency_average_10s.append(pq_data[800])
     else:
         if index == 10:
             index = 0
-        frequency_average_10s[index] = pq_data[800]    
+        frequency_average_10s[index] = pq_data[800]
     index += 1
-     
+
     frequency_10s = sum(frequency_average_10s)/len(frequency_average_10s)
-               
+
     if frequency_10s < 47.5 or frequency_10s > 52:
         frequency_status = "bad"
     elif frequency_10s < 49.5 or frequency_10s > 50.5:
         frequency_status = "critical"
-    else:    
+    else:
         frequency_status = "okay"
     status_dict['frequency'] = frequency_status
-       
-#   Voltage magnitude variations 
+
+#   Voltage magnitude variations
     voltage_L1_average =  pq_data[1728]
     voltage_L2_average =  pq_data[1730]
     voltage_L3_average =  pq_data[1732]
-            
+
     if voltage_L1_average < 207 or voltage_L1_average > 253:
         voltage_L1 = "critical"
     else:
         voltage_L1 = "okay"
-        
+
     if voltage_L2_average < 207 or voltage_L1_average > 253:
         voltage_L2 = "critical"
     else:
         voltage_L2 = "okay"
-        
+
     if voltage_L3_average < 207 or voltage_L1_average > 253:
         voltage_L3 = "critical"
     else:
         voltage_L3 = "okay"
-        
+
     status_dict['voltage_L1'] = voltage_L1
     status_dict['voltage_L2'] = voltage_L2
     status_dict['voltage_L3'] = voltage_L3
-    
+
 #   Long interruption of supply voltage
     m = long_interruption_df.index.size
-    if voltage_L1_average < 1 or voltage_L2_average < 1 or voltage_L3_average < 1:       
+    if voltage_L1_average < 1 or voltage_L2_average < 1 or voltage_L3_average < 1:
         long_interruption_df.at[m,'Time'] = time.asctime()
         long_interruption_df.at[m,'Voltage_L1'] = voltage_L1_average
         long_interruption_df.at[m,'Voltage_L2'] = voltage_L2_average
-        long_interruption_df.at[m,'Voltage_L3'] = voltage_L3_average    
-        
+        long_interruption_df.at[m,'Voltage_L3'] = voltage_L3_average
+
     elif voltage_L1_average > 1 and voltage_L2_average > 1 and voltage_L3_average > 1 and m < (3*60) and m > 0:
         long_interruption_df = pd.DataFrame(columns = ['Time','Voltage_L1','Voltage_L2','Voltage_L3'])
-        
+
     else:
         with open("longterm_interruption.json","w") as out_file:
             out_file.write(long_interruption_df.to_json())
         long_interruption_df = pd.DataFrame(columns = ['Time','Voltage_L1','Voltage_L2','Voltage_L3'])
-               
+
 #    Analyses Total Harmonics Distortion (THD) and checks if measured data is confom with EN 50160
     THD_L1 = pq_data[2236]
     THD_L2 = pq_data[2238]
@@ -102,11 +102,11 @@ def analyse(pq_data):
         THD_L3 = "critical"
     else:
         THD_L3 = "okay"
-        
+
     status_dict['THD_L1'] = THD_L1
     status_dict['THD_L2'] = THD_L2
     status_dict['THD_L3'] = THD_L3
-            
+
 #    Analyses most important harmonics (5th & 7th) and checks if data is conform with EN 50160
     '''Harmonics U L1,L2,L3: Maximum of mean value'''
     harmonic_5th_U1 = pq_data[1008]
@@ -152,5 +152,5 @@ def analyse(pq_data):
         harmonic_7th_U3 = "bad"
     else:
         harmonic_7th_U3 = "okay"
-                                
+
     return frequency_10s, status_dict
