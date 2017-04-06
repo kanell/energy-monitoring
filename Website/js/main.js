@@ -8,12 +8,13 @@ function clearTimers() {
 }
 
 // Request for Flask
-function makeFlaskRequest (requestJSON, plotId) {
+function makeFlaskRequest (requestJSON, plotId, plotData) {
   let req = new XMLHttpRequest();
   function transferComplete() {
     //console.log(req.responseText);
+    plotData = req.responseText;
     plotId.updateOptions({
-      'file': req.responseText,
+      'file': plotData,
       dateWindow: null,
       valueRange: null
     });
@@ -23,6 +24,37 @@ function makeFlaskRequest (requestJSON, plotId) {
   req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   req.responseType = 'text';
   req.send(JSON.stringify(requestJSON));
+}
+
+// Download All function
+function downloadAll(requestJSON){
+  let req = new XMLHttpRequest();
+  function transferComplete() {
+    console.log(req.response);
+    let blob = new Blob([this.response], {type: 'octet-stream'});
+    let a = document.createElement('a');
+    a.href = window.URL.createObjectURL(blob)
+    a.download = 'data.csv';
+    a.style.display = 'none';
+    document.body.appendChild(a)
+    a.click()
+  }
+  req.addEventListener('load',transferComplete);
+  req.open('POST', '/get_data/');
+  req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  req.responseType = 'blob';
+  req.send(JSON.stringify(requestJSON));
+}
+
+// download selected data
+function downloadSelected(plotData) {
+  let blob = new Blob([plotData], {type: 'octet-stream'});
+  let a = document.createElement('a');
+  a.href = window.URL.createObjectURL(blob)
+  a.download = 'data.csv';
+  a.style.display = 'none';
+  document.body.appendChild(a)
+  a.click()
 }
 
 $(document).ready(function(){
@@ -243,6 +275,7 @@ $(document).ready(function(){
     // set default startTime and endTime
     let startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
     let endTime = Date.parse(new Date()) / 1000
+    let dataSize = 1000;
     // set graph
     const historicVoltageOptions = {
       xValueParser : function(x) {return 1000 * parseFloat(x);},
@@ -265,31 +298,49 @@ $(document).ready(function(){
     let historicVoltageData = "timestamp,u1,u2,u3\n"
     let historicVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), historicVoltageData, historicVoltageOptions);
     function updateHistoricVoltageGraph(historicVoltageGraph) {
+      dataSize = 1000;
       // create requestJSON
       let requestJSON = {
         startTime : startTime,
         endTime : endTime,
-        dataName : "voltage"
+        dataName : "voltage",
+        dataSize : dataSize,
+        dataType : 'text'    
       }
       // make request
       console.log(requestJSON);
-      makeFlaskRequest(requestJSON, historicVoltageGraph)
+      makeFlaskRequest(requestJSON, historicVoltageGraph, historicVoltageData)
     }
     updateHistoricVoltageGraph(historicVoltageGraph)
-    function resetHistoricVoltageGraph(historicVoltageGraph) {
+    function resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
       if (document.getElementById("datepicker_1").value == ''){
-        startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000
+        startTime = Date.parse(new Date().toLocaleDateString('en-US')) / 1000;
       } else {
-        startTime = Date.parse(document.getElementById("datepicker_1").value) / 1000
+        startTime = Date.parse(document.getElementById("datepicker_1").value) / 1000;
       }
       endTime = startTime + 24 * 60 * 60
-      updateHistoricVoltageGraph(historicVoltageGraph)
+      updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData);
     }
     $("#load_voltage").click(function(){
-      resetHistoricVoltageGraph(historicVoltageGraph)
+      resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData);
     });
     $("#historic_chart_u").dblclick(function(){
-      resetHistoricVoltageGraph(historicVoltageGraph)
+      resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData);
+    });
+    $("#download_all_voltage").click(function(){
+      dataSize = 0;
+      // create requestJSON
+      let requestJSON = {
+        startTime : startTime,
+        endTime : endTime,
+        dataName : "voltage",
+        dataSize : dataSize,
+        dataType : 'blob'    
+      }
+      downloadAll(requestJSON);
+    });
+    $("#download_selected_voltage").click(function(){
+      downloadSelected(historicVoltageData); 
     });
   });
 
@@ -482,17 +533,12 @@ $(document).ready(function(){
     $("#Harmonische_U_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
     clearTimers();
-      radius: 10,
-      maxOpacity: .5,
-      minOpacity: 0,
-      blur: .75
-    };
     let historicHarmonicUData = [[1,2],[3,4]];
     let historicHarmonicUGraph = simpleheat(document.getElementById('historic_heatmap_u'));
-    historicHarmonicUGraph.max(max(historicHarmonicUData))
-    historicHarmonicUData.data(historicHarmonicUData)
+    historicHarmonicUGraph.max(Math.max(historicHarmonicUData))
+    historicHarmonicUGraph.data(historicHarmonicUData)
     historicHarmonicUGraph.radius(1, 1);
-    historicHarmonicUGraph.gradient({1.5: 'blue', 3: 'lime', 4: 'red'});
+    historicHarmonicUGraph.gradient({0.45: 'blue', 0.75: 'lime', 1: 'red'});
     historicHarmonicUGraph.draw()
   });
 

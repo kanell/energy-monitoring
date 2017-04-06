@@ -20,12 +20,14 @@ def connect_to_db(description):
     db = DB(dbname, host, port, opt, user, passwd)
     return db
 
-def get_data_from_db(startTime, endTime, dataName):
+def get_data_from_db(startTime, endTime, dataName, dataSize):
     # get data from DB
     tc = time.time()
     db = connect_to_db(db_config)
     ttc = time.time() - tc
-    indices = np.linspace(startTime,endTime,num=1000,dtype=int)
+    if dataSize == 0:
+        dataSize = endTime - startTime
+    indices = np.linspace(startTime,endTime,num=dataSize,dtype=int)
     rule = 'timestamp between {} and {} and timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
 
     ts = time.time()
@@ -89,8 +91,10 @@ def get_data():
         startTime = requestJSON['startTime']
         endTime = requestJSON['endTime']
     dataName = requestJSON['dataName']
+    dataSize = requestJSON['dataSize']
+    dataType = requestJSON['dataType']
 
-    csvdata, header = get_data_from_db(startTime, endTime, dataName)
+    csvdata, header = get_data_from_db(startTime, endTime, dataName, dataSize)
     if header == '':
         return csvdata
     output = io.BytesIO()
@@ -98,7 +102,7 @@ def get_data():
     writer = np.savetxt(output,csvdata, delimiter=',', newline='\n', header=header, comments='')
 
     response = make_response(output.getvalue())
-    response.headers["Content-type"] = "text"
+    response.headers["Content-type"] = dataType
     endtime = time.time()
     print('time needed for response: ' + str(endtime-starttime) + ' s')
     return response

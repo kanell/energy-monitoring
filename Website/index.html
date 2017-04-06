@@ -218,7 +218,7 @@
     <div id="Spannung_h" class="Inhalt_hist">
       <h3>Spannung</h3>
       <div id="historic_chart_u" style="width:100%; height:500px; position:relative;"></div>
-      <div style="position:relative;">Messungstag: <input type="text" id="datepicker_1" style=margin-right:4em><button id="load_voltage">Lade neue Daten</button></div>
+      <div style="position:relative;">Messungstag: <input type="text" id="datepicker_1" style=margin-right:4em><button id="load_voltage">Lade neue Daten</button><button id="download_all_voltage">Download all</button><button id="download_selected_voltage">Download selected</button></div>
     </div>
     <div id="Frequenz_h" class="Inhalt_hist">
       <h3>Frequenz</h3>
@@ -237,7 +237,7 @@
     </div>
     <div id="Harmonische_U_h" class="Inhalt_hist">
       <h3>Harmonische U</h3>
-      <div id="historic_heatmap_u" style="width:1200px; height:400px;"></div>
+      <canvas id="historic_heatmap_u" style="width:100%; height:500px; position:relative;"></canvas>
     </div>
     <div id="Harmonische_I_h" class="Inhalt_hist">
       <h3>Harmonische I</h3>
