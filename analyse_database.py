@@ -5,17 +5,41 @@ Created on Wed Jan 18 15:55:29 2017
 @author: Paul-G
 """
 
-import pqdb
+#import pqdb
 import json
 import time
 import os
 import numpy as np
 import datetime as dt
+<<<<<<< Updated upstream
 import json
 
 with open('db_config.json','r') as f:
     db_config = json.loads(f.read())
 
+=======
+import matplotlib
+from matplotlib import pyplot  as plt
+import json
+
+tablename = 'pqdata'
+    
+db_config = {'dbname': 'postgres',
+             'host': '129.69.176.71',
+             'port': 5432,
+             'opt': None,
+             'user': 'pqpostgres',
+             'passwd': 'pkm123_postgres'}
+             
+#   connection to database
+#db = pqdb.connect_to_db(db_config)
+#basefolder = 'Website/temp/json'
+
+
+with open('db_config.json','r') as f:
+    db_config = json.loads(f.read())
+
+>>>>>>> Stashed changes
 basefolder = 'Website/temp/json'
 
 def heatplot_data(starttime, endtime, datasize):
@@ -41,6 +65,21 @@ def heatplot_data(starttime, endtime, datasize):
     print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     np.save('harmonics.npy',df_short)
 
+def heatplot():
+    harmonics = np.load('harmonics.npy')
+    transpose = harmonics.T
+    plt.close('all')
+
+    fig, ax = plt.subplots(figsize= [16,5], dpi = 80)
+    im = plt.pcolor(transpose[2:,:])
+    fig.colorbar(mappable = im)
+    
+    plt.xlabel('Senkunden des Tages')
+    plt.ylabel('Harmonische')
+    plt.title('2. bis 41. Harmonsiche der Spannung\n')
+    plt.subplots_adjust(left=0.04, bottom=0.1, right=0.999, top=0.9)
+    plt.axis('tight')
+    plt.show()
 
 def analyse_database_frequency():
 #   Analyses historical Data: frequency (+/- 1%)
