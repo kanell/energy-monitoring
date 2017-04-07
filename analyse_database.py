@@ -11,13 +11,7 @@ import time
 import os
 import numpy as np
 import datetime as dt
-<<<<<<< Updated upstream
 import json
-
-with open('db_config.json','r') as f:
-    db_config = json.loads(f.read())
-
-=======
 import matplotlib
 from matplotlib import pyplot  as plt
 import json
@@ -39,7 +33,6 @@ db_config = {'dbname': 'postgres',
 with open('db_config.json','r') as f:
     db_config = json.loads(f.read())
 
->>>>>>> Stashed changes
 basefolder = 'Website/temp/json'
 
 def heatplot_data(starttime, endtime, datasize):
