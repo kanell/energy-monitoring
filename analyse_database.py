@@ -11,10 +11,7 @@ import time
 import os
 import numpy as np
 import datetime as dt
-import json
-import matplotlib
 from matplotlib import pyplot  as plt
-import json
 
 tablename = 'pqdata'
     
@@ -58,7 +55,10 @@ def heatplot_data(starttime, endtime, datasize):
     print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     np.save('harmonics.npy',df_short)
 
+
 def heatplot():
+    '''Funktion erstellt einen Heatplot der Hamonischen, wobei die erste Harmonische 
+    nicht berücksichtigt wird.'''
     harmonics = np.load('harmonics.npy')
     transpose = harmonics.T
     plt.close('all')
@@ -73,6 +73,8 @@ def heatplot():
     plt.subplots_adjust(left=0.04, bottom=0.1, right=0.999, top=0.9)
     plt.axis('tight')
     plt.show()
+
+
 
 def analyse_database_frequency():
 #   Analyses historical Data: frequency (+/- 1%)
