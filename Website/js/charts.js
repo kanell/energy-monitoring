@@ -10,7 +10,7 @@ var Interval_L_t;
 
 function VoltageChart () {
   // Set graph
- 
+
  			 $.ajax({
                     type: "GET",
                     cache: false,
@@ -27,7 +27,7 @@ function VoltageChart () {
 
 
 	 function VoltageGraph() {
-	 	
+
 		  if ( Interval_U_t == 1) {return;}
 		  else {
 		    g = new Dygraph(document.getElementById("div_U"), [[0],[0],[0],[0]],{
@@ -55,7 +55,7 @@ function VoltageChart () {
 		    	  g.updateOptions( { 'file': csvData } );
 		    }, 1000);
   }
-}
+}}
 
 
 

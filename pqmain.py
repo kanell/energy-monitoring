@@ -80,7 +80,10 @@ def put_data(queue, db, tablename, control_flag):
                 datadict = queue.get()
 
                 # insert data in database
-                #db.insert(tablename,datadict)
+                try:
+                    db.insert(tablename,datadict)
+                except:
+                    pass
 
                 time2 = time.time()
                 min_time = min(min_time,time2-time1)
@@ -110,7 +113,6 @@ def write_csv(csvdict, basefolder, csvsize):
 # init
 ipaddr = '129.69.176.123'
 timedelta = 1 # seconds
-tablename = 'pqdata'
 max_time = 0
 min_time = 1000
 control_flag = Value('i',0)
@@ -149,12 +151,9 @@ if profile is True:
     profiling.enable()
 
 # database config
-db_config = {'dbname': 'postgres',
-             'host': 'localhost',
-             'port': 5432,
-             'opt': None,
-             'user': 'postgres',
-             'passwd': 'pqdata'}
+with open('db_config.json', 'r') as f:
+    db_config = json.loads(f.read())
+tablename = db_config['tablename']
 
 try:
     # read ports from csv

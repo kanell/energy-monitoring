@@ -19,8 +19,10 @@
     <script src="https://www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/simpleheat.js"></script>
+    <script src="../js/charts.js"></script>
+    <script src="../js/functions.js"></script>
+    <script src="../js/polar.js"></script>
+    <script src="../js/historie.js"></script>
     <script src="../js/analyse.js"></script>
   </head>
   <body>
@@ -63,13 +65,13 @@
     <!-- content (heading, table, etc.) -->
     <!-- content of button "?bersicht" -->
     <div id="Ubersicht_i" class="Inhalt_ist">      <!--div with table-->
-      <div>         <!-- makes the table scrollable, if screen to small-->
+      <div style="overflow-x:auto;">         <!-- makes the table scrollable, if screen to small-->
         <table class="Ubertabelle">           <!-- Mastertable with the different content-tables inside-->
           <tr>
             <td class="Ubertabelle">
               <table class="Bezeichnung">          <!-- table for the lables-->
                 <tr>
-                  <th style="background-color: hsla(0, 0%, 60%, 1)"><br></th>
+                  <th style="background-color: hsla(0, 0%, 0%, 1)"><br></th>
                 </tr>
                 <tr>
                   <th>Spannung (V)</th>
@@ -97,7 +99,7 @@
             <td class="Ubertabelle">
               <table class="Phase1">          <!-- table for the values of Phase 1-->
                 <tr>
-                  <th style="background-color: hsla(46, 100%, 60%, 1)">Phase 1</th>
+                  <th>Phase 1</th>
                 </tr>
                 <tr>
                   <td id="U1t"></td>
@@ -125,7 +127,7 @@
             <td class="Ubertabelle">
               <table class="Phase2">          <!-- table for the values of Phase 2-->
                 <tr>
-                  <th style="background-color: hsla(46, 75%, 60%, 1)">Phase 2</th>
+                  <th>Phase 2</th>
                 </tr>
                 <tr>
                   <td id="U2t"></td>
@@ -153,7 +155,7 @@
             <td class="Ubertabelle">
               <table class="Phase3">          <!-- table for values of Phase 3-->
                 <tr>
-                  <th style="background-color: hsla(46, 50%, 60%, 1)">Phase 3</th>
+                  <th>Phase 3</th>
                 </tr>
                 <tr>
                   <td id="U3t"></td>
@@ -180,84 +182,69 @@
             </td>
           </tr>
         </table>
-        <br>
         <!-- table for the frequency -->
-        <table class="FrequenzTabelle" style="background-color:hsla(0, 0%, 95%, 1); color:black;">
+        <table class="Ubertabelle" style="background-color:green; color:white;">
           <tr>
-            <th> Frequenz (Hz) </th>
+            <td> Frequenz (Hz) </td>
           </tr>
           <tr>
             <td id="ft"></td>
           </tr>
         </table>
       </div>
+      <script type="text/javascript">currentValues();</script>
     </div>
     <!-- content of button "Spannung" -->
     <!-- actual content of "Spannung" -->
     <div id="Spannung_i" class="Inhalt_ist">
       <h2>Spannung</h2>
-      <div id="div_U" style="width:100%; height:500px; position:relative;"></div>
+      <div id="div_U" style="width:800px; height:400px; position:relative;"></div>
     </div>
     <!-- content of button "Frequenz" -->
     <div id="Frequenz_i" class="Inhalt_ist">
       <h3>Frequenz</h3>
-      <div id="div_f" style="width:100%; height:500px; position:relative;"></div>
+      <div id="div_f" style="width:800px; height:400px; position:relative;"></div>
     </div>
     <!-- content of button "Strom" -->
     <div id="Strom_i" class="Inhalt_ist">
       <h2>Strom</h2>
-      <div id="div_I" style="width:100%; height:500px; position:relative;"></div>
+      <div id="div_I" style="width:800px; height:400px; position:relative;"></div>
     </div>
     <!-- content of button "Leistung" -->
     <div id="Leistung_i" class="Inhalt_ist">
       <h2>Leistung</h2>
-      <div id="div_L" style="width:100%; height:500px; position:relative";></div>
+      <div id="div_L" style="width:800px; height:400px;"></div>
       <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
     </div>
+
+
+
+
+
+
     <!-- content of "Historische Werte" -->
     <div id="Spannung_h" class="Inhalt_hist">
       <h3>Spannung</h3>
-      <div id="historic_chart_u" style="width:100%; height:500px; position:relative;"></div>
-      <div style="position:relative;">
-        Messungstag: <input type="text" id="datepicker_1" style=margin-right:4em>
-        <button id="load_voltage">Lade neue Daten</button>
-        <button id="download_all_voltage">Download all</button>
-        <button id="download_selected_voltage">Download selected</button>
-      </div>
+      <div id="historic_chart_u" style="width:800px; height:400px; position:relative;"></div>
+      <div style="position:relative;">Messungstag: <input type="text" id="datepicker_1" style=margin-right:4em><button onclick="loadHistoricVoltageData()">Lade neue Daten</button></div>
     </div>
     <div id="Frequenz_h" class="Inhalt_hist">
       <h3>Frequenz</h3>
-      <div id="historic_chart_f" style="width:100%; height:500px; position:relative;"></div>
-      <div style="position:relative;">
-        Messungstag: <input type="text" id="datepicker_2" style=margin-right:4em>
-        <button id="load_frequency">Lade neue Daten</button>
-        <button id="download_all_frequency">Download all</button>
-        <button id="download_selected_frequency">Download selected</button>
-      </div>
+      <div id="historie_chartdiv_f" style="width:1200px; height:400px;"></div>
     </div>
     <div id="Strom_h" class="Inhalt_hist">
       <h3>Strom</h3>
-      <div id="historic_chart_i" style="width:100%; height:500px; position:relative;"></div>
-      <div style="position:relative;">
-        Messungstag: <input type="text" id="datepicker_3" style=margin-right:4em>
-        <button id="load_current">Lade neue Daten</button>
-        <button id="download_all_current">Download all</button>
-        <button id="download_selected_current">Download selected</button>
-      </div>
+      <div id="historie_chartdiv_I" style="width:1200px; height:400px;"></div>
     </div>
     <div id="Leistung_h" class="Inhalt_hist">
       <h3>Leistung</h3>
-      <div id="historic_chart_p" style="width:100%; height:500px; position:relative;"></div>
-      <div style="position:relative;">
-        Messungstag: <input type="text" id="datepicker_4" style=margin-right:4em>
-        <button id="load_power">Lade neue Daten</button>
-        <button id="download_all_power">Download all</button>
-        <button id="download_selected_power">Download selected</button>
-      </div>
+      <div id="historie_chartdiv_L" style="width:1200px; height:400px;"></div>
+      <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
     </div>
     <div id="Harmonische_U_h" class="Inhalt_hist">
       <h3>Harmonische U</h3>
-      <canvas id="historic_heatmap_u" style="width:100%; height:500px; position:relative;"></canvas>
+      <div id="historie_chartdiv_HU" style="width:1200px; height:400px;"></div>
+      <button onclick="console.log(chartvalue.start);console.log(chartvalue.end)">The time is?</button>
     </div>
     <div id="Harmonische_I_h" class="Inhalt_hist">
       <h3>Harmonische I</h3>

@@ -11,6 +11,9 @@ jsonfiles
 # No .json file
 *.json
 
+# No .npy file
+*.npy
+
 # No .log file
 *.log
 *.out

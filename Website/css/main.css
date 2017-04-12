@@ -1,4 +1,16 @@
-
+html {
+  height: 100%;
+  background-color: white;
+}
+body {
+  display: block;
+  margin:0;
+  padding:0;
+  height: 100%;
+  font-family: 'robotolight','robotoregular',sans-serif,monospace;
+  font-weight:300;
+  letter-spacing: 0em;
+}
 /* Styles for the upper List*/
 
 
@@ -8,11 +20,11 @@ ul.oben {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: hsla(131, 100%, 15%, 0.80);  
-    float:left; 
+    background-color: hsla(131, 100%, 15%, 0.80);
+    float:left;
     width:100%;
-    
-    
+
+
 }
 
 
@@ -21,56 +33,56 @@ ul.oben {
 li.oben {
     float: left;
     position:relative;
-    
+
 }
 
 
-/* sets the properties of the links */ 
+/* sets the properties of the links */
 
 li.oben a {
     display: block;
     color: white;
     text-align: center;
-    padding: 16px;   
+    padding: 16px;
     width:150px;
     text-decoration: none;
     width:150px;
-    
+
 }
 
 
 /* hovers the entries */
 
 #aktuell:hover #akt{
-        
+
     display:block;
-    
+
 }
 
 #analysiert:hover #analy{
     display: block;
-   
+
 }
 
 #historisch:hover #hist{
     display: block;
-   
+
 }
 
 li.oben:hover{
     background-color: green;
-   
+
 }
 
-   
+
 
 /* changes the style of the active choice */
 
 li.aktiv {
   float:left;
   position: relative;
-  
-  
+
+
 }
 
 li.aktiv a {
@@ -80,9 +92,9 @@ li.aktiv a {
     padding: 16px;
     width:150px;
     text-decoration: none;
-    background-color: #134201; 
-    
-    
+    background-color: #134201;
+
+
 }
 
 
@@ -112,21 +124,21 @@ ul.links {
     width:100%;
     margin: 0;
     padding: 0;
-    
-    
+
+
 }
 
 
 
-/* defines the style of the links */ 
+/* defines the style of the links */
 
 li.links {
    display: block;
-   float:none; 
+   float:none;
    position:relative;
    z-index:1;
-   
-    
+
+
 }
 
 
@@ -138,17 +150,17 @@ li.links a {
     padding: 16px;
     text-decoration: none;
     background-color:hsla(131, 100%, 15%, 0.8);
-    
+
 }
 
-/* defines the style of the active choice */ 
+/* defines the style of the active choice */
 
 li.links.aktiv {
     display: block;
     float:none;
-    
+
 }
- 
+
 
 
 li.links.aktiv a {
@@ -157,14 +169,14 @@ li.links.aktiv a {
     padding: 16px;
     text-decoration: none;
     background-color: green;
-    
+
 }
 
 
 /* hover */
 
 li.links a:hover {
-    background-color:green  ; 
+    background-color:green  ;
 }
 
 
@@ -172,47 +184,42 @@ li.links a:hover {
 
 
 div.Inhalt_ist {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display: none;
-    z-index: -12;
-        }          
-
+  position: absolute;
+  top: 50px;
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: none;
+        }
 
 div.Inhalt_hist {
     position: absolute;
-    top: 100px;
-    left: 300px;
+    top: 50px;
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
     display: none;
-    z-index: -12;
-        }          
+        }
 
 
 div.Inhalt_analy {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display: none;
-    z-index: -12;
-        }          
-        
-/* Propertoies of the current Voltage content */
-   
-#Spannung_i {
-    position: absolute;
-    top: 100px;
-    left: 300px;
-    display: none;
-           }                           
-        
-#Ubersicht_i {
-    position: absolute;
-    top: 100px;
-    left: 300px; 
-    display:block;
-          }                    
+  position: absolute;
+  top: 50px;
+  width: 90%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: none;
+        }
 
+/* Propertoies of the current Voltage content */
+
+#Ubersicht_i { 
+    display: block;
+    padding: 50px;
+    position: relative;
+    width: 800px;
+    margin :auto;
+}
 /* styles of the table in "Aktuelle Werte" */
 
 /* general styling of the table */
@@ -220,16 +227,22 @@ div.Inhalt_analy {
 table.Ubertabelle {
     width: 800px;
     border-collapse: collapse;
-    border: 5px solid hsla(0, 0%, 0%, 1); 
+    border: 1px solid hsla(0, 0%, 0%, 1);
 }
 
+table.FrequenzTabelle {
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+    border: 1px solid hsla(0, 0%, 0%, 1);
+}
 
 td,th {
     width: 200px;
     height: 30px;
     text-align: center;
     padding: 0px;
-     
+
 }
 
 table.Bezeichnung th {
@@ -244,38 +257,38 @@ table {
 /* background colors for the different rows and collumns */
 
 table.Bezeichnung {
-    background-color: hsla(0, 0%, 67%, 1);
+    background-color: hsla(0, 0%, 90%, 1);
 }
 
 table.Phase1 {
-    background-color: hsla(214, 100%, 50%, 1);
+    background-color: hsla(46, 100%, 75%, 1);
 }
 
 table.Phase2 {
-    background-color: hsla(53, 100%, 50%, 1);
+    background-color: hsla(46, 75%, 75%, 1);
 }
 
 table.Phase3 {
-    background-color: hsla(141, 100%, 35%, 1);
+    background-color: hsla(46, 50%, 75%, 1);
 }
 
 table.Phase1 tr:nth-child(even)  {
-    background-color: hsla(214, 100%, 75%, 1) 
+    background-color: hsla(46, 100%, 85%, 1) ;
 }
 
 table.Phase2 tr:nth-child(even)  {
-    background-color: hsla(53, 100%, 75%, 1) 
+    background-color: hsla(46, 75%, 85%, 1);
 }
 
 table.Phase3 tr:nth-child(even)  {
-    background-color: hsla(141, 100%, 40%, 1) 
+    background-color: hsla(46, 50%, 85%, 1) ;
 }
 
 table.Bezeichnung tr:nth-child(even)  {
-    background-color: hsla(0, 0%, 80%, 1);
+    background-color: hsla(0, 0%, 95%, 1);
 }
 
 #chartdiv {
   width: 100%;
   height: 500px;
-}	
+}
