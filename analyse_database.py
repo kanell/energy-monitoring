@@ -22,6 +22,7 @@ db_config = {'dbname': 'postgres',
 db = pqdb.connect_to_db(db_config)
 basefolder = 'Website/temp/json'
     
+
 def analyse_database_frequency():
 #   Analyses historical Data: frequency (+/- 1%)
     rule = 'frequency_10s between {} and {}'.format(47,49.5) 
@@ -42,7 +43,7 @@ def analyse_database_frequency():
         timestamp_frequency_critical.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_frequency_float[i])))
         i += 1
 
-# Save Data as JS conform JSON file    
+# Save Data as json conform javascript file    
     try:
         if timestamp_frequency_critical != []:
             frequency_critical_JS = []
@@ -67,7 +68,7 @@ def analyse_database_frequency():
         timestamp_frequency_bad.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_frequency_float[i])))
         i += 1
 
-# Save Data as JS conform JSON file    
+# Save Data as json conform javascript file    
     try:
         if timestamp_frequency_bad != []:
             frequency_bad_JS = []
@@ -80,11 +81,12 @@ def analyse_database_frequency():
     except KeyError:
         pass
     
+    
 def analyse_database_voltage():
 #   Analyses historical Data: voltage        
-    rule_L1 = 'port_1728 not between {} and {}'.format(242, 253) 
-    rule_L2 = 'port_1730 not between {} and {}'.format(242, 253) 
-    rule_L3 = 'port_1732 not between {} and {}'.format(242, 253) 
+    rule_L1 = 'port_1728 not between {} and {}'.format(207, 253) 
+    rule_L2 = 'port_1730 not between {} and {}'.format(207, 253) 
+    rule_L3 = 'port_1732 not between {} and {}'.format(207, 253) 
 
 # Get data and timestamps from database
     data_voltage_L1 = pqdb.get_data(db, tablename, 'port_1728', rule_L1 ) 
@@ -97,7 +99,7 @@ def analyse_database_voltage():
         timestamp_voltage_L1.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_voltage_L1_float[i])))
         i += 1
         
-# Save Data as JS conform JSON file        
+# Save Data as json conform javascript file       
     try:
         if timestamp_voltage_L1 != []:
             voltage_L1_JS = []
@@ -121,7 +123,7 @@ def analyse_database_voltage():
         timestamp_voltage_L2.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_voltage_L2_float[i])))
         i += 1
 
-# Save Data as JS conform JSON file        
+# Save Data as json conform javascript file        
     try:
         if timestamp_voltage_L2 != []:
             voltage_L2_JS = []
@@ -145,7 +147,7 @@ def analyse_database_voltage():
         timestamp_voltage_L3.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_voltage_L3_float[i])))
         i += 1
 
-# Save Data as JS conform JSON file        
+# Save Data as json conform javascript file        
     try:
         if timestamp_voltage_L3 != []:
             voltage_L3_JS = []
@@ -158,27 +160,152 @@ def analyse_database_voltage():
     except KeyError:
         pass
 
+    
 def analyse_database_THD_U():
-#   Analyses historical Data: THD 
-    data_THD_L1 = pqdb.get_data(db, tablename, 'port_2236', 'port_2236 > 8') 
-    timestamp_THD_L1 = pqdb.get_data(db, tablename, 'timestamp', 'port_2236 > 8')
+  
+# Get data and timestamps from database
+    data_THD_U_L1 = pqdb.get_data(db, tablename, 'port_2236', 'port_2236 > 8') 
+    timestamp_THD_U_L1_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2236 > 8')
     
-    data_THD_L2 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
-    timestamp_THD_L2 = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')
+# Transform float time in time "yyy-mm-dd hh:mm:ss" 
+    timestamp_THD_U_L1 = []
+    i = 0
+    while i < len(timestamp_THD_U_L1_float):
+        timestamp_THD_U_L1.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_U_L1_float[i])))
+        i += 1    
+        
+# Save Data as json conform javascript file        
+    try:
+        if timestamp_THD_U_L1 != []:
+            THD_U_L1_JS = []
+            i = 0
+            while i < len(timestamp_THD_U_L1):
+                THD_U_L1_JS.append({"timestamp": timestamp_THD_U_L1[i], "value": data_THD_U_L1[i],"deviation": data_THD_U_L1[i]})
+                i += 1
+            with open(os.path.join(basefolder, "THD_U_L1.json"),"w") as out_file:
+                out_file.write(json.dumps(THD_U_L1_JS))
+    except KeyError:
+        pass    
+    
+# Get data and timestamps from database    
+    data_THD_U_L2 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
+    timestamp_THD_U_L2_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')
+    
+# Transform float time in time "yyy-mm-dd hh:mm:ss" 
+    timestamp_THD_U_L2 = []
+    i = 0
+    while i < len(timestamp_THD_U_L2_float):
+        timestamp_THD_U_L2.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_U_L2_float[i])))
+        i += 1    
+        
+# Save Data as json conform javascript file        
+    try:
+        if timestamp_THD_U_L2 != []:
+            THD_U_L2_JS = []
+            i = 0
+            while i < len(timestamp_THD_U_L2):
+                THD_U_L2_JS.append({"timestamp": timestamp_THD_U_L2[i], "value": data_THD_U_L2[i],"deviation": data_THD_U_L2[i]})
+                i += 1
+            with open(os.path.join(basefolder, "THD_U_L2.json"),"w") as out_file:
+                out_file.write(json.dumps(THD_U_L2_JS))
+    except KeyError:
+        pass    
 
-    data_THD_L3 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
-    timestamp_THD_L3 = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')    
+# Get data and timestamps from database
+    data_THD_U_L3 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
+    timestamp_THD_U_L3_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')    
     
-    data_THD_L1_dict = {'THD_L1_data:': data_THD_L1,
-                            'THD_L1_timestamp': timestamp_THD_L1}
-                            
-    data_THD_L2_dict =  {'THD_L2_data:': data_THD_L2,
-                            'THD_L2_timestamp': timestamp_THD_L2}
+# Transform float time in time "yyy-mm-dd hh:mm:ss" 
+    timestamp_THD_U_L3 = []
+    i = 0
+    while i < len(timestamp_THD_U_L3_float):
+        timestamp_THD_U_L3.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_U_L3_float[i])))
+        i += 1    
+        
+# Save Data as json conform javascript file        
+    try:
+        if timestamp_THD_U_L3 != []:
+            THD_U_L3_JS = []
+            i = 0
+            while i < len(timestamp_THD_U_L3):
+                THD_U_L3_JS.append({"timestamp": timestamp_THD_U_L3[i], "value": data_THD_U_L3[i],"deviation": data_THD_U_L3[i]})
+                i += 1
+            with open(os.path.join(basefolder, "THD_U_L3.json"),"w") as out_file:
+                out_file.write(json.dumps(THD_U_L3_JS))
+    except KeyError:
+        pass        
     
-    data_THD_L3_dict = {'THD_L3_data:': data_THD_L3,
-                            'THD_L3_timestamp': timestamp_THD_L3}    
     
-    return data_THD_L1_dict, data_THD_L2_dict, data_THD_L3_dict
+def analyse_database_THD_I():
+# Get data and timestamps from database  
+    data_THD_I_L1 = pqdb.get_data(db, tablename, 'port_2548', 'port_2548 > 8') 
+    timestamp_THD_I_L1_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2548 > 8')
     
-#def analyse_database_THD_I()
+# Transform float time in time "yyy-mm-dd hh:mm:ss" 
+    timestamp_THD_I_L1 = []
+    i = 0
+    while i < len(timestamp_THD_I_L1_float):
+        timestamp_THD_I_L1.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_I_L1_float[i])))
+        i += 1    
+        
+# Save Data as json conform javascript file        
+    try:
+        if timestamp_THD_I_L1 != []:
+            THD_I_L1_JS = []
+            i = 0
+            while i < len(timestamp_THD_I_L1):
+                THD_I_L1_JS.append({"timestamp": timestamp_THD_I_L1[i], "value": data_THD_I_L1[i],"deviation": data_THD_I_L1[i]})
+                i += 1
+            with open(os.path.join(basefolder, "THD_I_L1.json"),"w") as out_file:
+                out_file.write(json.dumps(THD_I_L1_JS))
+    except KeyError:
+        pass       
+       
+# Get data and timestamps from database    
+    data_THD_I_L2 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
+    timestamp_THD_L2_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')
     
+# Transform float time in time "yyy-mm-dd hh:mm:ss" 
+    timestamp_THD_I_L2 = []
+    i = 0
+    while i < len(timestamp_THD_L2_float):
+        timestamp_THD_I_L2.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_L2_float[i])))
+        i += 1    
+        
+# Save Data as json conform javascript file        
+    try:
+        if timestamp_THD_I_L2 != []:
+            THD_I_L2_JS = []
+            i = 0
+            while i < len(timestamp_THD_I_L2):
+                THD_I_L2_JS.append({"timestamp": timestamp_THD_I_L2[i], "value": data_THD_I_L2[i],"deviation": data_THD_I_L2[i]})
+                i += 1
+            with open(os.path.join(basefolder, "THD_I_L2.json"),"w") as out_file:
+                out_file.write(json.dumps(THD_I_L2_JS))
+    except KeyError:
+        pass 
+    
+
+# Get data and timestamps from database
+    data_THD_I_L3 = pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8') 
+    timestamp_THD_L3_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2238 > 8')    
+    
+# Transform float time in time "yyy-mm-dd hh:mm:ss" 
+    timestamp_THD_I_L3 = []
+    i = 0
+    while i < len(timestamp_THD_L3_float):
+        timestamp_THD_I_L3.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_L3_float[i])))
+        i += 1    
+        
+# Save Data as json conform javascript file        
+    try:
+        if timestamp_THD_I_L3 != []:
+            THD_I_L3_JS = []
+            i = 0
+            while i < len(timestamp_THD_I_L2):
+                THD_I_L3_JS.append({"timestamp": timestamp_THD_I_L3[i], "value": data_THD_I_L3[i],"deviation": data_THD_I_L3[i]})
+                i += 1
+            with open(os.path.join(basefolder, "THD_I_L3.json"),"w") as out_file:
+                out_file.write(json.dumps(THD_I_L3_JS))
+    except KeyError:
+        pass 
