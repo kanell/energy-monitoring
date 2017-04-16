@@ -79,8 +79,8 @@ def analyse(pq_data):
         long_interruption_df.at[m,'Voltage_L2'] = voltage_L2_average
         long_interruption_df.at[m,'Voltage_L3'] = voltage_L3_average    
         
-    elif voltage_L1_average > 1 and voltage_L2_average > 1 and voltage_L3_average > 1 and m < ((3*60)-1):
-        long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
+#    elif voltage_L1_average > 1 and voltage_L2_average > 1 and voltage_L3_average > 1 and m < ((3*60)-1):
+#        long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
         
     else:
         starttime = long_interruption_df.at[0,'Time']
