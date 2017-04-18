@@ -82,11 +82,11 @@ def analyse(pq_data):
 #    elif voltage_L1_average > 1 and voltage_L2_average > 1 and voltage_L3_average > 1 and m < ((3*60)-1):
 #        long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
         
-    else:
+    elif m != 0:
         starttime = long_interruption_df.at[0,'Time']
-        endtime = long_interruption_df.at[(m),'Time']
+        endtime = long_interruption_df.at[m,'Time']
 # duration of interruption in seconds
-        timedelta = long_interruption_df.at[(m),'Time_float'] - long_interruption_df.at[0,'Time_float']
+        timedelta = long_interruption_df.at[m,'Time_float'] - long_interruption_df.at[0,'Time_float']
 # save as dictionary         
         time_dict = {'Beginn': starttime, 'Ende': endtime, 'Dauer': timedelta}   
 
@@ -110,7 +110,9 @@ def analyse(pq_data):
         with open(os.path.join(basefolder, json_name),"w") as out_file:
             out_file.write(long_interruption_df.to_json())
         long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
-               
+    else:
+        pass
+
 #   Analyses Total Harmonics Distortion (THD) of voltage U and checks if measured data is confom with EN 50160
     THD_U_L1 = pq_data[2236]
     THD_U_L2 = pq_data[2238]
