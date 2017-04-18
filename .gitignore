@@ -21,6 +21,9 @@ jsonfiles
 # No .bat for server on windows
 *.bat
 
+# no .swp files
+*.swp
+
 logs
 Website/temp
 nohup.out
