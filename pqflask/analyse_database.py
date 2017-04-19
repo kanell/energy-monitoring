@@ -5,78 +5,22 @@ Created on Wed Jan 18 15:55:29 2017
 @author: Paul-G
 """
 
-#import pqdb
+import pqdb
 import json
 import time
 import os
 import numpy as np
 import datetime as dt
-from matplotlib import pyplot  as plt
 
-tablename = 'pqdata'
-    
-db_config = {'dbname': 'postgres',
-             'host': '129.69.176.71',
-             'port': 5432,
-             'opt': None,
-             'user': 'pqpostgres',
-             'passwd': 'pkm123_postgres'}
-             
-#   connection to database
-#db = pqdb.connect_to_db(db_config)
-#basefolder = 'Website/temp/json'
-
-
-with open('db_config.json','r') as f:
+with open('../db_config.json','r') as f:
     db_config = json.loads(f.read())
 
-basefolder = 'Website/temp/json'
-
-def heatplot_data(starttime, endtime, datasize):
-    tc = time.time()
-    db = pqdb.connect_to_db(db_config)
-    ttc = time.time() - tc
-    startTime = dt.datetime.strptime(starttime, '%m/%d/%Y').timestamp()
-    endTime = dt.datetime.strptime(endtime, '%m/%d/%Y').timestamp()
-    indices = np.linspace(startTime,endTime,num=datasize,dtype=int)
-    rule = 'timestamp between {} and {} and timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
-
-    ts = time.time()
-    try:
-        df = np.array(db.query('select {} from {} where {}'.format('timestamp', db_config['tablename'], rule)).getresult())[:,-1]
-    except IndexError:
-        return 'No data in that time period', ''
-    tts = time.time() - ts
-    selectors = ['port_'+str(i) for i in np.arange(1000,1079,2)]
-    df_short = np.empty((df.size,len(selectors)+1))
-    df_short[:,0] = df
-    for index, selector in enumerate(selectors):
-        df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
-    print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
-    np.save('harmonics.npy',df_short)
-
-
-def heatplot():
-    '''Funktion erstellt einen Heatplot der Hamonischen, wobei die erste Harmonische 
-    nicht berücksichtigt wird.'''
-    harmonics = np.load('harmonics.npy')
-    transpose = harmonics.T
-    plt.close('all')
-
-    fig, ax = plt.subplots(figsize= [16,5], dpi = 80)
-    im = plt.pcolor(transpose[2:,:])
-    fig.colorbar(mappable = im)
-    
-
-    plt.xlabel('Senkunden des Tages')
-    plt.ylabel('Harmonische')
-    plt.title('2. bis 41. Harmonsiche der Spannung\n')
-    plt.subplots_adjust(left=0.04, bottom=0.1, right=0.999, top=0.9)
-    plt.axis('tight')
-    plt.show()
+basefolder = '../Website/temp/json'
+tablename = db_config['tablename'] 
 
 
 def analyse_database_frequency():
+    db = pqdb.connect_to_db(db_config)
 #   Analyses historical Data: frequency (+/- 1%)
     rule = 'frequency_10s between {} and {}'.format(47,49.5)
     data_frequency_critical_1 = pqdb.get_data(db, tablename, 'frequency_10s', rule)
@@ -136,14 +80,19 @@ def analyse_database_frequency():
   
     
 def analyse_database_voltage():
+    db = pqdb.connect_to_db(db_config)
 #   Analyses historical Data: voltage        
     rule_L1 = 'port_1728 not between {} and {}'.format(207, 253) 
     rule_L2 = 'port_1730 not between {} and {}'.format(207, 253) 
-    rule_L3 = 'port_1732 not between {} and {}'.format(207, 253) 
+    rule_L3 = 'port_1732 not between {} and {}'.format(207, 253)
 
 # Get data and timestamps from database
+    t1 = time.time()
     data_voltage_L1 = pqdb.get_data(db, tablename, 'port_1728', rule_L1 )
+    t2 = time.time()
     timestamp_voltage_L1_float = pqdb.get_data(db, tablename, 'timestamp', rule_L1)
+    t3 = time.time()
+    print('t2-t1: {} s, t3-t2: {} s'.format(t2-t1,t3-t2))
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_voltage_L1 = []
@@ -215,6 +164,7 @@ def analyse_database_voltage():
 
     
 def analyse_database_THD_U():  
+    db = pqdb.connect_to_db(db_config)
 # Get data and timestamps from database
     data_THD_U_L1 = pqdb.get_data(db, tablename, 'port_2236', 'port_2236 > 8') 
     timestamp_THD_U_L1_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2236 > 8')
@@ -289,6 +239,7 @@ def analyse_database_THD_U():
     
     
 def analyse_database_THD_I():
+    db = pqdb.connect_to_db(db_config)
 # Get data and timestamps from database  
     data_THD_I_L1 = pqdb.get_data(db, tablename, 'port_2548', 'port_2548 > 8') 
     timestamp_THD_I_L1_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2548 > 8')

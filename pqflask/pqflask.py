@@ -2,6 +2,8 @@ from flask import Flask, request, make_response
 import io
 import numpy as np
 from pg import DB
+import os
+import analyse_database as ana_db
 import json
 import time
 import datetime as dt
@@ -105,6 +107,35 @@ def get_data():
     response.headers["Content-type"] = dataType
     endtime = time.time()
     print('time needed for response: ' + str(endtime-starttime) + ' s')
+    return response
+
+@app.route('/get_data/analyse', methods=['POST'])
+def analyse_database():
+    requestJSON = request.get_json()
+    print(requestJSON)
+    dataName = requestJSON['dataName']
+    dataPhase = requestJSON['dataPhase']
+    # check db for events and write jsons
+    if dataName == 'voltage':
+        ana_db.analyse_database_voltage()
+        if os.path.isfile('../Website/temp/json/voltage_L{}.json'.format(dataPhase)):
+            with open('../Website/temp/json/voltage_L{}.json'.format(dataPhase), 'r') as f:
+                responseJSON = f.read()
+        else:
+            responseJSON = json.dumps(['no data'])
+        
+    elif dataName == 'frequency':
+        pass
+    elif dataName == 'thdu':
+        pass
+    elif dataName == 'thdi':
+        pass
+    elif dataName == 'supplyinterrupt':
+        pass
+    else:
+        return 'wrong request input'
+    response = make_response(responseJSON)
+    response.headers['Content-type'] = 'json'
     return response
 
 if __name__ == '__main__':

@@ -4,11 +4,18 @@ Created on Wed Jan 11 16:08:28 2017
 
 @author: Paul-G
 """
-
+import pqdb
+import datetime as dt
+import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
 import time 
 import os
-import json 
+import json
+
+with open('db_config.json','r') as f:
+    db_config = json.loads(f.read())
+
 
 keylist = ['frequency_status', 'voltage_L1, voltage_L2', 'voltage_L3', 'THD_U_L1', 'THD_U_L2', 'THD_U_L3', 'THD_I_L1', 'THD_I_L2', 'THD_I_L3',
     'harmonic_5th_U1', 'harmonic_7th_U1', 'harmonic_5th_U2', 'harmonic_7th_U2', 'harmonic_5th_U3', 'harmonic_7th_U3']
@@ -18,6 +25,50 @@ frequency_average_10s = []
 index = 0
 long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
 basefolder = 'Website/temp/json'
+
+def heatplot_data(starttime, endtime, datasize):
+    tc = time.time()
+    db = pqdb.connect_to_db(db_config)
+    ttc = time.time() - tc
+    startTime = dt.datetime.strptime(starttime, '%m/%d/%Y').timestamp()
+    endTime = dt.datetime.strptime(endtime, '%m/%d/%Y').timestamp()
+    indices = np.linspace(startTime,endTime,num=datasize,dtype=int)
+    rule = 'timestamp between {} and {} and timestamp in ({})'.format(startTime, endTime, ','.join(str(i) for i in indices))
+
+    ts = time.time()
+    try:
+        df = np.array(db.query('select {} from {} where {}'.format('timestamp', db_config['tablename'], rule)).getresult())[:,-1]
+    except IndexError:
+        return 'No data in that time period', ''
+    tts = time.time() - ts
+    selectors = ['port_'+str(i) for i in np.arange(1000,1079,2)]
+    df_short = np.empty((df.size,len(selectors)+1))
+    df_short[:,0] = df
+    for index, selector in enumerate(selectors):
+        df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+    print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
+    np.save('harmonics.npy',df_short)
+
+
+def heatplot():
+    '''Funktion erstellt einen Heatplot der Hamonischen, wobei die erste Harmonische 
+    nicht berücksichtigt wird.'''
+    harmonics = np.load('harmonics.npy')
+    transpose = harmonics.T
+    plt.close('all')
+
+    fig, ax = plt.subplots(figsize= [16,5], dpi = 80)
+    im = plt.pcolor(transpose[2:,:])
+    fig.colorbar(mappable = im)
+    
+
+    plt.xlabel('Senkunden des Tages')
+    plt.ylabel('Harmonische')
+    plt.title('2. bis 41. Harmonsiche der Spannung\n')
+    plt.subplots_adjust(left=0.04, bottom=0.1, right=0.999, top=0.9)
+    plt.axis('tight')
+    plt.show()
+
 
 def analyse(pq_data):
     global index

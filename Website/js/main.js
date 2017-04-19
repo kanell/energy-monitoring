@@ -57,6 +57,25 @@ function downloadSelected(plotData) {
   a.click()
 }
 
+// get deviation table data from flask
+function makeFlaskRequestDeviationTable(tableId, requestJSON){
+  let req = new XMLHttpRequest();
+  // insert data to deviation table 
+  function appendToTable(){
+    console.log(req.response);
+    let trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
+    $.each(req.response, function (i, item) {
+      trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
+    });
+    tableId.innerHTML = trHTML;
+  }
+  req.addEventListener('load',appendToTable);
+  req.open('POST', '/get_data/analyse');
+  req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+  req.responseType = 'json';
+  req.send(JSON.stringify(requestJSON));
+}
+
 $(document).ready(function(){
   /* "Aktuelle Werte" */
 
@@ -608,51 +627,40 @@ $(document).ready(function(){
   });
   /* Analyse */
 
-  // Spannung U1 wurde geklickt
-  $("#U1_a").click(function(){
-    $("#Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
-    $("#Spannung_1_a").show();
+  // Spannung wurde geklickt
+  $("#U_a").click(function(){
+    $("#analyse_frequency, #analyse_THDu, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_voltage").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
-    Analyse();
-  });
+    let requestJSON = {
+      dataName : 'voltage',
+      dataPhase : 1
+    }
+    makeFlaskRequestDeviationTable(document.getElementById('AnalyseTabelleSpannung'), requestJSON);
 
-  // Spannung U2 wurde geklickt
-  $("#U2_a").click(function(){
-    $("#Spannung_1_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
-    $("#Spannung_2_a").show();
-    changeColor(a="oben",b="oben", c="aktiv");
-    clearTimers();
-  });
-
-  // Spannung U3 wurde geklickt
-  $("#U3_a").click(function(){
-    $("#Spannung_1_a, #Spannung_2_a, #Frequenz_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
-    $("#Spannung_3_a").show();
-    changeColor(a="oben",b="oben", c="aktiv");
-    clearTimers();
   });
 
   // Frequenz wurde geklickt
   $("#f_a").click(function(){
-    $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Harmonische_U_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
-    $("#Frequenz_a").show();
+    $("#analyse_voltage, #analyse_THDu, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_frequency").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
   });
 
   // THD U wurde geklickt
   $("#THD_U_a").click(function(){
-    $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_I_a, .Inhalt_ist, .Inhalt_hist").hide();
-    $("#Harmonische_U_a").show();
+    $("#analyse_frequency, #analyse_voltage, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_THDu").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
   });
 
   // THD I wurde geklickt
   $("#THD_I_a").click(function(){
-    $("#Spannung_1_a, #Spannung_2_a, #Spannung_3_a, #Frequenz_a, #Harmonische_U_a, .Inhalt_ist, .Inhalt_hist").hide();
-    $("#Harmonische_I_a").show();
+    $("#analyse_frequency, #analyse_THDu, #analyse_voltage, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_THDi").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
   });

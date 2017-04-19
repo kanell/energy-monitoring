@@ -49,12 +49,10 @@
       </li>
       <li id="analysiert" class="oben"><a href="#analysiert">Analyse</a>
         <ul id="analy"class="links">
-          <li class="links"><a id="U1_a" href="#">Abweichung U Phase 1</a></li>
-          <li class="links"><a id="U2_a" href="#">Abweichung U Phase 2</a></li>
-          <li class="links"><a id="U3_a" href="#">Abweichung U Phase 3</a></li>
-          <li class="links"><a id="f_a" href="#">Abweichung f</a></li>
-          <li class="links"><a id="THD_U_a" href="#">Abweichung THD_U</a></li>
-          <li class="links"><a id="THD_I_a" href="#">Abweichung THD_I</a></li>
+          <li class="links"><a id="U_a" href="#">Spannung</a></li>
+          <li class="links"><a id="f_a" href="#">Frequenz</a></li>
+          <li class="links"><a id="THD_U_a" href="#">THD Spannung</a></li>
+          <li class="links"><a id="THD_I_a" href="#">THD Strom</a></li>
         </ul>
       </li>
       <!-- upper right comment -->
@@ -257,7 +255,6 @@
     </div>
     <div id="Harmonische_U_h" class="Inhalt_hist">
       <h3>Harmonische U</h3>
-      <canvas id="historic_heatmap_u" style="width:100%; height:500px; position:relative;"></canvas>
     </div>
     <div id="Harmonische_I_h" class="Inhalt_hist">
       <h3>Harmonische I</h3>
@@ -265,10 +262,10 @@
 
     </div>
     <!-- content of "Analyse" -->
-    <div class="Inhalt_analy" id="Spannung_1_a">
+    <div class="Inhalt_analy" id="analyse_voltage">
       <br>
-      <h2>Grenzwert&uuml;berschreitung Spannung Leiter 1</h2>
-      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+      <h2>Grenzwert&uuml;berschreitung Spannung</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleSpannung">
         <tr class="UberschreitungsTabelle">
           <th class="UberschreitungsTabelle">Zeitstempel</th>
           <th>Wert</th>
@@ -276,32 +273,10 @@
         </tr>
       </table>
     </div>
-    <div class="Inhalt_analy" id="Spannung_2_a">
-      <br>
-      <h2>Grenzwert&uuml;berschreitung Spannung Leiter 2</h2>
-      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-        <tr class="UberschreitungsTabelle">
-          <th class="UberschreitungsTabelle">Zeitstempel</th>
-          <th>Wert</th>
-          <th>Abweichung in %</th>
-        </tr>
-      </table>
-    </div>
-    <div class="Inhalt_analy" id="Spannung_3_a">
-      <br>
-      <h2>Grenzwert&uuml;berschreitung Spannung Leiter 3</h2>
-      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
-        <tr class="UberschreitungsTabelle">
-          <th class="UberschreitungsTabelle">Zeitstempel</th>
-          <th>Wert</th>
-          <th>Abweichung in %</th>
-        </tr>
-      </table>
-    </div>
-    <div class="Inhalt_analy" id="Frequenz_a">
+    <div class="Inhalt_analy" id="analyse_frequency">
       <br>
       <h2>Grenzwert&uuml;berschreitung Frequenz</h2>
-      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleFrequenz">
         <tr class="UberschreitungsTabelle">
           <th class="UberschreitungsTabelle">Zeitstempel</th>
           <th>Wert</th>
@@ -309,10 +284,10 @@
         </tr>
       </table>
     </div>
-    <div class="Inhalt_analy" id="Harmonische_U_a">
+    <div class="Inhalt_analy" id="analyse_THDu">
       <br>
-      <h2>Grenzwert&uuml;berschreitung Harmonische U</h2>
-      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+      <h2>Grenzwert&uuml;berschreitung THD Spannung</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleTHDu">
         <tr class="UberschreitungsTabelle">
           <th class="UberschreitungsTabelle">Zeitstempel</th>
           <th>Wert</th>
@@ -320,10 +295,10 @@
         </tr>
       </table>
     </div>
-    <div class="Inhalt_analy" id="Harmonische_I_a">
+    <div class="Inhalt_analy" id="analyse_THDi">
       <br>
-      <h2>Grenzwert&uuml;berschreitung Harmonische I</h2>
-      <table class="UberschreitungsTabelle" id="AnalyseTabelleU1">
+      <h2>Grenzwert&uuml;berschreitung THD Strom</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleTHDi">
         <tr class="UberschreitungsTabelle">
           <th class="UberschreitungsTabelle">Zeitstempel</th>
           <th>Wert</th>
