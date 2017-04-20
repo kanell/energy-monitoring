@@ -123,13 +123,28 @@ def analyse_database():
                 responseJSON = f.read()
         else:
             responseJSON = json.dumps(['no data'])
-        
+
     elif dataName == 'frequency':
-        pass
+        ana_db.analyse_database_frequency()
+        if os.path.isfile('../Website/temp/json/frequency_critical.json'.format(dataPhase)):
+            with open('../Website/temp/json/frequency_critical.json'.format(dataPhase), 'r') as f:
+                responseJSON = f.read()
+        else:
+            responseJSON = json.dumps(['no data'])
     elif dataName == 'thdu':
-        pass
+        ana_db.analyse_database_THD_U()
+        if os.path.isfile('../Website/temp/json/THD_U_L{}.json'.format(dataPhase)):
+            with open('../Website/temp/json/THD_U_L{}.json'.format(dataPhase), 'r') as f:
+                responseJSON = f.read()
+        else:
+            responseJSON = json.dumps(['no data'])
     elif dataName == 'thdi':
-        pass
+        ana_db.analyse_database_THD_I()
+        if os.path.isfile('../Website/temp/json/THD_I_L{}.json'.format(dataPhase)):
+            with open('../Website/temp/json/THD_I_L{}.json'.format(dataPhase), 'r') as f:
+                responseJSON = f.read()
+        else:
+            responseJSON = json.dumps(['no data'])
     elif dataName == 'supplyinterrupt':
         pass
     else:

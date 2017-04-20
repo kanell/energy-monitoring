@@ -60,7 +60,7 @@ function downloadSelected(plotData) {
 // get deviation table data from flask
 function makeFlaskRequestDeviationTable(tableId, requestJSON){
   let req = new XMLHttpRequest();
-  // insert data to deviation table 
+  // insert data to deviation table
   function appendToTable(){
     console.log(req.response);
     let trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
@@ -74,6 +74,13 @@ function makeFlaskRequestDeviationTable(tableId, requestJSON){
   req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   req.responseType = 'json';
   req.send(JSON.stringify(requestJSON));
+}
+function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
+  let requestJSON = {
+    dataName : dataName,
+    dataPhase : dataPhase
+  };
+  makeFlaskRequestDeviationTable(tableId, requestJSON);
 }
 
 $(document).ready(function(){
@@ -633,12 +640,22 @@ $(document).ready(function(){
     $("#analyse_voltage").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
-    let requestJSON = {
-      dataName : 'voltage',
-      dataPhase : 1
-    }
-    makeFlaskRequestDeviationTable(document.getElementById('AnalyseTabelleSpannung'), requestJSON);
-
+    let dataName = 'voltage';
+    let dataPhase = 1;
+    let tableId = document.getElementById('AnalyseTabelleSpannung');
+    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    $("#U_a_button_L1").click(function(){
+      dataPhase = 1;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
+    $("#U_a_button_L2").click(function(){
+      dataPhase = 2;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
+    $("#U_a_button_L3").click(function(){
+      dataPhase = 3;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
   });
 
   // Frequenz wurde geklickt
@@ -647,6 +664,10 @@ $(document).ready(function(){
     $("#analyse_frequency").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
+    let dataName = 'frequency';
+    let dataPhase = 0;
+    let tableId = document.getElementById('AnalyseTabelleFrequenz');
+    updateFlaskRequestDeviationTable(tableId,dataPhase,dataName)
   });
 
   // THD U wurde geklickt
@@ -655,6 +676,22 @@ $(document).ready(function(){
     $("#analyse_THDu").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
+    let dataName = 'thdu';
+    let dataPhase = 1;
+    let tableId = document.getElementById('AnalyseTabelleTHDu');
+    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    $("#THD_U_a_button_L1").click(function(){
+      dataPhase = 1;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
+    $("#THD_U_a_button_L2").click(function(){
+      dataPhase = 2;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
+    $("#THD_U_a_button_L3").click(function(){
+      dataPhase = 3;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
   });
 
   // THD I wurde geklickt
@@ -663,6 +700,22 @@ $(document).ready(function(){
     $("#analyse_THDi").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
+    let dataName = 'thdi';
+    let dataPhase = 1;
+    let tableId = document.getElementById('AnalyseTabelleTHDi');
+    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    $("#THD_I_a_button_L1").click(function(){
+      dataPhase = 1;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
+    $("#THD_I_a_button_L2").click(function(){
+      dataPhase = 2;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
+    $("#THD_I_a_button_L3").click(function(){
+      dataPhase = 3;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });
   });
   // click to show dashboard at start
   document.getElementById("Uber_i").click();
