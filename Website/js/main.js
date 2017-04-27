@@ -9,28 +9,45 @@ function clearTimers() {
 
 function legendFormatter(data) {
   if (data.x == null) {
+    if (data.dygraph.rawData_.length == 0) {
+      return 
+    }
     
-         
-    firstDataPoint = data.dygraph.rawData_[0];
-
-    if (firstDataPoint == null) {return }
+    let t;
+    // Abfrage ob Harmonische oder nicht
+    if (data.dygraph.rawData_.length > 50) {
+      t = data.dygraph.rawData_.length - 1;
+    }
+     else {
+        t = 1
+        var x_Value_label = data.dygraph.rawData_;
+      }
+     
+    let firstDataPoint = data.dygraph.rawData_[t];
+    
     maxData = firstDataPoint.length;
     for (var i=1; i < maxData; i++) {
     
     data.series[i-1]['firstDataPoint']= firstDataPoint[i];
     }
     x=firstDataPoint[0]
-
-    var CurrentDate = Dygraph.dateString_(x,0);
+    // Abfrage ob Harmonische oder nicht
+    if (data.dygraph.rawData_.length > 500) {
+      var x_Value_Label = Dygraph.dateString_(x,0);
+    }
+    else {
+      var x_Value_Label = '2. Harmonische'
+    }
+    
    // This happens when there's no selection and {legend: 'always'} is set.
-  return  CurrentDate + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + series.labelHTML + ': ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>';
+  	return  x_Value_Label + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>';
   
-}
+  }
   
     var html =  data.xHTML;
      data.series.forEach(function(series) {
     if (!series.isVisible) return;
-    var labeledData = series.labelHTML + ': ' + series.yHTML;
+    var labeledData = '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.yHTML;
     if (series.isHighlighted) {
       labeledData = '<b>' + labeledData + '</b>';
     }
@@ -38,6 +55,43 @@ function legendFormatter(data) {
   });
     html += '<br>' + '<br>';
   return html;
+}
+
+function barChartPlotter(e) {
+      
+  if (e.seriesIndex !== 0) return;
+  var g = e.dygraph;
+  var ctx = e.drawingContext;
+  var sets = e.allSeriesPoints;
+  var y_bottom = e.dygraph.toDomYCoord(0);
+  // Find the minimum separation between x-values.
+  // This determines the bar width.
+  var min_sep = Infinity;
+  for (var j = 0; j < sets.length; j++) {
+    var points = sets[j];
+    for (var i = 1; i < points.length; i++) {
+      var sep = points[i].canvasx - points[i - 1].canvasx;
+      if (sep < min_sep) min_sep = sep;
+    }
+  }
+  var bar_width = Math.floor(2.0 / 3 * min_sep);
+  var fillColors = g.getColors();
+  var strokeColors = g.getColors();
+  
+  
+  for (var j = 0; j < sets.length; j++) {
+    ctx.fillStyle = fillColors[j];
+    ctx.strokeStyle = strokeColors[j];
+    for (var i = 0; i < sets[j].length; i++) {
+      var p = sets[j][i];
+      var center_x = p.canvasx;
+      var x_left = center_x - (bar_width / 2) * (1 - j/(sets.length-1));
+      ctx.fillRect(x_left, p.canvasy,
+          bar_width/sets.length, y_bottom - p.canvasy);
+      ctx.strokeRect(x_left, p.canvasy,
+          bar_width/sets.length, y_bottom - p.canvasy);
+    }
+  }
 }
 
 // Request for Flask
@@ -122,7 +176,7 @@ $(document).ready(function(){
   // Uebersicht wird geklickt
   $("#Uber_i").click(function(){
     // Verstecke nicht geklickte Seiten
-    $("#Frequenz_i, #Spannung_i, #Strom_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Frequenz_i, #Spannung_i, #Strom_i, #Leistung_i, #Harmonische_I_i, #Harmonische_U_i, .Inhalt_hist, .Inhalt_analy").hide();
     // Zeige geklickte Seite
     $("#Ubersicht_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
@@ -165,7 +219,7 @@ $(document).ready(function(){
 
   // Spannung wird geklickt
   $("#U_i").click(function(){
-    $("#Frequenz_i, #Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Frequenz_i, #Strom_i, #Ubersicht_i, #Leistung_i, #Harmonische_I_i, #Harmonische_U_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Spannung_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
     clearTimers();
@@ -182,15 +236,11 @@ $(document).ready(function(){
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
         }
-
       },
       labelsDiv: document.getElementById('legend_U'),
       legend: 'always',
       legendFormatter: legendFormatter
-
     }
-
-
 
     let currentVoltageData = "timestamp,u1,u2,u3\n"
     let currentVoltageGraph = new Dygraph(document.getElementById("div_U"), currentVoltageData, currentVoltageOptions);
@@ -201,8 +251,11 @@ $(document).ready(function(){
         url: "temp/csv/voltage.csv",
         dataType: "text",
         success: function (data) {
-          currentVoltageData = data;
-          currentVoltageGraph.updateOptions({'file':currentVoltageData});
+          // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
+          if (currentVoltageData.length <= data.length) {
+            currentVoltageData = data;
+            currentVoltageGraph.updateOptions({'file':currentVoltageData});
+          }
           timers.push(window.setTimeout(function (){updateCurrentVoltageGraph();}, 1000));
         }
       });
@@ -212,7 +265,7 @@ $(document).ready(function(){
 
   // Frequenz wird geklickt
   $("#f_i").click(function(){
-    $("#Spannung_i, #Strom_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Spannung_i, #Strom_i, #Ubersicht_i, #Leistung_i, #Harmonische_I_i, #Harmonische_U_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Frequenz_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
     clearTimers();
@@ -243,8 +296,11 @@ $(document).ready(function(){
         url: "temp/csv/frequency.csv",
         dataType: "text",
         success: function (data) {
-          currentFrequencyData = data;
-          currentFrequencyGraph.updateOptions({'file':currentFrequencyData});
+          // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
+          if (currentFrequencyData.length <= data.length) {
+            currentFrequencyData = data;
+            currentFrequencyGraph.updateOptions({'file':currentFrequencyData});
+          }
           timers.push(window.setTimeout(function (){updateCurrentFrequencyGraph();}, 1000));
         }
       });
@@ -255,7 +311,7 @@ $(document).ready(function(){
 
   // Strom wird geklickt
   $("#I_i").click(function(){
-    $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Leistung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Leistung_i, #Harmonische_I_i, #Harmonische_U_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Strom_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
     clearTimers();
@@ -272,7 +328,10 @@ $(document).ready(function(){
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
         }
-      }
+      },
+      labelsDiv: document.getElementById('legend_I'),
+      legend: 'always',
+      legendFormatter: legendFormatter
     }
     let currentCurrentData = "timestamp,i1,i2,i3\n"
     let currentCurrentGraph = new Dygraph(document.getElementById("div_I"), currentCurrentData, currentCurrentOptions);
@@ -283,8 +342,11 @@ $(document).ready(function(){
         url: "temp/csv/current.csv",
         dataType: "text",
         success: function (data) {
-          currentCurrentData = data;
-          currentCurrentGraph.updateOptions({'file':currentCurrentData});
+          // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
+          if (currentCurrentData.length <= data.length) {
+            currentCurrentData = data;
+            currentCurrentGraph.updateOptions({'file':currentCurrentData});
+          }
           timers.push(window.setTimeout(function (){updateCurrentCurrentGraph();}, 1000));
         }
       });
@@ -295,7 +357,7 @@ $(document).ready(function(){
 
   // Leistung wird geklickt
   $("#L_i").click(function(){
-    $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Strom_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Frequenz_i, #Spannung_i, #Ubersicht_i, #Strom_i, #Harmonische_I_i, #Harmonische_U_i, .Inhalt_hist, .Inhalt_analy").hide();
     $("#Leistung_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
     clearTimers();
@@ -312,7 +374,10 @@ $(document).ready(function(){
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
         }
-      }
+      },
+      labelsDiv: document.getElementById('legend_L'),
+      legend: 'always',
+      legendFormatter: legendFormatter
     }
     let currentPowerData = "timestamp,p1,p2,p3\n"
     let currentPowerGraph = new Dygraph(document.getElementById("div_L"), currentPowerData, currentPowerOptions);
@@ -323,13 +388,97 @@ $(document).ready(function(){
         url: "temp/csv/power.csv",
         dataType: "text",
         success: function (data) {
-          currentPowerData = data;
-          currentPowerGraph.updateOptions({'file':currentPowerData});
+          // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
+          if (currentPowerData.length <= data.length) {
+            currentPowerData = data;
+            currentPowerGraph.updateOptions({'file':currentPowerData});
+          }
           timers.push(window.setTimeout(function (){updateCurrentPowerGraph();}, 1000));
         }
       });
     }
     updateCurrentPowerGraph()
+  });
+
+  // Harmonische U wird geklickt
+  $("#H_U_i").click(function(){
+    $("#Frequenz_i, #Strom_i, #Ubersicht_i, #Leistung_i, #Harmonische_I_i, #Spannung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Harmonische_U_i").show();
+    changeColor(a="aktiv",b="oben", c="oben");
+    clearTimers();
+
+    // set graph
+    const currentHarmonicVoltageOptions = {
+      digitsAfterDecimal : 4,
+      plotter: barChartPlotter,
+      dateWindow: [1,40],
+      labelsDiv: document.getElementById('legend_H_U'),
+      legend: 'always',
+      legendFormatter: legendFormatter
+    }
+
+    let currentHarmonicVoltageData = 'number,u1,u2,u3\n'
+    let currentHarmonicVoltageGraph = new Dygraph(document.getElementById("div_H_U"), currentHarmonicVoltageData, currentHarmonicVoltageOptions);
+    function updateCurrentHarmonicVoltageGraph () {
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/harmonics_u.csv",
+        dataType: "text",
+        success: function (data) {
+          currentHarmonicVoltageData = data;
+          currentHarmonicVoltageGraph.updateOptions({'file':currentHarmonicVoltageData});
+          timers.push(window.setTimeout(function (){updateCurrentHarmonicVoltageGraph();}, 1000));
+        }
+      });
+    }
+    updateCurrentHarmonicVoltageGraph()
+  });
+
+ // Harmonische I wird geklickt
+  $("#H_I_i").click(function(){
+    $("#Frequenz_i, #Strom_i, #Ubersicht_i, #Leistung_i, #Harmonische_U_i, #Spannung_i, .Inhalt_hist, .Inhalt_analy").hide();
+    $("#Harmonische_I_i").show();
+    changeColor(a="aktiv",b="oben", c="oben");
+    clearTimers();
+
+    // set graph
+    const currentVoltageOptions = {
+      xValueParser : function(x) {return 1000 * parseFloat(x);},
+      xlabel : 'Uhrzeit',
+      ylabel : 'Spannung [V]',
+      digitsAfterDecimal : 4,
+      axes : {
+        x : {
+            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
+            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
+            ticker: Dygraph.dateTicker
+        }
+      },
+      labelsDiv: document.getElementById('legend_H_I'),
+      legend: 'always',
+      legendFormatter: legendFormatter
+    }
+
+    let currentVoltageData = "timestamp,u1,u2,u3\n"
+    let currentVoltageGraph = new Dygraph(document.getElementById("div_H_I"), currentVoltageData, currentVoltageOptions);
+    function updateCurrentVoltageGraph () {
+      $.ajax({
+        type: "GET",
+        cache: false,
+        url: "temp/csv/voltage.csv",
+        dataType: "text",
+        success: function (data) {
+          currentVoltageData = data;
+          // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
+          if (currentVoltageData.length > 60000) { 
+            currentVoltageGraph.updateOptions({'file':currentVoltageData});
+          }
+          timers.push(window.setTimeout(function (){updateCurrentVoltageGraph();}, 1000));
+        }
+      });
+    }
+    updateCurrentVoltageGraph()
   });
 
   /* Historische Werte */

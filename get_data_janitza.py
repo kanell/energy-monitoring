@@ -11,6 +11,7 @@ import modbus_tk.defines as cst
 import modbus_tk.modbus_tcp as modbus_tcp
 import datetime as dt
 import numpy as np
+from numpy import binary_repr
 import math
 
 
@@ -82,6 +83,7 @@ def fetch_data_dataframe(dataframe,ports,master):
         if ports.at[i,'range'] == 2:
             for m in range(ports.at[i,'start'],ports.at[i,'end']+1,ports.at[i,'range']):
                 dataframe[m] = convert_to_float(data[n:n+2])
+                #print('port: ' + str(m) + ' ,data: ' + str(data[n:n+2]) + ' ,value: ' + str(dataframe[m]))
                 n += ports.at[i,'range']
 
     end_time = dt.datetime.now()
@@ -98,3 +100,26 @@ def convert_to_float(data):
     low0 = data[1]
     mantisse = (high0 + low0) % 2**23
     return round(sign * (1.0 + mantisse / 2**23) * 2**exponent, 4)
+
+def convert_to_float2(data):
+    highbyte = binary_repr(data[0],16)
+    lowbyte = binary_repr(data[1],16)
+    totalbyte = highbyte + lowbyte
+    # handle sign
+    sign = int(totalbyte[0])
+    if sign == 0:
+        sign = 1
+    else:
+        sign = -1
+    # handle exponent
+    exponent = int(totalbyte[1:9],2) - 127
+    # handle fraction
+    fraction = totalbyte[9:]
+    mantisse = 0
+    for i in range(len(fraction)):
+        mantisse += int(fraction[i]) * 2**-i
+    # create float
+    value = sign * (1 + mantisse) * 2 ** exponent
+    return value
+
+

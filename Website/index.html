@@ -20,7 +20,6 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/simpleheat.js"></script>
     <script src="../js/analyse.js"></script>
   </head>
   <body>
@@ -34,6 +33,8 @@
           <li class="links"><a id="f_i" href="#Frequenz">Frequenz</a></li>
           <li class="links"><a id="I_i" href="#Strom">Strom</a></li>
           <li class="links"><a id="L_i" href="#Leistung">Leistung</a></li>
+          <li class="links"><a id="H_U_i" href="#Harmonische_U">Harmonische U</a></li>
+          <li class="links"><a id="H_I_i" href="#Harmonische_I">Harmonische I</a></li>
         </ul>
       </li>
       <li id="historisch" class="oben"><a href="#historisch">Historische Werte</a>
@@ -120,6 +121,36 @@
                 </tr>
               </table>
             </td>
+
+            <td class="Ubertabelle">
+              <table id="Norm1" class="Phase1">          <!-- table for norm conformity-->
+                <tr>
+                  <th style="background-color: hsla(46, 100%, 60%, 1)">EN 50160</th>
+                </tr>
+                <tr>
+                  <td id="U1t"></td>
+                </tr>
+                <tr>
+                  <td id="I1t"></td>
+                </tr>
+                <tr>
+                  <td id="S1t"></td>
+                </tr>
+                <tr>
+                  <td id="P1t"></td>
+                </tr>
+                <tr>
+                  <td id="Q1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_U1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_I1t"></td>
+                </tr>
+              </table>
+            </td>
+
             <td class="Ubertabelle">
               <table class="Phase2">          <!-- table for the values of Phase 2-->
                 <tr>
@@ -148,6 +179,36 @@
                 </tr>
               </table>
             </td>
+            
+            <td class="Ubertabelle">
+              <table id="Norm2" class="Phase2">          <!-- table for norm conformity-->
+                <tr>
+                  <th style="background-color: hsla(46, 75%, 60%, 1)">EN 50160</th>
+                </tr>
+                <tr>
+                  <td id="U1t"></td>
+                </tr>
+                <tr>
+                  <td id="I1t"></td>
+                </tr>
+                <tr>
+                  <td id="S1t"></td>
+                </tr>
+                <tr>
+                  <td id="P1t"></td>
+                </tr>
+                <tr>
+                  <td id="Q1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_U1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_I1t"></td>
+                </tr>
+              </table>
+            </td>
+
             <td class="Ubertabelle">
               <table class="Phase3">          <!-- table for values of Phase 3-->
                 <tr>
@@ -176,6 +237,34 @@
                 </tr>
               </table>
             </td>
+            <td class="Ubertabelle">
+              <table id="Norm3" class="Phase3">          <!-- table for norm conformity-->
+                <tr>
+                  <th style="background-color: hsla(46, 50%, 60%, 1)">EN 50160</th>
+                </tr>
+                <tr>
+                  <td id="U1t"></td>
+                </tr>
+                <tr>
+                  <td id="I1t"></td>
+                </tr>
+                <tr>
+                  <td id="S1t"></td>
+                </tr>
+                <tr>
+                  <td id="P1t"></td>
+                </tr>
+                <tr>
+                  <td id="Q1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_U1t"></td>
+                </tr>
+                <tr>
+                  <td id="THD_I1t"></td>
+                </tr>
+              </table>
+            </td>
           </tr>
         </table>
         <br>
@@ -194,25 +283,39 @@
     <!-- actual content of "Spannung" -->
     <div id="Spannung_i" class="Inhalt_ist">
       <div style="display: inline-block; "><h2>Spannung</h2></div>
-      <div id="legend_U" class="Legend">pla</div>
+      <div id="legend_U" class="Legend">Bug</div>
       <div id="div_U" style="width:100%; height:500px; position:relative;"></div>
     </div>
     <!-- content of button "Frequenz" -->
     <div id="Frequenz_i" class="Inhalt_ist">
-      <h3>Frequenz</h3>
-      <div id="legend_f" style="display: inline-block; vertical-align: top;"></div>
+      <div style="display: inline-block; "><h2>Frequenz</h2></div>
+      <div id="legend_f" class="Legend">Bug</div>
       <div id="div_f" style="width:100%; height:500px; position:relative;"></div>
     </div>
     <!-- content of button "Strom" -->
     <div id="Strom_i" class="Inhalt_ist">
-      <h2>Strom</h2>
+      <div style="display: inline-block; "><h2>Strom</h2></div>
+      <div id="legend_I" class="Legend">Bug</div>
       <div id="div_I" style="width:100%; height:500px; position:relative;"></div>
     </div>
     <!-- content of button "Leistung" -->
     <div id="Leistung_i" class="Inhalt_ist">
-      <h2>Leistung</h2>
+      <div style="display: inline-block; "><h2>Leistung</h2></div>
+      <div id="legend_L" class="Legend">Bug</div>
       <div id="div_L" style="width:100%; height:500px; position:relative";></div>
       <div id="polar_chartdiv" style="width:800px; height:400px;"></div>
+    </div>
+    <!-- content of button "Harmonische U" -->
+    <div id="Harmonische_U_i" class="Inhalt_ist">
+      <div style="display: inline-block; "><h2>Harmonische U</h2></div>
+      <div id="legend_H_U" class="Legend">Bug</div>
+      <div id="div_H_U" style="width:100%; height:500px; position:relative";></div>
+    </div>
+    <!-- content of button "Harmonische I" -->
+    <div id="Harmonische_I_i" class="Inhalt_ist">
+      <div style="display: inline-block; "><h2>Harmonische I</h2></div>
+      <div id="legend_H_I" class="Legend">Bug</div>
+      <div id="div_H_I" style="width:100%; height:500px; position:relative";></div>
     </div>
     <!-- content of "Historische Werte" -->
     <div id="Spannung_h" class="Inhalt_hist">

@@ -119,6 +119,14 @@ control_flag = Value('i',0)
 
 # ports for live data
 live_ports = [800,808,810,812,860,862,864,884,886,888,868,870,872,876,878,880,836,838,840,908,910,912]
+harmonics_u_ports = []
+harmonics_i_ports = []
+for index in np.arange(0,78,2):
+    harmonics_u_ports.append([1002+index,1082+index,1162+index])
+    harmonics_i_ports.append([1482+index,1562+index,1642+index])
+
+live_harmonics_u = np.zeros((len(harmonics_u_ports),4))
+live_harmonics_i = np.zeros((len(harmonics_i_ports),4))
 
 # configdicts for csv file
 csvsize = 600 # sec.
@@ -233,6 +241,27 @@ try:
                 csvdata['newdata'][1:] = pq_data[csvports[index]]
                 csvdictlist[index] = write_csv(csvdata,basefolder, csvsize)
 
+	    # create csv file for harmonics
+            for index, ports in enumerate(harmonics_u_ports):
+                live_harmonics_u[index,0] = index + 2
+                live_harmonics_u[index,1] = datadict['port_'+str(ports[0])]
+                live_harmonics_u[index,2] = datadict['port_'+str(ports[1])]
+                live_harmonics_u[index,3] = datadict['port_'+str(ports[2])]
+            # =========================================
+            # WARNING janiza gibt uns falsche Messwerte --> verusche die faschen raus zu filtern
+            low_values = live_harmonics_u[:,1:] < 0
+            high_values = live_harmonics_u[:,1:] > 15
+            indices = (low_values | high_values).nonzero()
+            live_harmonics_u[:,1:][indices] = 0
+            # =========================================
+            np.savetxt(os.path.join(basefolder,'temp/csv/harmonics_u.csv'),live_harmonics_u,delimiter=',',newline='\n',header='number,u1,u2,u3', comments='')
+            for index, ports in enumerate(harmonics_i_ports):
+                live_harmonics_i[index,0] = index + 2
+                live_harmonics_i[index,1] = datadict['port_'+str(ports[0])]
+                live_harmonics_i[index,2] = datadict['port_'+str(ports[1])]
+                live_harmonics_i[index,3] = datadict['port_'+str(ports[2])]
+            np.savetxt(os.path.join(basefolder,'temp/csv/harmonics_i.csv'),live_harmonics_i,delimiter=',',newline='\n',header='number,i1,i2,i3', comments='')
+            
             time2 = time.time()
             min_time = min(min_time,time2-time1)
             max_time = max(max_time,time2-time1)
