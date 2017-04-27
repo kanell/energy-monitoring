@@ -237,6 +237,8 @@ try:
                 f.write(json.dumps(datadict))
             with open(os.path.join(basefolder,'temp/json/livedata.json'), 'w') as f:
                 f.write(json.dumps(livedatadict))
+            with open(os.path.join(basefolder,'temp/json/liveanalyse.json'), 'w') as f:
+                f.write(json.dumps(status_dict))
 
             # create csv files
             for index, csvdata in enumerate(csvdictlist):
