@@ -154,7 +154,29 @@ $(document).ready(function(){
             document.getElementById("Q" + i + "t").innerHTML =  input["port_" + Q] ;
             document.getElementById("THD_U" + i + "t").innerHTML =  input["port_" + THD_U];
             document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];
-            document.getElementById("ft").innerHTML =  input["port_" + f] ;
+            document.getElementById("ft").innerHTML =  input["port_" + f] ;                    
+          };
+          timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
+        }
+      });
+      $.ajax({
+        cache: false,
+        url: "temp/json/liveanalyse.json",
+        dataType: "json",
+        success: function(data) {
+          let input = data
+          // Iterate over all needed ports
+          for (i=1; i <= 3; i++) {
+           
+            // push data to table Id
+            document.getElementById("Norm_U" + i + "t").innerHTML =  input["voltage_L" + i] ;
+            document.getElementById("Norm_I" + i + "t").innerHTML =  input["-"] ;
+            document.getElementById("Norm_S" + i + "t").innerHTML =  input["-"] ;
+            document.getElementById("Norm_P" + i + "t").innerHTML =  input["-"] ;
+            document.getElementById("Norm_Q" + i + "t").innerHTML =  input["-"] ;
+            document.getElementById("Norm_THD_U" + i + "t").innerHTML =  input["THD_U_L" + i];
+            document.getElementById("Norm_THD_I" + i + "t").innerHTML =  input["THD_I_L" + i];
+            document.getElementById("Norm_ft").innerHTML =  input["frequency_status"] ;                    
           };
           timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
         }
