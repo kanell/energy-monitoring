@@ -7,6 +7,39 @@ function clearTimers() {
     timers = [];
 }
 
+function legendFormatter(data) {
+  if (data.x == null) {
+    
+         
+    firstDataPoint = data.dygraph.rawData_[0];
+
+    if (firstDataPoint == null) {return }
+    maxData = firstDataPoint.length;
+    for (var i=1; i < maxData; i++) {
+    
+    data.series[i-1]['firstDataPoint']= firstDataPoint[i];
+    }
+    x=firstDataPoint[0]
+
+    var CurrentDate = Dygraph.dateString_(x,0);
+   // This happens when there's no selection and {legend: 'always'} is set.
+  return  CurrentDate + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + series.labelHTML + ': ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>';
+  
+}
+  
+    var html =  data.xHTML;
+     data.series.forEach(function(series) {
+    if (!series.isVisible) return;
+    var labeledData = series.labelHTML + ': ' + series.yHTML;
+    if (series.isHighlighted) {
+      labeledData = '<b>' + labeledData + '</b>';
+    }
+    html += '<br>' + series.dashHTML + ' ' + labeledData ;
+  });
+    html += '<br>' + '<br>';
+  return html;
+}
+
 // Request for Flask
 function makeFlaskRequest (requestJSON, plotId, plotData) {
   let req = new XMLHttpRequest();
@@ -149,8 +182,16 @@ $(document).ready(function(){
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
         }
-      }
+
+      },
+      labelsDiv: document.getElementById('legend_U'),
+      legend: 'always',
+      legendFormatter: legendFormatter
+
     }
+
+
+
     let currentVoltageData = "timestamp,u1,u2,u3\n"
     let currentVoltageGraph = new Dygraph(document.getElementById("div_U"), currentVoltageData, currentVoltageOptions);
     function updateCurrentVoltageGraph () {
@@ -188,7 +229,10 @@ $(document).ready(function(){
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
         }
-      }
+      },
+      labelsDiv: document.getElementById('legend_f'),
+      legend: 'always',
+      legendFormatter: legendFormatter
     }
     let currentFrequencyData = "timestamp,frequency\n"
     let currentFrequencyGraph = new Dygraph(document.getElementById("div_f"), currentFrequencyData, currentFrequencyOptions);

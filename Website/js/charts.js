@@ -7,6 +7,23 @@ var Interval_f_t;
 var Interval_Table_t;
 var Interval_L_t;
 
+function legendFormatter(data) {
+  if (data.x == null) {
+    // This happens when there's no selection and {legend: 'always'} is set.
+    return '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + series.labelHTML }).join('<br>');
+  }
+
+  var html = this.getLabels()[0] + ': ' + data.xHTML;
+  data.series.forEach(function(series) {
+    if (!series.isVisible) return;
+    var labeledData = series.labelHTML + ': ' + series.yHTML;
+    if (series.isHighlighted) {
+      labeledData = '<b>' + labeledData + '</b>';
+    }
+    html += '<br>' + series.dashHTML + ' ' + labeledData;
+  });
+  return html;
+}
 
 function VoltageChart () {
   // Set graph
@@ -30,16 +47,22 @@ function VoltageChart () {
 
 		  if ( Interval_U_t == 1) {return;}
 		  else {
-		    g = new Dygraph(document.getElementById("div_U"), [[0],[0],[0],[0]],{
-		      xValueParser : function(x) {return 1000 * parseFloat(x);},
-		      axes : {
-		        x : {
-		            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
-		            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
-		            ticker: Dygraph.dateTicker
-		        }
-		      }
-		    });
+		    g = new Dygraph(document.getElementById("div_U"), csvData,{
+		      
+		     
+      labelsKMB: true,
+      colors: ["rgb(51,204,204)",
+               "rgb(255,100,100)",
+               "#00DD55",
+               "rgba(50,50,200,0.4)"],
+      title: 'Interesting Shapes',
+      xlabel: 'Date',
+      ylabel: 'Count',
+      highlightSeriesOpts: { strokeWidth: 2 },
+      labelsDiv: document.getElementById('legend'),
+      legend: 'always',
+      legendFormatter: legendFormatter
+		      });
 
 
     			// set Interval
