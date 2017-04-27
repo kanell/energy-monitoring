@@ -17,6 +17,7 @@ import os
 import analyse as ana
 from multiprocessing import Process, Queue, Value
 import signal
+import analyse_database as ana_db
 
 # processes
 def get_data(queue, dataframe, ports, pqid, control_flag):
@@ -98,8 +99,8 @@ def put_data(queue, db, tablename, control_flag):
     finally:
         # check if queue is empty
         while queue.qsize() != 0:
-            queue.get()
-
+            queue.get()    
+            
 def write_csv(csvdict, basefolder, csvsize):
     if csvdict['csvdata'].shape[0] < csvsize:
         csvdict['csvdata'] = np.append(csvdict['csvdata'],np.array([csvdict['newdata']]),axis=0)
@@ -110,6 +111,11 @@ def write_csv(csvdict, basefolder, csvsize):
     np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
     return csvdict
 
+# update analyse_database files at 00:00:00
+
+if time.strftime('%H:%M:%S', time.localtime(time.time())) == '00:00:00':    
+    ana_db.analyse_database_voltage()      
+    
 # init
 ipaddr = '129.69.176.123'
 timedelta = 1 # seconds
