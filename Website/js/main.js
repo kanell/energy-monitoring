@@ -44,7 +44,7 @@ function legendFormatter(data) {
   
   }
   
-    var html =  data.xHTML;
+    var html =  data.xHTML + '. Harmonische';
      data.series.forEach(function(series) {
     if (!series.isVisible) return;
     var labeledData = '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.yHTML;
