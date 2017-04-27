@@ -17,6 +17,7 @@ import os
 import analyse as ana
 from multiprocessing import Process, Queue, Value
 import signal
+import analyse_database as ana_db
 
 # processes
 def get_data(queue, dataframe, ports, pqid, control_flag):
@@ -98,8 +99,8 @@ def put_data(queue, db, tablename, control_flag):
     finally:
         # check if queue is empty
         while queue.qsize() != 0:
-            queue.get()
-
+            queue.get()    
+            
 def write_csv(csvdict, basefolder, csvsize):
     if csvdict['csvdata'].shape[0] < csvsize:
         csvdict['csvdata'] = np.append(csvdict['csvdata'],np.array([csvdict['newdata']]),axis=0)
@@ -108,8 +109,8 @@ def write_csv(csvdict, basefolder, csvsize):
         csvdict['csvdata'][-1] = csvdict['newdata']
     #print(csvdict['csvdata'])
     np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
-    return csvdict
-
+    return csvdict   
+    
 # init
 ipaddr = '129.69.176.123'
 timedelta = 1 # seconds
@@ -203,8 +204,18 @@ try:
     print('Started database process')
 
     timestamp = int(dt.datetime.now().timestamp())
-
+    
+    old_day = dt.datetime.now().day
     while control_flag.value == 0:
+        # update analyse_database files for each new day
+        day_now = dt.datetime.now().day
+        if day_now != old_day:            
+            ana_db.analyse_database_voltage() 
+            ana_db.analyse_database_frequency()
+            ana_db.analyse_database_THD_U()
+            ana_db.analyse_database_THD_I()
+            old_day = day_now
+        
         if mbqueue.qsize() == 0:
             time.sleep(0.2)
         else:
@@ -234,6 +245,8 @@ try:
                 f.write(json.dumps(datadict))
             with open(os.path.join(basefolder,'temp/json/livedata.json'), 'w') as f:
                 f.write(json.dumps(livedatadict))
+            with open(os.path.join(basefolder,'temp/json/liveanalyse.json'), 'w') as f:
+                f.write(json.dumps(status_dict))
 
             # create csv files
             for index, csvdata in enumerate(csvdictlist):
