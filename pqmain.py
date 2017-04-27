@@ -109,12 +109,7 @@ def write_csv(csvdict, basefolder, csvsize):
         csvdict['csvdata'][-1] = csvdict['newdata']
     #print(csvdict['csvdata'])
     np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
-    return csvdict
-
-# update analyse_database files at 00:00:00
-
-if time.strftime('%H:%M:%S', time.localtime(time.time())) == '00:00:00':    
-    ana_db.analyse_database_voltage()      
+    return csvdict   
     
 # init
 ipaddr = '129.69.176.123'
@@ -201,8 +196,18 @@ try:
     print('Started database process')
 
     timestamp = int(dt.datetime.now().timestamp())
-
+    
+    old_day = dt.datetime.now().day
     while control_flag.value == 0:
+        # update analyse_database files for each new day
+        day_now = dt.datetime.now().day
+        if day_now != old_day:            
+            ana_db.analyse_database_voltage() 
+            ana_db.analyse_database_frequency()
+            ana_db.analyse_database_THD_U()
+            ana_db.analyse_database_THD_I()
+            old_day = day_now
+        
         if mbqueue.qsize() == 0:
             time.sleep(0.2)
         else:
