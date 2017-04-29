@@ -1,34 +1,28 @@
 // Helper Function in pure Javascript
 var timers = [];
 function clearTimers() {
-    for (var i=0; i<timers.length; i++) {
-        window.clearTimeout(timers[i]);
-    }
-    timers = [];
+  for (var i=0; i<timers.length; i++) {
+    window.clearTimeout(timers[i]);
+  }
+  timers = [];
 }
 
 function legendFormatter(data) {
   if (data.x == null) {
-    if (data.dygraph.rawData_.length == 0) {
-      return 
-    }
-    
+    if (data.dygraph.rawData_.length == 0) {return}
     let t;
     // Abfrage ob Harmonische oder nicht
     if (data.dygraph.rawData_.length != 39) {
       t = data.dygraph.rawData_.length - 1;
     }
-     else {
-        t = 1
-        var x_Value_label = data.dygraph.rawData_;
-      }
-     
+    else {
+      t = 1
+      var x_Value_label = data.dygraph.rawData_;
+    }
     let firstDataPoint = data.dygraph.rawData_[t];
-    
     maxData = firstDataPoint.length;
     for (var i=1; i < maxData; i++) {
-    
-    data.series[i-1]['firstDataPoint']= firstDataPoint[i];
+      data.series[i-1]['firstDataPoint']= firstDataPoint[i];
     }
     x=firstDataPoint[0]
     // Abfrage ob Harmonische oder nicht
@@ -38,34 +32,28 @@ function legendFormatter(data) {
     else {
       var x_Value_Label = '2. Harmonische'
     }
-    
-   // This happens when there's no selection and {legend: 'always'} is set.
+    // This happens when there's no selection and {legend: 'always'} is set.
   	return  x_Value_Label + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>';
-  
   }
-
-  	if (data.dygraph.rawData_.length != 39) {
-  		var html = data.xHTML
-  	}
-  	else {
-  		var html =  data.xHTML + '. Harmonische';
-  	}
-  	console.log(data)
-
-    data.series.forEach(function(series) {
-    if (!series.isVisible) return;
+  if (data.dygraph.rawData_.length != 39) {
+    var html = data.xHTML
+  }
+  else {
+    var html =  data.xHTML + '. Harmonische';
+  }
+  data.series.forEach(function(series) {
+    if (!series.isVisible) {return};
     var labeledData = '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.yHTML;
     if (series.isHighlighted) {
       labeledData = '<b>' + labeledData + '</b>';
     }
     html += '<br>' + series.dashHTML + ' ' + labeledData ;
   });
-    html += '<br>' + '<br>';
+  html += '<br>' + '<br>';
   return html;
 }
 
 function barChartPlotter(e) {
-      
   if (e.seriesIndex !== 0) return;
   var g = e.dygraph;
   var ctx = e.drawingContext;
@@ -84,8 +72,6 @@ function barChartPlotter(e) {
   var bar_width = Math.floor(2.0 / 3 * min_sep);
   var fillColors = g.getColors();
   var strokeColors = g.getColors();
-  
-  
   for (var j = 0; j < sets.length; j++) {
     ctx.fillStyle = fillColors[j];
     ctx.strokeStyle = strokeColors[j];
@@ -208,19 +194,18 @@ $(document).ready(function(){
             var THD_I = 906 + i*2;
             var f = 800;
             // push data to table Id
-            document.getElementById("U" + i + "t").innerHTML =  input["port_" + U] ;
-            document.getElementById("I" + i + "t").innerHTML =  input["port_" + I] ;
-            document.getElementById("S" + i + "t").innerHTML =  input["port_" + S] ;
-            document.getElementById("P" + i + "t").innerHTML =  input["port_" + P] ;
-            document.getElementById("Q" + i + "t").innerHTML =  input["port_" + Q] ;
+            document.getElementById("U" + i + "t").innerHTML =  input["port_" + U];
+            document.getElementById("I" + i + "t").innerHTML =  input["port_" + I];
+            document.getElementById("S" + i + "t").innerHTML =  input["port_" + S];
+            document.getElementById("P" + i + "t").innerHTML =  input["port_" + P];
+            document.getElementById("Q" + i + "t").innerHTML =  input["port_" + Q];
             document.getElementById("THD_U" + i + "t").innerHTML =  input["port_" + THD_U];
             document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];
-            document.getElementById("ft").innerHTML =  input["port_" + f] ;                    
+            document.getElementById("ft").innerHTML =  input["port_" + f];
           };
           timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
         }
       });
-
       $.ajax({
         cache: false,
         url: "temp/json/liveanalyse.json",
@@ -229,16 +214,15 @@ $(document).ready(function(){
           let input = data
           // Iterate over all needed ports
           for (i=1; i <= 3; i++) {
-           
             // push data to table Id
-            document.getElementById("Norm_U" + i + "t").innerHTML =  input["voltage_L" + i]; ;
-            document.getElementById("Norm_I" + i + "t").innerHTML =  1 ;
-            document.getElementById("Norm_S" + i + "t").innerHTML =  input["-"] ;
-            document.getElementById("Norm_P" + i + "t").innerHTML =  input["-"] ;
-            document.getElementById("Norm_Q" + i + "t").innerHTML =  input["-"] ;
-            document.getElementById("Norm_THD_U" + i + "t").innerHTML =  input["THD_U_L" + i];
-            document.getElementById("Norm_THD_I" + i + "t").innerHTML =  input["THD_I_L" + i];
-            document.getElementById("Norm_ft").innerHTML =  input["frequency_status"] ;                    
+            document.getElementById("Norm_U" + i + "t").innerHTML =  input["voltage_L" + i];
+            document.getElementById("Norm_I" + i + "t").innerHTML =  1;
+            document.getElementById("Norm_S" + i + "t").innerHTML =  1;
+            document.getElementById("Norm_P" + i + "t").innerHTML =  1;
+            document.getElementById("Norm_Q" + i + "t").innerHTML =  1;
+            document.getElementById("Norm_THD_U" + i + "t").innerHTML =  1;
+            document.getElementById("Norm_THD_I" + i + "t").innerHTML =  1;
+            document.getElementById("Norm_ft").innerHTML =  1;
           };
           timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
         }
@@ -501,7 +485,7 @@ $(document).ready(function(){
         success: function (data) {
           currentVoltageData = data;
           // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
-          if (currentVoltageData.length > 60000) { 
+          if (currentVoltageData.length > 60000) {
             currentVoltageGraph.updateOptions({'file':currentVoltageData});
           }
           timers.push(window.setTimeout(function (){updateCurrentVoltageGraph();}, 1000));
