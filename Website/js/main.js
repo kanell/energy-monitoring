@@ -216,13 +216,9 @@ $(document).ready(function(){
           for (i=1; i <= 3; i++) {
             // push data to table Id
             document.getElementById("Norm_U" + i + "t").innerHTML =  input["voltage_L" + i];
-            document.getElementById("Norm_I" + i + "t").innerHTML =  1;
-            document.getElementById("Norm_S" + i + "t").innerHTML =  1;
-            document.getElementById("Norm_P" + i + "t").innerHTML =  1;
-            document.getElementById("Norm_Q" + i + "t").innerHTML =  1;
-            document.getElementById("Norm_THD_U" + i + "t").innerHTML =  1;
-            document.getElementById("Norm_THD_I" + i + "t").innerHTML =  1;
-            document.getElementById("Norm_ft").innerHTML =  1;
+            document.getElementById("Norm_THD_U" + i + "t").innerHTML =  input["THD_U_L" + i];
+            document.getElementById("Norm_THD_I" + i + "t").innerHTML =  input["TDH_I_L" + i];
+            //document.getElementById("Norm_ft").innerHTML =  1;
           };
           timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
         }
