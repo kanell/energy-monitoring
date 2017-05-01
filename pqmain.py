@@ -229,7 +229,7 @@ try:
     dbprocess = Process(target=put_data, args=args)
     dbprocess.start()
     print('Started database process')
-    args = (control_flag)
+    args = (control_flag,)
     anadbprocess = Process(target=update_analyse_database, args=args)
     anadbprocess.start()
     print('Started analyse database process')
