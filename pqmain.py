@@ -99,8 +99,35 @@ def put_data(queue, db, tablename, control_flag):
     finally:
         # check if queue is empty
         while queue.qsize() != 0:
-            queue.get()    
-            
+            queue.get()
+
+def update_analyse_database(control_flag):
+    # ignore signals from main process
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+    old_day = dt.datetime.now().day
+    try:
+        starttime = dt.datetime.now().timestamp()
+        while control_flag.value == 0:
+            # update analyse_database files for each new day
+            day_now = dt.datetime.now().day
+            # check if it is a new day
+            if day_now != old_day:
+                ana_db.analyse_database_voltage()
+                ana_db.analyse_database_frequency()
+                ana_db.analyse_database_THD_U()
+                ana_db.analyse_database_THD_I()
+                old_day = day_now
+    except:
+        control_flag.value = 1
+
+        import traceback
+        print(traceback.format_exc())
+        raise
+    finally:
+        # close process
+        pass
+
 def write_csv(csvdict, basefolder, csvsize):
     if csvdict['csvdata'].shape[0] < csvsize:
         csvdict['csvdata'] = np.append(csvdict['csvdata'],np.array([csvdict['newdata']]),axis=0)
@@ -109,8 +136,8 @@ def write_csv(csvdict, basefolder, csvsize):
         csvdict['csvdata'][-1] = csvdict['newdata']
     #print(csvdict['csvdata'])
     np.savetxt(os.path.join(basefolder,'temp/csv/'+str(csvdict['filename'])+'.csv'),csvdict['csvdata'],delimiter=',',newline='\n',header=csvdict['header'], comments='')
-    return csvdict   
-    
+    return csvdict
+
 # init
 ipaddr = '129.69.176.123'
 timedelta = 1 # seconds
@@ -202,20 +229,14 @@ try:
     dbprocess = Process(target=put_data, args=args)
     dbprocess.start()
     print('Started database process')
+    args = (control_flag)
+    anadbprocess = Process(target=update_analyse_database, args=args)
+    anadbprocess.start()
+    print('Started analyse database process')
 
     timestamp = int(dt.datetime.now().timestamp())
-    
-    old_day = dt.datetime.now().day
+
     while control_flag.value == 0:
-        # update analyse_database files for each new day
-        day_now = dt.datetime.now().day
-        if day_now != old_day:            
-            ana_db.analyse_database_voltage() 
-            ana_db.analyse_database_frequency()
-            ana_db.analyse_database_THD_U()
-            ana_db.analyse_database_THD_I()
-            old_day = day_now
-        
         if mbqueue.qsize() == 0:
             time.sleep(0.2)
         else:
@@ -274,7 +295,7 @@ try:
                 live_harmonics_i[index,2] = datadict['port_'+str(ports[1])]
                 live_harmonics_i[index,3] = datadict['port_'+str(ports[2])]
             np.savetxt(os.path.join(basefolder,'temp/csv/harmonics_i.csv'),live_harmonics_i,delimiter=',',newline='\n',header='number,i1,i2,i3', comments='')
-            
+
             time2 = time.time()
             min_time = min(min_time,time2-time1)
             max_time = max(max_time,time2-time1)
@@ -301,5 +322,6 @@ finally:
 
     mbprocess.join()
     dbprocess.join()
+    anadbprocess.join()
 
     print('finished measurement')
