@@ -118,6 +118,9 @@ def update_analyse_database(control_flag):
                 ana_db.analyse_database_THD_U()
                 ana_db.analyse_database_THD_I()
                 old_day = day_now
+            else:
+                # process can sleep
+                time.sleep(1)
     except:
         control_flag.value = 1
 
