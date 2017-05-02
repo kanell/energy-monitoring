@@ -253,6 +253,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_U_i'),
@@ -299,6 +302,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_f_i'),
@@ -345,6 +351,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_I_i'),
@@ -391,6 +400,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_L_i'),
@@ -522,6 +534,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_U_h'),
@@ -605,6 +620,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_f_h'),
@@ -688,6 +706,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_I_h'),
@@ -771,6 +792,9 @@ $(document).ready(function(){
             valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
             axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
             ticker: Dygraph.dateTicker
+        },
+        y : {
+        	axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_L_h'),
