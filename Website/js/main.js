@@ -32,8 +32,14 @@ function legendFormatter(data) {
     else {
       var x_Value_Label = '2. Harmonische'
     }
-    // This happens when there's no selection and {legend: 'always'} is set.
-  	return  x_Value_Label + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>';
+    console.log(b);
+    if (b=="aktiv") {
+      var label = '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: '}).join('<br>') + '<br>' + '<br>'
+    }
+    else {
+      var label = x_Value_Label + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>'
+    }
+    return  label;
   }
   if (data.dygraph.rawData_.length != 39) {
     var html = data.xHTML

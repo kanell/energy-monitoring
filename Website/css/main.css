@@ -323,8 +323,10 @@ table.Bezeichnung tr:nth-child(even)  {
 div.Legend {
 
 display: inline-block; 
+width: 200px;
 margin-top: 10px;
 position: absolute;
+text-align: left;
 right: 10px;
 background-color: white;
 z-index: 100;
