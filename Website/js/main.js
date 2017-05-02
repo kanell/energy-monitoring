@@ -150,8 +150,16 @@ function makeFlaskRequestDeviationTable(tableId, requestJSON){
     console.log(req.response);
     let trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
     $.each(req.response, function (i, item) {
-      trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
-    });
+    	console.log(item);
+    	if (item.length == 0) { 
+    	  return 
+    	}
+    	else {
+    	  trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
+  		}
+  	});
+  } 
+      
     tableId.innerHTML = trHTML;
   }
   req.addEventListener('load',appendToTable);
