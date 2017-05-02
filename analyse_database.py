@@ -15,7 +15,7 @@ import datetime as dt
 with open('db_config.json','r') as f:
     db_config = json.loads(f.read())
 
-basefolder = '../Website/temp/json'
+basefolder = 'Website/temp/json'
 tablename = db_config['tablename']
 
 
