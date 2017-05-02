@@ -33,6 +33,7 @@ function legendFormatter(data) {
     else {
       var x_Value_Label = '2. Harmonische'
     }
+    console.log(b);
     if (b=="aktiv") {
       var label = '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: '}).join('<br>') + '<br>' + '<br>'
     }
