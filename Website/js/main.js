@@ -213,6 +213,9 @@ $(document).ready(function(){
           timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
         }
       });
+    }
+    updateLiveDashboad();
+    function updateLiveAnalyse() {
       $.ajax({
         cache: false,
         url: "temp/json/liveanalyse.json",
@@ -224,14 +227,14 @@ $(document).ready(function(){
             // push data to table Id
             document.getElementById("Norm_U" + i + "t").innerHTML =  input["voltage_L" + i];
             document.getElementById("Norm_THD_U" + i + "t").innerHTML =  input["THD_U_L" + i];
-            document.getElementById("Norm_THD_I" + i + "t").innerHTML =  input["TDH_I_L" + i];
+            //document.getElementById("Norm_THD_I" + i + "t").innerHTML =  input["TDH_I_L" + i];
             //document.getElementById("Norm_ft").innerHTML =  1;
           };
-          timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
+          timers.push(window.setTimeout(function (){updateLiveAnalyse();}, 1000));
         }
       });
     }
-    updateLiveDashboad()
+    updateLiveAnalyse();
   });
 
   // Spannung wird geklickt
