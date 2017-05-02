@@ -255,7 +255,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_U_i'),
@@ -304,7 +304,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_f_i'),
@@ -353,7 +353,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_I_i'),
@@ -402,7 +402,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_L_i'),
@@ -446,7 +446,12 @@ $(document).ready(function(){
       dateWindow: [1,40],
       labelsDiv: document.getElementById('legend_H_U_i'),
       legend: 'always',
-      legendFormatter: legendFormatter
+      legendFormatter: legendFormatter,
+      axes : {
+        y : {
+            axisLabelWidth : 65
+        }
+      }
     }
 
     let currentHarmonicVoltageData = 'number,u1,u2,u3\n'
@@ -483,7 +488,12 @@ $(document).ready(function(){
       ylabel : 'RMS der Harmonischen [V]',
       labelsDiv: document.getElementById('legend_H_I_i'),
       legend: 'always',
-      legendFormatter: legendFormatter
+      legendFormatter: legendFormatter,
+      axes : {
+        y: {
+            axisLabelWidth : 65
+        }
+      }
     }
 
     let currentHarmonicCurrentData = 'number,i1,i2,i3\n'
@@ -536,7 +546,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_U_h'),
@@ -622,7 +632,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_f_h'),
@@ -708,7 +718,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_I_h'),
@@ -794,7 +804,7 @@ $(document).ready(function(){
             ticker: Dygraph.dateTicker
         },
         y : {
-        	axisLabelWidth: 65
+            axisLabelWidth: 65
         }
       },
       labelsDiv: document.getElementById('legend_L_h'),
