@@ -59,9 +59,16 @@ def fetch_raw(master,start):
     raw_data = master.execute(1, cst.READ_HOLDING_REGISTERS,start, 123)
     return raw_data
 
-def fetch_raw_new(master,port):
+def fetch_raw_new(master,start,end):
     '''Fetches data via Modbus. Can only take 123 floating point numbers at once.'''
-    raw_data = master.execute(1, cst.READ_HOLDING_REGISTERS,port, 1)
+    # it is necessary that the number of ports is even
+    number_of_ports = end - start + 1
+    if number_of_ports % 2: 
+        number_of_ports += 1
+    # data format is float
+    data_format = '>' + number_of_ports // 2 * 'f'
+    #print('start: {}, end: {}, number of ports: {}, data format: {}'.format(start,end,number_of_ports,data_format))
+    raw_data = master.execute(1, cst.READ_HOLDING_REGISTERS, start, number_of_ports, 0, data_format)
     return raw_data
 
 def fetch_data_dataframe(dataframe,ports,master):
@@ -69,22 +76,27 @@ def fetch_data_dataframe(dataframe,ports,master):
     seperat DataFrame.'''
     start_time = dt.datetime.now()
     for i in ports.index:
-        data = ()
         n = 0
         delta = ports.at[i,'end'] - ports.at[i,'start']
+        data = ()
+        #print('delta: ' + str(delta))
         if delta < 123:
             start = ports.at[i,'start']
-            data = data + fetch_raw(master,start)
+            end = ports.at[i,'end']
+            data = data + fetch_raw_new(master,start,end)
         else:
-            x = math.ceil(delta/123)
+            x = math.ceil(delta/122)
             for k in range(x):
-                start =  ports.at[i,'start']+k*124
-                data = data + fetch_raw(master,start)
+                start =  ports.at[i,'start'] + k*122
+                if k < x-1:
+                    end = start + 121
+                else:
+                    end = ports.at[i,'end']
+                data = data + fetch_raw_new(master,start,end)
         if ports.at[i,'range'] == 2:
-            for m in range(ports.at[i,'start'],ports.at[i,'end']+1,ports.at[i,'range']):
-                dataframe[m] = convert_to_float(data[n:n+2])
-                #print('port: ' + str(m) + ' ,data: ' + str(data[n:n+2]) + ' ,value: ' + str(dataframe[m]))
-                n += ports.at[i,'range']
+            for n,m in enumerate(range(ports.at[i,'start'],ports.at[i,'end']+1,ports.at[i,'range'])):
+                dataframe[m] = np.round(data[n],4)
+                #print('port: {}, value: {}, index: {}'.format(m,data[n:n+1],n))
 
     end_time = dt.datetime.now()
     timedelta = end_time - start_time

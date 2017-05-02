@@ -430,7 +430,7 @@ $(document).ready(function(){
       digitsAfterDecimal : 4,
       plotter: barChartPlotter,
       xlabel : 'Harmonischenzahl',
-      ylabel : 'Amplitude der Harmonischen',
+      ylabel : 'Amplitude der Harmonischen [%]',
       dateWindow: [1,40],
       labelsDiv: document.getElementById('legend_H_U_i'),
       legend: 'always',
@@ -468,7 +468,7 @@ $(document).ready(function(){
       plotter: barChartPlotter,
       dateWindow: [1,40],
       xlabel : 'Harmonischenzahl',
-      ylabel : 'Amplitude der Harmonischen',
+      ylabel : 'RMS der Harmonischen [V]',
       labelsDiv: document.getElementById('legend_H_I_i'),
       legend: 'always',
       legendFormatter: legendFormatter

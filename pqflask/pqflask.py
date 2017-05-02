@@ -51,6 +51,7 @@ def get_data_from_db(startTime, endTime, dataName, dataSize):
     # get current
     elif dataName == 'current':
         selectors = ['port_860','port_862','port_864']
+        header = 'timestamp,i1,i2,i3'
         df_short = np.empty((df.size,len(selectors)+1))
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
@@ -117,7 +118,7 @@ def analyse_database():
     dataPhase = requestJSON['dataPhase']
     # check db for events and write jsons
     if dataName == 'voltage':
-        ana_db.analyse_database_voltage()
+        #ana_db.analyse_database_voltage()
         if os.path.isfile('../Website/temp/json/voltage_L{}.json'.format(dataPhase)):
             with open('../Website/temp/json/voltage_L{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
@@ -125,21 +126,21 @@ def analyse_database():
             responseJSON = json.dumps(['no data'])
 
     elif dataName == 'frequency':
-        ana_db.analyse_database_frequency()
+        #ana_db.analyse_database_frequency()
         if os.path.isfile('../Website/temp/json/frequency_critical.json'.format(dataPhase)):
             with open('../Website/temp/json/frequency_critical.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
         else:
             responseJSON = json.dumps(['no data'])
     elif dataName == 'thdu':
-        ana_db.analyse_database_THD_U()
+        #ana_db.analyse_database_THD_U()
         if os.path.isfile('../Website/temp/json/THD_U_L{}.json'.format(dataPhase)):
             with open('../Website/temp/json/THD_U_L{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
         else:
             responseJSON = json.dumps(['no data'])
     elif dataName == 'thdi':
-        ana_db.analyse_database_THD_I()
+        #ana_db.analyse_database_THD_I()
         if os.path.isfile('../Website/temp/json/THD_I_L{}.json'.format(dataPhase)):
             with open('../Website/temp/json/THD_I_L{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
