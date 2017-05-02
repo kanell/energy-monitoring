@@ -8,7 +8,6 @@ function clearTimers() {
 }
 
 function legendFormatter(data) {
-  // Wird in der Legende angezeigt, wenn nichts ausgewählt ist
   if (data.x == null) {
     if (data.dygraph.rawData_.length == 0) {return}
     let t;
@@ -33,15 +32,9 @@ function legendFormatter(data) {
     else {
       var x_Value_Label = '2. Harmonische'
     }
-    if (b=="aktiv") {
-      var label = '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: '}).join('<br>') + '<br>' + '<br>'
-    }
-    else {
-      var label = x_Value_Label + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>'
-    }
-    return  label;
+    // This happens when there's no selection and {legend: 'always'} is set.
+  	return  x_Value_Label + '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: ' + series.firstDataPoint }).join('<br>') + '<br>' + '<br>';
   }
-  // Wird in der Legende angezeigt, wenn der Cursor über einem Datenpunkt liegt
   if (data.dygraph.rawData_.length != 39) {
     var html = data.xHTML
   }
@@ -431,6 +424,8 @@ $(document).ready(function(){
     const currentHarmonicVoltageOptions = {
       digitsAfterDecimal : 4,
       plotter: barChartPlotter,
+      xlabel : 'Harmonischenzahl',
+      ylabel : 'Amplitude der Harmonischen',
       dateWindow: [1,40],
       labelsDiv: document.getElementById('legend_H_U_i'),
       legend: 'always',
@@ -463,42 +458,33 @@ $(document).ready(function(){
     clearTimers();
 
     // set graph
-    const currentVoltageOptions = {
-      xValueParser : function(x) {return 1000 * parseFloat(x);},
-      xlabel : 'Uhrzeit',
-      ylabel : 'Spannung [V]',
+    const currentHarmonicCurrentOptions = {
       digitsAfterDecimal : 4,
-      axes : {
-        x : {
-            valueFormatter : function(x) {return Dygraph.dateString_(x,0);},
-            axisLabelFormatter : Dygraph.dateAxisLabelFormatter,
-            ticker: Dygraph.dateTicker
-        }
-      },
+      plotter: barChartPlotter,
+      dateWindow: [1,40],
+      xlabel : 'Harmonischenzahl',
+      ylabel : 'Amplitude der Harmonischen',
       labelsDiv: document.getElementById('legend_H_I_i'),
       legend: 'always',
       legendFormatter: legendFormatter
     }
 
-    let currentVoltageData = "timestamp,u1,u2,u3\n"
-    let currentVoltageGraph = new Dygraph(document.getElementById("div_H_I"), currentVoltageData, currentVoltageOptions);
-    function updateCurrentVoltageGraph () {
+    let currentHarmonicCurrentData = 'number,i1,i2,i3\n'
+    let currentHarmonicCurrentGraph = new Dygraph(document.getElementById("div_H_I"), currentHarmonicCurrentData, currentHarmonicCurrentOptions);
+    function updateCurrentHarmonicCurrentGraph () {
       $.ajax({
         type: "GET",
         cache: false,
-        url: "temp/csv/voltage.csv",
+        url: "temp/csv/harmonics_i.csv",
         dataType: "text",
         success: function (data) {
-          currentVoltageData = data;
-          // if-Abfrage zur Überprüfung der Vollständigkeit des Datensatzes
-          if (currentVoltageData.length > 60000) {
-            currentVoltageGraph.updateOptions({'file':currentVoltageData});
-          }
-          timers.push(window.setTimeout(function (){updateCurrentVoltageGraph();}, 1000));
+          currentHarmonicCurrentData = data;
+          currentHarmonicCurrentGraph.updateOptions({'file':currentHarmonicCurrentData});
+          timers.push(window.setTimeout(function (){updateCurrentHarmonicCurrentGraph();}, 1000));
         }
       });
     }
-    updateCurrentVoltageGraph()
+    updateCurrentHarmonicCurrentGraph()
   });
 
   /* Historische Werte */
@@ -841,13 +827,6 @@ $(document).ready(function(){
     $("#Harmonische_U_h").show();
     changeColor(a="oben",b="aktiv", c="oben");
     clearTimers();
-    let historicHarmonicUData = [[1,2],[3,4]];
-    let historicHarmonicUGraph = simpleheat(document.getElementById('historic_heatmap_u'));
-    historicHarmonicUGraph.max(Math.max(historicHarmonicUData))
-    historicHarmonicUGraph.data(historicHarmonicUData)
-    historicHarmonicUGraph.radius(1, 1);
-    historicHarmonicUGraph.gradient({0.45: 'blue', 0.75: 'lime', 1: 'red'});
-    historicHarmonicUGraph.draw()
   });
 
   // Harmonische Strom werden geklickt
