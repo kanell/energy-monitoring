@@ -35,19 +35,15 @@ def analyse_database_frequency():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_frequency_critical = []
-    i = 0
-    while i < len(timestamp_frequency_float):
+    for i in range(len(timestamp_frequency_float)):
         timestamp_frequency_critical.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_frequency_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_frequency_critical != []:
+        if len(timestamp_frequency_critical) != 0:
             frequency_critical_JS = []
-            i = 0
-            while i < len(timestamp_frequency_critical):
+            for i in range(len(timestamp_frequency_critical)):
                 frequency_critical_JS.append({"timestamp": timestamp_frequency_critical[i], "value": data_frequency_critical[i],"deviation": (data_frequency_critical[i]-50)/50*100})
-                i += 1
             with open(os.path.join(basefolder, "frequency_critical.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_critical_JS))
     except KeyError:
@@ -60,19 +56,15 @@ def analyse_database_frequency():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_frequency_bad = []
-    i = 0
-    while i < len(timestamp_frequency_float):
+    for i in range(len(timestamp_frequency_float)):
         timestamp_frequency_bad.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_frequency_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_frequency_bad != []:
+        if len(timestamp_frequency_bad) != 0:
             frequency_bad_JS = []
-            i = 0
-            while i < len(timestamp_frequency_bad):
+            for i in range(len(timestamp_frequency_bad)):
                 frequency_bad_JS.append({"timestamp": timestamp_frequency_bad[i], "value": data_frequency_bad[i],"deviation": (data_frequency_bad[i]-50)/50*100})
-                i += 1
             with open(os.path.join(basefolder, "frequency_bad.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_bad_JS))
     except KeyError:
@@ -96,19 +88,15 @@ def analyse_database_voltage():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_voltage_L1 = []
-    i = 0
-    while i < len(timestamp_voltage_L1_float):
+    for i in range(len(timestamp_voltage_L1_float)):
         timestamp_voltage_L1.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_voltage_L1_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_voltage_L1 != []:
+        if len(timestamp_voltage_L1) != 0:
             voltage_L1_JS = []
-            i = 0
-            while i < len(timestamp_voltage_L1):
+            for i in range(len(timestamp_voltage_L1)):
                 voltage_L1_JS.append({"timestamp": timestamp_voltage_L1[i], "value": data_voltage_L1[i],"deviation": (data_voltage_L1[i]-230)/230*100})
-                i += 1
             with open(os.path.join(basefolder, "voltage_L1.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L1_JS))
     except KeyError:
@@ -120,19 +108,15 @@ def analyse_database_voltage():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_voltage_L2 = []
-    i = 0
-    while i < len(timestamp_voltage_L2_float):
+    for i in range(len(timestamp_voltage_L2_float)):
         timestamp_voltage_L2.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_voltage_L2_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_voltage_L2 != []:
+        if len(timestamp_voltage_L2) != 0:
             voltage_L2_JS = []
-            i = 0
-            while i < len(timestamp_voltage_L2):
+            for i in range(len(timestamp_voltage_L2)):
                 voltage_L2_JS.append({"timestamp": timestamp_voltage_L2[i], "value": data_voltage_L2[i],"deviation": (data_voltage_L2[i]-230)/230*100})
-                i += 1
             with open(os.path.join(basefolder, "voltage_L2.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L2_JS))
     except KeyError:
@@ -144,19 +128,15 @@ def analyse_database_voltage():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_voltage_L3 = []
-    i = 0
-    while i < len(timestamp_voltage_L3_float):
+    for i in range(len(timestamp_voltage_L3_float)):
         timestamp_voltage_L3.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_voltage_L3_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_voltage_L3 != []:
+        if len(timestamp_voltage_L3) != 0:
             voltage_L3_JS = []
-            i = 0
-            while i < len(timestamp_voltage_L3):
+            for i in range(len(timestamp_voltage_L3)):
                 voltage_L3_JS.append({"timestamp": timestamp_voltage_L3[i], "value": data_voltage_L3[i],"deviation": (data_voltage_L3[i]-230)/230*100})
-                i += 1
             with open(os.path.join(basefolder, "voltage_L3.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L3_JS))
     except KeyError:
@@ -171,19 +151,15 @@ def analyse_database_THD_U():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_THD_U_L1 = []
-    i = 0
-    while i < len(timestamp_THD_U_L1_float):
+    for i in range(len(timestamp_THD_U_L1_float)):
         timestamp_THD_U_L1.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_U_L1_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_THD_U_L1 != []:
+        if len(timestamp_THD_U_L1) != 0:
             THD_U_L1_JS = []
-            i = 0
-            while i < len(timestamp_THD_U_L1):
+            for i in range(len(timestamp_THD_U_L1)):
                 THD_U_L1_JS.append({"timestamp": timestamp_THD_U_L1[i], "value": data_THD_U_L1[i],"deviation": data_THD_U_L1[i]})
-                i += 1
             with open(os.path.join(basefolder, "THD_U_L1.json"),"w") as out_file:
                 out_file.write(json.dumps(THD_U_L1_JS))
     except KeyError:
@@ -195,19 +171,15 @@ def analyse_database_THD_U():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_THD_U_L2 = []
-    i = 0
-    while i < len(timestamp_THD_U_L2_float):
+    for i in range(len(timestamp_THD_U_L2_float)):
         timestamp_THD_U_L2.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_U_L2_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_THD_U_L2 != []:
+        if len(timestamp_THD_U_L2) != 0:
             THD_U_L2_JS = []
-            i = 0
-            while i < len(timestamp_THD_U_L2):
+            for i in range(len(timestamp_THD_U_L2)):
                 THD_U_L2_JS.append({"timestamp": timestamp_THD_U_L2[i], "value": data_THD_U_L2[i],"deviation": data_THD_U_L2[i]})
-                i += 1
             with open(os.path.join(basefolder, "THD_U_L2.json"),"w") as out_file:
                 out_file.write(json.dumps(THD_U_L2_JS))
     except KeyError:
@@ -219,19 +191,15 @@ def analyse_database_THD_U():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_THD_U_L3 = []
-    i = 0
-    while i < len(timestamp_THD_U_L3_float):
+    for i in range(len(timestamp_THD_U_L3_float)):
         timestamp_THD_U_L3.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_U_L3_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_THD_U_L3 != []:
+        if len(timestamp_THD_U_L3) != 0:
             THD_U_L3_JS = []
-            i = 0
-            while i < len(timestamp_THD_U_L3):
+            for i in range(len(timestamp_THD_U_L3)):
                 THD_U_L3_JS.append({"timestamp": timestamp_THD_U_L3[i], "value": data_THD_U_L3[i],"deviation": data_THD_U_L3[i]})
-                i += 1
             with open(os.path.join(basefolder, "THD_U_L3.json"),"w") as out_file:
                 out_file.write(json.dumps(THD_U_L3_JS))
     except KeyError:
@@ -246,19 +214,15 @@ def analyse_database_THD_I():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_THD_I_L1 = []
-    i = 0
-    while i < len(timestamp_THD_I_L1_float):
+    for i in range(len(timestamp_THD_I_L1_float)):
         timestamp_THD_I_L1.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_I_L1_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_THD_I_L1 != []:
+        if len(timestamp_THD_I_L1) != 0:
             THD_I_L1_JS = []
-            i = 0
-            while i < len(timestamp_THD_I_L1):
+            for i in range(len(timestamp_THD_I_L1)):
                 THD_I_L1_JS.append({"timestamp": timestamp_THD_I_L1[i], "value": data_THD_I_L1[i],"deviation": data_THD_I_L1[i]})
-                i += 1
             with open(os.path.join(basefolder, "THD_I_L1.json"),"w") as out_file:
                 out_file.write(json.dumps(THD_I_L1_JS))
     except KeyError:
@@ -270,24 +234,19 @@ def analyse_database_THD_I():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_THD_I_L2 = []
-    i = 0
-    while i < len(timestamp_THD_L2_float):
+    for i in range(len(timestamp_THD_L2_float)):
         timestamp_THD_I_L2.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_L2_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_THD_I_L2 != []:
+        if len(timestamp_THD_I_L2) != 0:
             THD_I_L2_JS = []
-            i = 0
-            while i < len(timestamp_THD_I_L2):
+            for i in range(len(timestamp_THD_I_L2)):
                 THD_I_L2_JS.append({"timestamp": timestamp_THD_I_L2[i], "value": data_THD_I_L2[i],"deviation": data_THD_I_L2[i]})
-                i += 1
             with open(os.path.join(basefolder, "THD_I_L2.json"),"w") as out_file:
                 out_file.write(json.dumps(THD_I_L2_JS))
     except KeyError:
         pass
-
 
 # Get data and timestamps from database
     data_THD_I_L3 = np.round(pqdb.get_data(db, tablename, 'port_2238', 'port_2238 > 8'), 2)
@@ -295,19 +254,15 @@ def analyse_database_THD_I():
 
 # Transform float time in time "yyy-mm-dd hh:mm:ss"
     timestamp_THD_I_L3 = []
-    i = 0
-    while i < len(timestamp_THD_L3_float):
+    for i in range(len(timestamp_THD_L3_float)):
         timestamp_THD_I_L3.append(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp_THD_L3_float[i])))
-        i += 1
 
 # Save Data as json conform javascript file
     try:
-        if timestamp_THD_I_L3 != []:
+        if len(timestamp_THD_I_L3) != 0:
             THD_I_L3_JS = []
-            i = 0
-            while i < len(timestamp_THD_I_L2):
+            for i in range(len(timestamp_THD_I_L2)):
                 THD_I_L3_JS.append({"timestamp": timestamp_THD_I_L3[i], "value": data_THD_I_L3[i],"deviation": data_THD_I_L3[i]})
-                i += 1
             with open(os.path.join(basefolder, "THD_I_L3.json"),"w") as out_file:
                 out_file.write(json.dumps(THD_I_L3_JS))
     except KeyError:
