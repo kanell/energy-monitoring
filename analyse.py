@@ -47,28 +47,21 @@ def heatplot_data(starttime, endtime, datasize):
     for index, selector in enumerate(selectors):
         df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
     print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
-    np.save('harmonics.npy',df_short)
-
-
-def heatplot():
-    '''Funktion erstellt einen Heatplot der Hamonischen, wobei die erste Harmonische 
-    nicht berücksichtigt wird.'''
-    harmonics = np.load('harmonics.npy')
-    transpose = harmonics.T
+    transpose = df_short.T
     plt.close('all')
 
-    fig, ax = plt.subplots(figsize= [16,5], dpi = 80)
-    im = plt.pcolor(transpose[2:,:])
+    fig, ax = plt.subplots(figsize = [16,5], dpi = 300)
+    vmin = 0
+    vmax = 4
+    im = plt.pcolor(transpose[2:,:],vmin=vmin, vmax=vmax, cmap=None)
     fig.colorbar(mappable = im)
     
-
     plt.xlabel('Senkunden des Tages')
     plt.ylabel('Harmonische')
     plt.title('2. bis 41. Harmonsiche der Spannung\n')
     plt.subplots_adjust(left=0.04, bottom=0.1, right=0.999, top=0.9)
     plt.axis('tight')
-    plt.show()
-
+    plt.savefig('harmonics_u1.png',format='png',dpi=300)
 
 def analyse(pq_data):
     global index
