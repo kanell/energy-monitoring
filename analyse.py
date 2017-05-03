@@ -102,7 +102,7 @@ def analyse(pq_data):
     voltage_L2_average =  pq_data[1730]
     voltage_L3_average =  pq_data[1732]
             
-    if voltage_L1_average < 207 or voltage_L1_average > 253:
+    if voltage_L1_average < 250 or voltage_L1_average > 253:
         voltage_L1 = "critical"
     else:
         voltage_L1 = "okay"
