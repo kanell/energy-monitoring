@@ -147,17 +147,17 @@ function makeFlaskRequestDeviationTable(tableId, requestJSON){
   let req = new XMLHttpRequest();
   // insert data to deviation table
   function appendToTable(){
-      console.log(req.response)
-      if (req.response != "no data") {
-      let trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
-      $.each(req.response, function (i, item) {
-    	  trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
+    let trHTML;
+    if (req.response.data != "no data") {
+      trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
+      $.each(req.response.data, function (i, item) {
+    	trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
       });
     }
     else {
-        trHTML = 'Hierfür liegen bisher keine Daten vor'
+        trHTML = 'Hierfür liegen bisher keine Daten vor';
     }
-  	tableId.innerHTML = trHTML;
+    tableId.innerHTML = trHTML;
   }
   req.addEventListener('load',appendToTable);
   req.open('POST', '/get_data/analyse');
@@ -910,7 +910,6 @@ $(document).ready(function(){
   $("#f_a").click(function(){
     $("#analyse_voltage, #analyse_THDu, #analyse_THDi, #analyse_Interrupt, .Inhalt_ist, .Inhalt_hist").hide();
     $("#analyse_frequency").show();
-    changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
     let dataName = 'frequency';
     let dataPhase = 0;

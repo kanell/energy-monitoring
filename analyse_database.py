@@ -45,7 +45,7 @@ def analyse_database_frequency():
             for i in range(len(timestamp_frequency_critical)):
                 frequency_critical_JS.append({"timestamp": timestamp_frequency_critical[i], "value": data_frequency_critical[i],"deviation": (data_frequency_critical[i]-50)/50*100})
             with open(os.path.join(basefolder, "frequency_critical.json"),"w") as out_file:
-                out_file.write(json.dumps(frequency_critical_JS))
+                out_file.write(json.dumps({'data':frequency_critical_JS}))
     except KeyError:
         pass
 
@@ -66,7 +66,7 @@ def analyse_database_frequency():
             for i in range(len(timestamp_frequency_bad)):
                 frequency_bad_JS.append({"timestamp": timestamp_frequency_bad[i], "value": data_frequency_bad[i],"deviation": (data_frequency_bad[i]-50)/50*100})
             with open(os.path.join(basefolder, "frequency_bad.json"),"w") as out_file:
-                out_file.write(json.dumps(frequency_bad_JS))
+                out_file.write(json.dumps({'data':frequency_bad_JS}))
     except KeyError:
         pass
 
@@ -98,7 +98,7 @@ def analyse_database_voltage():
             for i in range(len(timestamp_voltage_L1)):
                 voltage_L1_JS.append({"timestamp": timestamp_voltage_L1[i], "value": data_voltage_L1[i],"deviation": (data_voltage_L1[i]-230)/230*100})
             with open(os.path.join(basefolder, "voltage_L1.json"),"w") as out_file:
-                out_file.write(json.dumps(voltage_L1_JS))
+                out_file.write(json.dumps({'data':voltage_L1_JS}))
     except KeyError:
         pass
 
@@ -118,7 +118,7 @@ def analyse_database_voltage():
             for i in range(len(timestamp_voltage_L2)):
                 voltage_L2_JS.append({"timestamp": timestamp_voltage_L2[i], "value": data_voltage_L2[i],"deviation": (data_voltage_L2[i]-230)/230*100})
             with open(os.path.join(basefolder, "voltage_L2.json"),"w") as out_file:
-                out_file.write(json.dumps(voltage_L2_JS))
+                out_file.write(json.dumps({'data':voltage_L2_JS}))
     except KeyError:
         pass
 
@@ -138,7 +138,7 @@ def analyse_database_voltage():
             for i in range(len(timestamp_voltage_L3)):
                 voltage_L3_JS.append({"timestamp": timestamp_voltage_L3[i], "value": data_voltage_L3[i],"deviation": (data_voltage_L3[i]-230)/230*100})
             with open(os.path.join(basefolder, "voltage_L3.json"),"w") as out_file:
-                out_file.write(json.dumps(voltage_L3_JS))
+                out_file.write(json.dumps({'data':voltage_L3_JS}))
     except KeyError:
         pass
 
@@ -161,7 +161,7 @@ def analyse_database_THD_U():
             for i in range(len(timestamp_THD_U_L1)):
                 THD_U_L1_JS.append({"timestamp": timestamp_THD_U_L1[i], "value": data_THD_U_L1[i],"deviation": data_THD_U_L1[i]})
             with open(os.path.join(basefolder, "THD_U_L1.json"),"w") as out_file:
-                out_file.write(json.dumps(THD_U_L1_JS))
+                out_file.write(json.dumps({'data':THD_U_L1_JS}))
     except KeyError:
         pass
 
@@ -181,7 +181,7 @@ def analyse_database_THD_U():
             for i in range(len(timestamp_THD_U_L2)):
                 THD_U_L2_JS.append({"timestamp": timestamp_THD_U_L2[i], "value": data_THD_U_L2[i],"deviation": data_THD_U_L2[i]})
             with open(os.path.join(basefolder, "THD_U_L2.json"),"w") as out_file:
-                out_file.write(json.dumps(THD_U_L2_JS))
+                out_file.write(json.dumps({'data':THD_U_L2_JS}))
     except KeyError:
         pass
 
@@ -201,7 +201,7 @@ def analyse_database_THD_U():
             for i in range(len(timestamp_THD_U_L3)):
                 THD_U_L3_JS.append({"timestamp": timestamp_THD_U_L3[i], "value": data_THD_U_L3[i],"deviation": data_THD_U_L3[i]})
             with open(os.path.join(basefolder, "THD_U_L3.json"),"w") as out_file:
-                out_file.write(json.dumps(THD_U_L3_JS))
+                out_file.write(json.dumps({'data':THD_U_L3_JS}))
     except KeyError:
         pass
 
@@ -224,7 +224,7 @@ def analyse_database_THD_I():
             for i in range(len(timestamp_THD_I_L1)):
                 THD_I_L1_JS.append({"timestamp": timestamp_THD_I_L1[i], "value": data_THD_I_L1[i],"deviation": data_THD_I_L1[i]})
             with open(os.path.join(basefolder, "THD_I_L1.json"),"w") as out_file:
-                out_file.write(json.dumps(THD_I_L1_JS))
+                out_file.write(json.dumps({'data':THD_I_L1_JS}))
     except KeyError:
         pass
 
@@ -244,7 +244,7 @@ def analyse_database_THD_I():
             for i in range(len(timestamp_THD_I_L2)):
                 THD_I_L2_JS.append({"timestamp": timestamp_THD_I_L2[i], "value": data_THD_I_L2[i],"deviation": data_THD_I_L2[i]})
             with open(os.path.join(basefolder, "THD_I_L2.json"),"w") as out_file:
-                out_file.write(json.dumps(THD_I_L2_JS))
+                out_file.write(json.dumps({'data':THD_I_L2_JS}))
     except KeyError:
         pass
 
@@ -264,6 +264,6 @@ def analyse_database_THD_I():
             for i in range(len(timestamp_THD_I_L2)):
                 THD_I_L3_JS.append({"timestamp": timestamp_THD_I_L3[i], "value": data_THD_I_L3[i],"deviation": data_THD_I_L3[i]})
             with open(os.path.join(basefolder, "THD_I_L3.json"),"w") as out_file:
-                out_file.write(json.dumps(THD_I_L3_JS))
+                out_file.write(json.dumps({'data':THD_I_L3_JS}))
     except KeyError:
         pass
