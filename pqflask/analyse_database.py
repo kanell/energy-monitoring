@@ -48,7 +48,7 @@ def analyse_database_frequency():
             while i < len(timestamp_frequency_critical):
                 frequency_critical_JS.append({"timestamp": timestamp_frequency_critical[i], "value": data_frequency_critical[i],"deviation": (data_frequency_critical[i]-50)/50*100})
                 i += 1
-            with open(os.path.join(basefolder, "frequency_critical.json"),"w") as out_file:
+            with open(os.path.join(basefolder, "frequency_critical_0.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_critical_JS))
     except KeyError:
         pass
@@ -73,7 +73,7 @@ def analyse_database_frequency():
             while i < len(timestamp_frequency_bad):
                 frequency_bad_JS.append({"timestamp": timestamp_frequency_bad[i], "value": data_frequency_bad[i],"deviation": (data_frequency_bad[i]-50)/50*100})
                 i += 1
-            with open(os.path.join(basefolder, "frequency_bad.json"),"w") as out_file:
+            with open(os.path.join(basefolder, "frequency_critical_1.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_bad_JS))
     except KeyError:
         pass

@@ -127,8 +127,8 @@ def analyse_database():
 
     elif dataName == 'frequency':
         #ana_db.analyse_database_frequency()
-        if os.path.isfile('../Website/temp/json/frequency_critical.json'.format(dataPhase)):
-            with open('../Website/temp/json/frequency_critical.json'.format(dataPhase), 'r') as f:
+        if os.path.isfile('../Website/temp/json/frequency_critical_{}.json'.format(dataPhase)):
+            with open('../Website/temp/json/frequency_critical_{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
         else:
             responseJSON = json.dumps(['no data'])
@@ -147,7 +147,12 @@ def analyse_database():
         else:
             responseJSON = json.dumps(['no data'])
     elif dataName == 'supplyinterrupt':
-        pass
+        #analyse voltage interruptions
+        if os.path.isfile('../Website/temp/json/longterm_interruptions.json'):
+            with open('../Website/temp/json/longterm_interruptions.json', 'r') as f:
+                responseJSON = f.read()
+        else:
+            responseJSON = json.dumps(['no data'])       
     else:
         return 'wrong request input'
     response = make_response(responseJSON)
