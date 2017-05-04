@@ -967,7 +967,7 @@ $(document).ready(function(){
 
   // Interrupt wurde geklickt
   $("#Interrupt").click(function(){
-    $("#analyse_frequency, #analyse_THDu, #analyse_voltage, #analyse_THDi .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_frequency, #analyse_THDu, #analyse_voltage, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
     $("#analyse_Interrupt").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
