@@ -46,7 +46,7 @@ def analyse_database_frequency():
             frequency_critical_JS = []
             i = 0
             while i < len(timestamp_frequency_critical):
-                frequency_critical_JS.append({"timestamp": timestamp_frequency_critical[i], "value": data_frequency_critical[i],"deviation": (data_frequency_critical[i]-50)/50*100})
+                frequency_critical_JS.append({"timestamp": timestamp_frequency_critical[i], "value": data_frequency_critical[i],"deviation": round((data_frequency_critical[i]-50)/50*100,1)})
                 i += 1
             with open(os.path.join(basefolder, "frequency_critical_0.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_critical_JS))
@@ -71,7 +71,7 @@ def analyse_database_frequency():
             frequency_bad_JS = []
             i = 0
             while i < len(timestamp_frequency_bad):
-                frequency_bad_JS.append({"timestamp": timestamp_frequency_bad[i], "value": data_frequency_bad[i],"deviation": (data_frequency_bad[i]-50)/50*100})
+                frequency_bad_JS.append({"timestamp": timestamp_frequency_bad[i], "value": data_frequency_bad[i],"deviation": round((data_frequency_bad[i]-50)/50*100,1)})
                 i += 1
             with open(os.path.join(basefolder, "frequency_critical_1.json"),"w") as out_file:
                 out_file.write(json.dumps(frequency_bad_JS))
@@ -107,7 +107,7 @@ def analyse_database_voltage():
             voltage_L1_JS = []
             i = 0
             while i < len(timestamp_voltage_L1):
-                voltage_L1_JS.append({"timestamp": timestamp_voltage_L1[i], "value": data_voltage_L1[i],"deviation": (data_voltage_L1[i]-230)/230*100})
+                voltage_L1_JS.append({"timestamp": timestamp_voltage_L1[i], "value": data_voltage_L1[i],"deviation": round((data_voltage_L1[i]-230)/230*100,1)})
                 i += 1
             with open(os.path.join(basefolder, "voltage_L1.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L1_JS))
@@ -131,7 +131,7 @@ def analyse_database_voltage():
             voltage_L2_JS = []
             i = 0
             while i < len(timestamp_voltage_L2):
-                voltage_L2_JS.append({"timestamp": timestamp_voltage_L2[i], "value": data_voltage_L2[i],"deviation": (data_voltage_L2[i]-230)/230*100})
+                voltage_L2_JS.append({"timestamp": timestamp_voltage_L2[i], "value": data_voltage_L2[i],"deviation": round((data_voltage_L2[i]-230)/230*100,1)})
                 i += 1
             with open(os.path.join(basefolder, "voltage_L2.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L2_JS))
@@ -155,7 +155,7 @@ def analyse_database_voltage():
             voltage_L3_JS = []
             i = 0
             while i < len(timestamp_voltage_L3):
-                voltage_L3_JS.append({"timestamp": timestamp_voltage_L3[i], "value": data_voltage_L3[i],"deviation": (data_voltage_L3[i]-230)/230*100})
+                voltage_L3_JS.append({"timestamp": timestamp_voltage_L3[i], "value": data_voltage_L3[i],"deviation": round((data_voltage_L3[i]-230)/230*100,1)})
                 i += 1
             with open(os.path.join(basefolder, "voltage_L3.json"),"w") as out_file:
                 out_file.write(json.dumps(voltage_L3_JS))
@@ -166,8 +166,8 @@ def analyse_database_voltage():
 def analyse_database_THD_U():  
     db = pqdb.connect_to_db(db_config)
 # Get data and timestamps from database
-    data_THD_U_L1 = round(pqdb.get_data(db, tablename, 'port_2236', 'port_2236 > 8'), 2)
-    timestamp_THD_U_L1_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2236 > 8')
+    data_THD_U_L1 = round(pqdb.get_data(db, tablename, 'port_2236', 'port_2236 > 8 and not NaN'), 2)
+    timestamp_THD_U_L1_float = pqdb.get_data(db, tablename, 'timestamp', 'port_2236 > 8 and not NaN')
     
 # Transform float time in time "yyy-mm-dd hh:mm:ss" 
     timestamp_THD_U_L1 = []
