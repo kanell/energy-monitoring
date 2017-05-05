@@ -975,6 +975,9 @@ $(document).ready(function(){
     let dataPhase = 0;
     let tableId = document.getElementById('AnalyseTabelleInterrupt');
     updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    $("#Download_Interrupt").click(function(){
+
+    });  
   });  
 
   // click to show dashboard at start
