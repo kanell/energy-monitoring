@@ -138,22 +138,31 @@ def analyse(pq_data):
         my_file = 'Website/temp/json/longterm_interruptions.json'
 
         if os.path.isfile(my_file): 
-            with open(os.path.join(basefolder, 'longterm_interruptions.json')) as out_file:
+            with open(my_file) as out_file:
                 data = json.load(out_file)
                 data.append(time_dict)
-            with open(os.path.join(basefolder, 'longterm_interruptions.json'),"w") as out_file:
+            with open(my_file,"w") as out_file:
                 out_file.write(json.dumps(data))   
         else: 
             data = []
             data.append(time_dict)
-            with open(os.path.join(basefolder, 'longterm_interruptions.json'),"w") as out_file:
+            with open(my_file,"w") as out_file:
                 out_file.write(json.dumps(data))           
             
-# save full dataframe with date and time of the beginning of the interruption as seperate json file            
-        json_name = 'longterm_interruption ({}).json'.format(time.strftime('%Y-%m-%d %H.%M', time.localtime(long_interruption_df.at[0,'Time_float']))) 
-        with open(os.path.join(basefolder, json_name),"w") as out_file:
-            out_file.write(long_interruption_df.to_json())
-        long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
+# save full dataframe with date and time of the beginning of the interruption as seperate json file      
+        my_file = 'Website/temp/csv/longterm_interruptions_specific.csv'
+        
+        if os.path.isfile(my_file): 
+            data = pd.read_csv(my_file)
+            data = data.append(long_interruption_df)
+            data.to_csv(my_file, index= False)  
+        else: 
+            long_interruption_df.to_csv(my_file, index= False)     
+      
+#        json_name = 'longterm_interruption ({}).json'.format(time.strftime('%Y-%m-%d %H.%M', time.localtime(long_interruption_df.at[0,'Time_float']))) 
+#        with open(os.path.join(basefolder, json_name),"w") as out_file:
+#            out_file.write(long_interruption_df.to_json())
+#        long_interruption_df = pd.DataFrame(columns = ['Time', 'Time_float','Voltage_L1','Voltage_L2','Voltage_L3'])
     else:
         pass
 
