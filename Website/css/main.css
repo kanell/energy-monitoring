@@ -164,7 +164,7 @@ table {
 }
 
 table.FrequenzTabelle {
-	width: 200px;
+	width: 300px;
 	margin-left: auto;             
 	margin-right: auto;
   text-align: center;
@@ -256,4 +256,18 @@ text-align: left;
 right: 10px;
 background-color: white;
 z-index: 100;
+}
+
+.button_analy {
+  position: relative;
+  display: block;
+  left: 500px;
+  margin: 1em;
+  padding: 5px;
+  padding-left:10px;
+  padding-right:10px;
+}
+
+table.UberschreitungsTabelle {
+  width: 400px;
 }

@@ -20,7 +20,6 @@
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/analyse.js"></script>
   </head>
   <body>
     <!-- upper menu -->
@@ -55,6 +54,7 @@
           <li class="links"><a id="f_a" href="#">Frequenz</a></li>
           <li class="links"><a id="THD_U_a" href="#">THD Spannung</a></li>
           <li class="links"><a id="THD_I_a" href="#">THD Strom</a></li>
+          <li class="links"><a id="Interrupt" href="#">Versorgungs-<br>unterbrechungen</a></li>
         </ul>
       </li>
       <!-- upper right comment -->
@@ -273,9 +273,11 @@
         <table class="FrequenzTabelle" style="background-color:hsla(0, 0%, 95%, 1); color:black;">
           <tr>
             <th> Frequenz (Hz) </th>
+            <th> EN 50160 </th>
           </tr>
           <tr>
             <td id="ft"></td>
+            <td id="Norm_ft"></td>
           </tr>
         </table>
       </div>
@@ -381,6 +383,11 @@
           <th>Abweichung in %</th>
         </tr>
       </table>
+      <div>
+      <button class="button_analy" id="U_a_button_L1">Leiter 1</button>
+      <button class="button_analy" id="U_a_button_L2">Leiter 2</button>
+      <button class="button_analy" id="U_a_button_L3">Leiter 3</button>
+      </div>
     </div>
     <div class="Inhalt_analy" id="analyse_frequency">
       <br>
@@ -392,6 +399,18 @@
           <th>Abweichung in %</th>
         </tr>
       </table>
+      <div>
+      <button class="button_analy" id="F_button_critical">Überschreitungen des kritischen Grenzwertes*</button>
+      <button class="button_analy" id="F_button_bad">Überschreitungen des absoluten Grenzwertes**</button>
+      </div>
+      <div class="button_analy" style="top: 100px; font-size: 14px;">
+      	<p>
+      		* Die Nennfrequenz muss 99,5% des Jahres zwischen 49,5 Hz und 50,5 Hz liegen, was einer Abweichung von 1% entspricht. 
+      	</p>
+      	<p>
+          ** Zu keinem Zeitpunkt darf die Frequenz unterhalb 47 Hz bzw. oberhalb 52 Hz liegen, d.h. -6% bzw. +4%.
+      	</p>
+      </div>
     </div>
     <div class="Inhalt_analy" id="analyse_THDu">
       <br>
@@ -403,6 +422,11 @@
           <th>Abweichung in %</th>
         </tr>
       </table>
+      <div>
+      <button class="button_analy" id="THD_U_a_button_L1">Leiter 1</button>
+      <button class="button_analy" id="THD_U_a_button_L2">Leiter 2</button>
+      <button class="button_analy" id="THD_U_a_button_L3">Leiter 3</button>
+      </div>
     </div>
     <div class="Inhalt_analy" id="analyse_THDi">
       <br>
@@ -414,6 +438,25 @@
           <th>Abweichung in %</th>
         </tr>
       </table>
+      <div>
+      <button class="button_analy" id="THD_I_a_button_L1">Leiter 1</button>
+      <button class="button_analy" id="THD_I_a_button_L2">Leiter 2</button>
+      <button class="button_analy" id="THD_I_a_button_L3">Leiter 3</button>
+      </div>
+    </div>
+    <div class="Inhalt_analy" id="analyse_Interrupt">
+      <br>
+      <h2>Versorgungsunterbrechungen</h2>
+      <table class="UberschreitungsTabelle" id="AnalyseTabelleInterrupt">
+        <tr class="UberschreitungsTabelle">
+          <th class="UberschreitungsTabelle">Beginn</th>
+          <th>Ende</th>
+          <th>Dauer (in Sekunden)</th>
+        </tr>
+      </table>
+      <div>
+      <button class="button_analy" id="Download_Interrupt_L1">Download</button>
+      </div>
     </div>
   </body>
 </html>

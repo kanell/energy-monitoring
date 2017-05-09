@@ -117,7 +117,8 @@ def update_analyse_database(control_flag):
                 ana_db.analyse_database_voltage()
                 ana_db.analyse_database_frequency()
                 ana_db.analyse_database_THD_U()
-                ana_db.analyse_database_THD_I()
+#               as long as there is no current
+#               ana_db.analyse_database_THD_I()
                 old_day = day_now
             else:
                 # process can sleep

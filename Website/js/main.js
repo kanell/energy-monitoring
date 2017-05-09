@@ -147,16 +147,17 @@ function makeFlaskRequestDeviationTable(tableId, requestJSON){
   let req = new XMLHttpRequest();
   // insert data to deviation table
   function appendToTable(){
-    if (req.response != "no data") {
-      let trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
-      $.each(req.response, function (i, item) {
-    	  trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
+    let trHTML;
+    if (req.response.data != "no data") {
+      trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
+      $.each(req.response.data, function (i, item) {
+    	trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
       });
     }
     else {
-        trHTML = 'Zur Zeit kommt es zu keiner Normüberschreitung'
+        trHTML = 'Hierfür liegen bisher keine Daten vor';
     }
-  	tableId.innerHTML = trHTML;
+    tableId.innerHTML = trHTML;
   }
   req.addEventListener('load',appendToTable);
   req.open('POST', '/get_data/analyse');
@@ -230,7 +231,7 @@ $(document).ready(function(){
             document.getElementById("Norm_U" + i + "t").innerHTML =  input["voltage_L" + i];
             document.getElementById("Norm_THD_U" + i + "t").innerHTML =  input["THD_U_L" + i];
             //document.getElementById("Norm_THD_I" + i + "t").innerHTML =  input["TDH_I_L" + i];
-            //document.getElementById("Norm_ft").innerHTML =  1;
+            document.getElementById("Norm_ft").innerHTML = input["frequency"];
           };
           timers.push(window.setTimeout(function (){updateLiveAnalyse();}, 1000));
         }
@@ -883,7 +884,7 @@ $(document).ready(function(){
 
   // Spannung wurde geklickt
   $("#U_a").click(function(){
-    $("#analyse_frequency, #analyse_THDu, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_frequency, #analyse_THDu, #analyse_THDi, #analyse_Interrupt, .Inhalt_ist, .Inhalt_hist").hide();
     $("#analyse_voltage").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
@@ -907,9 +908,8 @@ $(document).ready(function(){
 
   // Frequenz wurde geklickt
   $("#f_a").click(function(){
-    $("#analyse_voltage, #analyse_THDu, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_voltage, #analyse_THDu, #analyse_THDi, #analyse_Interrupt, .Inhalt_ist, .Inhalt_hist").hide();
     $("#analyse_frequency").show();
-    changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
     let dataName = 'frequency';
     let dataPhase = 0;
@@ -919,7 +919,7 @@ $(document).ready(function(){
 
   // THD U wurde geklickt
   $("#THD_U_a").click(function(){
-    $("#analyse_frequency, #analyse_voltage, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_frequency, #analyse_voltage, #analyse_THDi, #analyse_Interrupt, .Inhalt_ist, .Inhalt_hist").hide();
     $("#analyse_THDu").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
@@ -943,7 +943,7 @@ $(document).ready(function(){
 
   // THD I wurde geklickt
   $("#THD_I_a").click(function(){
-    $("#analyse_frequency, #analyse_THDu, #analyse_voltage, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_frequency, #analyse_THDu, #analyse_voltage, #analyse_Interrupt, .Inhalt_ist, .Inhalt_hist").hide();
     $("#analyse_THDi").show();
     changeColor(a="oben",b="oben", c="aktiv");
     clearTimers();
@@ -964,6 +964,22 @@ $(document).ready(function(){
       updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
   });
+
+  // Interrupt wurde geklickt
+  $("#Interrupt").click(function(){
+    $("#analyse_frequency, #analyse_THDu, #analyse_voltage, #analyse_THDi, .Inhalt_ist, .Inhalt_hist").hide();
+    $("#analyse_Interrupt").show();
+    changeColor(a="oben",b="oben", c="aktiv");
+    clearTimers();
+    let dataName = 'supplyinterrupt';
+    let dataPhase = 0;
+    let tableId = document.getElementById('AnalyseTabelleInterrupt');
+    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    $("#Download_Interrupt").click(function(){
+
+    });  
+  });  
+
   // click to show dashboard at start
   document.getElementById("Uber_i").click();
 });
