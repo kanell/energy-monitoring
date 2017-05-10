@@ -258,6 +258,8 @@ background-color: white;
 z-index: 100;
 }
 
+/* positioning of the buttons for the analyse tabs */
+
 .button_analy {
   position: relative;
   display: block;
@@ -267,6 +269,8 @@ z-index: 100;
   padding-left:10px;
   padding-right:10px;
 }
+
+/* resize the table for the analyse tabs */
 
 table.UberschreitungsTabelle {
   width: 400px;
