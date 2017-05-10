@@ -923,6 +923,10 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataPhase = 0;
     let tableId = document.getElementById('AnalyseTabelleFrequenz');
     updateFlaskRequestDeviationTable(tableId,dataPhase,dataName);
+    $("#F_button_critical").click(function(){
+      dataPhase = 0;
+      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    });  
     $("#F_button_bad").click(function(){
       dataPhase = 1;
       updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
