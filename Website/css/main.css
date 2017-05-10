@@ -261,9 +261,10 @@ z-index: 100;
 /* positioning of the buttons for the analyse tabs */
 
 .button_analy {
-  position: relative;
+  position: absolute;
   display: block;
-  left: 500px;
+  left: 600px;
+  top: 100px;
   margin: 1em;
   padding: 5px;
   padding-left:10px;
