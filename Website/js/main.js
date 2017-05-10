@@ -990,10 +990,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataName = 'supplyinterrupt';
     let dataPhase = 0;
     let tableId = document.getElementById('AnalyseTabelleInterrupt');
-    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
-    $("#Download_Interrupt").click(function(){
-
-    });  
+    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName); 
   });  
 
   // click to show dashboard at start
