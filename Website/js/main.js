@@ -1,3 +1,4 @@
+$(document).ready(function(){
 // Helper Function in pure Javascript
 var timers = [];
 function clearTimers() {
@@ -7,6 +8,14 @@ function clearTimers() {
   timers = [];
 }
 
+/* Changes the Color of the selected Tab */
+function changeColor() {
+  document.getElementById("aktuell").className = a;
+  document.getElementById("historisch").className = b;
+  document.getElementById("analysiert").className = c;
+}
+
+/* includes the Code for formatting the Graph's legend */
 function legendFormatter(data) {
   if (data.x == null) {
     if (data.dygraph.rawData_.length == 0) {return}
@@ -58,6 +67,7 @@ function legendFormatter(data) {
   return html;
 }
 
+/* Options for the dygraph bar charts */
 function barChartPlotter(e) {
   if (e.seriesIndex !== 0) return;
   var g = e.dygraph;
@@ -173,20 +183,18 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
   makeFlaskRequestDeviationTable(tableId, requestJSON);
 }
 
-$(document).ready(function(){
   /* "Aktuelle Werte" */
-
-  // Uebersicht wird geklickt
+  // Uebersicht has been clicked
   $("#Uber_i").click(function(){
-    // Verstecke nicht geklickte Seiten
+    // hide pages that has not been clicked
     $("#Frequenz_i, #Spannung_i, #Strom_i, #Leistung_i, #Harmonische_I_i, #Harmonische_U_i, .Inhalt_hist, .Inhalt_analy").hide();
-    // Zeige geklickte Seite
+    // show clicked page
     $("#Ubersicht_i").show();
     changeColor(a="aktiv",b="oben", c="oben");
-    // Beende alle Anfragen/Timer
+    // close all requests and timers
     clearTimers();
-    // Hole gesuchte Werte ab// Get data function
-    function updateLiveDashboad() {
+    // Get data function
+    function updateLiveDashboard() {
       $.ajax({
         cache: false,
         url: "temp/json/livedata.json",
@@ -213,11 +221,11 @@ $(document).ready(function(){
             document.getElementById("THD_I" + i + "t").innerHTML =  input["port_" + THD_I];
             document.getElementById("ft").innerHTML =  input["port_" + f];
           };
-          timers.push(window.setTimeout(function (){updateLiveDashboad();}, 1000));
+          timers.push(window.setTimeout(function (){updateLiveDashboard();}, 1000));
         }
       });
     }
-    updateLiveDashboad();
+    updateLiveDashboard();
     function updateLiveAnalyse() {
       $.ajax({
         cache: false,
@@ -983,10 +991,3 @@ $(document).ready(function(){
   // click to show dashboard at start
   document.getElementById("Uber_i").click();
 });
-
-/* Changes the Color of the selected Tab */
-function changeColor() {
-  document.getElementById("aktuell").className = a;
-  document.getElementById("historisch").className = b;
-  document.getElementById("analysiert").className = c;
-}
