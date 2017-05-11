@@ -586,7 +586,6 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       // make request
       console.log(requestJSON);
       makeFlaskRequest(requestJSON, historicVoltageGraph, historicVoltageData)
-      console.log(historicVoltageData)
     }
     updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData)
     function resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
