@@ -993,7 +993,4 @@ function makeFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let tableId = document.getElementById('AnalyseTabelleInterrupt');
     makeFlaskRequestDeviationTable(tableId, dataPhase, dataName); 
   });  
-
-  // click to show dashboard at start
-  document.getElementById("Uber_i").click();
 });
