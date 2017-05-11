@@ -17,10 +17,11 @@ function changeColor() {
 
 /* includes the Code for formatting the Graph's legend */
 function legendFormatter(data) {
+  // If nothing is selected
   if (data.x == null) {
     if (data.dygraph.rawData_.length == 0) {return}
     let t;
-    // Abfrage ob Harmonische oder nicht
+    // checks, if it's the harmonic's plot
     if (data.dygraph.rawData_.length != 39) {
       t = data.dygraph.rawData_.length - 1;
     }
@@ -34,13 +35,14 @@ function legendFormatter(data) {
       data.series[i-1]['firstDataPoint']= firstDataPoint[i];
     }
     x=firstDataPoint[0]
-    // Abfrage ob Harmonische oder nicht
+    // checks, if it's the harmonic's plot
     if (data.dygraph.rawData_.length != 39) {
       var x_Value_Label = Dygraph.dateString_(x,0);
     }
     else {
       var x_Value_Label = '2. Harmonische'
     }
+    // for the historical values
     if (b=="aktiv") {
       var label = '<br>' + data.series.map(function(series) { return series.dashHTML + ' ' + '<b style="color: ' + series.color + '">' + series.labelHTML + '</b>: '}).join('<br>') + '<br>' + '<br>'
     }
@@ -49,6 +51,8 @@ function legendFormatter(data) {
     }
     return  label;
   }
+  // At Mouseover
+  // checks, if it's the harmonic's plot
   if (data.dygraph.rawData_.length != 39) {
     var html = data.xHTML
   }
@@ -112,6 +116,7 @@ function makeFlaskRequest (requestJSON, plotId, plotData) {
       'file': plotData,
       dateWindow: null,
       valueRange: null
+      console.log(historicVoltageData)
     });
   }
   req.addEventListener('load',transferComplete);
@@ -498,7 +503,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       plotter: barChartPlotter,
       dateWindow: [1,40],
       xlabel : 'Harmonischenzahl',
-      ylabel : 'RMS der Harmonischen [V]',
+      ylabel : 'RMS der Harmonischen [I]',
       labelsDiv: document.getElementById('legend_H_I_i'),
       legend: 'always',
       legendFormatter: legendFormatter,
@@ -566,7 +571,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       legend: 'always',
       legendFormatter: legendFormatter
     }
-    let historicVoltageData = "timestamp,u1,u2,u3\n"
+    var historicVoltageData = "timestamp,u1,u2,u3\n"
     let historicVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), historicVoltageData, historicVoltageOptions);
     function updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
       dataSize = 1000;
@@ -581,6 +586,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       // make request
       console.log(requestJSON);
       makeFlaskRequest(requestJSON, historicVoltageGraph, historicVoltageData)
+      console.log(historicVoltageData)
     }
     updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData)
     function resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
