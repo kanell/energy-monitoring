@@ -116,7 +116,6 @@ function makeFlaskRequest (requestJSON, plotId, plotData) {
       'file': plotData,
       dateWindow: null,
       valueRange: null
-      console.log(historicVoltageData)
     });
   }
   req.addEventListener('load',transferComplete);
@@ -571,7 +570,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       legend: 'always',
       legendFormatter: legendFormatter
     }
-    var historicVoltageData = "timestamp,u1,u2,u3\n"
+    let historicVoltageData = "timestamp,u1,u2,u3\n"
     let historicVoltageGraph = new Dygraph(document.getElementById("historic_chart_u"), historicVoltageData, historicVoltageOptions);
     function updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
       dataSize = 1000;
@@ -586,7 +585,6 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       // make request
       console.log(requestJSON);
       makeFlaskRequest(requestJSON, historicVoltageGraph, historicVoltageData)
-      console.log(historicVoltageData)
     }
     updateHistoricVoltageGraph(historicVoltageGraph, historicVoltageData)
     function resetHistoricVoltageGraph(historicVoltageGraph, historicVoltageData) {
@@ -617,7 +615,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       downloadAll(requestJSON);
     });
     $("#download_selected_voltage").click(function(){
-      downloadSelected(historicVoltageData);
+      downloadSelected(historicVoltageGraph.file_);
     });
   });
 
@@ -703,7 +701,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       downloadAll(requestJSON);
     });
     $("#download_selected_frequency").click(function(){
-      downloadSelected(historicFrequencyData);
+      downloadSelected(historicFrequencyGraph.file_);
     });
   });
 
@@ -789,7 +787,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       downloadAll(requestJSON);
     });
     $("#download_selected_current").click(function(){
-      downloadSelected(historicCurrentData);
+      downloadSelected(historicCurrentGraph.file_);
     });
   });
 
@@ -875,7 +873,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
       downloadAll(requestJSON);
     });
     $("#download_selected_power").click(function(){
-      downloadSelected(historicPowerData);
+      downloadSelected(historicPowerGraph.file_);
     });
   });
 
