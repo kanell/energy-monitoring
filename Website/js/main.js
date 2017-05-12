@@ -125,6 +125,17 @@ function makeFlaskRequest (requestJSON, plotId, plotData) {
   req.send(JSON.stringify(requestJSON));
 }
 
+// download selected data
+function downloadSelected(plotData) {
+  let blob = new Blob([plotData], {type: 'octet-stream'});
+  let a = document.createElement('a');
+  a.href = window.URL.createObjectURL(blob)
+  a.download = 'data.csv';
+  a.style.display = 'none';
+  document.body.appendChild(a)
+  a.click()
+}
+
 // Download All function
 function downloadAll(requestJSON){
   let req = new XMLHttpRequest();
@@ -145,19 +156,12 @@ function downloadAll(requestJSON){
   req.send(JSON.stringify(requestJSON));
 }
 
-// download selected data
-function downloadSelected(plotData) {
-  let blob = new Blob([plotData], {type: 'octet-stream'});
-  let a = document.createElement('a');
-  a.href = window.URL.createObjectURL(blob)
-  a.download = 'data.csv';
-  a.style.display = 'none';
-  document.body.appendChild(a)
-  a.click()
-}
-
 // get deviation table data from flask
-function makeFlaskRequestDeviationTable(tableId, requestJSON){
+function makeFlaskRequestDeviationTable(tableId, dataPhase, dataName){
+  let requestJSON = {
+    dataName : dataName,
+    dataPhase : dataPhase
+  };
   let req = new XMLHttpRequest();
   // insert data to deviation table
   function appendToTable(){
@@ -186,13 +190,6 @@ function makeFlaskRequestDeviationTable(tableId, requestJSON){
   req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   req.responseType = 'json';
   req.send(JSON.stringify(requestJSON));
-}
-function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
-  let requestJSON = {
-    dataName : dataName,
-    dataPhase : dataPhase
-  };
-  makeFlaskRequestDeviationTable(tableId, requestJSON);
 }
 
   /* "Aktuelle Werte" */
@@ -911,18 +908,18 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataName = 'voltage';
     let dataPhase = 1;
     let tableId = document.getElementById('AnalyseTabelleSpannung');
-    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     $("#U_a_button_L1").click(function(){
       dataPhase = 1;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
     $("#U_a_button_L2").click(function(){
       dataPhase = 2;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
     $("#U_a_button_L3").click(function(){
       dataPhase = 3;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
   });
 
@@ -934,14 +931,14 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataName = 'frequency';
     let dataPhase = 0;
     let tableId = document.getElementById('AnalyseTabelleFrequenz');
-    updateFlaskRequestDeviationTable(tableId,dataPhase,dataName);
+    makeFlaskRequestDeviationTable(tableId,dataPhase,dataName);
     $("#F_button_critical").click(function(){
       dataPhase = 0;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });  
     $("#F_button_bad").click(function(){
       dataPhase = 1;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
   });
 
@@ -954,18 +951,18 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataName = 'thdu';
     let dataPhase = 1;
     let tableId = document.getElementById('AnalyseTabelleTHDu');
-    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     $("#THD_U_a_button_L1").click(function(){
       dataPhase = 1;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
     $("#THD_U_a_button_L2").click(function(){
       dataPhase = 2;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
     $("#THD_U_a_button_L3").click(function(){
       dataPhase = 3;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
   });
 
@@ -978,18 +975,18 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataName = 'thdi';
     let dataPhase = 1;
     let tableId = document.getElementById('AnalyseTabelleTHDi');
-    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+    makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     $("#THD_I_a_button_L1").click(function(){
       dataPhase = 1;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
     $("#THD_I_a_button_L2").click(function(){
       dataPhase = 2;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
     $("#THD_I_a_button_L3").click(function(){
       dataPhase = 3;
-      updateFlaskRequestDeviationTable(tableId, dataPhase, dataName);
+      makeFlaskRequestDeviationTable(tableId, dataPhase, dataName);
     });
   });
 
@@ -1002,7 +999,7 @@ function updateFlaskRequestDeviationTable(tableId, dataPhase, dataName){
     let dataName = 'supplyinterrupt';
     let dataPhase = 0;
     let tableId = document.getElementById('AnalyseTabelleInterrupt');
-    updateFlaskRequestDeviationTable(tableId, dataPhase, dataName); 
+    makeFlaskRequestDeviationTable(tableId, dataPhase, dataName); 
   });  
 
   // click to show dashboard at start
