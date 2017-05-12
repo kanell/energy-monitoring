@@ -3,7 +3,6 @@ import io
 import numpy as np
 from pg import DB
 import os
-import analyse_database as ana_db
 import json
 import time
 import datetime as dt
@@ -46,7 +45,7 @@ def get_data_from_db(startTime, endTime, dataName, dataSize):
         df_short = np.empty((df.size,len(selectors)+1))
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:df.size,-1]
         print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     # get current
     elif dataName == 'current':
@@ -55,7 +54,7 @@ def get_data_from_db(startTime, endTime, dataName, dataSize):
         df_short = np.empty((df.size,len(selectors)+1))
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:df.size,-1]
         print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     # get frequency
     elif dataName == 'frequency':
@@ -64,7 +63,7 @@ def get_data_from_db(startTime, endTime, dataName, dataSize):
         df_short = np.empty((df.size,len(selectors)+1))
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:df.size,-1]
         print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     # get power
     elif dataName == 'power':
@@ -73,7 +72,7 @@ def get_data_from_db(startTime, endTime, dataName, dataSize):
         df_short = np.empty((df.size,len(selectors)+1))
         df_short[:,0] = df
         for index, selector in enumerate(selectors):
-            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:,-1]
+            df_short[:,index+1] = np.array(db.query('select {} from {} where {}'.format(selector, db_config['tablename'], rule)).getresult())[:df.size,-1]
         print('number of timestamps: ' + str(df.size) + ',number of values: ' + str(df_short.size))
     else:
         return 'wrong data type input', ''
@@ -118,7 +117,6 @@ def analyse_database():
     dataPhase = requestJSON['dataPhase']
     # check db for events and write jsons
     if dataName == 'voltage':
-        #ana_db.analyse_database_voltage()
         if os.path.isfile('../Website/temp/json/voltage_L{}.json'.format(dataPhase)):
             with open('../Website/temp/json/voltage_L{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
@@ -126,21 +124,18 @@ def analyse_database():
             responseJSON = json.dumps({'data':'no data'})
 
     elif dataName == 'frequency':
-        #ana_db.analyse_database_frequency()
         if os.path.isfile('../Website/temp/json/frequency_critical_{}.json'.format(dataPhase)):
             with open('../Website/temp/json/frequency_critical_{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
         else:
             responseJSON = json.dumps({'data':'no data'})
     elif dataName == 'thdu':
-        #ana_db.analyse_database_THD_U()
         if os.path.isfile('../Website/temp/json/THD_U_L{}.json'.format(dataPhase)):
             with open('../Website/temp/json/THD_U_L{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()
         else:
             responseJSON = json.dumps({'data':'no data'})
     elif dataName == 'thdi':
-        #ana_db.analyse_database_THD_I()
         if os.path.isfile('../Website/temp/json/THD_I_L{}.json'.format(dataPhase)):
             with open('../Website/temp/json/THD_I_L{}.json'.format(dataPhase), 'r') as f:
                 responseJSON = f.read()

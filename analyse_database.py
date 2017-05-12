@@ -74,7 +74,7 @@ def analyse_database_frequency():
 def analyse_database_voltage():
     db = pqdb.connect_to_db(db_config)
 #   Analyses historical Data: voltage
-    rule_L1 = 'port_1728 not between {} and {}'.format(233, 253)
+    rule_L1 = 'port_1728 not between {} and {}'.format(207, 253)
     rule_L2 = 'port_1730 not between {} and {}'.format(207, 253)
     rule_L3 = 'port_1732 not between {} and {}'.format(207, 253)
 

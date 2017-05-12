@@ -163,10 +163,18 @@ function makeFlaskRequestDeviationTable(tableId, requestJSON){
   function appendToTable(){
     let trHTML;
     if (req.response.data != "no data") {
-      trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
-      $.each(req.response.data, function (i, item) {
-    	trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
-      });
+      if (tableId.id == "AnalyseTabelleInterrupt"){
+        trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Beginn</th><th>Ende</th><th>Dauer (in Sekunden)</th></tr>';
+        $.each(req.response.data, function (i, item) {
+    	  trHTML += '<tr><td>' + item.Beginn + '</td><td>' + item.Ende + '</td><td>' + item.Dauer + '</td></tr>';
+        });
+      }
+      else {
+        trHTML = '<tr class="UberschreitungsTabelle"><th class="UberschreitungsTabelle">Zeitstempel</th><th>Wert</th><th>Abweichung in %</th></tr>';
+        $.each(req.response.data, function (i, item) {
+    	  trHTML += '<tr><td>' + item.timestamp + '</td><td>' + item.value + '</td><td>' + item.deviation + '</td></tr>';
+        });
+      }
     }
     else {
         trHTML = 'Hierfür liegen bisher keine Daten vor';
