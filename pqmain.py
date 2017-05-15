@@ -108,17 +108,22 @@ def update_analyse_database(control_flag):
 
     old_day = dt.datetime.now().day
     try:
-        starttime = dt.datetime.now().timestamp()
         while control_flag.value == 0:
             # update analyse_database files for each new day
-            day_now = dt.datetime.now().day
+            timestamp = dt.datetime.now()
+            day_now = timestamp.day
             # check if it is a new day
             if day_now != old_day:
                 ana_db.analyse_database_voltage()
                 ana_db.analyse_database_frequency()
                 ana_db.analyse_database_THD_U()
-#               as long as there is no current
+                # as long as there is no current
 #               ana_db.analyse_database_THD_I()
+                # create heatplot every day
+                start = dt.datetime.fromtimestamp(timestamp.timestamp()-(60*60*24)).strftime('%m/%d/%Y')
+                end = dt.datetime.fromtimestamp(timestamp.timestamp()).strftime('%m/%d/%Y')
+                datasize = 10000
+                ana.heatplot_data(start, end, datasize)
                 old_day = day_now
             else:
                 # process can sleep
