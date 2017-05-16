@@ -61,7 +61,7 @@ def heatplot_data(starttime, endtime, datasize):
     plt.title('2. bis 41. Harmonsiche der Spannung\n')
     plt.subplots_adjust(left=0.04, bottom=0.1, right=0.999, top=0.9)
     plt.axis('tight')
-    plt.savefig('Website/temp/png/{}_harmonics_u1.png'.format(starttime),format='png',dpi=300)
+    plt.savefig('Website/temp/png/{}_harmonics_u1.png'.format(startTime),format='png',dpi=300)
     return 0
 
 def analyse(pq_data):
