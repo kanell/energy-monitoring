@@ -178,12 +178,12 @@ def analyse(pq_data):
         THD_U_L1 = "okay"
 
     if THD_U_L2 >= 8:
-        THD_U_L2 = "critical"
+        THD_U_L2 = "bad"
     else:
         THD_U_L2 = "okay"
 
     if THD_U_L3 >= 8:
-        THD_U_L3 = "critical"
+        THD_U_L3 = "bad"
     else:
         THD_U_L3 = "okay"
         
@@ -202,12 +202,12 @@ def analyse(pq_data):
         THD_I_L1 = "okay"
 
     if THD_I_L2 >= 8:
-        THD_I_L2 = "critical"
+        THD_I_L2 = "bad"
     else:
         THD_I_L2 = "okay"
 
     if THD_I_L3 >= 8:
-        THD_I_L3 = "critical"
+        THD_I_L3 = "bad"
     else:
         THD_I_L3 = "okay"
         
